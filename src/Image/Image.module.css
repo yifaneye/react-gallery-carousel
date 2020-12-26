@@ -1,0 +1,28 @@
+.imageWrapper {
+  height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  margin: auto;
+  object-fit: cover;
+  user-select: none;
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  touch-action: pinch-zoom;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  object-fit: cover;
+  user-select: none;
+  touch-action: pinch-zoom;
+  cursor: default;
+}
+
+.displayNone {
+  display: none;
+}
