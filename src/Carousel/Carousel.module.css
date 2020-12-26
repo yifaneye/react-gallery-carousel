@@ -23,3 +23,7 @@
   transition-timing-function: ease-out;
   touch-action: pinch-zoom;
 }
+
+.images:focus {
+  outline: none;
+}

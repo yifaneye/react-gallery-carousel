@@ -4,7 +4,7 @@ import { Image } from '../Image';
 
 export function Carousel(props) {
   const [, setCurrentImageIndex] = useState(0);
-  const ImagesRef = useRef(null);
+  const imagesRef = useRef(null);
   const maxImageIndex = props.images.length;
 
   const updateCurrentImageIndex = (change) =>
@@ -18,7 +18,7 @@ export function Carousel(props) {
       const newCurrentImageIndex = Math.abs(
         (currentImageIndex + change) % maxImageIndex
       );
-      ImagesRef.current.style.transform = `translateX(calc(-100% * ${newCurrentImageIndex})`;
+      imagesRef.current.style.transform = `translateX(calc(-100% * ${newCurrentImageIndex})`;
       return newCurrentImageIndex;
     });
 
@@ -31,16 +31,16 @@ export function Carousel(props) {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', updateCarousel, false);
+    imagesRef.current.addEventListener('keydown', updateCarousel, false);
 
     return () => {
-      document.removeEventListener('keydown', updateCarousel, false);
+      imagesRef.current.removeEventListener('keydown', updateCarousel, false);
     };
   }, [updateCarousel]);
 
   return (
     <div className={styles.imagesWrapper}>
-      <div className={styles.images} ref={ImagesRef}>
+      <div className={styles.images} ref={imagesRef} tabIndex={0}>
         {props.images.map((image, index) => (
           <Image key={index} image={image} />
         ))}
