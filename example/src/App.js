@@ -19,14 +19,30 @@ const App = () => {
     }
   ];
   return (
-    <div
-      style={{
-        width: '100vw',
-        height: '50vh'
-      }}
-    >
-      <Carousel images={images} />
-    </div>
+    <>
+      <div
+        style={{
+          width: '100vw',
+          height: '50vh'
+        }}
+      >
+        <Carousel images={images} />
+      </div>
+      <div
+        style={{
+          width: '50vw',
+          height: 450,
+          border: '10px solid #bbb',
+          overflow: 'hidden',
+          borderRadius: 20,
+          willChange: 'transform',
+          WebkitMaskImage: '-webkit-radial-gradient(white, black)',
+          margin: '20px auto'
+        }}
+      >
+        <Carousel images={images} />
+      </div>
+    </>
   );
 };
 
