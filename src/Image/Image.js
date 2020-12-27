@@ -11,14 +11,13 @@ export function Image(props) {
       ([entry]) => {
         if (entry.isIntersecting && !isInViewport) {
           setIsInViewport(true);
-          imageRef.current.src = props.image.src;
           observer.disconnect();
         }
       },
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.01
+        threshold: 0
       }
     );
     if (imageRef.current) {
