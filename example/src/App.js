@@ -4,20 +4,12 @@ import { Carousel } from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
 const App = () => {
-  const images = [
-    {
-      src: 'https://placekitten.com/200/300',
-      alt: 'Cat 1'
-    },
-    {
-      src: 'https://placekitten.com/400/300',
-      alt: 'Cat 2'
-    },
-    {
-      src: 'https://placekitten.com/600/300',
-      alt: 'Cat 3'
-    }
-  ];
+  const catImageSizes = [900, 800, 700, 600, 500, 400];
+  const images = catImageSizes.map((catImageSize) => ({
+    src: `https://placekitten.com/${catImageSize}/${catImageSize}`,
+    alt: `Kitten of size ${catImageSize}px`
+  }));
+
   return (
     <>
       <div
