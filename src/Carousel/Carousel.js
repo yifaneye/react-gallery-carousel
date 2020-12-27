@@ -9,9 +9,10 @@ export function Carousel(props) {
   // carousel settings
   const transitionSpeed = 1500; // px/s
   const swipePercentageMin = 0.25; // * 100%
+  const autoPlayInterval = 0.6; // s
 
   const imagesLength = props.images.length;
-  let imagesTotalLength = imagesLength; // add 1 image each to head and tail
+  let imagesTotalLength = imagesLength;
   let currentImageIndex = props.rtl ? imagesTotalLength - 1 : 0;
   if (props.loop) {
     imagesTotalLength = imagesLength + 2; // add 1 image each to head and tail
@@ -45,7 +46,12 @@ export function Carousel(props) {
     const transitionDistance = hasToUpdate
       ? Math.abs(imagesRef.current.clientWidth - swipedDistance)
       : swipedDistance;
-    const transitionDuration = transitionDistance / transitionSpeed;
+    let transitionDuration = transitionDistance / transitionSpeed;
+
+    // make transitionDuration slightly smaller (faster) than autoPlayInterval
+    if (props.auto && transitionDuration > autoPlayInterval) {
+      transitionDuration = autoPlayInterval * 0.99;
+    }
 
     imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
     setTimeout(
@@ -120,7 +126,7 @@ export function Carousel(props) {
     if (props.auto) {
       timerRef.current = setInterval(() => {
         updateCurrentImageIndex(props.rtl ? -1 : +1);
-      }, 1000);
+      }, autoPlayInterval * 1000);
     }
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
 
