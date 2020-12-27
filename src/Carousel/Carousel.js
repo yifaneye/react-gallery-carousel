@@ -17,10 +17,13 @@ export function Carousel(props) {
   const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
     const hasToUpdate =
       change !== 0 &&
-      currentImageIndex + change >= 0 &&
-      currentImageIndex + change < imagesLength;
+      (props.infinite ||
+        (currentImageIndex + change >= 0 &&
+          currentImageIndex + change < imagesLength));
     if (hasToUpdate) {
-      currentImageIndex = Math.abs((currentImageIndex + change) % imagesLength);
+      currentImageIndex = Math.abs(
+        (imagesLength + currentImageIndex + change) % imagesLength
+      );
     }
 
     const swipedDistance = Math.abs(swipedDisplacement);
