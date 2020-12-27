@@ -6,21 +6,26 @@ export function Carousel(props) {
   const imagesRef = useRef(null);
 
   // carousel settings
-  const transitionDuration = 0.3; // s
+  const transitionSpeed = 1500; // px/s
   const swipeDistanceMin = 50; // px
 
   let currentImageIndex = 0;
   const imagesLength = props.images.length;
   let swipeStartX = 0;
 
-  const updateCurrentImageIndex = (change) => {
-    if (
+  const updateCurrentImageIndex = (change, swipedDistance = 0) => {
+    const hasToUpdate =
       change !== 0 &&
       currentImageIndex + change >= 0 &&
-      currentImageIndex + change < imagesLength
-    ) {
+      currentImageIndex + change < imagesLength;
+    if (hasToUpdate) {
       currentImageIndex = Math.abs((currentImageIndex + change) % imagesLength);
     }
+
+    const transitionDistance = hasToUpdate
+      ? Math.abs(imagesRef.current.clientWidth - Math.abs(swipedDistance))
+      : Math.abs(swipedDistance);
+    const transitionDuration = transitionDistance / transitionSpeed;
     imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
     setTimeout(
       () => (imagesRef.current.style.transitionDuration = null),
@@ -33,11 +38,11 @@ export function Carousel(props) {
 
   const applySwipe = (swipeDistance) => {
     if (swipeDistance > swipeDistanceMin) {
-      updateCurrentImageIndex(-1);
+      updateCurrentImageIndex(-1, swipeDistance);
     } else if (swipeDistance < -swipeDistanceMin) {
-      updateCurrentImageIndex(+1);
+      updateCurrentImageIndex(+1, swipeDistance);
     } else {
-      updateCurrentImageIndex(0);
+      updateCurrentImageIndex(0, swipeDistance);
     }
   };
 
