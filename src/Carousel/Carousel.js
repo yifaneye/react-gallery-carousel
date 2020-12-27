@@ -13,7 +13,7 @@ export function Carousel(props) {
   const imagesLength = props.images.length;
   let swipeStartX = 0;
 
-  const updateCurrentImageIndex = (change, swipedDistance = 0) => {
+  const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
     const hasToUpdate =
       change !== 0 &&
       currentImageIndex + change >= 0 &&
@@ -22,9 +22,10 @@ export function Carousel(props) {
       currentImageIndex = Math.abs((currentImageIndex + change) % imagesLength);
     }
 
+    const swipedDistance = Math.abs(swipedDisplacement);
     const transitionDistance = hasToUpdate
-      ? Math.abs(imagesRef.current.clientWidth - Math.abs(swipedDistance))
-      : Math.abs(swipedDistance);
+      ? Math.abs(imagesRef.current.clientWidth - swipedDistance)
+      : swipedDistance;
     const transitionDuration = transitionDistance / transitionSpeed;
     imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
     setTimeout(
@@ -36,21 +37,21 @@ export function Carousel(props) {
 
   const isPinch = (event) => event.scale !== undefined && event.scale !== 1;
 
-  const applySwipe = (swipeDistance) => {
-    if (swipeDistance > swipeDistanceMin) {
-      updateCurrentImageIndex(-1, swipeDistance);
-    } else if (swipeDistance < -swipeDistanceMin) {
-      updateCurrentImageIndex(+1, swipeDistance);
+  const applySwipe = (swipeDisplacement) => {
+    if (swipeDisplacement > swipeDistanceMin) {
+      updateCurrentImageIndex(-1, swipeDisplacement);
+    } else if (swipeDisplacement < -swipeDistanceMin) {
+      updateCurrentImageIndex(+1, swipeDisplacement);
     } else {
-      updateCurrentImageIndex(0, swipeDistance);
+      updateCurrentImageIndex(0, swipeDisplacement);
     }
   };
 
   const showSwipe = (event) => {
-    const swipeDistance = event.changedTouches[0].clientX - swipeStartX;
-    imagesRef.current.style.transform = `translateX(calc(-100% * ${currentImageIndex} + ${swipeDistance}px)`;
+    const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
+    imagesRef.current.style.transform = `translateX(calc(-100% * ${currentImageIndex} + ${swipeDisplacement}px)`;
     if (event.type === 'touchend') {
-      applySwipe(swipeDistance);
+      applySwipe(swipeDisplacement);
     }
   };
 
