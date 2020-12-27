@@ -32,7 +32,7 @@ export function Carousel(props) {
       () => (imagesRef.current.style.transitionDuration = null),
       transitionDuration * 1000
     );
-    imagesRef.current.style.transform = `translateX(calc(-100% * ${currentImageIndex})`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
   };
 
   const isPinch = (event) => event.scale !== undefined && event.scale !== 1;
@@ -50,7 +50,7 @@ export function Carousel(props) {
 
   const showSwipe = (event) => {
     const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
-    imagesRef.current.style.transform = `translateX(calc(-100% * ${currentImageIndex} + ${swipeDisplacement}px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex} + ${swipeDisplacement}px), 0px, 0px)`;
     if (event.type === 'touchend') {
       applySwipe(swipeDisplacement);
     }
