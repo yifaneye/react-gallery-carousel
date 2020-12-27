@@ -92,6 +92,10 @@ export const Carousel = (props) => {
     }
   };
 
+  const handleMouseEnter = useCallback(() => {
+    imagesRef.current.focus();
+  }, []);
+
   const handleKeyDown = useCallback((event) => {
     if (event.key === 'ArrowLeft') {
       updateCurrentImageIndex(-1);
@@ -144,6 +148,7 @@ export const Carousel = (props) => {
         className={styles.images}
         ref={imagesRef}
         tabIndex={0}
+        onMouseEnter={handleMouseEnter}
         onKeyDown={handleKeyDown}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
