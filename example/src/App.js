@@ -32,7 +32,7 @@ const App = () => {
           margin: '20px auto'
         }}
       >
-        <Carousel images={images} />
+        <Carousel images={images} auto infinite rtl loop />
       </div>
     </>
   );

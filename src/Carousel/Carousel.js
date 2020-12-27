@@ -11,7 +11,13 @@ export function Carousel(props) {
   const swipePercentageMin = 0.25; // * 100%
 
   const imagesLength = props.images.length;
-  let currentImageIndex = props.rtl ? imagesLength - 1 : 0;
+  let imagesTotalLength = imagesLength; // add 1 image each to head and tail
+  let currentImageIndex = props.rtl ? imagesTotalLength - 1 : 0;
+  if (props.loop) {
+    imagesTotalLength = imagesLength + 2; // add 1 image each to head and tail
+    currentImageIndex = props.rtl ? imagesTotalLength - 2 : 1; // choose between the second last and the second
+  }
+
   let swipeStartX = 0;
 
   const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
@@ -21,8 +27,17 @@ export function Carousel(props) {
         (currentImageIndex + change >= 0 &&
           currentImageIndex + change < imagesLength));
     if (hasToUpdate) {
+      // check for non-swipe updates
+      if (props.loop && swipedDisplacement === 0) {
+        if (change < 0 && currentImageIndex === 1) {
+          currentImageIndex = imagesTotalLength - 1;
+        } else if (change > 0 && currentImageIndex === imagesTotalLength - 2) {
+          currentImageIndex = 0;
+        }
+        imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
+      }
       currentImageIndex = Math.abs(
-        (imagesLength + currentImageIndex + change) % imagesLength
+        (imagesTotalLength + currentImageIndex + change) % imagesTotalLength
       );
     }
 
@@ -31,6 +46,7 @@ export function Carousel(props) {
       ? Math.abs(imagesRef.current.clientWidth - swipedDistance)
       : swipedDistance;
     const transitionDuration = transitionDistance / transitionSpeed;
+
     imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
     setTimeout(
       () => (imagesRef.current.style.transitionDuration = null),
@@ -54,6 +70,16 @@ export function Carousel(props) {
 
   const showSwipe = (event) => {
     const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
+    if (props.loop) {
+      if (swipeDisplacement > 0 && currentImageIndex === 1) {
+        currentImageIndex = imagesTotalLength - 1;
+      } else if (
+        swipeDisplacement < 0 &&
+        currentImageIndex === imagesTotalLength - 2
+      ) {
+        currentImageIndex = 0;
+      }
+    }
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex} + ${swipeDisplacement}px), 0px, 0px)`;
     if (event.type === 'touchend') {
       applySwipe(swipeDisplacement);
@@ -96,9 +122,7 @@ export function Carousel(props) {
         updateCurrentImageIndex(props.rtl ? -1 : +1);
       }, 1000);
     }
-    if (props.rtl) {
-      imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
-    }
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
 
     return () => {
       if (timerRef.current !== -1) {
@@ -119,9 +143,15 @@ export function Carousel(props) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
+        {props.loop && props.images.length >= 1 ? (
+          <Image image={props.images[imagesLength - 1]} />
+        ) : null}
         {props.images.map((image, index) => (
           <Image key={index} image={image} />
         ))}
+        {props.loop && props.images.length >= 1 ? (
+          <Image image={props.images[0]} />
+        ) : null}
       </div>
     </div>
   );
