@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
 import { Image } from '../Image';
 
-export function Carousel(props) {
+export const Carousel = (props) => {
   const imagesRef = useRef(null);
   const timerRef = useRef(-1);
 
@@ -161,4 +161,4 @@ export function Carousel(props) {
       </div>
     </div>
   );
-}
+};

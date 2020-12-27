@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Image.module.css';
 
-export function Image(props) {
+export const Image = (props) => {
   const imageRef = useRef(null);
   const [isInViewport, setIsInViewport] = useState(false);
 
@@ -38,4 +38,4 @@ export function Image(props) {
       <figcaption className={styles.displayNone}>{props.image.alt}</figcaption>
     </figure>
   );
-}
+};
