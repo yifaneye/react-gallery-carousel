@@ -10,8 +10,8 @@ export function Carousel(props) {
   const transitionSpeed = 1500; // px/s
   const swipePercentageMin = 0.25; // * 100%
 
-  let currentImageIndex = 0;
   const imagesLength = props.images.length;
+  let currentImageIndex = props.rtl ? imagesLength - 1 : 0;
   let swipeStartX = 0;
 
   const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
@@ -93,9 +93,11 @@ export function Carousel(props) {
     document.body.addEventListener('touchstart', () => {});
     if (props.auto) {
       timerRef.current = setInterval(() => {
-        updateCurrentImageIndex(+1);
+        updateCurrentImageIndex(props.rtl ? -1 : +1);
       }, 1000);
-      console.log(timerRef.current);
+    }
+    if (props.rtl) {
+      imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
     }
 
     return () => {
