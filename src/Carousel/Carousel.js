@@ -4,6 +4,7 @@ import { Image } from '../Image';
 
 export function Carousel(props) {
   const imagesRef = useRef(null);
+  const timerRef = useRef(-1);
 
   // carousel settings
   const transitionSpeed = 1500; // px/s
@@ -87,8 +88,17 @@ export function Carousel(props) {
 
   useEffect(() => {
     document.body.addEventListener('touchstart', () => {});
+    if (props.auto) {
+      timerRef.current = setInterval(() => {
+        updateCurrentImageIndex(+1);
+      }, 1000);
+      console.log(timerRef.current);
+    }
 
     return () => {
+      if (timerRef.current !== -1) {
+        clearInterval(timerRef.current);
+      }
       document.body.removeEventListener('touchstart', () => {});
     };
   }, [handleKeyDown]);
