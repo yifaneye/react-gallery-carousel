@@ -92,7 +92,7 @@ export const Carousel = (props) => {
     }
   };
 
-  const handleMouseEnter = useCallback(() => {
+  const handlePointerEnter = useCallback(() => {
     imagesRef.current.focus();
   }, []);
 
@@ -148,7 +148,7 @@ export const Carousel = (props) => {
         className={styles.images}
         ref={imagesRef}
         tabIndex={0}
-        onMouseEnter={handleMouseEnter}
+        onPointerEnter={handlePointerEnter}
         onKeyDown={handleKeyDown}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
