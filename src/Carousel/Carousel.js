@@ -1,28 +1,55 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
 import { Image } from '../Image';
 
 export function Carousel(props) {
-  const [, setCurrentImageIndex] = useState(0);
   const imagesRef = useRef(null);
-  const maxImageIndex = props.images.length;
 
-  const updateCurrentImageIndex = (change) =>
-    setCurrentImageIndex((currentImageIndex) => {
-      if (
-        currentImageIndex + change < 0 ||
-        currentImageIndex + change >= maxImageIndex
-      ) {
-        return currentImageIndex;
-      }
-      const newCurrentImageIndex = Math.abs(
-        (currentImageIndex + change) % maxImageIndex
-      );
-      imagesRef.current.style.transform = `translateX(calc(-100% * ${newCurrentImageIndex})`;
-      return newCurrentImageIndex;
-    });
+  // carousel settings
+  const transitionDuration = 0.3; // s
+  const swipeDistanceMin = 50; // px
 
-  const updateCarousel = useCallback((event) => {
+  let currentImageIndex = 0;
+  const imagesLength = props.images.length;
+  let swipeStartX = 0;
+
+  const updateCurrentImageIndex = (change) => {
+    if (
+      change !== 0 &&
+      currentImageIndex + change >= 0 &&
+      currentImageIndex + change < imagesLength
+    ) {
+      currentImageIndex = Math.abs((currentImageIndex + change) % imagesLength);
+    }
+    imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
+    setTimeout(
+      () => (imagesRef.current.style.transitionDuration = null),
+      transitionDuration * 1000
+    );
+    imagesRef.current.style.transform = `translateX(calc(-100% * ${currentImageIndex})`;
+  };
+
+  const isPinch = (event) => event.scale !== undefined && event.scale !== 1;
+
+  const applySwipe = (swipeDistance) => {
+    if (swipeDistance > swipeDistanceMin) {
+      updateCurrentImageIndex(-1);
+    } else if (swipeDistance < -swipeDistanceMin) {
+      updateCurrentImageIndex(+1);
+    } else {
+      updateCurrentImageIndex(0);
+    }
+  };
+
+  const showSwipe = (event) => {
+    const swipeDistance = event.changedTouches[0].clientX - swipeStartX;
+    imagesRef.current.style.transform = `translateX(calc(-100% * ${currentImageIndex} + ${swipeDistance}px)`;
+    if (event.type === 'touchend') {
+      applySwipe(swipeDistance);
+    }
+  };
+
+  const handleKeyDown = useCallback((event) => {
     if (event.key === 'ArrowLeft') {
       updateCurrentImageIndex(-1);
     } else if (event.key === 'ArrowRight') {
@@ -30,17 +57,46 @@ export function Carousel(props) {
     }
   }, []);
 
+  const handleTouchStart = useCallback((event) => {
+    if (isPinch(event)) {
+      return;
+    }
+    swipeStartX = event.touches[0].clientX;
+  }, []);
+
+  const handleTouchMove = useCallback((event) => {
+    if (isPinch(event)) {
+      return;
+    }
+    showSwipe(event);
+  }, []);
+
+  const handleTouchEnd = useCallback((event) => {
+    if (isPinch(event)) {
+      return;
+    }
+    showSwipe(event);
+  }, []);
+
   useEffect(() => {
-    imagesRef.current.addEventListener('keydown', updateCarousel, false);
+    document.body.addEventListener('touchstart', () => {});
 
     return () => {
-      imagesRef.current.removeEventListener('keydown', updateCarousel, false);
+      document.body.removeEventListener('touchstart', () => {});
     };
-  }, [updateCarousel]);
+  }, [handleKeyDown]);
 
   return (
     <div className={styles.imagesWrapper}>
-      <div className={styles.images} ref={imagesRef} tabIndex={0}>
+      <div
+        className={styles.images}
+        ref={imagesRef}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {props.images.map((image, index) => (
           <Image key={index} image={image} />
         ))}
