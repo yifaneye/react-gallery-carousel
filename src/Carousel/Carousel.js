@@ -7,7 +7,7 @@ export function Carousel(props) {
 
   // carousel settings
   const transitionSpeed = 1500; // px/s
-  const swipeDistanceMin = 50; // px
+  const swipePercentageMin = 0.25; // * 100%
 
   let currentImageIndex = 0;
   const imagesLength = props.images.length;
@@ -38,6 +38,7 @@ export function Carousel(props) {
   const isPinch = (event) => event.scale !== undefined && event.scale !== 1;
 
   const applySwipe = (swipeDisplacement) => {
+    const swipeDistanceMin = imagesRef.current.clientWidth * swipePercentageMin;
     if (swipeDisplacement > swipeDistanceMin) {
       updateCurrentImageIndex(-1, swipeDisplacement);
     } else if (swipeDisplacement < -swipeDistanceMin) {
