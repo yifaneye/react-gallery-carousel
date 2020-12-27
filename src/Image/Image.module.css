@@ -21,6 +21,8 @@
   user-select: none;
   touch-action: pinch-zoom;
   cursor: default;
+  text-align: center;
+  -webkit-user-drag: none;
 }
 
 .displayNone {

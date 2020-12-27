@@ -26,7 +26,7 @@ export function Image(props) {
   }, [imageRef]);
 
   return (
-    <div className={styles.imageWrapper} ref={imageRef}>
+    <figure className={styles.imageWrapper} ref={imageRef}>
       <img
         className={styles.image}
         src={isInViewport ? props.image.src : undefined}
@@ -35,9 +35,7 @@ export function Image(props) {
         aria-label='Image'
         title={props.image.alt}
       />
-      <figcaption className={styles.displayNone}>
-        <span className={styles.displayNone}>{props.image.alt}</span>
-      </figcaption>
-    </div>
+      <figcaption className={styles.displayNone}>{props.image.alt}</figcaption>
+    </figure>
   );
 }
