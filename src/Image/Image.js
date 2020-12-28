@@ -5,6 +5,8 @@ export const Image = (props) => {
   const imageRef = useRef(null);
   const [isInViewport, setIsInViewport] = useState(false);
 
+  const imageTitle = props.image.alt || null;
+
   useEffect(() => {
     if (!props.lazy) {
       return;
@@ -33,13 +35,13 @@ export const Image = (props) => {
       <img
         className={styles.image}
         src={!props.lazy || isInViewport ? props.image.src : undefined}
-        alt={props.image.alt}
+        alt={imageTitle}
+        aria-label={imageTitle}
+        title={imageTitle}
         loading={props.lazy ? 'lazy' : 'eager'}
-        aria-label='Image'
-        title={props.image.alt}
         style={{ objectFit: props.fit || null }}
       />
-      <figcaption className={styles.displayNone}>{props.image.alt}</figcaption>
+      <figcaption className={styles.displayNone}>{imageTitle}</figcaption>
     </figure>
   );
 };
