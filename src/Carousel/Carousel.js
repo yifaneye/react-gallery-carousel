@@ -155,13 +155,17 @@ export const Carousel = (props) => {
         onTouchEnd={handleTouchEnd}
       >
         {props.loop && props.images.length >= 1 ? (
-          <Image image={props.images[imagesLength - 1]} lazy={props.lazy} />
+          <Image
+            image={props.images[imagesLength - 1]}
+            lazy={props.lazy}
+            fit={props.fit}
+          />
         ) : null}
         {props.images.map((image, index) => (
-          <Image key={index} image={image} lazy={props.lazy} />
+          <Image key={index} image={image} lazy={props.lazy} fit={props.fit} />
         ))}
         {props.loop && props.images.length >= 1 ? (
-          <Image image={props.images[0]} lazy={props.lazy} />
+          <Image image={props.images[0]} lazy={props.lazy} fit={props.fit} />
         ) : null}
       </div>
     </div>

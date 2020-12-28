@@ -37,6 +37,7 @@ const App = () => {
           speed={1500} // px per second
           threshold={0.1} // 10% of image width
           interval={5} // 5 second auto play interval
+          fit={'contain'}
           lazy
           auto
           infinite

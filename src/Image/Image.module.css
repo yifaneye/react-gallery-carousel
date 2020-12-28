@@ -17,6 +17,7 @@
   height: 100%;
   width: 100%;
   margin: auto;
+  background-color: #000;
   object-fit: cover;
   user-select: none;
   touch-action: pinch-zoom;

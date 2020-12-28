@@ -37,6 +37,7 @@ export const Image = (props) => {
         loading={props.lazy ? 'lazy' : 'eager'}
         aria-label='Image'
         title={props.image.alt}
+        style={{ objectFit: props.fit || null }}
       />
       <figcaption className={styles.displayNone}>{props.image.alt}</figcaption>
     </figure>
