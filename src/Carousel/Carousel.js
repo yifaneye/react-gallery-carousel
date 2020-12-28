@@ -7,9 +7,9 @@ export const Carousel = (props) => {
   const timerRef = useRef(-1);
 
   // carousel settings
-  const transitionSpeed = 1500; // px/s
-  const swipePercentageMin = 0.25; // * 100%
-  const autoPlayInterval = 0.6; // s
+  const transitionSpeed = props.speed || 1500; // px/s
+  const swipePercentageMin = props.threshold || 0.1; // * 100%
+  const autoPlayInterval = props.interval || 5; // s
 
   const imagesLength = props.images.length;
   let imagesTotalLength = imagesLength;
@@ -155,13 +155,13 @@ export const Carousel = (props) => {
         onTouchEnd={handleTouchEnd}
       >
         {props.loop && props.images.length >= 1 ? (
-          <Image image={props.images[imagesLength - 1]} />
+          <Image image={props.images[imagesLength - 1]} lazy={props.lazy} />
         ) : null}
         {props.images.map((image, index) => (
-          <Image key={index} image={image} />
+          <Image key={index} image={image} lazy={props.lazy} />
         ))}
         {props.loop && props.images.length >= 1 ? (
-          <Image image={props.images[0]} />
+          <Image image={props.images[0]} lazy={props.lazy} />
         ) : null}
       </div>
     </div>

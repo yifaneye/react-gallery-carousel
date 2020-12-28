@@ -6,6 +6,9 @@ export const Image = (props) => {
   const [isInViewport, setIsInViewport] = useState(false);
 
   useEffect(() => {
+    if (!props.lazy) {
+      return;
+    }
     // eslint-disable-next-line no-undef
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -29,9 +32,9 @@ export const Image = (props) => {
     <figure className={styles.imageWrapper} ref={imageRef}>
       <img
         className={styles.image}
-        src={isInViewport ? props.image.src : undefined}
+        src={!props.lazy || isInViewport ? props.image.src : undefined}
         alt={props.image.alt}
-        loading='lazy'
+        loading={props.lazy ? 'lazy' : 'eager'}
         aria-label='Image'
         title={props.image.alt}
       />
