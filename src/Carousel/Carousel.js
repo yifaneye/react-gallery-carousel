@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
+import imagesStyles from '../Image/Image.module.css';
 import { Image } from '../Image';
 
 export const Carousel = (props) => {
@@ -11,7 +12,8 @@ export const Carousel = (props) => {
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = props.interval || 5; // s
 
-  const imagesLength = props.images.length;
+  const images = props.images || props.children; // make children to the carousel component as a fallback value
+  const imagesLength = images.length;
   let imagesTotalLength = imagesLength;
   let currentImageIndex = props.rtl ? imagesTotalLength - 1 : 0;
   if (props.loop) {
@@ -149,17 +151,35 @@ export const Carousel = (props) => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {props.loop && props.images.length >= 1 ? (
+        {!('images' in props) &&
+          props.children &&
+          props.children.map((slide, index) => (
+            <div
+              key={index}
+              className={
+                imagesStyles.imageWrapper + ' ' + imagesStyles.userSelectAuto
+              }
+            >
+              {slide}
+            </div>
+          ))}
+        {props.images && props.loop && props.images.length >= 1 ? (
           <Image
             image={props.images[imagesLength - 1]}
             lazy={props.lazy}
             fit={props.fit}
           />
         ) : null}
-        {props.images.map((image, index) => (
-          <Image key={index} image={image} lazy={props.lazy} fit={props.fit} />
-        ))}
-        {props.loop && props.images.length >= 1 ? (
+        {props.images &&
+          props.images.map((image, index) => (
+            <Image
+              key={index}
+              image={image}
+              lazy={props.lazy}
+              fit={props.fit}
+            />
+          ))}
+        {props.images && props.loop && props.images.length >= 1 ? (
           <Image image={props.images[0]} lazy={props.lazy} fit={props.fit} />
         ) : null}
       </div>
