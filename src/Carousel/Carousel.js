@@ -143,7 +143,7 @@ export const Carousel = (props) => {
   }, [handleKeyDown]);
 
   return (
-    <div className={styles.imagesWrapper}>
+    <div className={styles.imagesWrapper} style={props.style}>
       <div
         className={styles.images}
         ref={imagesRef}

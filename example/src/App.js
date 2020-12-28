@@ -12,15 +12,24 @@ const App = () => {
 
   return (
     <div>
-      <div
+      <Carousel
+        images={images}
+        lazy
         style={{
           width: '100vw',
           height: '50vh'
         }}
-      >
-        <Carousel images={images} lazy />
-      </div>
-      <div
+      />
+      <Carousel
+        images={images}
+        speed={1500} // px per second
+        threshold={0.1} // 10% of image width
+        interval={5} // 5 second auto play interval
+        fit={'contain'}
+        lazy
+        auto
+        infinite
+        loop
         style={{
           width: '100vw',
           height: '50vh',
@@ -31,19 +40,7 @@ const App = () => {
           WebkitMaskImage: '-webkit-radial-gradient(white, black)',
           boxSizing: 'border-box'
         }}
-      >
-        <Carousel
-          images={images}
-          speed={1500} // px per second
-          threshold={0.1} // 10% of image width
-          interval={5} // 5 second auto play interval
-          fit={'contain'}
-          lazy
-          auto
-          infinite
-          loop
-        />
-      </div>
+      />
     </div>
   );
 };
