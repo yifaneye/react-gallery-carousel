@@ -133,25 +133,20 @@ export const Carousel = (props) => {
 
   const handleTouchStart = useCallback((event) => {
     if (isOrWasPinch(event)) {
-      console.log('🤏 2222222222 pinch zoom start');
       return;
     }
-    console.info('👆 touch start');
     swipeStartX = event.touches[0].clientX;
   }, []);
 
   const handleTouchMove = useCallback((event) => {
     if (isOrWasPinch(event)) {
-      console.log('🤏 2222222222 pinch zoom move');
       return;
     }
-    console.info('👆 touch move');
     showSwipe(event);
   }, []);
 
   const handleTouchEnd = useCallback((event) => {
     if (isOrWasPinch(event)) {
-      console.log('🤏 2222222222 pinch zoom end');
       return;
     }
     showSwipe(event);
