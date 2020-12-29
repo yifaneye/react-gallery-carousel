@@ -63,11 +63,35 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
   };
 
+  const pinchTouchIdentifiers = new Set(); // record all pinch touch identifiers
+
+  const recordPinchTouchIdentifiers = (event) => {
+    for (const touch of event.touches) {
+      pinchTouchIdentifiers.add(touch.identifier);
+    }
+  };
+
   const isPinch = (event) => {
     return (
       (event.touches !== undefined && event.touches.length > 1) ||
       (event.scale !== undefined && event.scale !== 1)
     );
+  };
+
+  const wasPinch = (event) => {
+    // only check one changedTouch because touchEnd event only has one changedTouch
+    return (
+      event.changedTouches &&
+      pinchTouchIdentifiers.has(event.changedTouches[0].identifier)
+    );
+  };
+
+  const isOrWasPinch = (event) => {
+    if (isPinch(event)) {
+      recordPinchTouchIdentifiers(event);
+      return true;
+    }
+    return wasPinch(event);
   };
 
   const applySwipe = (swipeDisplacement) => {
@@ -108,21 +132,26 @@ export const Carousel = (props) => {
   }, []);
 
   const handleTouchStart = useCallback((event) => {
-    if (isPinch(event)) {
+    if (isOrWasPinch(event)) {
+      console.log('🤏 2222222222 pinch zoom start');
       return;
     }
+    console.info('👆 touch start');
     swipeStartX = event.touches[0].clientX;
   }, []);
 
   const handleTouchMove = useCallback((event) => {
-    if (isPinch(event)) {
+    if (isOrWasPinch(event)) {
+      console.log('🤏 2222222222 pinch zoom move');
       return;
     }
+    console.info('👆 touch move');
     showSwipe(event);
   }, []);
 
   const handleTouchEnd = useCallback((event) => {
-    if (isPinch(event)) {
+    if (isOrWasPinch(event)) {
+      console.log('🤏 2222222222 pinch zoom end');
       return;
     }
     showSwipe(event);
@@ -143,7 +172,7 @@ export const Carousel = (props) => {
       }
       document.body.removeEventListener('touchstart', () => {});
     };
-  }, [handleKeyDown]);
+  }, []);
 
   return (
     <div className={styles.imagesWrapper} style={props.style}>
