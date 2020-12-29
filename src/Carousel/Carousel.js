@@ -66,6 +66,30 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
   };
 
+  const checkToStopAutoPlay = () => {
+    if (props.auto && timerRef.current !== -1) {
+      clearInterval(timerRef.current);
+    }
+  };
+
+  const checkToStartAutoPlay = () => {
+    if (props.auto) {
+      timerRef.current = setInterval(() => {
+        updateCurrentImageIndex(props.rtl ? -1 : +1);
+      }, autoPlayInterval * 1000);
+    }
+  };
+
+  const checkToResetAutoPlay = () => {
+    checkToStopAutoPlay();
+    checkToStartAutoPlay();
+  };
+
+  const updateCarouselImageIndex = (change, swipedDisplacement = 0) => {
+    checkToResetAutoPlay();
+    updateCurrentImageIndex(change, swipedDisplacement);
+  };
+
   const pinchTouchIdentifiers = new Set(); // record all pinch touch identifiers
 
   const recordPinchTouchIdentifiers = (event) => {
@@ -100,11 +124,11 @@ export const Carousel = (props) => {
   const applySwipe = (swipeDisplacement) => {
     const swipeDistanceMin = imagesRef.current.clientWidth * swipePercentageMin;
     if (swipeDisplacement > swipeDistanceMin) {
-      updateCurrentImageIndex(-1, swipeDisplacement);
+      updateCarouselImageIndex(-1, swipeDisplacement);
     } else if (swipeDisplacement < -swipeDistanceMin) {
-      updateCurrentImageIndex(+1, swipeDisplacement);
+      updateCarouselImageIndex(+1, swipeDisplacement);
     } else {
-      updateCurrentImageIndex(0, swipeDisplacement);
+      updateCarouselImageIndex(0, swipeDisplacement);
     }
   };
 
@@ -128,9 +152,9 @@ export const Carousel = (props) => {
 
   const handleKeyDown = useCallback((event) => {
     if (event.key === 'ArrowLeft') {
-      updateCurrentImageIndex(-1);
+      updateCarouselImageIndex(-1);
     } else if (event.key === 'ArrowRight') {
-      updateCurrentImageIndex(+1);
+      updateCarouselImageIndex(+1);
     }
   }, []);
 
@@ -157,17 +181,11 @@ export const Carousel = (props) => {
 
   useEffect(() => {
     document.body.addEventListener('touchstart', () => {});
-    if (props.auto) {
-      timerRef.current = setInterval(() => {
-        updateCurrentImageIndex(props.rtl ? -1 : +1);
-      }, autoPlayInterval * 1000);
-    }
+    checkToStartAutoPlay();
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
 
     return () => {
-      if (timerRef.current !== -1) {
-        clearInterval(timerRef.current);
-      }
+      checkToStopAutoPlay();
       document.body.removeEventListener('touchstart', () => {});
     };
   }, []);
