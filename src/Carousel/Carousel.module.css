@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  touch-action: pan-x pinch-zoom;
+  touch-action: manipulation;
 }
 
 .images {
@@ -19,7 +19,6 @@
   transition-duration: 0s;
   transition-property: transform;
   transition-timing-function: ease-out;
-  touch-action: pinch-zoom;
 }
 
 .images:focus {
