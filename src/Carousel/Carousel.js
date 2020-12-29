@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
 import imagesStyles from '../Image/Image.module.css';
 import { Image } from '../Image';
+import { useKeys } from '../utils/useKeys';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);
@@ -150,13 +151,10 @@ export const Carousel = (props) => {
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'ArrowLeft') {
-      updateCarouselImageIndex(-1);
-    } else if (event.key === 'ArrowRight') {
-      updateCarouselImageIndex(+1);
-    }
-  };
+  useKeys(imagesRef, {
+    ArrowLeft: () => updateCarouselImageIndex(-1),
+    ArrowRight: () => updateCarouselImageIndex(+1)
+  });
 
   const handleTouchStart = (event) => {
     if (isOrWasPinch(event)) {
@@ -194,7 +192,6 @@ export const Carousel = (props) => {
         className={styles.images}
         ref={imagesRef}
         tabIndex={0}
-        onKeyDown={handleKeyDown}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
