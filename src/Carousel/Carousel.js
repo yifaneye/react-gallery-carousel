@@ -180,13 +180,11 @@ export const Carousel = (props) => {
   };
 
   useEffect(() => {
-    document.body.addEventListener('touchstart', () => {});
     checkToStartAutoPlay();
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
 
     return () => {
       checkToStopAutoPlay();
-      document.body.removeEventListener('touchstart', () => {});
     };
   }, []);
 
