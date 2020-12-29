@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
 import imagesStyles from '../Image/Image.module.css';
 import { Image } from '../Image';
@@ -150,34 +150,34 @@ export const Carousel = (props) => {
     }
   };
 
-  const handleKeyDown = useCallback((event) => {
+  const handleKeyDown = (event) => {
     if (event.key === 'ArrowLeft') {
       updateCarouselImageIndex(-1);
     } else if (event.key === 'ArrowRight') {
       updateCarouselImageIndex(+1);
     }
-  }, []);
+  };
 
-  const handleTouchStart = useCallback((event) => {
+  const handleTouchStart = (event) => {
     if (isOrWasPinch(event)) {
       return;
     }
     swipeStartX = event.touches[0].clientX;
-  }, []);
+  };
 
-  const handleTouchMove = useCallback((event) => {
+  const handleTouchMove = (event) => {
     if (isOrWasPinch(event)) {
       return;
     }
     showSwipe(event);
-  }, []);
+  };
 
-  const handleTouchEnd = useCallback((event) => {
+  const handleTouchEnd = (event) => {
     if (isOrWasPinch(event)) {
       return;
     }
     showSwipe(event);
-  }, []);
+  };
 
   useEffect(() => {
     document.body.addEventListener('touchstart', () => {});
