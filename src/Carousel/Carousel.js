@@ -15,6 +15,9 @@ export const Carousel = (props) => {
   const images = props.images || props.children; // make children to the carousel component as a fallback value
   const imagesLength = images.length;
   let imagesTotalLength = imagesLength;
+  if (props.rtl) {
+    images.reverse();
+  }
   let currentImageIndex = props.rtl ? imagesTotalLength - 1 : 0;
   if (props.loop) {
     imagesTotalLength = imagesLength + 2; // add 1 image each to head and tail
