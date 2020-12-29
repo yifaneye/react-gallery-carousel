@@ -63,7 +63,12 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
   };
 
-  const isPinch = (event) => event.scale !== undefined && event.scale !== 1;
+  const isPinch = (event) => {
+    return (
+      (event.touches !== undefined && event.touches.length > 1) ||
+      (event.scale !== undefined && event.scale !== 1)
+    );
+  };
 
   const applySwipe = (swipeDisplacement) => {
     const swipeDistanceMin = imagesRef.current.clientWidth * swipePercentageMin;
