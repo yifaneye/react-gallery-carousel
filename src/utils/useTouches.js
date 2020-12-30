@@ -85,10 +85,12 @@ export const useTouches = (elementRef, swipePercentageMin, callbacks) => {
       showSwipe(event);
     };
 
+    document.addEventListener('touchstart', () => {});
     elementRef.current.addEventListener('touchstart', handleTouchStart);
     elementRef.current.addEventListener('touchmove', handleTouchMove);
     elementRef.current.addEventListener('touchend', handleTouchEnd);
     return () => {
+      document.removeEventListener('touchstart', () => {});
       elementRef.current.removeEventListener('touchstart', handleTouchStart);
       elementRef.current.removeEventListener('touchmove', handleTouchMove);
       elementRef.current.removeEventListener('touchend', handleTouchEnd);
