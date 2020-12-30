@@ -13,17 +13,35 @@ export const Carousel = (props) => {
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = (props.interval || 5) * 1000; // ms // convert 1sec to 1000ms
 
-  const images = props.images || props.children; // make children to the carousel component as a fallback value
-  const imagesLength = images.length;
-  let imagesTotalLength = imagesLength;
-  if (props.rtl) {
-    images.reverse();
-  }
-  let currentImageIndex = props.rtl ? imagesTotalLength - 1 : 0;
-  if (props.loop) {
-    imagesTotalLength = imagesLength + 2; // add 1 image each to head and tail
-    currentImageIndex = props.rtl ? imagesTotalLength - 2 : 1; // choose between the second last and the second
-  }
+  const generateSlides = (items, { rtl, loop }) => {
+    let slides = items;
+    const slidesLength = slides.length;
+    if (!slidesLength) {
+      return [];
+    }
+    if (rtl) {
+      slides.reverse();
+    }
+    if (loop) {
+      slides = [slides[slidesLength - 1], ...slides, slides[0]];
+    }
+    return slides;
+  };
+
+  const getSlidesCurrentIndex = (slides, { rtl, loop }) => {
+    const slidesLength = slides.length;
+    if (slidesLength <= 1) {
+      return slidesLength;
+    }
+    const bufferLength = loop ? 1 : 0;
+    return rtl ? slidesLength - 1 - bufferLength : bufferLength;
+  };
+
+  let slides = props.images || props.children; // make children to the carousel component as a fallback value
+  const slidesLength = slides.length;
+  slides = generateSlides(slides, props);
+  let currentSlideIndex = getSlidesCurrentIndex(slides, props);
+  const slideTotalLength = slides.length;
 
   let swipeStartX = 0;
 
@@ -31,20 +49,20 @@ export const Carousel = (props) => {
     const hasToUpdate =
       change !== 0 &&
       (props.infinite ||
-        (currentImageIndex + change >= 0 &&
-          currentImageIndex + change < imagesLength));
+        (currentSlideIndex + change >= 0 &&
+          currentSlideIndex + change < slidesLength));
     if (hasToUpdate) {
       // check for non-swipe updates
       if (props.loop && swipedDisplacement === 0) {
-        if (change < 0 && currentImageIndex === 1) {
-          currentImageIndex = imagesTotalLength - 1;
-        } else if (change > 0 && currentImageIndex === imagesTotalLength - 2) {
-          currentImageIndex = 0;
+        if (change < 0 && currentSlideIndex === 1) {
+          currentSlideIndex = slideTotalLength - 1;
+        } else if (change > 0 && currentSlideIndex === slideTotalLength - 2) {
+          currentSlideIndex = 0;
         }
-        imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
+        imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex}), 0px, 0px)`;
       }
-      currentImageIndex = Math.abs(
-        (imagesTotalLength + currentImageIndex + change) % imagesTotalLength
+      currentSlideIndex = Math.abs(
+        (slideTotalLength + currentSlideIndex + change) % slideTotalLength
       );
     }
 
@@ -64,7 +82,7 @@ export const Carousel = (props) => {
       () => (imagesRef.current.style.transitionDuration = null),
       transitionDuration * 1000
     );
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex}), 0px, 0px)`;
   };
 
   const timer = useTimer(props.auto ? autoPlayInterval : null, () =>
@@ -121,16 +139,16 @@ export const Carousel = (props) => {
   const showSwipe = (event) => {
     const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
     if (props.loop) {
-      if (swipeDisplacement > 0 && currentImageIndex === 1) {
-        currentImageIndex = imagesTotalLength - 1;
+      if (swipeDisplacement > 0 && currentSlideIndex === 1) {
+        currentSlideIndex = slideTotalLength - 1;
       } else if (
         swipeDisplacement < 0 &&
-        currentImageIndex === imagesTotalLength - 2
+        currentSlideIndex === slideTotalLength - 2
       ) {
-        currentImageIndex = 0;
+        currentSlideIndex = 0;
       }
     }
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
     if (event.type === 'touchend') {
       applySwipe(swipeDisplacement);
     }
@@ -163,7 +181,7 @@ export const Carousel = (props) => {
   };
 
   useEffect(() => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex}), 0px, 0px)`;
   }, []);
 
   return (
@@ -178,7 +196,7 @@ export const Carousel = (props) => {
       >
         {!('images' in props) &&
           props.children &&
-          props.children.map((slide, index) => (
+          slides.map((slide, index) => (
             <div
               key={index}
               className={
@@ -188,25 +206,15 @@ export const Carousel = (props) => {
               {slide}
             </div>
           ))}
-        {props.images && props.loop && props.images.length >= 1 ? (
-          <Image
-            image={props.images[imagesLength - 1]}
-            lazy={props.lazy}
-            fit={props.fit}
-          />
-        ) : null}
-        {props.images &&
-          props.images.map((image, index) => (
+        {'images' in props &&
+          slides.map((slide, index) => (
             <Image
               key={index}
-              image={image}
+              image={slide}
               lazy={props.lazy}
               fit={props.fit}
             />
           ))}
-        {props.images && props.loop && props.images.length >= 1 ? (
-          <Image image={props.images[0]} lazy={props.lazy} fit={props.fit} />
-        ) : null}
       </div>
     </div>
   );
