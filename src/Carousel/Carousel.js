@@ -31,7 +31,7 @@ export const Carousel = (props) => {
   const getSlidesCurrentIndex = (slides, { rtl, loop }) => {
     const slidesLength = slides.length;
     if (slidesLength <= 1) {
-      return slidesLength;
+      return 0;
     }
     const bufferLength = loop ? 1 : 0;
     return rtl ? slidesLength - 1 - bufferLength : bufferLength;
