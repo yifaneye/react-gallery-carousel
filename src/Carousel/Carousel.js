@@ -3,15 +3,15 @@ import styles from './Carousel.module.css';
 import imagesStyles from '../Image/Image.module.css';
 import { Image } from '../Image';
 import { useKeys } from '../utils/useKeys';
+import { useTimer } from '../utils/useTimer';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);
-  const timerRef = useRef(-1);
 
   // carousel settings
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
-  const autoPlayInterval = props.interval || 5; // s
+  const autoPlayInterval = (props.interval || 5) * 1000; // ms // convert 1sec to 1000ms
 
   const images = props.images || props.children; // make children to the carousel component as a fallback value
   const imagesLength = images.length;
@@ -67,27 +67,12 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
   };
 
-  const checkToStopAutoPlay = () => {
-    if (props.auto && timerRef.current !== -1) {
-      clearInterval(timerRef.current);
-    }
-  };
-
-  const checkToStartAutoPlay = () => {
-    if (props.auto) {
-      timerRef.current = setInterval(() => {
-        updateCurrentImageIndex(props.rtl ? -1 : +1);
-      }, autoPlayInterval * 1000);
-    }
-  };
-
-  const checkToResetAutoPlay = () => {
-    checkToStopAutoPlay();
-    checkToStartAutoPlay();
-  };
+  const timer = useTimer(props.auto ? autoPlayInterval : null, () =>
+    updateCurrentImageIndex(props.rtl ? -1 : +1)
+  );
 
   const updateCarouselImageIndex = (change, swipedDisplacement = 0) => {
-    checkToResetAutoPlay();
+    timer && timer.restart();
     updateCurrentImageIndex(change, swipedDisplacement);
   };
 
@@ -178,12 +163,7 @@ export const Carousel = (props) => {
   };
 
   useEffect(() => {
-    checkToStartAutoPlay();
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentImageIndex}), 0px, 0px)`;
-
-    return () => {
-      checkToStopAutoPlay();
-    };
   }, []);
 
   return (

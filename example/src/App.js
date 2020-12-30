@@ -65,6 +65,9 @@ const App = () => {
       <Carousel
         images={images}
         lazy
+        auto
+        infinite
+        loop
         style={{
           maxWidth: 'min(100vh, 1440px)',
           height: '40vh',
@@ -77,12 +80,13 @@ const App = () => {
         images={images}
         speed={1500} // 1500 px per second
         threshold={0.1} // 10% of image width
-        interval={2.5} // 2.5 second auto play interval
+        interval={10} // second auto play interval
         fit={'contain'}
         lazy
         auto
         infinite
         loop
+        rtl
         style={{
           maxWidth: 'min(100vh, 1440px)',
           height: '40vh',
