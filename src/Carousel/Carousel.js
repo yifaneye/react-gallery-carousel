@@ -45,6 +45,10 @@ export const Carousel = (props) => {
 
   let swipeStartX = 0;
 
+  const applyTransition = (swipeDisplacement = 0) => {
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+  };
+
   const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
     const hasToUpdate =
       change !== 0 &&
@@ -59,7 +63,7 @@ export const Carousel = (props) => {
         } else if (change > 0 && currentSlideIndex === slideTotalLength - 2) {
           currentSlideIndex = 0;
         }
-        imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex}), 0px, 0px)`;
+        applyTransition();
       }
       currentSlideIndex = Math.abs(
         (slideTotalLength + currentSlideIndex + change) % slideTotalLength
@@ -82,7 +86,7 @@ export const Carousel = (props) => {
       () => (imagesRef.current.style.transitionDuration = null),
       transitionDuration * 1000
     );
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex}), 0px, 0px)`;
+    applyTransition();
   };
 
   const timer = useTimer(props.auto ? autoPlayInterval : null, () =>
@@ -148,7 +152,7 @@ export const Carousel = (props) => {
         currentSlideIndex = 0;
       }
     }
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    applyTransition(swipeDisplacement);
     if (event.type === 'touchend') {
       applySwipe(swipeDisplacement);
     }
@@ -181,7 +185,7 @@ export const Carousel = (props) => {
   };
 
   useEffect(() => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex}), 0px, 0px)`;
+    applyTransition();
   }, []);
 
   return (
