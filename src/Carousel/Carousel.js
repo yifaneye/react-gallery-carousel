@@ -4,6 +4,7 @@ import imagesStyles from '../Image/Image.module.css';
 import { Image } from '../Image';
 import { useKeys } from '../utils/useKeys';
 import { useTimer } from '../utils/useTimer';
+import { useTouches } from '../utils/useTouches';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);
@@ -58,8 +59,6 @@ export const Carousel = (props) => {
   } = getSlidesIndices(slides, props);
   let currentSlideIndex = slidesCurrentIndex;
   const slideTotalLength = slides.length;
-
-  let swipeStartX = 0;
 
   const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
     const swipedDistance = Math.abs(swipedDisplacement);
@@ -123,81 +122,21 @@ export const Carousel = (props) => {
     updateCurrentImageIndex(change, swipedDisplacement);
   };
 
-  const pinchTouchIdentifiers = new Set(); // record all pinch touch identifiers
-
-  const recordPinchTouchIdentifiers = (event) => {
-    for (const touch of event.touches) {
-      pinchTouchIdentifiers.add(touch.identifier);
-    }
-  };
-
-  const isPinch = (event) => {
-    return (
-      (event.touches !== undefined && event.touches.length > 1) ||
-      (event.scale !== undefined && event.scale !== 1)
-    );
-  };
-
-  const wasPinch = (event) => {
-    // only check one changedTouch because touchEnd event only has one changedTouch
-    return (
-      event.changedTouches &&
-      pinchTouchIdentifiers.has(event.changedTouches[0].identifier)
-    );
-  };
-
-  const isOrWasPinch = (event) => {
-    if (isPinch(event)) {
-      recordPinchTouchIdentifiers(event);
-      return true;
-    }
-    return wasPinch(event);
-  };
-
-  const applySwipe = (swipeDisplacement) => {
-    const swipeDistanceMin = imagesRef.current.clientWidth * swipePercentageMin;
-    if (swipeDisplacement > swipeDistanceMin) {
-      updateCarouselImageIndex(-1, swipeDisplacement);
-    } else if (swipeDisplacement < -swipeDistanceMin) {
-      updateCarouselImageIndex(+1, swipeDisplacement);
-    } else {
-      updateCarouselImageIndex(0, swipeDisplacement);
-    }
-  };
-
-  const showSwipe = (event) => {
-    const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
-    calibrateCurrentSlideIndex(-swipeDisplacement);
-    if (event.type === 'touchend') {
-      applySwipe(swipeDisplacement);
-    }
-  };
-
   useKeys(imagesRef, {
     ArrowLeft: () => updateCarouselImageIndex(-1),
     ArrowRight: () => updateCarouselImageIndex(+1)
   });
 
-  const handleTouchStart = (event) => {
-    if (isOrWasPinch(event)) {
-      return;
-    }
-    swipeStartX = event.touches[0].clientX;
-  };
-
-  const handleTouchMove = (event) => {
-    if (isOrWasPinch(event)) {
-      return;
-    }
-    showSwipe(event);
-  };
-
-  const handleTouchEnd = (event) => {
-    if (isOrWasPinch(event)) {
-      return;
-    }
-    showSwipe(event);
-  };
+  useTouches(imagesRef, swipePercentageMin, {
+    swipeMove: (swipeDisplacement) =>
+      calibrateCurrentSlideIndex(-swipeDisplacement),
+    swipeEndRight: (swipeDisplacement) =>
+      updateCarouselImageIndex(-1, swipeDisplacement),
+    swipeEndLeft: (swipeDisplacement) =>
+      updateCarouselImageIndex(+1, swipeDisplacement),
+    swipeEndDisqualified: (swipeDisplacement) =>
+      updateCarouselImageIndex(0, swipeDisplacement)
+  });
 
   useEffect(() => {
     applyTransition();
@@ -205,14 +144,7 @@ export const Carousel = (props) => {
 
   return (
     <div className={styles.imagesWrapper} style={props.style}>
-      <div
-        className={styles.images}
-        ref={imagesRef}
-        tabIndex={0}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className={styles.images} ref={imagesRef} tabIndex={0}>
         {!('images' in props) &&
           props.children &&
           slides.map((slide, index) => (
