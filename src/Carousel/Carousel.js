@@ -28,19 +28,35 @@ export const Carousel = (props) => {
     return slides;
   };
 
-  const getSlidesCurrentIndex = (slides, { rtl, loop }) => {
+  const getSlidesIndices = (slides, { rtl, loop }) => {
     const slidesLength = slides.length;
     if (slidesLength <= 1) {
       return 0;
     }
     const bufferLength = loop ? 1 : 0;
-    return rtl ? slidesLength - 1 - bufferLength : bufferLength;
+    const slidesHeadIndex = rtl
+      ? slidesLength - 1 - bufferLength
+      : bufferLength;
+    const slidesTailIndex = rtl
+      ? bufferLength
+      : slidesLength - 1 - bufferLength;
+    return {
+      slidesCurrentIndex: slidesHeadIndex,
+      slidesMinIndex:
+        slidesHeadIndex < slidesTailIndex ? slidesHeadIndex : slidesTailIndex,
+      slidesMaxIndex:
+        slidesHeadIndex < slidesTailIndex ? slidesTailIndex : slidesHeadIndex
+    };
   };
 
   let slides = props.images || props.children; // make children to the carousel component as a fallback value
-  const slidesLength = slides.length;
   slides = generateSlides(slides, props);
-  let currentSlideIndex = getSlidesCurrentIndex(slides, props);
+  const {
+    slidesCurrentIndex,
+    slidesMinIndex,
+    slidesMaxIndex
+  } = getSlidesIndices(slides, props);
+  let currentSlideIndex = slidesCurrentIndex;
   const slideTotalLength = slides.length;
 
   let swipeStartX = 0;
@@ -70,10 +86,10 @@ export const Carousel = (props) => {
 
   const calibrateCurrentSlideIndex = (change) => {
     if (!props.loop) return;
-    if (currentSlideIndex === 1 && change < 0) {
-      currentSlideIndex = slideTotalLength - 1;
-    } else if (currentSlideIndex === slideTotalLength - 2 && change > 0) {
-      currentSlideIndex = 0;
+    if (currentSlideIndex === slidesMinIndex && change < 0) {
+      currentSlideIndex = slidesMaxIndex + 1;
+    } else if (currentSlideIndex === slidesMaxIndex && change > 0) {
+      currentSlideIndex = slidesMinIndex - 1;
     }
     applyTransition(-change);
   };
@@ -82,8 +98,8 @@ export const Carousel = (props) => {
     const hasToUpdate =
       change !== 0 &&
       (props.infinite ||
-        (currentSlideIndex + change >= 0 &&
-          currentSlideIndex + change < slidesLength));
+        (currentSlideIndex + change >= slidesMinIndex &&
+          currentSlideIndex + change <= slidesMaxIndex));
     if (hasToUpdate) {
       // check for non-swipe updates
       if (swipedDisplacement === 0) {
