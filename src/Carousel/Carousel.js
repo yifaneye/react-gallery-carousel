@@ -45,6 +45,25 @@ export const Carousel = (props) => {
 
   let swipeStartX = 0;
 
+  const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
+    const swipedDistance = Math.abs(swipedDisplacement);
+    const transitionDistance = hasToUpdate
+      ? Math.abs(imagesRef.current.clientWidth - swipedDistance)
+      : swipedDistance;
+    let transitionDuration = transitionDistance / transitionSpeed;
+
+    // make transitionDuration slightly smaller (faster) than autoPlayInterval
+    if (props.auto && transitionDuration > autoPlayInterval) {
+      transitionDuration = autoPlayInterval * 0.99;
+    }
+
+    imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
+    setTimeout(
+      () => (imagesRef.current.style.transitionDuration = null),
+      transitionDuration * 1000
+    );
+  };
+
   const applyTransition = (swipeDisplacement = 0) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
@@ -75,22 +94,7 @@ export const Carousel = (props) => {
       );
     }
 
-    const swipedDistance = Math.abs(swipedDisplacement);
-    const transitionDistance = hasToUpdate
-      ? Math.abs(imagesRef.current.clientWidth - swipedDistance)
-      : swipedDistance;
-    let transitionDuration = transitionDistance / transitionSpeed;
-
-    // make transitionDuration slightly smaller (faster) than autoPlayInterval
-    if (props.auto && transitionDuration > autoPlayInterval) {
-      transitionDuration = autoPlayInterval * 0.99;
-    }
-
-    imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
-    setTimeout(
-      () => (imagesRef.current.style.transitionDuration = null),
-      transitionDuration * 1000
-    );
+    applyTransitionDuration(swipedDisplacement, hasToUpdate);
     applyTransition();
   };
 
