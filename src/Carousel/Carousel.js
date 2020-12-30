@@ -83,14 +83,14 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
-  const calibrateCurrentSlideIndex = (change) => {
+  const calibrateCurrentSlideIndex = (change, swipeDisplacement = 0) => {
     if (!props.loop) return;
     if (currentSlideIndex === slidesMinIndex && change < 0) {
       currentSlideIndex = slidesMaxIndex + 1;
     } else if (currentSlideIndex === slidesMaxIndex && change > 0) {
       currentSlideIndex = slidesMinIndex - 1;
     }
-    applyTransition(-change);
+    applyTransition(swipeDisplacement);
   };
 
   const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
@@ -129,7 +129,7 @@ export const Carousel = (props) => {
 
   useTouches(imagesRef, swipePercentageMin, {
     swipeMove: (swipeDisplacement) =>
-      calibrateCurrentSlideIndex(-swipeDisplacement),
+      calibrateCurrentSlideIndex(0, swipeDisplacement),
     swipeEndRight: (swipeDisplacement) =>
       updateCarouselImageIndex(-1, swipeDisplacement),
     swipeEndLeft: (swipeDisplacement) =>
