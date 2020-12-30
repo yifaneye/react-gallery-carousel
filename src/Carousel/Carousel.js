@@ -87,7 +87,7 @@ export const Carousel = (props) => {
     if (hasToUpdate) {
       // check for non-swipe updates
       if (swipedDisplacement === 0) {
-        calibrateCurrentSlideIndex();
+        calibrateCurrentSlideIndex(change);
       }
       currentSlideIndex = Math.abs(
         (slideTotalLength + currentSlideIndex + change) % slideTotalLength
