@@ -67,7 +67,7 @@ export const Carousel = (props) => {
     ArrowRight: () => updateIndex(+1)
   });
 
-  useTouches(imagesRef, swipePercentageMin, {
+  const touchEventHandlers = useTouches(imagesRef, swipePercentageMin, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
@@ -80,7 +80,12 @@ export const Carousel = (props) => {
 
   return (
     <div className={styles.imagesWrapper} style={props.style}>
-      <div className={styles.images} ref={imagesRef} tabIndex={0}>
+      <div
+        className={styles.images}
+        ref={imagesRef}
+        {...touchEventHandlers}
+        tabIndex={0}
+      >
         {!('images' in props) &&
           props.children &&
           slides.getSlides().map((slide, index) => (
