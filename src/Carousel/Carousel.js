@@ -12,7 +12,8 @@ export const Carousel = (props) => {
   const slides = useSlides(props.images || props.children, props);
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
-  const autoPlayInterval = (props.interval || 5) * 1000; // ms // convert 1sec to 1000ms
+  const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
+  const indexStep = props.rtl ? -1 : +1;
 
   const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
     const swipedDistance = Math.abs(swipedDisplacement);
@@ -23,7 +24,7 @@ export const Carousel = (props) => {
 
     // make transitionDuration slightly smaller (faster) than autoPlayInterval
     if (props.auto && transitionDuration > autoPlayInterval) {
-      transitionDuration = autoPlayInterval * 0.99;
+      transitionDuration = autoPlayInterval * 0.999;
     }
 
     imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
@@ -31,6 +32,7 @@ export const Carousel = (props) => {
       () => (imagesRef.current.style.transitionDuration = null),
       transitionDuration * 1000
     );
+    timer && timer.restart();
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
@@ -38,7 +40,6 @@ export const Carousel = (props) => {
   };
 
   const calibrateIndex = (change, swipeDisplacement = 0) => {
-    timer && timer.restart();
     if (swipeDisplacement) {
       change = -swipeDisplacement;
     }
@@ -47,7 +48,6 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = (change, swipedDisplacement = 0) => {
-    timer && timer.restart();
     const hasToUpdate = slides.hasToUpdateIndex(change);
     if (hasToUpdate) {
       if (!swipedDisplacement) {
@@ -59,9 +59,7 @@ export const Carousel = (props) => {
     applyTransition();
   };
 
-  const timer = useTimer(props.auto ? autoPlayInterval : null, () =>
-    updateIndex(props.rtl ? -1 : +1)
-  );
+  const timer = useTimer(autoPlayInterval, () => updateIndex(indexStep));
 
   useKeys(imagesRef, {
     ArrowLeft: () => updateIndex(-1),
