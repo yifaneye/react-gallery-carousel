@@ -5,68 +5,14 @@ import { Image } from '../Image';
 import { useKeys } from '../utils/useKeys';
 import { useTimer } from '../utils/useTimer';
 import { useTouches } from '../utils/useTouches';
+import { useSlides } from '../utils/useSlides';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);
-
-  // carousel settings
+  const slides = useSlides(props.images || props.children, props);
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = (props.interval || 5) * 1000; // ms // convert 1sec to 1000ms
-
-  const getSlides = (items, { rtl, loop }) => {
-    let slides = items;
-    const slidesLength = slides.length;
-    if (!slidesLength) {
-      return [];
-    }
-    if (rtl) {
-      slides.reverse();
-    }
-    if (loop) {
-      slides = [slides[slidesLength - 1], ...slides, slides[0]];
-    }
-    return slides;
-  };
-
-  const getIndices = (slides, { rtl, loop }) => {
-    const slidesLength = slides.length;
-    if (slidesLength <= 1) {
-      return 0;
-    }
-    const bufferLength = loop ? 1 : 0;
-    const headIndex = rtl ? slidesLength - 1 - bufferLength : bufferLength;
-    const tailIndex = rtl ? bufferLength : slidesLength - 1 - bufferLength;
-    return {
-      curIndex: headIndex,
-      minIndex: headIndex < tailIndex ? headIndex : tailIndex,
-      maxIndex: headIndex < tailIndex ? tailIndex : headIndex
-    };
-  };
-
-  const hasToUpdateIndex = (change) => {
-    return (
-      change !== 0 &&
-      (props.infinite ||
-        (currentIndex + change >= minIndex &&
-          currentIndex + change <= maxIndex))
-    );
-  };
-
-  const roundIndex = (change) => {
-    if (!props.loop) return;
-    if (currentIndex === minIndex && change < 0) {
-      currentIndex = maxIndex + 1;
-    } else if (currentIndex === maxIndex && change > 0) {
-      currentIndex = minIndex - 1;
-    }
-  };
-
-  let slides = props.images || props.children; // make children to the carousel component as a fallback value
-  slides = getSlides(slides, props);
-  const { curIndex, minIndex, maxIndex } = getIndices(slides, props);
-  let currentIndex = curIndex;
-  const slidesLength = slides.length;
 
   const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
     const swipedDistance = Math.abs(swipedDisplacement);
@@ -88,7 +34,7 @@ export const Carousel = (props) => {
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
   const calibrateIndex = (change, swipeDisplacement = 0) => {
@@ -96,20 +42,18 @@ export const Carousel = (props) => {
     if (swipeDisplacement) {
       change = -swipeDisplacement;
     }
-    roundIndex(change);
+    slides.calibrateIndex(change);
     applyTransition(swipeDisplacement);
   };
 
   const updateIndex = (change, swipedDisplacement = 0) => {
     timer && timer.restart();
-    const hasToUpdate = hasToUpdateIndex(change);
+    const hasToUpdate = slides.hasToUpdateIndex(change);
     if (hasToUpdate) {
       if (!swipedDisplacement) {
         calibrateIndex(change);
       }
-      currentIndex = Math.abs(
-        (slidesLength + currentIndex + change) % slidesLength
-      );
+      slides.updateIndex(change);
     }
     applyTransitionDuration(swipedDisplacement, hasToUpdate);
     applyTransition();
@@ -140,7 +84,7 @@ export const Carousel = (props) => {
       <div className={styles.images} ref={imagesRef} tabIndex={0}>
         {!('images' in props) &&
           props.children &&
-          slides.map((slide, index) => (
+          slides.getSlides().map((slide, index) => (
             <div
               key={index}
               className={
@@ -151,14 +95,16 @@ export const Carousel = (props) => {
             </div>
           ))}
         {'images' in props &&
-          slides.map((slide, index) => (
-            <Image
-              key={index}
-              image={slide}
-              lazy={props.lazy}
-              fit={props.fit}
-            />
-          ))}
+          slides
+            .getSlides()
+            .map((slide, index) => (
+              <Image
+                key={index}
+                image={slide}
+                lazy={props.lazy}
+                fit={props.fit}
+              />
+            ))}
       </div>
     </div>
   );
