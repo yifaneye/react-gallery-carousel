@@ -1,5 +1,5 @@
 export class Slides {
-  constructor(items, { rtl, loop, infinite }) {
+  constructor(items, { rtl, loop }) {
     this.items = items;
     this.slides = null;
     this.length = 0;
@@ -8,7 +8,6 @@ export class Slides {
     this.maxIndex = null;
     this.rtl = rtl;
     this.loop = loop;
-    this.infinite = infinite;
   }
 
   get currentIndex() {
@@ -40,7 +39,7 @@ export class Slides {
     if (!this.length) return false;
     return (
       change !== 0 &&
-      (this.infinite ||
+      (this.loop ||
         (this.curIndex + change >= this.minIndex &&
           this.curIndex + change <= this.maxIndex))
     );

@@ -6,7 +6,6 @@ import 'react-gallery-carousel/dist/index.css';
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
     <Carousel
-      infinite
       style={{
         width: '100vw',
         height: '20vh'
@@ -66,7 +65,6 @@ const App = () => {
         images={images}
         lazy
         auto
-        infinite
         loop
         style={{
           maxWidth: 'min(100vh, 1440px)',
@@ -84,7 +82,6 @@ const App = () => {
         fit={'contain'}
         lazy
         auto
-        infinite
         loop
         rtl
         style={{
