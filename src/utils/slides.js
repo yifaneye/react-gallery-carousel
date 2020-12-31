@@ -10,6 +10,10 @@ export class Slides {
     this.infinite = infinite;
   }
 
+  get currentIndex() {
+    return this.curIndex;
+  }
+
   getSlides() {
     if (this.slides) {
       return this.slides;

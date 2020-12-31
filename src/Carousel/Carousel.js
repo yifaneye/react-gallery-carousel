@@ -34,7 +34,7 @@ export const Carousel = (props) => {
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.currentIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
   const calibrateIndex = (change, swipeDisplacement = 0) => {
