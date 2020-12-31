@@ -50,6 +50,15 @@ export const Carousel = (props) => {
     };
   };
 
+  const hasToUpdateSlides = (change) => {
+    return (
+      change !== 0 &&
+      (props.infinite ||
+        (currentSlideIndex + change >= slidesMinIndex &&
+          currentSlideIndex + change <= slidesMaxIndex))
+    );
+  };
+
   let slides = props.images || props.children; // make children to the carousel component as a fallback value
   slides = generateSlides(slides, props);
   const {
@@ -58,7 +67,7 @@ export const Carousel = (props) => {
     slidesMaxIndex
   } = getSlidesIndices(slides, props);
   let currentSlideIndex = slidesCurrentIndex;
-  const slideTotalLength = slides.length;
+  const slidesTotalLength = slides.length;
 
   const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
     const swipedDistance = Math.abs(swipedDisplacement);
@@ -83,29 +92,30 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
-  const calibrateCurrentSlideIndex = (change, swipeDisplacement = 0) => {
-    if (!props.loop) return;
-    if (currentSlideIndex === slidesMinIndex && change < 0) {
-      currentSlideIndex = slidesMaxIndex + 1;
-    } else if (currentSlideIndex === slidesMaxIndex && change > 0) {
-      currentSlideIndex = slidesMinIndex - 1;
+  const calibrateIndex = (change, swipeDisplacement = 0) => {
+    timer && timer.restart();
+    if (swipeDisplacement) {
+      change = -swipeDisplacement;
+    }
+    if (props.loop) {
+      if (currentSlideIndex === slidesMinIndex && change < 0) {
+        currentSlideIndex = slidesMaxIndex + 1;
+      } else if (currentSlideIndex === slidesMaxIndex && change > 0) {
+        currentSlideIndex = slidesMinIndex - 1;
+      }
     }
     applyTransition(swipeDisplacement);
   };
 
-  const updateCurrentImageIndex = (change, swipedDisplacement = 0) => {
-    const hasToUpdate =
-      change !== 0 &&
-      (props.infinite ||
-        (currentSlideIndex + change >= slidesMinIndex &&
-          currentSlideIndex + change <= slidesMaxIndex));
+  const updateIndex = (change, swipedDisplacement = 0) => {
+    timer && timer.restart();
+    const hasToUpdate = hasToUpdateSlides(change);
     if (hasToUpdate) {
-      // check for non-swipe updates
-      if (swipedDisplacement === 0) {
-        calibrateCurrentSlideIndex(change);
+      if (!swipedDisplacement) {
+        calibrateIndex(change);
       }
       currentSlideIndex = Math.abs(
-        (slideTotalLength + currentSlideIndex + change) % slideTotalLength
+        (slidesTotalLength + currentSlideIndex + change) % slidesTotalLength
       );
     }
 
@@ -114,28 +124,19 @@ export const Carousel = (props) => {
   };
 
   const timer = useTimer(props.auto ? autoPlayInterval : null, () =>
-    updateCurrentImageIndex(props.rtl ? -1 : +1)
+    updateIndex(props.rtl ? -1 : +1)
   );
 
-  const updateCarouselImageIndex = (change, swipedDisplacement = 0) => {
-    timer && timer.restart();
-    updateCurrentImageIndex(change, swipedDisplacement);
-  };
-
   useKeys(imagesRef, {
-    ArrowLeft: () => updateCarouselImageIndex(-1),
-    ArrowRight: () => updateCarouselImageIndex(+1)
+    ArrowLeft: () => updateIndex(-1),
+    ArrowRight: () => updateIndex(+1)
   });
 
   useTouches(imagesRef, swipePercentageMin, {
-    swipeMove: (swipeDisplacement) =>
-      calibrateCurrentSlideIndex(0, swipeDisplacement),
-    swipeEndRight: (swipeDisplacement) =>
-      updateCarouselImageIndex(-1, swipeDisplacement),
-    swipeEndLeft: (swipeDisplacement) =>
-      updateCarouselImageIndex(+1, swipeDisplacement),
-    swipeEndDisqualified: (swipeDisplacement) =>
-      updateCarouselImageIndex(0, swipeDisplacement)
+    swipeMove: (displacement) => calibrateIndex(0, displacement),
+    swipeEndRight: (displacement) => updateIndex(-1, displacement),
+    swipeEndLeft: (displacement) => updateIndex(+1, displacement),
+    swipeEndDisqualified: (displacement) => updateIndex(0, displacement)
   });
 
   useEffect(() => {
