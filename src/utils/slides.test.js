@@ -2,9 +2,8 @@ import { Slides } from './slides';
 
 test('slides with 0 items', () => {
   const slides = new Slides([], {});
-  expect(slides.currentIndex).toBe(null);
   expect(slides.getSlides()).toStrictEqual([]);
-  expect(slides.getSlides()).not.toBe([]);
+  expect(slides.currentIndex).toBe(null);
 });
 
 const items = [1, 2, 3, 4, 5, 6];
