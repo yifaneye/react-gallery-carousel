@@ -56,9 +56,11 @@ export class Slides {
   }
 
   updateIndex(change) {
-    if (!this.length) return;
+    if (!this.length) return false;
+    if (!this.hasToUpdateIndex(change)) return false;
     this.curIndex = Math.abs(
       (this.length + this.curIndex + change) % this.length
     );
+    return true;
   }
 }

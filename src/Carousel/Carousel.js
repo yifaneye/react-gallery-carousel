@@ -39,23 +39,24 @@ export const Carousel = (props) => {
     imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.currentIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
-  const calibrateIndex = (change, swipeDisplacement = 0) => {
-    if (swipeDisplacement) {
-      change = -swipeDisplacement;
-    }
+  const calibrateIndex = (change) => {
     slides.calibrateIndex(change);
+    applyTransition();
+  };
+
+  const updateIndex = (change) => {
+    calibrateIndex(change);
+    applyTransitionDuration(0, slides.updateIndex(change));
+    applyTransition();
+  };
+
+  const calibrateIndexBySwipe = (swipeDisplacement) => {
+    slides.calibrateIndex(-swipeDisplacement);
     applyTransition(swipeDisplacement);
   };
 
-  const updateIndex = (change, swipedDisplacement = 0) => {
-    const hasToUpdate = slides.hasToUpdateIndex(change);
-    if (hasToUpdate) {
-      if (!swipedDisplacement) {
-        calibrateIndex(change);
-      }
-      slides.updateIndex(change);
-    }
-    applyTransitionDuration(swipedDisplacement, hasToUpdate);
+  const updateIndexBySwipe = (change, swipedDisplacement) => {
+    applyTransitionDuration(swipedDisplacement, slides.updateIndex(change));
     applyTransition();
   };
 
@@ -67,10 +68,10 @@ export const Carousel = (props) => {
   });
 
   useTouches(imagesRef, swipePercentageMin, {
-    swipeMove: (displacement) => calibrateIndex(0, displacement),
-    swipeEndRight: (displacement) => updateIndex(-1, displacement),
-    swipeEndLeft: (displacement) => updateIndex(+1, displacement),
-    swipeEndDisqualified: (displacement) => updateIndex(0, displacement)
+    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
+    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
+    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
+    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
   });
 
   useEffect(() => {
