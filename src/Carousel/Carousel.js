@@ -14,7 +14,7 @@ export const Carousel = (props) => {
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = (props.interval || 5) * 1000; // ms // convert 1sec to 1000ms
 
-  const generateSlides = (items, { rtl, loop }) => {
+  const getSlides = (items, { rtl, loop }) => {
     let slides = items;
     const slidesLength = slides.length;
     if (!slidesLength) {
@@ -29,45 +29,44 @@ export const Carousel = (props) => {
     return slides;
   };
 
-  const getSlidesIndices = (slides, { rtl, loop }) => {
+  const getIndices = (slides, { rtl, loop }) => {
     const slidesLength = slides.length;
     if (slidesLength <= 1) {
       return 0;
     }
     const bufferLength = loop ? 1 : 0;
-    const slidesHeadIndex = rtl
-      ? slidesLength - 1 - bufferLength
-      : bufferLength;
-    const slidesTailIndex = rtl
-      ? bufferLength
-      : slidesLength - 1 - bufferLength;
+    const headIndex = rtl ? slidesLength - 1 - bufferLength : bufferLength;
+    const tailIndex = rtl ? bufferLength : slidesLength - 1 - bufferLength;
     return {
-      slidesCurrentIndex: slidesHeadIndex,
-      slidesMinIndex:
-        slidesHeadIndex < slidesTailIndex ? slidesHeadIndex : slidesTailIndex,
-      slidesMaxIndex:
-        slidesHeadIndex < slidesTailIndex ? slidesTailIndex : slidesHeadIndex
+      curIndex: headIndex,
+      minIndex: headIndex < tailIndex ? headIndex : tailIndex,
+      maxIndex: headIndex < tailIndex ? tailIndex : headIndex
     };
   };
 
-  const hasToUpdateSlides = (change) => {
+  const hasToUpdateIndex = (change) => {
     return (
       change !== 0 &&
       (props.infinite ||
-        (currentSlideIndex + change >= slidesMinIndex &&
-          currentSlideIndex + change <= slidesMaxIndex))
+        (currentIndex + change >= minIndex &&
+          currentIndex + change <= maxIndex))
     );
   };
 
+  const roundIndex = (change) => {
+    if (!props.loop) return;
+    if (currentIndex === minIndex && change < 0) {
+      currentIndex = maxIndex + 1;
+    } else if (currentIndex === maxIndex && change > 0) {
+      currentIndex = minIndex - 1;
+    }
+  };
+
   let slides = props.images || props.children; // make children to the carousel component as a fallback value
-  slides = generateSlides(slides, props);
-  const {
-    slidesCurrentIndex,
-    slidesMinIndex,
-    slidesMaxIndex
-  } = getSlidesIndices(slides, props);
-  let currentSlideIndex = slidesCurrentIndex;
-  const slidesTotalLength = slides.length;
+  slides = getSlides(slides, props);
+  const { curIndex, minIndex, maxIndex } = getIndices(slides, props);
+  let currentIndex = curIndex;
+  const slidesLength = slides.length;
 
   const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
     const swipedDistance = Math.abs(swipedDisplacement);
@@ -89,7 +88,7 @@ export const Carousel = (props) => {
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentSlideIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${currentIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
   const calibrateIndex = (change, swipeDisplacement = 0) => {
@@ -97,28 +96,21 @@ export const Carousel = (props) => {
     if (swipeDisplacement) {
       change = -swipeDisplacement;
     }
-    if (props.loop) {
-      if (currentSlideIndex === slidesMinIndex && change < 0) {
-        currentSlideIndex = slidesMaxIndex + 1;
-      } else if (currentSlideIndex === slidesMaxIndex && change > 0) {
-        currentSlideIndex = slidesMinIndex - 1;
-      }
-    }
+    roundIndex(change);
     applyTransition(swipeDisplacement);
   };
 
   const updateIndex = (change, swipedDisplacement = 0) => {
     timer && timer.restart();
-    const hasToUpdate = hasToUpdateSlides(change);
+    const hasToUpdate = hasToUpdateIndex(change);
     if (hasToUpdate) {
       if (!swipedDisplacement) {
         calibrateIndex(change);
       }
-      currentSlideIndex = Math.abs(
-        (slidesTotalLength + currentSlideIndex + change) % slidesTotalLength
+      currentIndex = Math.abs(
+        (slidesLength + currentIndex + change) % slidesLength
       );
     }
-
     applyTransitionDuration(swipedDisplacement, hasToUpdate);
     applyTransition();
   };
