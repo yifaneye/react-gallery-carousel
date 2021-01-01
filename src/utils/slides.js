@@ -1,5 +1,5 @@
 export default class Slides {
-  constructor(items, { rtl, loop }) {
+  constructor(items, { rtl = false, loop = false }) {
     this._items = items;
     this._slides = null;
     this._length = 0;

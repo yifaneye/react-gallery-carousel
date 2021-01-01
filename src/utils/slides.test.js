@@ -26,7 +26,7 @@ describe('0 item', () => {
 const items = [1, 2, 3, 4, 5, 6];
 
 describe('6 items', () => {
-  const slides = new Slides(items, { rtl: false, loop: false });
+  const slides = new Slides(items, {});
   const expectedCurIndex = 0;
   it('constructs slides', () => {
     expect(slides.slides).toStrictEqual([1, 2, 3, 4, 5, 6]);
@@ -49,7 +49,7 @@ describe('6 items', () => {
 });
 
 describe('6 items, rtl', () => {
-  const slides = new Slides(items, { rtl: true, loop: false });
+  const slides = new Slides(items, { rtl: true });
   const expectedCurIndex = 5;
   it('constructs slides', () => {
     expect(slides.slides).toStrictEqual([6, 5, 4, 3, 2, 1]);
@@ -72,7 +72,7 @@ describe('6 items, rtl', () => {
 });
 
 describe('6 items, loop', () => {
-  const slides = new Slides(items, { rtl: false, loop: true });
+  const slides = new Slides(items, { loop: true });
   const expectedCurIndex = 1;
   it('constructs slides', () => {
     expect(slides.slides).toStrictEqual([6, 1, 2, 3, 4, 5, 6, 1]);
