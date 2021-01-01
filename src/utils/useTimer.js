@@ -21,7 +21,7 @@ const getTimer = (interval, callback) => {
   return { start, stop, restart };
 };
 
-export const useTimer = (interval, callback) => {
+const useTimer = (interval, callback) => {
   const timer = interval ? getTimer(interval, callback) : null;
 
   useEffect(() => {
@@ -34,3 +34,5 @@ export const useTimer = (interval, callback) => {
 
   return timer;
 };
+
+export default useTimer;

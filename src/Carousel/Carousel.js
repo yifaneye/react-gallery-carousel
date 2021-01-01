@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
 import imagesStyles from '../Image/Image.module.css';
-import { Image } from '../Image';
-import { useKeys } from '../utils/useKeys';
-import { useTimer } from '../utils/useTimer';
-import { useTouches } from '../utils/useTouches';
-import { useSlides } from '../utils/useSlides';
+import Image from '../Image';
+import useKeys from '../utils/useKeys';
+import useTimer from '../utils/useTimer';
+import useTouches from '../utils/useTouches';
+import useSlides from '../utils/useSlides';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);

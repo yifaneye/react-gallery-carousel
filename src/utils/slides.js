@@ -1,4 +1,4 @@
-export class Slides {
+export default class Slides {
   constructor(items, { rtl, loop }) {
     this._items = items;
     this._slides = null;

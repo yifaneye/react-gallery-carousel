@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useKeys = (elementRef, callbacks) => {
+const useKeys = (elementRef, callbacks) => {
   const callbackRef = useRef(null);
   callbackRef.current = callbacks;
 
@@ -15,3 +15,5 @@ export const useKeys = (elementRef, callbacks) => {
     };
   }, [elementRef, callbackRef]);
 };
+
+export default useKeys;

@@ -1,4 +1,4 @@
-import { Slides } from './slides';
+import Slides from './slides';
 
 test('slides with 0 items', () => {
   const slides = new Slides([], {});
