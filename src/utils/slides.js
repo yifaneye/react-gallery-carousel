@@ -42,16 +42,6 @@ export default class Slides {
     return this._slides;
   }
 
-  hasToUpdateIndex(change) {
-    if (!this._length) return false;
-    return (
-      change !== 0 &&
-      (this._loop ||
-        (this._curIndex + change >= this._minIndex &&
-          this._curIndex + change <= this._maxIndex))
-    );
-  }
-
   calibrateIndex(change) {
     if (!this._length) return;
     if (!this._loop) return;
@@ -62,9 +52,19 @@ export default class Slides {
     }
   }
 
+  _hasToUpdateIndex(change) {
+    if (!this._length) return false;
+    return (
+      change !== 0 &&
+      (this._loop ||
+        (this._curIndex + change >= this._minIndex &&
+          this._curIndex + change <= this._maxIndex))
+    );
+  }
+
   updateIndex(change) {
     if (!this._length) return false;
-    if (!this.hasToUpdateIndex(change)) return false;
+    if (!this._hasToUpdateIndex(change)) return false;
     this._curIndex = Math.abs(
       (this._length + this._curIndex + change) % this._length
     );
