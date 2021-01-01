@@ -36,7 +36,7 @@ export const Carousel = (props) => {
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.currentIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
   const calibrateIndex = (change) => {
@@ -88,7 +88,7 @@ export const Carousel = (props) => {
       >
         {!('images' in props) &&
           props.children &&
-          slides.getSlides.map((slide, index) => (
+          slides.slides.map((slide, index) => (
             <div
               key={index}
               className={
@@ -99,7 +99,7 @@ export const Carousel = (props) => {
             </div>
           ))}
         {'images' in props &&
-          slides.getSlides.map((slide, index) => (
+          slides.slides.map((slide, index) => (
             <Image
               key={index}
               image={slide}

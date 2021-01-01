@@ -1,68 +1,72 @@
 export class Slides {
   constructor(items, { rtl, loop }) {
-    this.items = items;
-    this.slides = null;
-    this.length = 0;
-    this.curIndex = null;
-    this.minIndex = null;
-    this.maxIndex = null;
-    this.rtl = rtl;
-    this.loop = loop;
+    this._items = items;
+    this._slides = null;
+    this._length = 0;
+    this._curIndex = null;
+    this._minIndex = null;
+    this._maxIndex = null;
+    this._rtl = rtl;
+    this._loop = loop;
 
-    // generate slides
-    let slides = this.items;
+    // generate _slides
+    let slides = this._items;
     const slidesLength = slides.length;
     if (!slidesLength) {
-      this.slides = slides;
+      this._slides = slides;
       return;
     }
-    if (this.rtl) slides.reverse();
-    if (this.loop) slides = [slides[slidesLength - 1], ...slides, slides[0]];
-    this.slides = slides;
-    this.length = slides.length;
+    if (this._rtl) slides.reverse();
+    if (this._loop) slides = [slides[slidesLength - 1], ...slides, slides[0]];
+    this._slides = slides;
+    this._length = slides.length;
 
     // calculate indices
-    const bufferLength = this.loop ? 1 : 0;
-    const headIndex = this.rtl ? this.length - 1 - bufferLength : bufferLength;
-    const tailIndex = this.rtl ? bufferLength : this.length - 1 - bufferLength;
-    this.curIndex = headIndex;
-    this.minIndex = headIndex < tailIndex ? headIndex : tailIndex;
-    this.maxIndex = headIndex < tailIndex ? tailIndex : headIndex;
+    const bufferLength = this._loop ? 1 : 0;
+    const headIndex = this._rtl
+      ? this._length - 1 - bufferLength
+      : bufferLength;
+    const tailIndex = this._rtl
+      ? bufferLength
+      : this._length - 1 - bufferLength;
+    this._curIndex = headIndex;
+    this._minIndex = headIndex < tailIndex ? headIndex : tailIndex;
+    this._maxIndex = headIndex < tailIndex ? tailIndex : headIndex;
   }
 
-  get currentIndex() {
-    return this.curIndex;
+  get curIndex() {
+    return this._curIndex;
   }
 
-  get getSlides() {
-    return this.slides;
+  get slides() {
+    return this._slides;
   }
 
   hasToUpdateIndex(change) {
-    if (!this.length) return false;
+    if (!this._length) return false;
     return (
       change !== 0 &&
-      (this.loop ||
-        (this.curIndex + change >= this.minIndex &&
-          this.curIndex + change <= this.maxIndex))
+      (this._loop ||
+        (this._curIndex + change >= this._minIndex &&
+          this._curIndex + change <= this._maxIndex))
     );
   }
 
   calibrateIndex(change) {
-    if (!this.length) return;
-    if (!this.loop) return;
-    if (this.curIndex === this.minIndex && change < 0) {
-      this.curIndex = this.maxIndex + 1;
-    } else if (this.curIndex === this.maxIndex && change > 0) {
-      this.curIndex = this.minIndex - 1;
+    if (!this._length) return;
+    if (!this._loop) return;
+    if (this._curIndex === this._minIndex && change < 0) {
+      this._curIndex = this._maxIndex + 1;
+    } else if (this._curIndex === this._maxIndex && change > 0) {
+      this._curIndex = this._minIndex - 1;
     }
   }
 
   updateIndex(change) {
-    if (!this.length) return false;
+    if (!this._length) return false;
     if (!this.hasToUpdateIndex(change)) return false;
-    this.curIndex = Math.abs(
-      (this.length + this.curIndex + change) % this.length
+    this._curIndex = Math.abs(
+      (this._length + this._curIndex + change) % this._length
     );
     return true;
   }
