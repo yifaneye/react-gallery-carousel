@@ -16,7 +16,7 @@ export default class Slides {
       this._slides = slides;
       return;
     }
-    if (this._rtl) slides.reverse();
+    if (this._rtl) slides = [...slides].reverse();
     if (this._loop) slides = [slides[slidesLength - 1], ...slides, slides[0]];
     this._slides = slides;
     this._length = slides.length;
