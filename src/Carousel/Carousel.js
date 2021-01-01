@@ -9,7 +9,10 @@ import { useSlides } from '../utils/useSlides';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);
-  const slides = useSlides(props.images || props.children, props);
+  const [slides, slidesElements] = useSlides(
+    props.images || props.children,
+    props
+  );
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
@@ -88,7 +91,7 @@ export const Carousel = (props) => {
       >
         {!('images' in props) &&
           props.children &&
-          slides.slides.map((slide, index) => (
+          slidesElements.map((slide, index) => (
             <div
               key={index}
               className={
@@ -99,7 +102,7 @@ export const Carousel = (props) => {
             </div>
           ))}
         {'images' in props &&
-          slides.slides.map((slide, index) => (
+          slidesElements.map((slide, index) => (
             <Image
               key={index}
               image={slide}
