@@ -88,7 +88,7 @@ export const Carousel = (props) => {
       >
         {!('images' in props) &&
           props.children &&
-          slides.getSlides().map((slide, index) => (
+          slides.getSlides.map((slide, index) => (
             <div
               key={index}
               className={
@@ -99,16 +99,14 @@ export const Carousel = (props) => {
             </div>
           ))}
         {'images' in props &&
-          slides
-            .getSlides()
-            .map((slide, index) => (
-              <Image
-                key={index}
-                image={slide}
-                lazy={props.lazy}
-                fit={props.fit}
-              />
-            ))}
+          slides.getSlides.map((slide, index) => (
+            <Image
+              key={index}
+              image={slide}
+              lazy={props.lazy}
+              fit={props.fit}
+            />
+          ))}
       </div>
     </div>
   );

@@ -8,30 +8,33 @@ export class Slides {
     this.maxIndex = null;
     this.rtl = rtl;
     this.loop = loop;
-  }
 
-  get currentIndex() {
-    return this.curIndex;
-  }
-
-  getSlides() {
-    if (this.slides) return this.slides;
+    // generate slides
     let slides = this.items;
     const slidesLength = slides.length;
     if (!slidesLength) {
       this.slides = slides;
-      return this.slides;
+      return;
     }
     if (this.rtl) slides.reverse();
     if (this.loop) slides = [slides[slidesLength - 1], ...slides, slides[0]];
     this.slides = slides;
     this.length = slides.length;
+
+    // calculate indices
     const bufferLength = this.loop ? 1 : 0;
     const headIndex = this.rtl ? this.length - 1 - bufferLength : bufferLength;
     const tailIndex = this.rtl ? bufferLength : this.length - 1 - bufferLength;
     this.curIndex = headIndex;
     this.minIndex = headIndex < tailIndex ? headIndex : tailIndex;
     this.maxIndex = headIndex < tailIndex ? tailIndex : headIndex;
+  }
+
+  get currentIndex() {
+    return this.curIndex;
+  }
+
+  get getSlides() {
     return this.slides;
   }
 
