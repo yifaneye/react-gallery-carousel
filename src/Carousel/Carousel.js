@@ -7,11 +7,12 @@ import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
 
 export const Carousel = (props) => {
-  const imagesRef = useRef(null);
+  const slidesRef = useRef(null);
   const [slides, slidesElements] = useSlides(
     props.images || props.children,
     props
   );
+
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
@@ -20,7 +21,7 @@ export const Carousel = (props) => {
   const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
     const swipedDistance = Math.abs(swipedDisplacement);
     const transitionDistance = hasToUpdate
-      ? Math.abs(imagesRef.current.clientWidth - swipedDistance)
+      ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
       : swipedDistance;
     let transitionDuration = transitionDistance / transitionSpeed;
 
@@ -29,16 +30,16 @@ export const Carousel = (props) => {
       transitionDuration = autoPlayInterval * 0.999;
     }
 
-    imagesRef.current.style.transitionDuration = `${transitionDuration}s`;
+    slidesRef.current.style.transitionDuration = `${transitionDuration}s`;
     setTimeout(
-      () => (imagesRef.current.style.transitionDuration = null),
+      () => (slidesRef.current.style.transitionDuration = null),
       transitionDuration * 1000
     );
     timer && timer.restart();
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
-    imagesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
   const calibrateIndex = (change) => {
@@ -64,12 +65,12 @@ export const Carousel = (props) => {
 
   const timer = useTimer(autoPlayInterval, () => updateIndex(indexStep));
 
-  useKeys(imagesRef, {
+  useKeys(slidesRef, {
     ArrowLeft: () => updateIndex(-1),
     ArrowRight: () => updateIndex(+1)
   });
 
-  const touchEventHandlers = useTouches(imagesRef, swipePercentageMin, {
+  const touchEventHandlers = useTouches(slidesRef, swipePercentageMin, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
@@ -81,10 +82,10 @@ export const Carousel = (props) => {
   }, []);
 
   return (
-    <div className={styles.imagesWrapper} style={props.style}>
+    <div className={styles.carousel} style={props.style}>
       <div
-        className={styles.images}
-        ref={imagesRef}
+        className={styles.slides}
+        ref={slidesRef}
         {...touchEventHandlers}
         tabIndex={0}
       >
