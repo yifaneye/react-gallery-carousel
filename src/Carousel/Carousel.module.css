@@ -7,18 +7,21 @@
   justify-content: flex-start;
   align-items: flex-start;
   touch-action: manipulation;
+  box-sizing: border-box;
 }
 
 .slides {
   height: 100%;
   width: 100%;
   display: flex;
+  outline: none;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
   transition-duration: 0s;
   transition-property: transform;
   transition-timing-function: ease-out;
+  box-sizing: border-box;
 }
 
 .images:focus {

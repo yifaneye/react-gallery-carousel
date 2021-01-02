@@ -8,12 +8,5 @@
   cursor: default;
   text-align: center;
   -webkit-user-drag: none;
-}
-
-.userSelectAuto {
-  user-select: auto;
-}
-
-.displayNone {
-  display: none;
+  box-sizing: border-box;
 }
