@@ -40,11 +40,11 @@ const useTouches = (elementRef, swipePercentageMin, callbacks) => {
     const swipeDistanceMin =
       elementRef.current.clientWidth * swipePercentageMin;
     if (swipeDisplacement > swipeDistanceMin) {
-      callbacks.swipeEndRight(swipeDistanceMin);
+      callbacks.swipeEndRight(swipeDisplacement);
     } else if (swipeDisplacement < -swipeDistanceMin) {
-      callbacks.swipeEndLeft(swipeDistanceMin);
+      callbacks.swipeEndLeft(swipeDisplacement);
     } else {
-      callbacks.swipeEndDisqualified(swipeDistanceMin);
+      callbacks.swipeEndDisqualified(swipeDisplacement);
     }
   };
 
