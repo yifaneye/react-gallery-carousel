@@ -7,6 +7,26 @@ import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
 
+const Slides = (props) => {
+  const hasImages = !!props.images;
+  const slides = props.slides;
+
+  if (hasImages) {
+    return slides.map((slide, index) => (
+      <Image key={index} image={slide} lazy={props.lazy} fit={props.fit} />
+    ));
+  }
+
+  return slides.map((slide, index) => (
+    <div
+      key={index}
+      className={imagesStyles.imageWrapper + ' ' + imagesStyles.userSelectAuto}
+    >
+      {slide}
+    </div>
+  ));
+};
+
 export const Carousel = (props) => {
   const imagesRef = useRef(null);
   const [slides, slidesElements] = useSlides(
@@ -89,27 +109,7 @@ export const Carousel = (props) => {
         {...touchEventHandlers}
         tabIndex={0}
       >
-        {!('images' in props) &&
-          props.children &&
-          slidesElements.map((slide, index) => (
-            <div
-              key={index}
-              className={
-                imagesStyles.imageWrapper + ' ' + imagesStyles.userSelectAuto
-              }
-            >
-              {slide}
-            </div>
-          ))}
-        {'images' in props &&
-          slidesElements.map((slide, index) => (
-            <Image
-              key={index}
-              image={slide}
-              lazy={props.lazy}
-              fit={props.fit}
-            />
-          ))}
+        <Slides slides={slidesElements} {...props} />
       </div>
     </div>
   );
