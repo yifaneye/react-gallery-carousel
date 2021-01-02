@@ -1,31 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
-import imagesStyles from '../Image/Image.module.css';
-import Image from '../Image';
 import useKeys from '../utils/useKeys';
 import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
-
-const Slides = (props) => {
-  const hasImages = !!props.images;
-  const slides = props.slides;
-
-  if (hasImages) {
-    return slides.map((slide, index) => (
-      <Image key={index} image={slide} lazy={props.lazy} fit={props.fit} />
-    ));
-  }
-
-  return slides.map((slide, index) => (
-    <div
-      key={index}
-      className={imagesStyles.imageWrapper + ' ' + imagesStyles.userSelectAuto}
-    >
-      {slide}
-    </div>
-  ));
-};
+import { Slides } from '../Slides/Slides';
 
 export const Carousel = (props) => {
   const imagesRef = useRef(null);

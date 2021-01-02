@@ -31,17 +31,15 @@ export const Image = (props) => {
   }, [imageRef]);
 
   return (
-    <figure className={styles.imageWrapper} ref={imageRef}>
-      <img
-        className={styles.image}
-        src={!props.lazy || isInViewport ? props.image.src : undefined}
-        alt={imageTitle}
-        aria-label={imageTitle}
-        title={imageTitle}
-        loading={props.lazy ? 'lazy' : 'eager'}
-        style={{ objectFit: props.fit || null }}
-      />
-      <figcaption className={styles.displayNone}>{imageTitle}</figcaption>
-    </figure>
+    <img
+      ref={imageRef}
+      className={styles.image}
+      src={!props.lazy || isInViewport ? props.image.src : undefined}
+      alt={imageTitle}
+      aria-label={imageTitle}
+      title={imageTitle}
+      loading={props.lazy ? 'lazy' : 'eager'}
+      style={{ objectFit: props.fit || null }}
+    />
   );
 };
