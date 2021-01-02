@@ -5,12 +5,7 @@ import 'react-gallery-carousel/dist/index.css';
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
-    <Carousel
-      style={{
-        width: '100vw',
-        height: '20vh'
-      }}
-    >
+    <Carousel style={{ height: '20vh' }}>
       <div>
         <h1>react-gallery-carousel</h1>
         <p>
@@ -40,38 +35,26 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 };
 
 const App = () => {
-  const basicCarouselExampleCode = `<Carousel
-        images={images}
-        lazy
-        style={{
-          width: '100vw',
-          height: '40vh'
-        }}
-      />`;
-
   const kittenImageSizes = [900, 800, 700, 600, 500, 400];
   const images = kittenImageSizes.map((kittenImageSize) => ({
     src: `https://placekitten.com/${kittenImageSize}/${kittenImageSize}`,
     alt: `Kitten of size ${kittenImageSize} pixels`
   }));
 
+  const basicCarouselExampleCode = `<Carousel images={images} lazy auto loop style={{ height: '40vh' }} />`;
+
   return (
-    <div>
+    <div
+      style={{
+        maxWidth: 'min(100vh, 1440px)',
+        margin: '0 auto'
+      }}
+    >
       {/*basic carousel example with self-managed slides */}
       <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
 
       {/*basic carousel example*/}
-      <Carousel
-        images={images}
-        lazy
-        auto
-        loop
-        style={{
-          maxWidth: 'min(100vh, 1440px)',
-          height: '40vh',
-          margin: '0 auto'
-        }}
-      />
+      <Carousel images={images} lazy auto loop style={{ height: '40vh' }} />
 
       {/*advanced carousel example*/}
       <Carousel
@@ -85,9 +68,7 @@ const App = () => {
         loop
         rtl
         style={{
-          maxWidth: 'min(100vh, 1440px)',
           height: '40vh',
-          margin: '0 auto',
           border: '10px solid #bbb',
           overflow: 'hidden',
           borderRadius: 20,
