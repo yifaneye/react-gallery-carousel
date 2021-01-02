@@ -28,6 +28,11 @@ export const Image = (props) => {
     if (imageRef.current) {
       observer.observe(imageRef.current);
     }
+    return () => {
+      if (props.lazy) {
+        observer.disconnect();
+      }
+    };
   }, [imageRef]);
 
   return (
