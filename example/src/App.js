@@ -67,6 +67,7 @@ const App = () => {
         auto
         loop
         rtl
+        controls={false}
         style={{
           height: '40vh',
           border: '10px solid #bbb',

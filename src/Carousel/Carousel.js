@@ -94,6 +94,13 @@ export const Carousel = (props) => {
     applyTransition();
   }, []);
 
+  const controls = props.controls !== false && (
+    <React.Fragment>
+      <ArrowButton direction='left' clickCallback={() => updateIndex(-1)} />
+      <ArrowButton direction='right' clickCallback={() => updateIndex(+1)} />
+    </React.Fragment>
+  );
+
   return (
     <div className={styles.carouselWrapper} style={props.style}>
       <div className={styles.carousel}>
@@ -106,8 +113,7 @@ export const Carousel = (props) => {
           <Slides slides={slidesElements} {...props} />
         </div>
       </div>
-      <ArrowButton direction='left' clickCallback={() => updateIndex(-1)} />
-      <ArrowButton direction='right' clickCallback={() => updateIndex(+1)} />
+      {controls}
     </div>
   );
 };
