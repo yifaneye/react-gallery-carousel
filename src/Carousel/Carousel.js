@@ -6,6 +6,7 @@ import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
 import { ArrowButton } from '../Button/Button';
+import PropTypes from 'prop-types';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
@@ -116,4 +117,21 @@ export const Carousel = (props) => {
       {controls}
     </div>
   );
+};
+
+Carousel.propTypes = {
+  images: PropTypes.array,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  fit: PropTypes.string,
+  lazy: PropTypes.bool,
+  loop: PropTypes.bool,
+  rtl: PropTypes.bool,
+  auto: PropTypes.bool,
+  interval: PropTypes.number,
+  speed: PropTypes.number,
+  threshold: PropTypes.number,
+  style: PropTypes.object
 };
