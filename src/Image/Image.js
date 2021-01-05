@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Image.module.css';
+import PropTypes from 'prop-types';
 
 export const Image = (props) => {
   const imageRef = useRef(null);
@@ -47,4 +48,13 @@ export const Image = (props) => {
       style={{ objectFit: props.fit || null }}
     />
   );
+};
+
+Image.propTypes = {
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string
+  }).isRequired,
+  lazy: PropTypes.bool,
+  fit: PropTypes.string
 };
