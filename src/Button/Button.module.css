@@ -1,0 +1,15 @@
+.buttonWrapper {
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 20px);
+}
+
+.left {
+  left: 10px;
+  transform: scaleX(-1);
+}
+
+.right {
+  right: 10px;
+}
+

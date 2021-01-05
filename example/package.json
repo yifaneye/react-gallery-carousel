@@ -12,8 +12,9 @@
   "dependencies": {
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
-    "react-scripts": "link:../node_modules/react-scripts",
-    "react-gallery-carousel": "link:.."
+    "react-gallery-carousel": "link:..",
+    "react-responsive-button": "0.2.0",
+    "react-scripts": "link:../node_modules/react-scripts"
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3"

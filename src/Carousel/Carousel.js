@@ -5,6 +5,7 @@ import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
+import { ArrowButton } from '../Button/Button';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
@@ -82,15 +83,19 @@ export const Carousel = (props) => {
   }, []);
 
   return (
-    <div className={styles.carousel} style={props.style}>
-      <div
-        className={styles.slides}
-        ref={slidesRef}
-        {...touchEventHandlers}
-        tabIndex={0}
-      >
-        <Slides slides={slidesElements} {...props} />
+    <div className={styles.carouselWrapper} style={props.style}>
+      <div className={styles.carousel}>
+        <div
+          className={styles.slides}
+          ref={slidesRef}
+          {...touchEventHandlers}
+          tabIndex={0}
+        >
+          <Slides slides={slidesElements} {...props} />
+        </div>
       </div>
+      <ArrowButton direction='left' clickCallback={() => updateIndex(-1)} />
+      <ArrowButton direction='right' clickCallback={() => updateIndex(+1)} />
     </div>
   );
 };
