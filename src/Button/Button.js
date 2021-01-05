@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-responsive-button';
 import 'react-responsive-button/dist/index.css';
 import styles from './Button.module.css';
+import PropTypes from 'prop-types';
 
 export const ArrowButton = (props) => {
   const className = `${styles.buttonWrapper} ${styles[props.direction]}`;
@@ -23,4 +24,10 @@ export const ArrowButton = (props) => {
       />
     </div>
   );
+};
+
+ArrowButton.propTypes = {
+  direction: PropTypes.oneOf(['left', 'right']).isRequired,
+  disabled: PropTypes.bool,
+  clickCallback: PropTypes.func
 };
