@@ -36,11 +36,14 @@ export const Carousel = (props) => {
       () => (slidesRef.current.style.transitionDuration = null),
       transitionDuration * 1000
     );
-    timer && timer.restart();
   };
 
   const applyTransition = (swipeDisplacement = 0) => {
     slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+  };
+
+  const restartTimer = () => {
+    timer && timer.restart();
   };
 
   const calibrateIndex = (change) => {
@@ -49,22 +52,31 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = (change) => {
+    restartTimer();
     calibrateIndex(change);
     applyTransitionDuration(0, slides.updateIndex(change));
     applyTransition();
   };
 
   const calibrateIndexBySwipe = (swipeDisplacement) => {
+    restartTimer();
     slides.calibrateIndex(-swipeDisplacement);
     applyTransition(swipeDisplacement);
   };
 
   const updateIndexBySwipe = (change, swipedDisplacement) => {
+    restartTimer();
     applyTransitionDuration(swipedDisplacement, slides.updateIndex(change));
     applyTransition();
   };
 
-  const timer = useTimer(autoPlayInterval, () => updateIndex(indexStep));
+  const updateIndexByAutoPlay = (change) => {
+    updateIndex(change);
+  };
+
+  const timer = useTimer(autoPlayInterval, () =>
+    updateIndexByAutoPlay(indexStep)
+  );
 
   useKeys(slidesRef, {
     ArrowLeft: () => updateIndex(-1),
