@@ -7,7 +7,7 @@ import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
 import { ArrowButton } from '../Button/Button';
 import PropTypes from 'prop-types';
-import { positiveNumber } from '../utils/validators';
+import { numberBetween, positiveNumber } from '../utils/validators';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
@@ -133,6 +133,6 @@ Carousel.propTypes = {
   auto: PropTypes.bool,
   interval: positiveNumber(),
   speed: positiveNumber(),
-  threshold: positiveNumber(),
+  threshold: numberBetween(0, 1),
   style: PropTypes.object
 };
