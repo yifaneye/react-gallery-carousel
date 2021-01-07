@@ -7,7 +7,7 @@ import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
 import PropTypes from 'prop-types';
 import { numberBetween, positiveNumber } from '../utils/validators';
-import { ArrowButtons } from '../Buttons';
+import { ArrowButtons, MediaButtons } from '../Buttons';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
@@ -112,6 +112,11 @@ export const Carousel = (props) => {
         disabled={props.controls === false}
         onClickLeft={() => updateIndex(-1)}
         onClickRight={() => updateIndex(+1)}
+      />
+      <MediaButtons
+        disabled={!props.auto}
+        onClickPlay={() => timer && timer.start()}
+        onClickPause={() => timer && timer.stop()}
       />
     </div>
   );

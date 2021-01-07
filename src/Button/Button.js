@@ -35,3 +35,34 @@ ArrowButton.propTypes = {
   disabled: PropTypes.bool,
   clickCallback: PropTypes.func
 };
+
+export const MediaButton = (props) => {
+  const icon = props.isPlaying
+    ? `url("data:image/svg+xml,%3Csvg height='30' preserveAspectRatio='xMidYMid meet' viewBox='0 0 30 30' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23eee' fill-opacity='.5'%3E%3Cpath d='m0 0h10v30h-10z'/%3E%3Cpath d='m20 0h10v30h-10z'/%3E%3C/g%3E%3C/svg%3E")`
+    : `url("data:image/svg+xml,%3Csvg height='30' preserveAspectRatio='xMidYMid meet' viewBox='0 0 30 30' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`;
+  const className = `${styles.buttonWrapper} ${styles.media}`;
+  return (
+    <div className={className}>
+      <Button
+        disabled={props.disabled}
+        shape='rectangle'
+        style={{
+          width: 30,
+          height: 30,
+          backgroundColor: 'transparent',
+          backgroundImage: icon,
+          backgroundSize: '30px 30px',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+        onClick={props.clickCallback}
+      />
+    </div>
+  );
+};
+
+MediaButton.propTypes = {
+  isPlaying: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
+  clickCallback: PropTypes.func
+};
