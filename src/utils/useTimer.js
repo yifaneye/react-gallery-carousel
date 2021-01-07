@@ -24,15 +24,19 @@ const getTimer = (interval, callback) => {
 const useTimer = (interval, callback) => {
   const timer = interval ? getTimer(interval, callback) : null;
 
+  const start = () => timer && timer.start();
+  const stop = () => timer && timer.stop();
+  const restart = () => timer && timer.restart();
+
   useEffect(() => {
-    timer && timer.start();
+    start();
 
     return () => {
-      timer && timer.stop();
+      stop();
     };
   }, []);
 
-  return timer;
+  return [start, stop, restart];
 };
 
 export default useTimer;

@@ -44,39 +44,33 @@ export const Carousel = (props) => {
     slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
-  const restartTimer = () => {
-    timer && timer.restart();
-  };
-
   const calibrateIndex = (change) => {
     slides.calibrateIndex(change);
     applyTransition();
   };
 
   const updateIndex = (change) => {
-    restartTimer();
+    restart();
     calibrateIndex(change);
     applyTransitionDuration(0, slides.updateIndex(change));
     applyTransition();
   };
 
   const calibrateIndexBySwipe = (swipeDisplacement) => {
-    restartTimer();
+    restart();
     slides.calibrateIndex(-swipeDisplacement);
     applyTransition(swipeDisplacement);
   };
 
   const updateIndexBySwipe = (change, swipedDisplacement) => {
-    restartTimer();
+    restart();
     applyTransitionDuration(swipedDisplacement, slides.updateIndex(change));
     applyTransition();
   };
 
-  const updateIndexByAutoPlay = (change) => {
-    updateIndex(change);
-  };
+  const updateIndexByAutoPlay = (change) => updateIndex(change);
 
-  const timer = useTimer(autoPlayInterval, () =>
+  const [start, stop, restart] = useTimer(autoPlayInterval, () =>
     updateIndexByAutoPlay(indexStep)
   );
 
@@ -115,8 +109,8 @@ export const Carousel = (props) => {
       />
       <MediaButtons
         disabled={!props.auto}
-        onClickPlay={() => timer && timer.start()}
-        onClickPause={() => timer && timer.stop()}
+        onClickPlay={() => start()}
+        onClickPause={() => stop()}
       />
     </div>
   );
