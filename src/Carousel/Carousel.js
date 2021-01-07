@@ -5,9 +5,9 @@ import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
-import { ArrowButton } from '../Button/Button';
 import PropTypes from 'prop-types';
 import { numberBetween, positiveNumber } from '../utils/validators';
+import { ArrowButtons } from '../Buttons';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
@@ -96,13 +96,6 @@ export const Carousel = (props) => {
     applyTransition();
   }, []);
 
-  const controls = props.controls !== false && (
-    <React.Fragment>
-      <ArrowButton direction='left' clickCallback={() => updateIndex(-1)} />
-      <ArrowButton direction='right' clickCallback={() => updateIndex(+1)} />
-    </React.Fragment>
-  );
-
   return (
     <div className={styles.carouselWrapper} style={props.style}>
       <div className={styles.carousel}>
@@ -115,7 +108,11 @@ export const Carousel = (props) => {
           <Slides slides={slidesElements} {...props} />
         </div>
       </div>
-      {controls}
+      <ArrowButtons
+        disabled={props.controls === false}
+        onClickLeft={() => updateIndex(-1)}
+        onClickRight={() => updateIndex(+1)}
+      />
     </div>
   );
 };
