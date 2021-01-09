@@ -94,9 +94,13 @@ export const Carousel = (props) => {
     applyTransition();
   }, []);
 
+  const carouselClassName = `${styles.carousel}${
+    'images' in props ? ' ' + styles.galleryCarousel : ''
+  }`;
+
   return (
     <div className={styles.carouselWrapper} style={props.style}>
-      <div className={styles.carousel}>
+      <div className={carouselClassName}>
         <div
           className={styles.slides}
           ref={slidesRef}
