@@ -50,20 +50,20 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = (change) => {
-    restart();
+    stop();
     calibrateIndex(change);
     applyTransitionDuration(0, slides.updateIndex(change));
     applyTransition();
   };
 
   const calibrateIndexBySwipe = (swipeDisplacement) => {
-    restart();
+    stop();
     slides.calibrateIndex(-swipeDisplacement);
     applyTransition(swipeDisplacement);
   };
 
   const updateIndexBySwipe = (change, swipedDisplacement) => {
-    restart();
+    stop();
     applyTransitionDuration(swipedDisplacement, slides.updateIndex(change));
     applyTransition();
   };
@@ -74,7 +74,7 @@ export const Carousel = (props) => {
     applyTransition();
   };
 
-  const [start, stop, restart] = useTimer(autoPlayInterval, () =>
+  const [start, stop] = useTimer(autoPlayInterval, () =>
     updateIndexByAutoPlay(indexStep)
   );
 
