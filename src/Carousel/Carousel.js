@@ -68,7 +68,11 @@ export const Carousel = (props) => {
     applyTransition();
   };
 
-  const updateIndexByAutoPlay = (change) => updateIndex(change);
+  const updateIndexByAutoPlay = (change) => {
+    calibrateIndex(change);
+    applyTransitionDuration(0, slides.updateIndex(change));
+    applyTransition();
+  };
 
   const [start, stop, restart] = useTimer(autoPlayInterval, () =>
     updateIndexByAutoPlay(indexStep)
