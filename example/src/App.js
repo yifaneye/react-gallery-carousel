@@ -54,20 +54,20 @@ const App = () => {
       <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
 
       {/*basic carousel example*/}
-      <Carousel images={images} lazy auto loop style={{ height: '40vh' }} />
+      <Carousel images={images} lazy loop style={{ height: '40vh' }} />
 
       {/*advanced carousel example*/}
       <Carousel
         images={images}
         speed={1500} // 1500 px per second
         threshold={0.1} // 10% of image width
-        interval={10} // second auto play interval
+        interval={1} // second auto play interval
         fit={'contain'}
         lazy
         auto
         loop
         rtl
-        controls={false}
+        controls
         style={{
           height: '40vh',
           border: '10px solid #bbb',

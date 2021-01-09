@@ -28,9 +28,9 @@ const useTimer = (interval, callback) => {
   const stop = () => timer && timer.stop();
   const restart = () => timer && timer.restart();
 
-  useEffect(() => {
-    start();
+  start();
 
+  useEffect(() => {
     return () => {
       stop();
     };
