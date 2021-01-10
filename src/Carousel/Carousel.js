@@ -16,7 +16,6 @@ export const Carousel = (props) => {
     props.images || props.children,
     props
   );
-  const shouldPause = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
@@ -77,9 +76,14 @@ export const Carousel = (props) => {
   };
 
   const [isPlaying, setIsPlaying] = useTimer(
-    props.auto && !shouldPause && autoPlayInterval,
+    props.auto && autoPlayInterval,
     () => updateIndexByAutoPlay(indexStep)
   );
+
+  const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  useEffect(() => {
+    if (isReducedMotion) setIsPlaying(false);
+  }, [isReducedMotion]);
 
   const handleMediaButtonClick = () => {
     setIsPlaying((isPlaying) => !isPlaying);
