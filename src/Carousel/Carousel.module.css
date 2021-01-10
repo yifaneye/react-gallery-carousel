@@ -22,7 +22,7 @@
   height: 100%;
   width: 100%;
   list-style: none;
-  white-space: nowrap;
+  white-space: normal;
   margin: 0;
   padding: 0;
   display: flex;
