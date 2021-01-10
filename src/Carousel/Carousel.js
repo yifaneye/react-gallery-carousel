@@ -101,14 +101,14 @@ export const Carousel = (props) => {
   return (
     <div className={styles.carouselWrapper} style={props.style}>
       <div className={carouselClassName}>
-        <div
+        <ul
           className={styles.slides}
           ref={slidesRef}
           {...touchEventHandlers}
           tabIndex={0}
         >
           <Slides slides={slidesElements} {...props} />
-        </div>
+        </ul>
       </div>
       <ArrowButtons
         disabled={props.controls === false}

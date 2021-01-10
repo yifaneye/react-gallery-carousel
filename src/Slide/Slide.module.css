@@ -3,6 +3,7 @@
   min-width: 100%;
   max-width: 100%;
   margin: auto;
+  padding: 0;
   object-fit: cover;
   overflow: auto;
   background: transparent;

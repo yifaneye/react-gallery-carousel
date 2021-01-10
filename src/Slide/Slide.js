@@ -9,7 +9,7 @@ export const Slide = (props) => {
   ) : (
     props.slide
   );
-  return <div className={styles.slide}>{slide}</div>;
+  return <li className={styles.slide}>{slide}</li>;
 };
 
 Slide.propTypes = {
