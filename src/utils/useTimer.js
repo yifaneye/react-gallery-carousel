@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const getTimer = (interval, callback) => {
   const _interval = interval;
@@ -23,20 +23,20 @@ const getTimer = (interval, callback) => {
 
 const useTimer = (interval, callback) => {
   const timer = interval ? getTimer(interval, callback) : null;
+  const [isRunning, setIsRunning] = useState(!!timer);
 
-  const start = () => timer && timer.start();
-  const stop = () => timer && timer.stop();
-  const restart = () => timer && timer.restart();
-
-  start();
+  const start = () => !!timer && timer.start();
+  const stop = () => !!timer && timer.stop();
 
   useEffect(() => {
+    if (isRunning) start();
+
     return () => {
       stop();
     };
-  }, []);
+  });
 
-  return [start, stop, restart];
+  return [isRunning, setIsRunning];
 };
 
 export default useTimer;

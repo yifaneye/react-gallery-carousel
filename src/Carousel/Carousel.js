@@ -8,6 +8,7 @@ import { Slides } from '../Slides/Slides';
 import PropTypes from 'prop-types';
 import { numberBetween, positiveNumber } from '../utils/validators';
 import { ArrowButtons, MediaButtons } from '../Buttons';
+import useMediaQuery from '../utils/useMediaQuery';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
@@ -15,6 +16,7 @@ export const Carousel = (props) => {
     props.images || props.children,
     props
   );
+  const shouldPause = useMediaQuery('(prefers-reduced-motion: reduce)');
 
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
@@ -50,20 +52,20 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = (change) => {
-    stopTimer();
+    setIsPlaying(false);
     calibrateIndex(change);
     applyTransitionDuration(0, slides.updateIndex(change));
     applyTransition();
   };
 
   const calibrateIndexBySwipe = (swipeDisplacement) => {
-    stopTimer();
+    setIsPlaying(false);
     slides.calibrateIndex(-swipeDisplacement);
     applyTransition(swipeDisplacement);
   };
 
   const updateIndexBySwipe = (change, swipedDisplacement) => {
-    stopTimer();
+    setIsPlaying(false);
     applyTransitionDuration(swipedDisplacement, slides.updateIndex(change));
     applyTransition();
   };
@@ -74,9 +76,14 @@ export const Carousel = (props) => {
     applyTransition();
   };
 
-  const [startTimer, stopTimer] = useTimer(autoPlayInterval, () =>
-    updateIndexByAutoPlay(indexStep)
+  const [isPlaying, setIsPlaying] = useTimer(
+    props.auto && !shouldPause && autoPlayInterval,
+    () => updateIndexByAutoPlay(indexStep)
   );
+
+  const handleMediaButtonClick = () => {
+    setIsPlaying((isPlaying) => !isPlaying);
+  };
 
   useKeys(slidesRef, {
     ArrowLeft: () => updateIndex(-1),
@@ -117,8 +124,8 @@ export const Carousel = (props) => {
       />
       <MediaButtons
         disabled={!props.auto}
-        onClickPlay={() => startTimer()}
-        onClickPause={() => stopTimer()}
+        isPlaying={isPlaying}
+        clickCallback={handleMediaButtonClick}
       />
     </div>
   );
