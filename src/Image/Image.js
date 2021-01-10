@@ -56,5 +56,5 @@ Image.propTypes = {
     alt: PropTypes.string
   }).isRequired,
   lazy: PropTypes.bool,
-  fit: PropTypes.string
+  fit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
 };
