@@ -19,3 +19,20 @@ export const numberBetween = (min, max, optional = true) => {
       );
   };
 };
+
+export const FallbackProps = (fallbackProps) => {
+  return (props, propName, componentName) => {
+    const prop = props[propName];
+    if (prop !== undefined) return;
+    if (!fallbackProps)
+      return new Error(
+        `The prop \`${propName} is marked as required in \`${componentName}, but its value is \`undefined\`.`
+      );
+    for (const fallbackProp of fallbackProps) {
+      if (props[fallbackProp] !== undefined) return;
+    }
+    return new Error(
+      `The props \`${fallbackProps}\` and \`${propName} are marked as at least one required in \`${componentName}, but their values are all \`undefined\`.`
+    );
+  };
+};

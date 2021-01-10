@@ -6,7 +6,11 @@ import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
 import { Slides } from '../Slides/Slides';
 import PropTypes from 'prop-types';
-import { numberBetween, positiveNumber } from '../utils/validators';
+import {
+  FallbackProps,
+  numberBetween,
+  positiveNumber
+} from '../utils/validators';
 import { ArrowButtons, MediaButtons } from '../Buttons';
 import useMediaQuery from '../utils/useMediaQuery';
 
@@ -136,7 +140,7 @@ export const Carousel = (props) => {
 };
 
 Carousel.propTypes = {
-  images: PropTypes.array,
+  images: PropTypes.array && FallbackProps(['children']),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
