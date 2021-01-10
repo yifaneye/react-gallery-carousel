@@ -52,6 +52,7 @@
     "dist"
   ],
   "dependencies": {
+    "lodash.isequal": "^4.5.0",
     "react-responsive-button": "0.2.0"
   }
 }
