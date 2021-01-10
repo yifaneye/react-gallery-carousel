@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './Carousel.module.css';
 import useKeys from '../utils/useKeys';
 import useTimer from '../utils/useTimer';
@@ -127,8 +127,8 @@ export const Carousel = (props) => {
       </div>
       <ArrowButtons
         disabled={props.controls === false}
-        onClickLeft={() => updateIndex(-1)}
-        onClickRight={() => updateIndex(+1)}
+        onClickLeft={useCallback(() => updateIndex(-1), [])}
+        onClickRight={useCallback(() => updateIndex(+1), [])}
       />
       <MediaButtons
         disabled={!props.auto}

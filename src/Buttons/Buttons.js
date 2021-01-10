@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import { ArrowButton, MediaButton } from '../Button/Button';
 import PropTypes from 'prop-types';
+import { isEqualProps } from '../utils/utils';
 
-export const ArrowButtons = (props) => {
+export const ArrowButtons = memo((props) => {
   if (props.disabled) return null;
 
   return (
@@ -11,7 +12,7 @@ export const ArrowButtons = (props) => {
       <ArrowButton direction='right' clickCallback={props.onClickRight} />
     </Fragment>
   );
-};
+}, isEqualProps);
 
 ArrowButtons.propTypes = {
   disabled: PropTypes.bool,
