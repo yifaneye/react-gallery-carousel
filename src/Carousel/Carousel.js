@@ -4,7 +4,7 @@ import useKeys from '../utils/useKeys';
 import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
-import { Slides } from '../Slides/Slides';
+import { Ribbon } from '../Ribbon/Ribbon';
 import PropTypes from 'prop-types';
 import {
   FallbackProps,
@@ -99,10 +99,22 @@ export const Carousel = (props) => {
   });
 
   const touchEventHandlers = useTouches(slidesRef, swipePercentageMin, {
-    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
-    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
-    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
-    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
+    swipeMove: useCallback(
+      (displacement) => calibrateIndexBySwipe(displacement),
+      []
+    ),
+    swipeEndRight: useCallback(
+      (displacement) => updateIndexBySwipe(-1, displacement),
+      []
+    ),
+    swipeEndLeft: useCallback(
+      (displacement) => updateIndexBySwipe(+1, displacement),
+      []
+    ),
+    swipeEndDisqualified: useCallback(
+      (displacement) => updateIndexBySwipe(0, displacement),
+      []
+    )
   });
 
   useEffect(() => {
@@ -116,14 +128,12 @@ export const Carousel = (props) => {
   return (
     <div className={styles.carouselWrapper} style={props.style}>
       <div className={carouselClassName}>
-        <ul
-          className={styles.slides}
-          ref={slidesRef}
-          {...touchEventHandlers}
-          tabIndex={0}
-        >
-          <Slides slides={slidesElements} {...props} />
-        </ul>
+        <Ribbon
+          reference={slidesRef}
+          slides={slidesElements}
+          handlers={{ ...touchEventHandlers }}
+          {...props}
+        />
       </div>
       <ArrowButtons
         disabled={props.controls === false}

@@ -18,24 +18,3 @@
   background-color: #000;
 }
 
-.slides {
-  height: 100%;
-  width: 100%;
-  list-style: none;
-  white-space: normal;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  outline: none;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  transition-duration: 0s;
-  transition-property: transform;
-  transition-timing-function: ease-out;
-  box-sizing: border-box;
-}
-
-.images:focus {
-  outline: none;
-}
