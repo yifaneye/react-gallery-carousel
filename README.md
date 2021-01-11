@@ -1,30 +1,60 @@
 # react-gallery-carousel
 
-> Simple, lightweight, dependency-free React carousel component with support for swiping and lazy loading
+React carousel component with support for swiping, image lazy loading and accessibility.
 
-[![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
 ## Install
 
 ```bash
 npm install --save react-gallery-carousel
 ```
+OR
+```bash
+yarn add react-gallery-carousel
+```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react';
+import { Carousel } from 'react-gallery-carousel';
+import 'react-gallery-carousel/dist/index.css';
 
-import MyComponent from 'react-gallery-carousel'
-import 'react-gallery-carousel/dist/index.css'
+const App = () => {
+  const sizes = [900, 800, 700, 600, 500, 400];
+    const images = sizes.map((size) => ({
+      src: `https://placekitten.com/${size}/${size}`,
+      alt: `Kitten of size ${size} pixels`
+    }));
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+  return (
+    <Carousel images={images} lazy loop style={{ height: '40vh' }} />
+  );
+};
+
+export default App;
+
 ```
+
+## Props
+
+To customize the carousel, use the following props:
+
+|Name     |Type                  |Default|Description|
+|:--------|:---------------------|:------|:----------|
+|images   |Array                 |null   |Images to be placed in the carousel.|
+|children |node or Array of nodes|null   |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
+|fit      |String                |'cover'|CSS 'object-fit' style of the images.|
+|lazy     |Boolean               |false  |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
+|loop     |Boolean               |false  |If true, the carousel form a loop from the ribbon of slides.|
+|auto     |Boolean               |false  |If true, the carousel plays automatically.|
+|rtl      |Boolean               |false  |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
+|interval |Number                |5      |Interval of auto play (in seconds).|
+|speed    |Number                |1500   |Speed of the transition (in pixels per second) in moving to the previous or the next slide.|
+|threshold|Number                |0.1    |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
+|style    |Object                |null   |Inline style(s) to be placed on the carousel.|
 
 ## License
 
-MIT © [yifaneye](https://github.com/yifaneye)
+MIT © [yifaneye](https://github.com/yifaneye/react-gallery-carousel)
