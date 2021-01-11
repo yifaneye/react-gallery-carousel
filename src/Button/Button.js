@@ -7,19 +7,29 @@ import PropTypes from 'prop-types';
 export const ArrowButton = (props) => {
   const className = `${styles.buttonWrapper} ${styles[props.direction]}`;
   const icons = {
-    left: `url("data:image/svg+xml,%3Csvg height='40' preserveAspectRatio='xMidYMid meet' viewBox='0 0 20 40' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m20 0v40l-20-20z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`,
-    right: `url("data:image/svg+xml,%3Csvg height='40' preserveAspectRatio='xMidYMid meet' viewBox='0 0 20 40' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m0 40v-40l20 20z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`
+    left: {
+      label: 'Previous Slide',
+      image: `url("data:image/svg+xml,%3Csvg height='40' preserveAspectRatio='xMidYMid meet' viewBox='0 0 20 40' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m20 0v40l-20-20z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`
+    },
+    right: {
+      label: 'Next Slide',
+      image: `url("data:image/svg+xml,%3Csvg height='40' preserveAspectRatio='xMidYMid meet' viewBox='0 0 20 40' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m0 40v-40l20 20z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`
+    }
   };
+  const { label, image } = icons[props.direction];
+
   return (
     <div className={className}>
       <Button
         disabled={props.disabled}
         shape='rectangle'
+        aria-label={label}
+        aria-disabled={false}
         style={{
           width: 20,
           height: 40,
           backgroundColor: 'transparent',
-          backgroundImage: icons[props.direction],
+          backgroundImage: image,
           backgroundSize: '20px 40px',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -37,20 +47,31 @@ ArrowButton.propTypes = {
 };
 
 export const MediaButton = (props) => {
-  const icon = props.isPlaying
-    ? `url("data:image/svg+xml,%3Csvg height='30' preserveAspectRatio='xMidYMid meet' viewBox='0 0 30 30' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23eee' fill-opacity='.5'%3E%3Cpath d='m0 0h10v30h-10z'/%3E%3Cpath d='m20 0h10v30h-10z'/%3E%3C/g%3E%3C/svg%3E")`
-    : `url("data:image/svg+xml,%3Csvg height='30' preserveAspectRatio='xMidYMid meet' viewBox='0 0 30 30' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`;
+  const icons = {
+    play: {
+      label: 'Play Auto Play',
+      image: `url("data:image/svg+xml,%3Csvg height='30' preserveAspectRatio='xMidYMid meet' viewBox='0 0 30 30' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z' fill='%23eee' fill-opacity='.5'/%3E%3C/svg%3E")`
+    },
+    pause: {
+      label: 'Pause Auto Play',
+      image: `url("data:image/svg+xml,%3Csvg height='30' preserveAspectRatio='xMidYMid meet' viewBox='0 0 30 30' width='30' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23eee' fill-opacity='.5'%3E%3Cpath d='m0 0h10v30h-10z'/%3E%3Cpath d='m20 0h10v30h-10z'/%3E%3C/g%3E%3C/svg%3E")`
+    }
+  };
+  const { label, image } = icons[props.isPlaying ? 'pause' : 'play'];
+
   const className = `${styles.buttonWrapper} ${styles.media}`;
   return (
     <div className={className}>
       <Button
         disabled={props.disabled}
         shape='rectangle'
+        aria-label={label}
+        aria-disabled={false}
         style={{
           width: 30,
           height: 30,
           backgroundColor: 'transparent',
-          backgroundImage: icon,
+          backgroundImage: image,
           backgroundSize: '30px 30px',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
