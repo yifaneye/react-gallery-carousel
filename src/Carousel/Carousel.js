@@ -16,10 +16,10 @@ import useMediaQuery from '../utils/useMediaQuery';
 
 export const Carousel = (props) => {
   const slidesRef = useRef(null);
-  const [slides, slidesElements] = useSlides(
-    props.images || props.children,
-    props
-  );
+  const rawSlides = Array.isArray(props.children)
+    ? props.children
+    : [props.children];
+  const [slides, slidesElements] = useSlides(props.images || rawSlides, props);
 
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
