@@ -34,7 +34,7 @@ export const Carousel = (props) => {
     let transitionDuration = transitionDistance / transitionSpeed;
 
     // make transitionDuration slightly smaller (faster) than autoPlayInterval
-    if (props.auto && transitionDuration > autoPlayInterval) {
+    if (isPlaying && transitionDuration > autoPlayInterval) {
       transitionDuration = autoPlayInterval * 0.999;
     }
 
