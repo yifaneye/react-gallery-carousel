@@ -99,22 +99,10 @@ export const Carousel = (props) => {
   });
 
   const touchEventHandlers = useTouches(slidesRef, swipePercentageMin, {
-    swipeMove: useCallback(
-      (displacement) => calibrateIndexBySwipe(displacement),
-      []
-    ),
-    swipeEndRight: useCallback(
-      (displacement) => updateIndexBySwipe(-1, displacement),
-      []
-    ),
-    swipeEndLeft: useCallback(
-      (displacement) => updateIndexBySwipe(+1, displacement),
-      []
-    ),
-    swipeEndDisqualified: useCallback(
-      (displacement) => updateIndexBySwipe(0, displacement),
-      []
-    )
+    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
+    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
+    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
+    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
   });
 
   useEffect(() => {
@@ -127,13 +115,8 @@ export const Carousel = (props) => {
 
   return (
     <div className={styles.carouselWrapper} style={props.style}>
-      <div className={carouselClassName}>
-        <Ribbon
-          reference={slidesRef}
-          slides={slidesElements}
-          handlers={{ ...touchEventHandlers }}
-          {...props}
-        />
+      <div className={carouselClassName} {...touchEventHandlers}>
+        <Ribbon reference={slidesRef} slides={slidesElements} {...props} />
       </div>
       <ArrowButtons
         disabled={props.controls === false}
