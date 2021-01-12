@@ -4,16 +4,16 @@
 }
 
 .centerLeft {
-  top: calc(50% - 20px);
-  left: 10px;
+  top: calc(50% - 30px);
+  left: 0;
 }
 
 .centerRight {
-  top: calc(50% - 20px);
-  right: 10px;
+  top: calc(50% - 30px);
+  right: 0;
 }
 
 .topLeft {
-  left: 10px;
-  top: 10px;
+  top: 0;
+  left: 0;
 }
