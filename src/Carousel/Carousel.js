@@ -116,6 +116,7 @@ export const Carousel = (props) => {
       </div>
       <ArrowButtons
         disabled={props.controls === false}
+        rtl={props.rtl}
         onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [])}
         onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [])}
       />
