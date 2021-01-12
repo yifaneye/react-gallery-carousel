@@ -111,20 +111,20 @@ export const Carousel = (props) => {
 
   return (
     <div className={styles.carouselWrapper} style={props.style}>
-      <div className={carouselClassName} {...touchEventHandlers}>
-        <Ribbon reference={slidesRef} slides={slidesElements} {...props} />
-      </div>
+      <MediaButtons
+        disabled={!props.auto}
+        isPlaying={isPlaying}
+        clickCallback={handleMediaButtonClick}
+      />
       <ArrowButtons
         disabled={props.controls === false}
         rtl={props.rtl}
         onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [])}
         onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [])}
       />
-      <MediaButtons
-        disabled={!props.auto}
-        isPlaying={isPlaying}
-        clickCallback={handleMediaButtonClick}
-      />
+      <div className={carouselClassName} {...touchEventHandlers}>
+        <Ribbon reference={slidesRef} slides={slidesElements} {...props} />
+      </div>
     </div>
   );
 };
