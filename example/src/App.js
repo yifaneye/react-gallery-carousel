@@ -41,7 +41,7 @@ const App = () => {
     alt: `Kitten of size ${kittenImageSize} pixels`
   }));
 
-  const basicCarouselExampleCode = `<Carousel images={images} lazy auto loop style={{ height: '40vh' }} />`;
+  const basicCarouselExampleCode = `<Carousel images={images} lazy loop style={{ height: '40vh' }} />`;
 
   return (
     <div

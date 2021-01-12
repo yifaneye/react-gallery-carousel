@@ -7,7 +7,7 @@ import useSlides from '../utils/useSlides';
 import { Ribbon } from '../Ribbon/Ribbon';
 import PropTypes from 'prop-types';
 import {
-  FallbackProps,
+  fallbackProps,
   numberBetween,
   positiveNumber
 } from '../utils/validators';
@@ -133,7 +133,7 @@ export const Carousel = (props) => {
 };
 
 Carousel.propTypes = {
-  images: PropTypes.array && FallbackProps(['children']),
+  images: PropTypes.array && fallbackProps(['children']),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

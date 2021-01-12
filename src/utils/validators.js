@@ -20,7 +20,7 @@ export const numberBetween = (min, max, optional = true) => {
   };
 };
 
-export const FallbackProps = (fallbackProps) => {
+export const fallbackProps = (fallbackProps) => {
   return (props, propName, componentName) => {
     const prop = props[propName];
     if (prop !== undefined) return;
