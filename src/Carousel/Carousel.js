@@ -26,7 +26,10 @@ export const Carousel = (props) => {
   const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
   const indexStep = props.rtl ? -1 : +1;
 
-  const applyTransitionDuration = (swipedDisplacement, hasToUpdate) => {
+  const applyTransitionDuration = (
+    swipedDisplacement = 0,
+    hasToUpdate = true
+  ) => {
     const swipedDistance = Math.abs(swipedDisplacement);
     const transitionDistance = hasToUpdate
       ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
@@ -49,34 +52,27 @@ export const Carousel = (props) => {
     slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
   };
 
-  const calibrateIndex = (change) => {
-    slides.calibrateIndex(change);
-    applyTransition();
-  };
-
-  const updateIndex = (change) => {
-    setIsPlaying(false);
-    calibrateIndex(change);
-    applyTransitionDuration(0, slides.updateIndex(change));
-    applyTransition();
-  };
-
   const calibrateIndexBySwipe = (swipeDisplacement) => {
     setIsPlaying(false);
     slides.calibrateIndex(-swipeDisplacement);
     applyTransition(swipeDisplacement);
   };
 
-  const updateIndexBySwipe = (change, swipedDisplacement) => {
-    setIsPlaying(false);
-    applyTransitionDuration(swipedDisplacement, slides.updateIndex(change));
+  const updateIndexBySwipe = (change, swipedDisplacement = 0) => {
+    slides.updateIndex(change);
+    applyTransitionDuration(swipedDisplacement, change !== 0);
     applyTransition();
   };
 
   const updateIndexByAutoPlay = (change) => {
-    calibrateIndex(change);
-    applyTransitionDuration(0, slides.updateIndex(change));
+    slides.calibrateIndex(change);
     applyTransition();
+    updateIndexBySwipe(change);
+  };
+
+  const updateIndexByButtonOrKey = (change) => {
+    setIsPlaying(false);
+    updateIndexByAutoPlay(change);
   };
 
   const [isPlaying, setIsPlaying] = useTimer(
@@ -94,8 +90,8 @@ export const Carousel = (props) => {
   };
 
   useKeys(slidesRef, {
-    ArrowLeft: () => updateIndex(-1),
-    ArrowRight: () => updateIndex(+1)
+    ArrowLeft: () => updateIndexByButtonOrKey(-1),
+    ArrowRight: () => updateIndexByButtonOrKey(+1)
   });
 
   const touchEventHandlers = useTouches(slidesRef, swipePercentageMin, {
@@ -120,8 +116,8 @@ export const Carousel = (props) => {
       </div>
       <ArrowButtons
         disabled={props.controls === false}
-        onClickLeft={useCallback(() => updateIndex(-1), [])}
-        onClickRight={useCallback(() => updateIndex(+1), [])}
+        onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [])}
+        onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [])}
       />
       <MediaButtons
         disabled={!props.auto}
