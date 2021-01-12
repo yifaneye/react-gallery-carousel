@@ -1,18 +1,19 @@
 .buttonWrapper {
   position: absolute;
   z-index: 1;
-  top: calc(50% - 20px);
 }
 
-.left {
+.centerLeft {
+  top: calc(50% - 20px);
   left: 10px;
 }
 
-.right {
+.centerRight {
+  top: calc(50% - 20px);
   right: 10px;
 }
 
-.media {
+.topLeft {
   left: 10px;
   top: 10px;
 }
