@@ -13,8 +13,10 @@ import {
 } from '../utils/validators';
 import { ArrowButtons, MediaButtons } from '../Buttons';
 import useMediaQuery from '../utils/useMediaQuery';
+import useKeyboard from '../utils/useKeyboard';
 
 export const Carousel = (props) => {
+  const carouselRef = useRef(null);
   const slidesRef = useRef(null);
   const rawSlides = Array.isArray(props.children)
     ? props.children
@@ -89,6 +91,8 @@ export const Carousel = (props) => {
     setIsPlaying((isPlaying) => !isPlaying);
   };
 
+  useKeyboard(carouselRef);
+
   useKeys(slidesRef, {
     ArrowLeft: () => updateIndexByButtonOrKey(-1),
     ArrowRight: () => updateIndexByButtonOrKey(+1)
@@ -110,7 +114,12 @@ export const Carousel = (props) => {
   }`;
 
   return (
-    <div className={styles.carouselWrapper} style={props.style}>
+    <div
+      className={styles.carouselWrapper}
+      style={props.style}
+      ref={carouselRef}
+      data-is-keyboard-user='true'
+    >
       <MediaButtons
         disabled={!props.auto}
         isPlaying={isPlaying}
