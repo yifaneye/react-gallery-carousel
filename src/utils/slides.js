@@ -45,10 +45,19 @@ export default class Slides {
   calibrateIndex(change) {
     if (!this._length) return;
     if (!this._loop) return;
-    if (this._curIndex === this._minIndex && change < 0) {
-      this._curIndex = this._maxIndex + 1;
-    } else if (this._curIndex === this._maxIndex && change > 0) {
-      this._curIndex = this._minIndex - 1;
+    switch (this._curIndex) {
+      case this._minIndex - 1:
+        if (change < 0 && this._loop) this._curIndex = this._maxIndex;
+        break;
+      case this._minIndex:
+        if (change < 0) this._curIndex = this._maxIndex + 1;
+        break;
+      case this._maxIndex:
+        if (change > 0) this._curIndex = this._minIndex - 1;
+        break;
+      case this._maxIndex + 1:
+        if (change > 0 && this._loop) this._curIndex = this._minIndex;
+        break;
     }
   }
 
