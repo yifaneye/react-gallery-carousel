@@ -34,7 +34,7 @@ export const Image = (props) => {
         observer.disconnect();
       }
     };
-  }, [imageRef]);
+  }, [imageRef, isInViewport, props.lazy]);
 
   return (
     <img
