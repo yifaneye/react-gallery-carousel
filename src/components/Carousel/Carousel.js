@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import styles from './Carousel.module.css';
 import useKeys from '../../utils/useKeys';
 import useTimer from '../../utils/useTimer';
@@ -112,10 +118,16 @@ export const Carousel = (props) => {
 
   useKeyboard(carouselRef);
 
-  useKeys(slidesRef, {
-    ArrowLeft: () => updateIndexByButtonOrKey(-1),
-    ArrowRight: () => updateIndexByButtonOrKey(+1)
-  });
+  useKeys(
+    slidesRef,
+    useMemo(
+      () => ({
+        ArrowLeft: () => updateIndexByButtonOrKey(-1),
+        ArrowRight: () => updateIndexByButtonOrKey(+1)
+      }),
+      [updateIndexByButtonOrKey]
+    )
+  );
 
   const touchEventHandlers = useTouches(slidesRef, swipePercentageMin, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
