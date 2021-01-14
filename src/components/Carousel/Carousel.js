@@ -27,32 +27,39 @@ export const Carousel = (props) => {
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
   const indexStep = props.rtl ? -1 : +1;
+  const [isPlaying, setIsPlaying] = useTimer(
+    props.auto && autoPlayInterval,
+    () => updateIndexByAutoPlay(indexStep)
+  );
 
-  const applyTransitionDuration = (
-    swipedDisplacement = 0,
-    hasToUpdate = true
-  ) => {
-    const swipedDistance = Math.abs(swipedDisplacement);
-    const transitionDistance = hasToUpdate
-      ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
-      : swipedDistance;
-    let transitionDuration = transitionDistance / transitionSpeed;
+  const applyTransitionDuration = useCallback(
+    (swipedDisplacement = 0, hasToUpdate = true) => {
+      const swipedDistance = Math.abs(swipedDisplacement);
+      const transitionDistance = hasToUpdate
+        ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
+        : swipedDistance;
+      let transitionDuration = transitionDistance / transitionSpeed;
 
-    // make transitionDuration slightly smaller (faster) than autoPlayInterval
-    if (isPlaying && transitionDuration > autoPlayInterval) {
-      transitionDuration = autoPlayInterval * 0.999;
-    }
+      // make transitionDuration slightly smaller (faster) than autoPlayInterval
+      if (isPlaying && transitionDuration > autoPlayInterval) {
+        transitionDuration = autoPlayInterval * 0.999;
+      }
 
-    slidesRef.current.style.transitionDuration = `${transitionDuration}s`;
-    setTimeout(
-      () => (slidesRef.current.style.transitionDuration = null),
-      transitionDuration * 1000
-    );
-  };
+      slidesRef.current.style.transitionDuration = `${transitionDuration}s`;
+      setTimeout(
+        () => (slidesRef.current.style.transitionDuration = null),
+        transitionDuration * 1000
+      );
+    },
+    [transitionSpeed, isPlaying, autoPlayInterval]
+  );
 
-  const applyTransition = (swipeDisplacement = 0) => {
-    slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
-  };
+  const applyTransition = useCallback(
+    (swipeDisplacement = 0) => {
+      slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    },
+    [slides.curIndex]
+  );
 
   const calibrateIndexBySwipe = (swipeDisplacement) => {
     setIsPlaying(false);
@@ -67,33 +74,37 @@ export const Carousel = (props) => {
     setCurIndex(slides.curIndex);
   };
 
-  const updateIndexBySwipe = (change, swipedDisplacement = 0) => {
-    slides.updateIndex(change);
-    applyTransitionDuration(swipedDisplacement, change !== 0);
-    applyTransition();
-    setCurIndex(slides.curIndex);
-  };
+  const updateIndexBySwipe = useCallback(
+    (change, swipedDisplacement = 0) => {
+      slides.updateIndex(change);
+      applyTransitionDuration(swipedDisplacement, change !== 0);
+      applyTransition();
+      setCurIndex(slides.curIndex);
+    },
+    [slides, applyTransitionDuration, applyTransition, setCurIndex]
+  );
 
-  const updateIndexByAutoPlay = (change) => {
-    slides.calibrateIndex(change);
-    applyTransition();
-    updateIndexBySwipe(change);
-  };
+  const updateIndexByAutoPlay = useCallback(
+    (change) => {
+      slides.calibrateIndex(change);
+      applyTransition();
+      updateIndexBySwipe(change);
+    },
+    [slides, applyTransition, updateIndexBySwipe]
+  );
 
-  const updateIndexByButtonOrKey = (change) => {
-    setIsPlaying(false);
-    updateIndexByAutoPlay(change);
-  };
-
-  const [isPlaying, setIsPlaying] = useTimer(
-    props.auto && autoPlayInterval,
-    () => updateIndexByAutoPlay(indexStep)
+  const updateIndexByButtonOrKey = useCallback(
+    (change) => {
+      setIsPlaying(false);
+      updateIndexByAutoPlay(change);
+    },
+    [setIsPlaying, updateIndexByAutoPlay]
   );
 
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   useEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
-  }, [isReducedMotion]);
+  }, [isReducedMotion, setIsPlaying]);
 
   const handleMediaButtonClick = () => {
     setIsPlaying((isPlaying) => !isPlaying);
@@ -115,7 +126,7 @@ export const Carousel = (props) => {
 
   useEffect(() => {
     applyTransition();
-  }, []);
+  }, [applyTransition]);
 
   const carouselClassName = `${styles.carousel}${
     'images' in props ? ' ' + styles.galleryCarousel : ''
@@ -145,8 +156,12 @@ export const Carousel = (props) => {
         rtl={props.rtl}
         isLeftDisabled={!slides.canUpdateIndex(-1)}
         isRightDisabled={!slides.canUpdateIndex(+1)}
-        onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [])}
-        onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [])}
+        onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [
+          updateIndexByButtonOrKey
+        ])}
+        onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [
+          updateIndexByButtonOrKey
+        ])}
       />
       <IndicatorButtons
         disabled={props.controls === false}
