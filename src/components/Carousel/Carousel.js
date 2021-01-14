@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Carousel.module.css';
-import useKeys from '../utils/useKeys';
-import useTimer from '../utils/useTimer';
-import useTouches from '../utils/useTouches';
-import useSlides from '../utils/useSlides';
+import useKeys from '../../utils/useKeys';
+import useTimer from '../../utils/useTimer';
+import useTouches from '../../utils/useTouches';
+import useSlides from '../../utils/useSlides';
 import Slides from '../Slides';
 import PropTypes from 'prop-types';
 import {
   fallbackProps,
   numberBetween,
   positiveNumber
-} from '../utils/validators';
+} from '../../utils/validators';
 import { ArrowButtons, MediaButtons, IndicatorButtons } from '../Buttons';
-import useMediaQuery from '../utils/useMediaQuery';
-import useKeyboard from '../utils/useKeyboard';
+import useMediaQuery from '../../utils/useMediaQuery';
+import useKeyboard from '../../utils/useKeyboard';
 
 export const Carousel = (props) => {
   const carouselRef = useRef(null);
