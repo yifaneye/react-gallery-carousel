@@ -4,7 +4,7 @@ import useKeys from '../utils/useKeys';
 import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
-import Ribbon from '../Ribbon';
+import Slides from '../Slides';
 import PropTypes from 'prop-types';
 import {
   fallbackProps,
@@ -154,7 +154,7 @@ export const Carousel = (props) => {
         callbacks={indicatorsCallbacks}
       />
       <div className={carouselClassName} {...touchEventHandlers}>
-        <Ribbon reference={slidesRef} slides={slidesElements} {...props} />
+        <Slides reference={slidesRef} slides={slidesElements} {...props} />
       </div>
     </div>
   );
