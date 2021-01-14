@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
-import { IconButton } from '../IconButton/IconButton';
+import IconButton from '../IconButton';
 import styles from './Buttons.module.css';
 
 export const ArrowButtons = memo((props) => {

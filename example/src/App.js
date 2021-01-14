@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Carousel } from 'react-gallery-carousel';
+import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
@@ -64,7 +64,6 @@ const App = () => {
         interval={1} // second auto play interval
         fit={'contain'}
         lazy
-        auto
         loop
         rtl
         controls

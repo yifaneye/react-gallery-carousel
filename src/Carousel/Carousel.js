@@ -4,7 +4,7 @@ import useKeys from '../utils/useKeys';
 import useTimer from '../utils/useTimer';
 import useTouches from '../utils/useTouches';
 import useSlides from '../utils/useSlides';
-import { Ribbon } from '../Ribbon/Ribbon';
+import Ribbon from '../Ribbon';
 import PropTypes from 'prop-types';
 import {
   fallbackProps,

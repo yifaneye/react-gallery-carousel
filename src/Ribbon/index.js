@@ -1,1 +1,1 @@
-export { Ribbon } from './Ribbon';
+export { Ribbon as default } from './Ribbon';
