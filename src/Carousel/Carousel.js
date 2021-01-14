@@ -143,6 +143,8 @@ export const Carousel = (props) => {
       <ArrowButtons
         disabled={props.controls === false}
         rtl={props.rtl}
+        isLeftDisabled={!slides.canUpdateIndex(-1)}
+        isRightDisabled={!slides.canUpdateIndex(+1)}
         onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [])}
         onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [])}
       />

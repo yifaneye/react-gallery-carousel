@@ -73,7 +73,7 @@ export default class Slides {
     }
   }
 
-  _hasToUpdateIndex(change) {
+  canUpdateIndex(change) {
     if (!this._length) return false;
     return (
       change !== 0 &&
@@ -85,7 +85,7 @@ export default class Slides {
 
   updateIndex(change) {
     if (!this._length) return false;
-    if (!this._hasToUpdateIndex(change)) return false;
+    if (!this.canUpdateIndex(change)) return false;
     this._curIndex = Math.abs(
       (this._length + this._curIndex + change) % this._length
     );

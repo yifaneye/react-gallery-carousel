@@ -20,6 +20,11 @@
   opacity: 0.75;
 }
 
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 @media (hover: none) {
   .button:hover {
     opacity: 1;
