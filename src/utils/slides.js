@@ -42,12 +42,24 @@ export default class Slides {
     return this._slides;
   }
 
+  static _range(min, max, step = 1) {
+    const length = max - min + 1;
+    return Array(length)
+      .fill(min)
+      .map((x, step) => x + step);
+  }
+
+  get allIndices() {
+    if (!this._length) return [];
+    return Slides._range(this._minIndex, this._maxIndex);
+  }
+
   calibrateIndex(change) {
     if (!this._length) return;
     if (!this._loop) return;
     switch (this._curIndex) {
       case this._minIndex - 1:
-        if (change < 0 && this._loop) this._curIndex = this._maxIndex;
+        if (change < 0) this._curIndex = this._maxIndex;
         break;
       case this._minIndex:
         if (change < 0) this._curIndex = this._maxIndex + 1;
@@ -56,7 +68,7 @@ export default class Slides {
         if (change > 0) this._curIndex = this._minIndex - 1;
         break;
       case this._maxIndex + 1:
-        if (change > 0 && this._loop) this._curIndex = this._minIndex;
+        if (change > 0) this._curIndex = this._minIndex;
         break;
     }
   }
@@ -77,6 +89,18 @@ export default class Slides {
     this._curIndex = Math.abs(
       (this._length + this._curIndex + change) % this._length
     );
+    return true;
+  }
+
+  _canGoToIndex(index) {
+    if (!this._length) return false;
+    return this._minIndex <= index <= this._maxIndex;
+  }
+
+  goToIndex(index) {
+    if (!this._length) return false;
+    if (!this._canGoToIndex(index)) return false;
+    this._curIndex = index;
     return true;
   }
 }

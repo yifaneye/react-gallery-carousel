@@ -3,6 +3,15 @@
   z-index: 1;
 }
 
+.buttonContainer {
+  height: 30px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .centerLeft {
   top: calc(50% - 30px);
   left: 0;
@@ -16,4 +25,10 @@
 .topLeft {
   top: 0;
   left: 0;
+}
+
+.bottomCenter {
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

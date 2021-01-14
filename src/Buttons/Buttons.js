@@ -51,3 +51,33 @@ MediaButtons.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
+
+export const IndicatorButtons = (props) => {
+  if (props.disabled) return null;
+  const callbacks = props.callbacks;
+
+  return (
+    <div className={styles.buttonWrapper + ' ' + styles.bottomCenter}>
+      <div className={styles.buttonContainer}>
+        {Object.keys(callbacks).map((key, index) => (
+          <IconButton
+            key={index}
+            name={Number(key) === props.curIndex ? 'circleLight' : 'circle'}
+            label={
+              Number(key) === props.curIndex
+                ? `Stay on Slide Number ${index + 1}`
+                : `Go to Slide Number ${index + 1}`
+            }
+            clickCallback={callbacks[key]}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+IndicatorButtons.propTypes = {
+  disabled: PropTypes.bool,
+  curIndex: PropTypes.number.isRequired,
+  callbacks: PropTypes.shape(PropTypes.function).isRequired
+};

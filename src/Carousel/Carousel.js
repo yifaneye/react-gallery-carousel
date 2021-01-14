@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Carousel.module.css';
 import useKeys from '../utils/useKeys';
 import useTimer from '../utils/useTimer';
@@ -11,7 +11,7 @@ import {
   numberBetween,
   positiveNumber
 } from '../utils/validators';
-import { ArrowButtons, MediaButtons } from '../Buttons';
+import { ArrowButtons, MediaButtons, IndicatorButtons } from '../Buttons';
 import useMediaQuery from '../utils/useMediaQuery';
 import useKeyboard from '../utils/useKeyboard';
 
@@ -22,7 +22,7 @@ export const Carousel = (props) => {
     ? props.children
     : [props.children];
   const [slides, slidesElements] = useSlides(props.images || rawSlides, props);
-
+  const [curIndex, setCurIndex] = useState(slides.curIndex);
   const transitionSpeed = props.speed || 1500; // px/s
   const swipePercentageMin = props.threshold || 0.1; // * 100%
   const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
@@ -60,10 +60,18 @@ export const Carousel = (props) => {
     applyTransition(swipeDisplacement);
   };
 
+  const goToIndex = (index) => {
+    slides.goToIndex(index);
+    applyTransitionDuration();
+    applyTransition();
+    setCurIndex(slides.curIndex);
+  };
+
   const updateIndexBySwipe = (change, swipedDisplacement = 0) => {
     slides.updateIndex(change);
     applyTransitionDuration(swipedDisplacement, change !== 0);
     applyTransition();
+    setCurIndex(slides.curIndex);
   };
 
   const updateIndexByAutoPlay = (change) => {
@@ -113,6 +121,13 @@ export const Carousel = (props) => {
     'images' in props ? ' ' + styles.galleryCarousel : ''
   }`;
 
+  const indices = slides.allIndices;
+  const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
+  const indicatorsCallbacks = indices.reduce(
+    (obj, key, index) => ({ ...obj, [key]: goToIndexCallbacks[index] }),
+    {}
+  );
+
   return (
     <div
       className={styles.carouselWrapper}
@@ -130,6 +145,11 @@ export const Carousel = (props) => {
         rtl={props.rtl}
         onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [])}
         onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [])}
+      />
+      <IndicatorButtons
+        disabled={props.controls === false}
+        curIndex={curIndex}
+        callbacks={indicatorsCallbacks}
       />
       <div className={carouselClassName} {...touchEventHandlers}>
         <Ribbon reference={slidesRef} slides={slidesElements} {...props} />

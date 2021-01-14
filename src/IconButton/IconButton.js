@@ -14,7 +14,14 @@ export const IconButton = (props) => {
 };
 
 IconButton.propTypes = {
-  name: PropTypes.oneOf(['left', 'right', 'play', 'pause']),
+  name: PropTypes.oneOf([
+    'left',
+    'right',
+    'play',
+    'pause',
+    'circle',
+    'circleLight'
+  ]),
   label: PropTypes.string,
   clickCallback: PropTypes.func
 };
