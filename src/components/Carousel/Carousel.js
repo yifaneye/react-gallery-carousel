@@ -112,9 +112,9 @@ export const Carousel = (props) => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
 
-  const handleMediaButtonClick = () => {
+  const handleMediaButtonClick = useCallback(() => {
     setIsPlaying((isPlaying) => !isPlaying);
-  };
+  }, [setIsPlaying]);
 
   useKeyboard(carouselRef);
 

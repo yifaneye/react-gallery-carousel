@@ -36,7 +36,7 @@ ArrowButtons.propTypes = {
   onClickRight: PropTypes.func.isRequired
 };
 
-export const MediaButtons = (props) => {
+export const MediaButtons = memo((props) => {
   if (props.disabled) return null;
 
   return (
@@ -48,7 +48,7 @@ export const MediaButtons = (props) => {
       />
     </div>
   );
-};
+});
 
 MediaButtons.propTypes = {
   disabled: PropTypes.bool,
@@ -56,7 +56,7 @@ MediaButtons.propTypes = {
   clickCallback: PropTypes.func.isRequired
 };
 
-export const IndicatorButtons = (props) => {
+export const IndicatorButtons = memo((props) => {
   if (props.disabled) return null;
   const callbacks = props.callbacks;
 
@@ -78,7 +78,7 @@ export const IndicatorButtons = (props) => {
       </div>
     </div>
   );
-};
+});
 
 IndicatorButtons.propTypes = {
   disabled: PropTypes.bool,
