@@ -7,6 +7,25 @@ it('renders without crashing', () => {
   window.IntersectionObserver = jest.fn(function () {
     this.observe = observe;
   });
+
+  global['IntersectionObserver'] = function () {
+    return {
+      observe: () => {},
+      disconnect: () => {}
+    };
+  };
+
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn()
+    }))
+  });
+
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
