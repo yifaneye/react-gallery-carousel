@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Image.module.css';
 import PropTypes from 'prop-types';
+import placeholder from 'placeholderImage.jpg';
 
 export const Image = (props) => {
   const imageRef = useRef(null);
@@ -40,12 +41,16 @@ export const Image = (props) => {
     <img
       ref={imageRef}
       className={styles.image}
-      src={!props.lazy || isInViewport ? props.image.src : undefined}
+      src={!props.lazy || isInViewport ? props.image.src : placeholder}
       alt={imageTitle}
       aria-label={imageTitle}
       title={imageTitle}
       loading={props.lazy ? 'lazy' : 'eager'}
       style={{ objectFit: props.fit || null }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = placeholder;
+      }}
     />
   );
 };
