@@ -63,6 +63,8 @@ const App = () => {
         threshold={0.1} // 10% of image width
         interval={1} // second auto play interval
         fit={'contain'}
+        auto
+        paused
         lazy
         loop
         rtl

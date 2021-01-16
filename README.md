@@ -48,7 +48,8 @@ To customize the carousel, use the following props:
 |fit      |String                |'cover'|CSS 'object-fit' style of the images.|
 |lazy     |Boolean               |false  |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
 |loop     |Boolean               |false  |If true, the carousel form a loop from the ribbon of slides.|
-|auto     |Boolean               |false  |If true, the carousel plays automatically.|
+|auto     |Boolean               |false  |If true, the carousel has auto play capability.|
+|paused   |Boolean               |false  |If true, the carousel's auto play is paused at start.|
 |rtl      |Boolean               |false  |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
 |interval |Number                |5      |Interval of auto play (in seconds).|
 |speed    |Number                |1500   |Speed of the transition (in pixels per second) in moving to the previous or the next slide.|

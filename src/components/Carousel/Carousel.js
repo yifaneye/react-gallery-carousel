@@ -138,7 +138,8 @@ export const Carousel = (props) => {
 
   useEffect(() => {
     applyTransition();
-  }, [applyTransition]);
+    if (props.paused) setIsPlaying(false);
+  }, [applyTransition, props.paused, setIsPlaying]);
 
   const carouselClassName = `${styles.carousel}${
     'images' in props ? ' ' + styles.galleryCarousel : ''
@@ -198,6 +199,7 @@ Carousel.propTypes = {
   loop: PropTypes.bool,
   rtl: PropTypes.bool,
   auto: PropTypes.bool,
+  paused: PropTypes.bool,
   interval: positiveNumber(),
   speed: positiveNumber(),
   threshold: numberBetween(0, 1),
