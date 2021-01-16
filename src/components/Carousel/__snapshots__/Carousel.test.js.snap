@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel renders correctly 1`] = `
+<div
+  className="carouselWrapper"
+  data-is-keyboard-user="true"
+>
+  <div
+    className="buttonWrapper centerLeft"
+  >
+    <button
+      aria-disabled={true}
+      aria-label="Previous Slide"
+      className="button left disabled"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="buttonWrapper centerRight"
+  >
+    <button
+      aria-disabled={false}
+      aria-label="Next Slide"
+      className="button right"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="buttonWrapper bottomCenter"
+  >
+    <div
+      className="buttonContainer"
+    >
+      <button
+        aria-disabled={false}
+        aria-label="Stay on Slide Number 1"
+        className="button circleLight"
+        onClick={[Function]}
+      />
+      <button
+        aria-disabled={false}
+        aria-label="Go to Slide Number 2"
+        className="button circle"
+        onClick={[Function]}
+      />
+      <button
+        aria-disabled={false}
+        aria-label="Go to Slide Number 3"
+        className="button circle"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="carousel galleryCarousel"
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+  >
+    <ul
+      className="ribbon"
+      tabIndex={0}
+    >
+      <li
+        className="slide"
+      >
+        <img
+          alt="Kitten of size 900 pixels"
+          aria-label="Kitten of size 900 pixels"
+          className="image"
+          loading="eager"
+          src="https://placekitten.com/900/900"
+          style={
+            Object {
+              "objectFit": null,
+            }
+          }
+          title="Kitten of size 900 pixels"
+        />
+      </li>
+      <li
+        className="slide"
+      >
+        <img
+          alt="Kitten of size 800 pixels"
+          aria-label="Kitten of size 800 pixels"
+          className="image"
+          loading="eager"
+          src="https://placekitten.com/800/800"
+          style={
+            Object {
+              "objectFit": null,
+            }
+          }
+          title="Kitten of size 800 pixels"
+        />
+      </li>
+      <li
+        className="slide"
+      >
+        <img
+          alt="Kitten of size 700 pixels"
+          aria-label="Kitten of size 700 pixels"
+          className="image"
+          loading="eager"
+          src="https://placekitten.com/700/700"
+          style={
+            Object {
+              "objectFit": null,
+            }
+          }
+          title="Kitten of size 700 pixels"
+        />
+      </li>
+    </ul>
+  </div>
+</div>
+`;
