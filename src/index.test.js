@@ -1,4 +1,4 @@
-import { Carousel } from '.';
+import Carousel from '.';
 
 describe('Carousel', () => {
   it('is truthy', () => {
