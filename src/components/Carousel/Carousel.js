@@ -20,6 +20,7 @@ import {
 import { ArrowButtons, MediaButtons, IndicatorButtons } from '../Buttons';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
+import useMouse from '../../utils/useMouse';
 
 export const Carousel = (props) => {
   const carouselRef = useRef(null);
@@ -135,6 +136,13 @@ export const Carousel = (props) => {
     swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
   });
 
+  const mouseEventHandlers = useMouse(slidesRef, props.threshold, {
+    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
+    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
+    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
+    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
+  });
+
   useEffect(() => {
     applyTransition();
   }, [applyTransition]);
@@ -179,7 +187,11 @@ export const Carousel = (props) => {
         curIndex={curIndex}
         callbacks={indicatorsCallbacks}
       />
-      <div className={carouselClassName} {...touchEventHandlers}>
+      <div
+        className={carouselClassName}
+        {...touchEventHandlers}
+        {...mouseEventHandlers}
+      >
         <Slides reference={slidesRef} slides={slidesElements} {...props} />
       </div>
     </div>
