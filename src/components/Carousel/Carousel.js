@@ -29,13 +29,9 @@ export const Carousel = (props) => {
     : [props.children];
   const [slides, slidesElements] = useSlides(props.images || rawSlides, props);
   const [curIndex, setCurIndex] = useState(slides.curIndex);
-  const transitionSpeed = props.speed || 1500; // px/s
-  const swipePercentageMin = props.threshold || 0.1; // * 100%
-  const autoPlayInterval = props.auto ? (props.interval || 5) * 1000 : null; // ms
   const indexStep = props.rtl ? -1 : +1;
-  const [isPlaying, setIsPlaying] = useTimer(
-    props.auto && autoPlayInterval,
-    () => updateIndexByAutoPlay(indexStep)
+  const [isPlaying, setIsPlaying] = useTimer(props.auto && props.interval, () =>
+    updateIndexByAutoPlay(indexStep)
   );
 
   const applyTransitionDuration = useCallback(
@@ -44,20 +40,20 @@ export const Carousel = (props) => {
       const transitionDistance = hasToUpdate
         ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
         : swipedDistance;
-      let transitionDuration = transitionDistance / transitionSpeed;
+      let transitionDuration = transitionDistance / props.speed;
 
-      // make transitionDuration slightly smaller (faster) than autoPlayInterval
-      if (isPlaying && transitionDuration > autoPlayInterval) {
-        transitionDuration = autoPlayInterval * 0.999;
+      // make transitionDuration slightly smaller (faster) than props.interval
+      if (isPlaying && transitionDuration > props.interval) {
+        transitionDuration = props.interval * 0.999;
       }
 
-      slidesRef.current.style.transitionDuration = `${transitionDuration}s`;
+      slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
       setTimeout(
         () => (slidesRef.current.style.transitionDuration = null),
-        transitionDuration * 1000
+        transitionDuration
       );
     },
-    [transitionSpeed, isPlaying, autoPlayInterval]
+    [props.speed, isPlaying, props.interval]
   );
 
   const applyTransition = useCallback(
@@ -129,7 +125,7 @@ export const Carousel = (props) => {
     )
   );
 
-  const touchEventHandlers = useTouches(slidesRef, swipePercentageMin, {
+  const touchEventHandlers = useTouches(slidesRef, props.threshold, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
@@ -204,4 +200,18 @@ Carousel.propTypes = {
   speed: positiveNumber(),
   threshold: numberBetween(0, 1),
   style: PropTypes.object
+};
+
+Carousel.defaultProps = {
+  children: undefined,
+  fit: undefined,
+  lazy: false,
+  loop: false,
+  rtl: false,
+  auto: false,
+  paused: false,
+  interval: 5000, // ms
+  speed: 1.5, // px/ms
+  threshold: 0.1, // %
+  style: {}
 };

@@ -59,9 +59,9 @@ const App = () => {
       {/*advanced carousel example*/}
       <Carousel
         images={images}
-        speed={1500} // 1500 px per second
+        speed={1.5} // 1.5 pixels per millisecond
         threshold={0.1} // 10% of image width
-        interval={1} // second auto play interval
+        interval={3000} // 3000 milliseconds auto play interval
         fit={'contain'}
         auto
         paused

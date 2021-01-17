@@ -41,20 +41,20 @@ export default App;
 
 To customize the carousel, use the following props:
 
-|Name     |Type                  |Default|Description|
-|:--------|:---------------------|:------|:----------|
-|images   |Array                 |null   |Images to be placed in the carousel.|
-|children |node or Array of nodes|null   |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
-|fit      |String                |'cover'|CSS 'object-fit' style of the images.|
-|lazy     |Boolean               |false  |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
-|loop     |Boolean               |false  |If true, the carousel form a loop from the ribbon of slides.|
-|auto     |Boolean               |false  |If true, the carousel has auto play capability.|
-|paused   |Boolean               |false  |If true, the carousel's auto play is paused at start.|
-|rtl      |Boolean               |false  |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
-|interval |Number                |5      |Interval of auto play (in seconds).|
-|speed    |Number                |1500   |Speed of the transition (in pixels per second) in moving to the previous or the next slide.|
-|threshold|Number                |0.1    |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
-|style    |Object                |null   |Inline style(s) to be placed on the carousel.|
+|Name     |Type                  |Default  |Description|
+|:--------|:---------------------|:--------|:----------|
+|images   |Array                 |null     |Images to be placed in the carousel.|
+|children |node or Array of nodes|undefined|HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
+|fit      |String                |'cover'  |CSS 'object-fit' style of the images.|
+|lazy     |Boolean               |false    |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
+|loop     |Boolean               |false    |If true, the carousel form a loop from the ribbon of slides.|
+|auto     |Boolean               |false    |If true, the carousel has auto play capability.|
+|paused   |Boolean               |false    |If true, the carousel's auto play is paused at start.|
+|rtl      |Boolean               |false    |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
+|interval |Number                |5000     |Interval of auto play (in milliseconds).|
+|speed    |Number                |1.5      |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
+|threshold|Number                |0.1      |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
+|style    |Object                |{}       |Inline style(s) to be placed on the carousel.|
 
 ## License
 
