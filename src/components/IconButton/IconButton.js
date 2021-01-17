@@ -22,6 +22,8 @@ IconButton.propTypes = {
     'right',
     'play',
     'pause',
+    'maximize',
+    'minimize',
     'circle',
     'circleLight'
   ]),

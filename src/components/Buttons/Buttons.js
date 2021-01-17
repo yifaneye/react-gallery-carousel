@@ -56,6 +56,26 @@ MediaButtons.propTypes = {
   clickCallback: PropTypes.func.isRequired
 };
 
+export const SizeButtons = memo((props) => {
+  if (props.disabled) return null;
+
+  return (
+    <div className={styles.buttonWrapper + ' ' + styles.topRight}>
+      <IconButton
+        name={props.isMaximized ? 'minimize' : 'maximize'}
+        label={props.isMaximized ? 'Minimize Slides' : 'Maximize Slides'}
+        clickCallback={props.clickCallback}
+      />
+    </div>
+  );
+});
+
+SizeButtons.propTypes = {
+  disabled: PropTypes.bool,
+  isMaximized: PropTypes.bool.isRequired,
+  clickCallback: PropTypes.func.isRequired
+};
+
 export const IndicatorButtons = memo((props) => {
   if (props.disabled) return null;
   const callbacks = props.callbacks;

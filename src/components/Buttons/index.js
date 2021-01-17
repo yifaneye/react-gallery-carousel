@@ -1,1 +1,6 @@
-export { ArrowButtons, MediaButtons, IndicatorButtons } from './Buttons';
+export {
+  ArrowButtons,
+  MediaButtons,
+  SizeButtons,
+  IndicatorButtons
+} from './Buttons';

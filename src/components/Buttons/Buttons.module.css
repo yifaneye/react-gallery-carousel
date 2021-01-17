@@ -27,6 +27,11 @@
   left: 0;
 }
 
+.topRight {
+  top: 0;
+  right: 0;
+}
+
 .bottomCenter {
   bottom: 0;
   left: 0;

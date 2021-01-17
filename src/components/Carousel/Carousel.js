@@ -16,7 +16,12 @@ import {
   numberBetween,
   positiveNumber
 } from '../../utils/validators';
-import { ArrowButtons, MediaButtons, IndicatorButtons } from '../Buttons';
+import {
+  ArrowButtons,
+  MediaButtons,
+  SizeButtons,
+  IndicatorButtons
+} from '../Buttons';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
 import useSwipe from '../../utils/useSwipe';
@@ -150,10 +155,21 @@ export const Carousel = (props) => {
     {}
   );
 
+  const [isMaximized, setIsMaximized] = useState(false);
+  const handleSizeButtonClick = useCallback(() => {
+    setIsMaximized((isMaximized) => !isMaximized);
+  }, [setIsMaximized]);
+  const carouselWrapperClassName = isMaximized
+    ? styles.carouselWrapperMaximized
+    : styles.carouselWrapper;
+  useKeys(carouselRef, {
+    Escape: () => setIsMaximized(() => false)
+  });
+
   return (
     <div
-      className={styles.carouselWrapper}
-      style={props.style}
+      className={carouselWrapperClassName}
+      style={isMaximized ? undefined : props.style}
       ref={carouselRef}
       data-is-keyboard-user='true'
     >
@@ -161,6 +177,11 @@ export const Carousel = (props) => {
         disabled={!props.auto}
         isPlaying={isPlaying}
         clickCallback={handleMediaButtonClick}
+      />
+      <SizeButtons
+        disabled={false}
+        isMaximized={isMaximized}
+        clickCallback={handleSizeButtonClick}
       />
       <ArrowButtons
         disabled={props.controls === false}

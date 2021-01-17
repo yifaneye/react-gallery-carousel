@@ -6,7 +6,7 @@
   padding: 0;
   object-fit: cover;
   overflow: auto;
-  background: transparent;
+  background: white;
   overflow-wrap: break-word;
   word-break: normal;
   display: flex;
