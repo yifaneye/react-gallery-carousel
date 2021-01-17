@@ -6,7 +6,7 @@
 
   display: inline-block;
   appearance: none;
-  opacity: 1;
+  opacity: 0.75;
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
@@ -23,12 +23,12 @@
 }
 
 .button:not(.disabled):hover {
-  opacity: 0.75;
+  opacity: 0.5;
 }
 
 @media (hover: none) {
   .button:hover {
-    opacity: 1;
+    opacity: 0.75;
   }
 }
 
