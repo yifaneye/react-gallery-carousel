@@ -107,6 +107,9 @@ export const Carousel = (props) => {
   useEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
+  useEffect(() => {
+    if (props.paused) setIsPlaying(false);
+  }, [props.paused, setIsPlaying]);
 
   const handleMediaButtonClick = useCallback(() => {
     setIsPlaying((isPlaying) => !isPlaying);
@@ -134,8 +137,7 @@ export const Carousel = (props) => {
 
   useEffect(() => {
     applyTransition();
-    if (props.paused) setIsPlaying(false);
-  }, [applyTransition, props.paused, setIsPlaying]);
+  }, [applyTransition]);
 
   const carouselClassName = `${styles.carousel}${
     'images' in props ? ' ' + styles.galleryCarousel : ''
