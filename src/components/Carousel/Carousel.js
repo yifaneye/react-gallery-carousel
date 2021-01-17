@@ -165,6 +165,9 @@ export const Carousel = (props) => {
   useKeys(carouselRef, {
     Escape: () => setIsMaximized(() => false)
   });
+  useEffect(() => {
+    if (isMaximized) slidesRef.current.focus();
+  }, [isMaximized]);
 
   return (
     <div
