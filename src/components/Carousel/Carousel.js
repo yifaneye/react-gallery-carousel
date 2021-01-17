@@ -81,7 +81,7 @@ export const Carousel = (props) => {
       slides.updateIndex(change);
       applyTransitionDuration(swipedDisplacement, change !== 0);
       applyTransition();
-      setCurIndex(slides.curIndex);
+      if (change !== 0) setCurIndex(slides.curIndex);
     },
     [slides, applyTransitionDuration, applyTransition, setCurIndex]
   );
