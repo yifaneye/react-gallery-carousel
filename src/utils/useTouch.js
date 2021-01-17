@@ -33,7 +33,7 @@ const getTouchDistinguisher = () => {
   return { isPinch };
 };
 
-const useTouches = (elementRef, swipePercentageMin, callbacks) => {
+const useTouch = (elementRef, swipePercentageMin, callbacks) => {
   let swipeStartX = 0;
 
   const applySwipe = (swipeDisplacement) => {
@@ -86,4 +86,4 @@ const useTouches = (elementRef, swipePercentageMin, callbacks) => {
   };
 };
 
-export default useTouches;
+export default useTouch;

@@ -8,7 +8,6 @@ import React, {
 import styles from './Carousel.module.css';
 import useKeys from '../../utils/useKeys';
 import useTimer from '../../utils/useTimer';
-import useTouches from '../../utils/useTouches';
 import useSlides from '../../utils/useSlides';
 import Slides from '../Slides';
 import PropTypes from 'prop-types';
@@ -20,7 +19,7 @@ import {
 import { ArrowButtons, MediaButtons, IndicatorButtons } from '../Buttons';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
-import useMouse from '../../utils/useMouse';
+import useSwipe from '../../utils/useSwipe';
 
 export const Carousel = (props) => {
   const carouselRef = useRef(null);
@@ -129,14 +128,7 @@ export const Carousel = (props) => {
     )
   );
 
-  const touchEventHandlers = useTouches(slidesRef, props.threshold, {
-    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
-    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
-    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
-    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
-  });
-
-  const mouseEventHandlers = useMouse(slidesRef, props.threshold, {
+  const swipeEventHandlers = useSwipe(slidesRef, props.threshold, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
@@ -187,11 +179,7 @@ export const Carousel = (props) => {
         curIndex={curIndex}
         callbacks={indicatorsCallbacks}
       />
-      <div
-        className={carouselClassName}
-        {...touchEventHandlers}
-        {...mouseEventHandlers}
-      >
+      <div className={carouselClassName} {...swipeEventHandlers}>
         <Slides reference={slidesRef} slides={slidesElements} {...props} />
       </div>
     </div>
