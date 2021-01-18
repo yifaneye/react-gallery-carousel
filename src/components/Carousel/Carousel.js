@@ -53,13 +53,16 @@ export const Carousel = (props) => {
         transitionDuration = props.interval * 0.999;
       }
 
+      if (transitionDuration < props.transitionMin)
+        transitionDuration = props.transitionMin;
+
       slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
       setTimeout(
         () => (slidesRef.current.style.transitionDuration = null),
         transitionDuration
       );
     },
-    [props.speed, isPlaying, props.interval]
+    [props.speed, isPlaying, props.interval, props.transitionMin]
   );
 
   const applyTransition = useCallback(
@@ -257,6 +260,7 @@ Carousel.propTypes = {
   interval: positiveNumber(),
   speed: positiveNumber(),
   threshold: numberBetween(0, 1),
+  transitionMin: positiveNumber(),
   style: PropTypes.object
 };
 
@@ -271,5 +275,6 @@ Carousel.defaultProps = {
   interval: 5000, // ms
   speed: 1.5, // px/ms
   threshold: 0.1, // %
+  transitionMin: 200, // ms
   style: {}
 };

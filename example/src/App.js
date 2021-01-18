@@ -61,6 +61,7 @@ const App = () => {
         images={images}
         speed={1.5} // 1.5 pixels per millisecond
         threshold={0.1} // 10% of image width
+        transitionMin={500} // 500 milliseconds of minimum transition duration
         interval={3000} // 3000 milliseconds auto play interval
         fit={'contain'}
         auto
