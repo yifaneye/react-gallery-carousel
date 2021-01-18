@@ -1,4 +1,5 @@
 import React, {
+  Fragment,
   useCallback,
   useEffect,
   useMemo,
@@ -169,44 +170,51 @@ export const Carousel = (props) => {
     if (isMaximized) slidesRef.current.focus();
   }, [isMaximized]);
 
+  const carouselMaximizedBackground = isMaximized ? (
+    <div className={styles.carouselWrapperMaximized} />
+  ) : null;
+
   return (
-    <div
-      className={carouselWrapperClassName}
-      style={isMaximized ? undefined : props.style}
-      ref={carouselRef}
-      data-is-keyboard-user='true'
-    >
-      <MediaButtons
-        disabled={!props.auto}
-        isPlaying={isPlaying}
-        clickCallback={handleMediaButtonClick}
-      />
-      <SizeButtons
-        disabled={false}
-        isMaximized={isMaximized}
-        clickCallback={handleSizeButtonClick}
-      />
-      <ArrowButtons
-        disabled={props.controls === false}
-        rtl={props.rtl}
-        isLeftDisabled={!slides.canUpdateIndex(-1)}
-        isRightDisabled={!slides.canUpdateIndex(+1)}
-        onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [
-          updateIndexByButtonOrKey
-        ])}
-        onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [
-          updateIndexByButtonOrKey
-        ])}
-      />
-      <IndicatorButtons
-        disabled={props.controls === false}
-        curIndex={curIndex}
-        callbacks={indicatorsCallbacks}
-      />
-      <div className={carouselClassName} {...swipeEventHandlers}>
-        <Slides reference={slidesRef} slides={slidesElements} {...props} />
+    <>
+      {carouselMaximizedBackground}
+      <div
+        className={carouselWrapperClassName}
+        style={isMaximized ? undefined : props.style}
+        ref={carouselRef}
+        data-is-keyboard-user='true'
+      >
+        <MediaButtons
+          disabled={!props.auto}
+          isPlaying={isPlaying}
+          clickCallback={handleMediaButtonClick}
+        />
+        <SizeButtons
+          disabled={false}
+          isMaximized={isMaximized}
+          clickCallback={handleSizeButtonClick}
+        />
+        <ArrowButtons
+          disabled={props.controls === false}
+          rtl={props.rtl}
+          isLeftDisabled={!slides.canUpdateIndex(-1)}
+          isRightDisabled={!slides.canUpdateIndex(+1)}
+          onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [
+            updateIndexByButtonOrKey
+          ])}
+          onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [
+            updateIndexByButtonOrKey
+          ])}
+        />
+        <IndicatorButtons
+          disabled={props.controls === false}
+          curIndex={curIndex}
+          callbacks={indicatorsCallbacks}
+        />
+        <div className={carouselClassName} {...swipeEventHandlers}>
+          <Slides reference={slidesRef} slides={slidesElements} {...props} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
