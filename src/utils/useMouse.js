@@ -23,12 +23,12 @@ const useMouse = (elementRef, swipePercentageMin, callbacks) => {
   };
 
   const handleMouseDown = (event) => {
-    isMouseDown = true;
+    if (event.buttons > 0) isMouseDown = true;
     swipeStartX = event.clientX;
   };
 
   const handleMouseMove = (event) => {
-    if (isMouseDown) showSwipe(event);
+    if (isMouseDown && event.buttons > 0) showSwipe(event);
   };
 
   const handleMouseUp = (event) => {
