@@ -14,25 +14,24 @@ const useMouse = (elementRef, swipePercentageMin, callbacks) => {
     }
   };
 
-  const showSwipe = (event) => {
-    const swipeDisplacement = event.clientX - swipeStartX;
-    callbacks.swipeMove(swipeDisplacement);
-    if (event.type === 'mouseup' || event.type === 'mouseleave') {
-      applySwipe(swipeDisplacement);
-    }
-  };
-
   const handleMouseDown = (event) => {
     if (event.buttons > 0) isMouseDown = true;
     swipeStartX = event.clientX;
   };
 
   const handleMouseMove = (event) => {
-    if (isMouseDown && event.buttons > 0) showSwipe(event);
+    if (isMouseDown && event.buttons > 0) {
+      const swipeDisplacement = event.clientX - swipeStartX;
+      callbacks.swipeMove(swipeDisplacement);
+    }
   };
 
   const handleMouseUp = (event) => {
-    if (isMouseDown) showSwipe(event);
+    if (isMouseDown) {
+      const swipeDisplacement = event.clientX - swipeStartX;
+      callbacks.swipeMove(swipeDisplacement);
+      applySwipe(swipeDisplacement);
+    }
     isMouseDown = false;
   };
 

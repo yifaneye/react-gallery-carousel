@@ -34,6 +34,7 @@ const getTouchDistinguisher = () => {
 };
 
 const useTouch = (elementRef, swipePercentageMin, callbacks) => {
+  const touchDistinguisher = getTouchDistinguisher();
   let swipeStartX = 0;
 
   const applySwipe = (swipeDisplacement) => {
@@ -48,41 +49,29 @@ const useTouch = (elementRef, swipePercentageMin, callbacks) => {
     }
   };
 
-  const showSwipe = (event) => {
-    const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
-    callbacks.swipeMove(swipeDisplacement);
-    if (event.type === 'touchend') {
-      applySwipe(swipeDisplacement);
-    }
-  };
-
-  const touchDistinguisher = getTouchDistinguisher();
-
   const handleTouchStart = (event) => {
-    if (touchDistinguisher.isPinch(event)) {
-      return;
-    }
+    if (touchDistinguisher.isPinch(event)) return;
     swipeStartX = event.touches[0].clientX;
   };
 
   const handleTouchMove = (event) => {
-    if (touchDistinguisher.isPinch(event)) {
-      return;
-    }
-    showSwipe(event);
+    if (touchDistinguisher.isPinch(event)) return;
+    const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
+    callbacks.swipeMove(swipeDisplacement);
   };
 
   const handleTouchEnd = (event) => {
-    if (touchDistinguisher.isPinch(event)) {
-      return;
-    }
-    showSwipe(event);
+    if (touchDistinguisher.isPinch(event)) return;
+    const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
+    callbacks.swipeMove(swipeDisplacement);
+    applySwipe(swipeDisplacement);
   };
 
   return {
     onTouchStart: (event) => handleTouchStart(event),
     onTouchMove: (event) => handleTouchMove(event),
-    onTouchEnd: (event) => handleTouchEnd(event)
+    onTouchEnd: (event) => handleTouchEnd(event),
+    onTouchCancel: (event) => handleTouchEnd(event)
   };
 };
 
