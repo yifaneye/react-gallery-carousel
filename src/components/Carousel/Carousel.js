@@ -167,7 +167,17 @@ export const Carousel = (props) => {
     Escape: () => setIsMaximized(() => false)
   });
   useEffect(() => {
-    if (isMaximized) slidesRef.current.focus();
+    const bodyElement = document.querySelector('body');
+    const overflowValue = bodyElement.style.overflow;
+
+    if (isMaximized) {
+      bodyElement.style.overflow = 'hidden';
+      slidesRef.current.focus();
+    }
+
+    return () => {
+      if (isMaximized) bodyElement.style.overflow = overflowValue;
+    };
   }, [isMaximized]);
 
   const carouselMaximizedBackground = isMaximized ? (
