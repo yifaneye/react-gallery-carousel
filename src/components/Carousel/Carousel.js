@@ -186,12 +186,20 @@ export const Carousel = (props) => {
     };
   }, [isMaximized]);
 
-  const carouselMaximizedBackground = isMaximized ? (
+  const carouselMaximizedBackground = isMaximized && (
     <div className={styles.carouselWrapperMaximized} />
-  ) : null;
+  );
+
+  const carouselMaximizedPlaceholder = isMaximized && (
+    <div
+      className={styles.carouselWrapper}
+      style={isMaximized ? props.style : null}
+    />
+  );
 
   return (
     <>
+      {carouselMaximizedPlaceholder}
       {carouselMaximizedBackground}
       <div
         className={carouselWrapperClassName}
