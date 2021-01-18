@@ -167,6 +167,9 @@ export const Carousel = (props) => {
     Escape: () => setIsMaximized(() => false)
   });
   useEffect(() => {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     const bodyElement = document.querySelector('body');
     const overflowValue = bodyElement.style.overflow;
 
@@ -176,7 +179,10 @@ export const Carousel = (props) => {
     }
 
     return () => {
-      if (isMaximized) bodyElement.style.overflow = overflowValue;
+      if (isMaximized) {
+        window.scrollTo(scrollX, scrollY);
+        bodyElement.style.overflow = overflowValue;
+      }
     };
   }, [isMaximized]);
 
