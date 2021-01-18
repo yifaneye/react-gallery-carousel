@@ -1,5 +1,6 @@
 import useTouch from './useTouch';
 import useMouse from './useMouse';
+import useNoDrag from './useNoDrag';
 
 const useSwipe = (elementRef, swipePercentageMin, callbacks) => {
   const touchEventHandlers = useTouch(
@@ -12,6 +13,8 @@ const useSwipe = (elementRef, swipePercentageMin, callbacks) => {
     swipePercentageMin,
     callbacks
   );
+
+  useNoDrag(elementRef); // prevent dragging on FireFox
 
   return {
     ...touchEventHandlers,
