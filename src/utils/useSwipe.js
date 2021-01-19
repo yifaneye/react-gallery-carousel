@@ -16,7 +16,7 @@ const useSwipe = (
     else swipeEndDisqualified(swipeDisplacement);
   };
 
-  // have to use passive event listeners
+  // have to use event listeners (active event listeners) to deal with undesired tiny vertical movements
   useTouch(elementRef, { swipeMove: swipeMove, swipeEnd: swipeEnd });
 
   const mouseEventHandlers = useMouse({

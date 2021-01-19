@@ -80,6 +80,7 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
 
   useEffect(() => {
     const el = elementRef.current;
+    // use active event listeners to have event.cancelable === true, for later use to in calling event.preventDefault()
     el.addEventListener('touchstart', touchStartCallback.current, {
       passive: false
     });
