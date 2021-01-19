@@ -8494,16 +8494,6 @@ react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-responsive-button@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/react-responsive-button/-/react-responsive-button-0.2.0.tgz#7e520caa4bfcfe5076d7d5ee645d031b55ecb705"
-  integrity sha512-lngtrTy8M5IynTaOrBYpG8MvvIeKE/CCY3HcYfXA+wPwCn+SJDkpbW/wlkOzzZ8HdCwjJ+zZX7RvV/QCa++kkQ==
-
-react-responsive-button@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-responsive-button/-/react-responsive-button-0.1.1.tgz#6f03c6330ba481afd83a72a1d561040c41fb29bd"
-  integrity sha512-I+weWmNLq24UZXAKiO5s9rJ0Kl/dc6IBc24zTewwb4lSVsbRYHwmwN2CY0S7zl+nn4Ki9XpfVhF3lvEEdJbYsw==
-
 "react-scripts@link:../node_modules/react-scripts":
   version "0.0.0"
   uid ""

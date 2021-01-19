@@ -13,7 +13,6 @@
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-gallery-carousel": "link:..",
-    "react-responsive-button": "0.2.0",
     "react-scripts": "link:../node_modules/react-scripts"
   },
   "devDependencies": {
