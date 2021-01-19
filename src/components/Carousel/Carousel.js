@@ -163,17 +163,21 @@ export const Carousel = (props) => {
 
   useKeys(carouselRef, { Escape: () => setIsMaximized(() => false) });
 
-  const carouselWrapperClassName = isMaximized
-    ? styles.carouselWrapperMaximized
-    : styles.carouselWrapper;
+  let carouselWrapperClassName = `${styles.carouselWrapper}${
+    'className' in props ? ' ' + props.className : ''
+  }`;
 
   const carouselPlaceholder = isMaximized && (
-    <div className={styles.carouselWrapper} style={props.style} />
+    <div className={carouselWrapperClassName} style={props.style} />
   );
 
   const carouselMaximizedBackground = isMaximized && (
     <div className={styles.carouselWrapperMaximized} />
   );
+
+  carouselWrapperClassName = isMaximized
+    ? styles.carouselWrapperMaximized
+    : carouselWrapperClassName;
 
   const slidesClassName = `${styles.carousel}${
     'images' in props ? ' ' + styles.galleryCarousel : ''
@@ -241,7 +245,8 @@ Carousel.propTypes = {
   speed: positiveNumber(),
   threshold: numberBetween(0, 1),
   transitionMin: positiveNumber(),
-  style: PropTypes.object
+  style: PropTypes.object,
+  className: PropTypes.string
 };
 
 Carousel.defaultProps = {
@@ -256,5 +261,6 @@ Carousel.defaultProps = {
   speed: 1.5, // px/ms
   threshold: 0.1, // %
   transitionMin: 200, // ms
+  className: undefined,
   style: {}
 };
