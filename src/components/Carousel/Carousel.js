@@ -137,7 +137,7 @@ export const Carousel = (props) => {
     )
   );
 
-  const swipeEventHandlers = useSwipe(slidesRef, props.threshold, {
+  const swipeEventHandlers = useSwipe(carouselRef, props.threshold, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
@@ -209,6 +209,7 @@ export const Carousel = (props) => {
         style={isMaximized ? undefined : props.style}
         ref={carouselRef}
         data-is-keyboard-user='true'
+        {...swipeEventHandlers}
       >
         <MediaButtons
           disabled={!props.auto}
@@ -237,7 +238,7 @@ export const Carousel = (props) => {
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
         />
-        <div className={carouselClassName} {...swipeEventHandlers}>
+        <div className={carouselClassName}>
           <Slides reference={slidesRef} slides={slidesElements} {...props} />
         </div>
       </div>

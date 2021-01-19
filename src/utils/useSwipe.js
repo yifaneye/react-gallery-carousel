@@ -16,10 +16,9 @@ const useSwipe = (
     else swipeEndDisqualified(swipeDisplacement);
   };
 
-  const touchEventHandlers = useTouch({
-    swipeMove: swipeMove,
-    swipeEnd: swipeEnd
-  });
+  // have to use passive event listeners
+  useTouch(elementRef, { swipeMove: swipeMove, swipeEnd: swipeEnd });
+
   const mouseEventHandlers = useMouse({
     swipeMove: swipeMove,
     swipeEnd: swipeEnd
@@ -27,10 +26,7 @@ const useSwipe = (
 
   useNoDrag(elementRef); // prevent dragging on FireFox
 
-  return {
-    ...touchEventHandlers,
-    ...mouseEventHandlers
-  };
+  return mouseEventHandlers;
 };
 
 export default useSwipe;

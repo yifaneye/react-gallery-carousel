@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 const getTouchDistinguisher = () => {
   const pinchTouchIdentifiers = new Set(); // record all pinch touch identifiers
 
@@ -33,34 +35,67 @@ const getTouchDistinguisher = () => {
   return { isPinch };
 };
 
-const useTouch = ({ swipeMove, swipeEnd }) => {
+const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
   const touchDistinguisher = getTouchDistinguisher();
   let swipeStartX = 0;
+  let swipeStartY = 0;
+
+  const handleVerticalMovement = (event) => {
+    if (
+      Math.abs(event.changedTouches[0].clientX - swipeStartX) >
+      Math.abs(event.changedTouches[0].clientY - swipeStartY)
+    ) {
+      if (event.cancelable) event.preventDefault();
+    }
+  };
 
   const handleTouchStart = (event) => {
     if (touchDistinguisher.isPinch(event)) return;
     swipeStartX = event.touches[0].clientX;
+    swipeStartY = event.touches[0].clientY;
   };
 
   const handleTouchMove = (event) => {
     if (touchDistinguisher.isPinch(event)) return;
+    handleVerticalMovement(event);
     const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
     swipeMove(swipeDisplacement);
   };
 
   const handleTouchEnd = (event) => {
     if (touchDistinguisher.isPinch(event)) return;
+    handleVerticalMovement(event);
     const swipeDisplacement = event.changedTouches[0].clientX - swipeStartX;
-    swipeMove(swipeDisplacement);
     swipeEnd(swipeDisplacement);
   };
 
-  return {
-    onTouchStart: (event) => handleTouchStart(event),
-    onTouchMove: (event) => handleTouchMove(event),
-    onTouchEnd: (event) => handleTouchEnd(event),
-    onTouchCancel: (event) => handleTouchEnd(event)
-  };
+  const touchStartCallback = useRef(null);
+  touchStartCallback.current = handleTouchStart;
+
+  const touchMoveCallback = useRef(null);
+  touchMoveCallback.current = handleTouchMove;
+
+  const touchEndCallback = useRef(null);
+  touchEndCallback.current = handleTouchEnd;
+
+  useEffect(() => {
+    const el = elementRef.current;
+    el.addEventListener('touchstart', touchStartCallback.current, {
+      passive: false
+    });
+    el.addEventListener('touchmove', touchMoveCallback.current, {
+      passive: false
+    });
+    el.addEventListener('touchend', touchEndCallback.current, {
+      passive: false
+    });
+
+    return () => {
+      el.removeEventListener('touchstart', touchStartCallback.current);
+      el.removeEventListener('touchmove', touchMoveCallback.current);
+      el.removeEventListener('touchend', touchEndCallback.current);
+    };
+  }, [elementRef, touchStartCallback, touchMoveCallback, touchEndCallback]);
 };
 
 export default useTouch;
