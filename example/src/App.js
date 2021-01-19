@@ -5,7 +5,7 @@ import 'react-gallery-carousel/dist/index.css';
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
-    <Carousel style={{ height: '20vh' }}>
+    <Carousel style={{ height: '50vh' }}>
       <div>
         <h1>react-gallery-carousel</h1>
         <p>

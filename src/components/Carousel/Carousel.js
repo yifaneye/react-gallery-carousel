@@ -26,6 +26,7 @@ import {
 import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
 import useSwipe from '../../utils/useSwipe';
+import useFixedPosition from '../../utils/useFixedPosition';
 
 export const Carousel = (props) => {
   const carouselRef = useRef(null);
@@ -159,35 +160,16 @@ export const Carousel = (props) => {
     {}
   );
 
-  const [isMaximized, setIsMaximized] = useState(false);
-  const handleSizeButtonClick = useCallback(() => {
+  const [isMaximized, setIsMaximized] = useFixedPosition(false, carouselRef);
+
+  const handleSizeButtonClick = () =>
     setIsMaximized((isMaximized) => !isMaximized);
-  }, [setIsMaximized]);
+
+  useKeys(carouselRef, { Escape: () => setIsMaximized(() => false) });
+
   const carouselWrapperClassName = isMaximized
     ? styles.carouselWrapperMaximized
     : styles.carouselWrapper;
-  useKeys(carouselRef, {
-    Escape: () => setIsMaximized(() => false)
-  });
-  useEffect(() => {
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-
-    const bodyElement = document.querySelector('body');
-    const overflowValue = bodyElement.style.overflow;
-
-    if (isMaximized) {
-      bodyElement.style.overflow = 'hidden';
-      slidesRef.current.focus();
-    }
-
-    return () => {
-      if (isMaximized) {
-        window.scrollTo(scrollX, scrollY);
-        bodyElement.style.overflow = overflowValue;
-      }
-    };
-  }, [isMaximized]);
 
   const carouselMaximizedBackground = isMaximized && (
     <div className={styles.carouselWrapperMaximized} />
