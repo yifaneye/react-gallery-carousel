@@ -5,24 +5,31 @@ import styles from './Buttons.module.css';
 
 export const ArrowButtons = memo((props) => {
   if (props.disabled) return null;
+
+  const leftButton = !props.isLeftDisabled && (
+    <div className={styles.buttonWrapper + ' ' + styles.centerLeft}>
+      <IconButton
+        name='left'
+        label={props.rtl ? 'Next Slide' : 'Previous Slide'}
+        clickCallback={props.onClickLeft}
+      />
+    </div>
+  );
+
+  const rightButton = !props.isRightDisabled && (
+    <div className={styles.buttonWrapper + ' ' + styles.centerRight}>
+      <IconButton
+        name='right'
+        label={props.rtl ? 'Previous Slide' : 'Next Slide'}
+        clickCallback={props.onClickRight}
+      />
+    </div>
+  );
+
   return (
     <Fragment>
-      <div className={styles.buttonWrapper + ' ' + styles.centerLeft}>
-        <IconButton
-          disabled={props.isLeftDisabled}
-          name='left'
-          label={props.rtl ? 'Next Slide' : 'Previous Slide'}
-          clickCallback={props.onClickLeft}
-        />
-      </div>
-      <div className={styles.buttonWrapper + ' ' + styles.centerRight}>
-        <IconButton
-          disabled={props.isRightDisabled}
-          name='right'
-          label={props.rtl ? 'Previous Slide' : 'Next Slide'}
-          clickCallback={props.onClickRight}
-        />
-      </div>
+      {leftButton}
+      {rightButton}
     </Fragment>
   );
 });
