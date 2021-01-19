@@ -2,7 +2,6 @@ import React, {
   Fragment,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState
 } from 'react';
@@ -127,16 +126,10 @@ export const Carousel = (props) => {
 
   useKeyboard(carouselRef);
 
-  useKeys(
-    slidesRef,
-    useMemo(
-      () => ({
-        ArrowLeft: () => updateIndexByButtonOrKey(-1),
-        ArrowRight: () => updateIndexByButtonOrKey(+1)
-      }),
-      [updateIndexByButtonOrKey]
-    )
-  );
+  useKeys(slidesRef, {
+    ArrowLeft: () => updateIndexByButtonOrKey(-1),
+    ArrowRight: () => updateIndexByButtonOrKey(+1)
+  });
 
   const swipeEventHandlers = useSwipe(carouselRef, props.threshold, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
