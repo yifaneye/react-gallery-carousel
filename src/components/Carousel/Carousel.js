@@ -149,10 +149,6 @@ export const Carousel = (props) => {
     applyTransition();
   }, [applyTransition]);
 
-  const carouselClassName = `${styles.carousel}${
-    'images' in props ? ' ' + styles.galleryCarousel : ''
-  }`;
-
   const indices = slides.allIndices;
   const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
   const indicatorsCallbacks = indices.reduce(
@@ -171,24 +167,25 @@ export const Carousel = (props) => {
     ? styles.carouselWrapperMaximized
     : styles.carouselWrapper;
 
+  const carouselPlaceholder = isMaximized && (
+    <div className={styles.carouselWrapper} style={props.style} />
+  );
+
   const carouselMaximizedBackground = isMaximized && (
     <div className={styles.carouselWrapperMaximized} />
   );
 
-  const carouselMaximizedPlaceholder = isMaximized && (
-    <div
-      className={styles.carouselWrapper}
-      style={isMaximized ? props.style : null}
-    />
-  );
+  const slidesClassName = `${styles.carousel}${
+    'images' in props ? ' ' + styles.galleryCarousel : ''
+  }`;
 
   return (
     <>
-      {carouselMaximizedPlaceholder}
+      {carouselPlaceholder}
       {carouselMaximizedBackground}
       <div
         className={carouselWrapperClassName}
-        style={isMaximized ? undefined : props.style}
+        style={isMaximized ? {} : props.style}
         ref={carouselRef}
         data-is-keyboard-user='true'
         {...swipeEventHandlers}
@@ -220,7 +217,7 @@ export const Carousel = (props) => {
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
         />
-        <div className={carouselClassName}>
+        <div className={slidesClassName}>
           <Slides reference={slidesRef} slides={slidesElements} {...props} />
         </div>
       </div>
