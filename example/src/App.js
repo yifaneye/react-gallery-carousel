@@ -46,7 +46,7 @@ const App = () => {
   return (
     <div
       style={{
-        maxWidth: 'min(100vh, 1440px)',
+        maxWidth: '1440px',
         margin: '0 auto'
       }}
     >
@@ -72,13 +72,25 @@ const App = () => {
         controls
         style={{
           height: '40vh',
-          border: '10px solid #bbb',
-          overflow: 'hidden',
-          borderRadius: 20,
-          willChange: 'transform',
-          WebkitMaskImage: '-webkit-radial-gradient(white, black)',
-          boxSizing: 'border-box'
+          border: '10px solid #bbb'
         }}
+      />
+
+      {/*advanced carousel example*/}
+      <Carousel
+        images={images}
+        speed={1.5} // 1.5 pixels per millisecond
+        threshold={0.1} // 10% of image width
+        transitionMin={500} // 500 milliseconds of minimum transition duration
+        interval={4000} // 4000 milliseconds auto play interval
+        fit={'contain'}
+        className='framed'
+        auto
+        paused
+        lazy
+        loop
+        rtl
+        controls
       />
     </div>
   );

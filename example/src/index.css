@@ -12,3 +12,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.framed {
+  height: 40vh;
+  border: 10px solid #bbb;
+  overflow: hidden;
+  border-radius: 20px;
+  will-change: transform;
+  webkit-mask-image: -webkit-radial-gradient(white, black);
+  box-sizing: border-box;
+}
