@@ -112,6 +112,14 @@ export const Carousel = (props) => {
     [setIsPlaying, updateIndexByAutoPlay]
   );
 
+  const goLeft = useCallback(() => updateIndexByButtonOrKey(-1), [
+    updateIndexByButtonOrKey
+  ]);
+
+  const goRight = useCallback(() => updateIndexByButtonOrKey(-1), [
+    updateIndexByButtonOrKey
+  ]);
+
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   useEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
@@ -202,12 +210,8 @@ export const Carousel = (props) => {
           rtl={props.rtl}
           isLeftDisabled={!slides.canUpdateIndex(-1)}
           isRightDisabled={!slides.canUpdateIndex(+1)}
-          onClickLeft={useCallback(() => updateIndexByButtonOrKey(-1), [
-            updateIndexByButtonOrKey
-          ])}
-          onClickRight={useCallback(() => updateIndexByButtonOrKey(+1), [
-            updateIndexByButtonOrKey
-          ])}
+          onClickLeft={goLeft}
+          onClickRight={goRight}
         />
         <IndicatorButtons
           disabled={props.controls === false}
