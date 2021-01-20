@@ -254,6 +254,5 @@ Carousel.defaultProps = {
   speed: 1.5, // px/ms
   threshold: 0.1, // %
   transitionMin: 200, // ms
-  className: undefined,
   style: {}
 };
