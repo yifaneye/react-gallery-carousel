@@ -10,12 +10,13 @@ const useKeyboard = (elementRef) => {
       elementRef.current.setAttribute('data-is-keyboard-user', 'true');
     };
 
-    elementRef.current.addEventListener('mousedown', handleMouseDown);
-    elementRef.current.addEventListener('keydown', handleKeyDown);
+    const element = elementRef.current;
+    element.addEventListener('mousedown', handleMouseDown);
+    element.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      elementRef.current.removeEventListener('mousedown', handleMouseDown);
-      elementRef.current.removeEventListener('keydown', handleKeyDown);
+      element.removeEventListener('mousedown', handleMouseDown);
+      element.removeEventListener('keydown', handleKeyDown);
     };
   }, [elementRef]);
 };
