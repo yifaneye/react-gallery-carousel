@@ -11,7 +11,7 @@
   width: 100vw;
   height: 100vh;
   /*noinspection CssInvalidPropertyValue*/
-  max-height: fill-available;
+  max-height: stretch;
   background-color: #fff;
 }
 
