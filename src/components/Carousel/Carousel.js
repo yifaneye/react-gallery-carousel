@@ -193,7 +193,6 @@ export const Carousel = (props) => {
         style={isMaximized ? {} : props.style}
         ref={carouselRef}
         data-is-keyboard-user='true'
-        {...swipeEventHandlers}
       >
         <MediaButtons
           disabled={!props.auto}
@@ -218,7 +217,7 @@ export const Carousel = (props) => {
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
         />
-        <div className={slidesClassName}>
+        <div className={slidesClassName} {...swipeEventHandlers}>
           <Slides reference={slidesRef} slides={slidesElements} {...props} />
         </div>
       </div>
