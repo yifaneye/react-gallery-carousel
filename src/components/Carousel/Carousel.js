@@ -26,6 +26,7 @@ import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
 import useSwipe from '../../utils/useSwipe';
 import useFixedPosition from '../../utils/useFixedPosition';
+import useEventListener from '../../utils/useEventListener';
 
 export const Carousel = (props) => {
   const carouselRef = useRef(null);
@@ -163,6 +164,8 @@ export const Carousel = (props) => {
     setIsMaximized((isMaximized) => !isMaximized);
 
   useKeys(carouselRef, { Escape: () => setIsMaximized(() => false) });
+
+  useEventListener(window, 'orientationchange', () => updateIndexBySwipe(0, 0));
 
   let carouselWrapperClassName = `${styles.carouselWrapper}${
     'className' in props ? ' ' + props.className : ''
