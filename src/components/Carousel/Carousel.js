@@ -116,7 +116,7 @@ export const Carousel = (props) => {
     updateIndexByButtonOrKey
   ]);
 
-  const goRight = useCallback(() => updateIndexByButtonOrKey(-1), [
+  const goRight = useCallback(() => updateIndexByButtonOrKey(+1), [
     updateIndexByButtonOrKey
   ]);
 
