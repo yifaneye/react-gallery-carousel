@@ -2,15 +2,16 @@ import { useEffect } from 'react';
 
 const useKeyboard = (elementRef) => {
   useEffect(() => {
+    const element = elementRef.current;
+
     const handleMouseDown = () => {
-      elementRef.current.setAttribute('data-is-keyboard-user', 'false');
+      element.setAttribute('data-is-keyboard-user', 'false');
     };
 
     const handleKeyDown = () => {
-      elementRef.current.setAttribute('data-is-keyboard-user', 'true');
+      element.setAttribute('data-is-keyboard-user', 'true');
     };
 
-    const element = elementRef.current;
     element.addEventListener('mousedown', handleMouseDown);
     element.addEventListener('keydown', handleKeyDown);
 
