@@ -33,7 +33,7 @@
 }
 
 .bottomCenter {
-  bottom: 0;
+  bottom: calc(10% + 5px);
   left: 0;
   right: 0;
 }

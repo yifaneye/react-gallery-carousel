@@ -1,5 +1,5 @@
 .ribbon {
-  height: 100%;
+  height: calc(90% - 5px);
   width: 100%;
   list-style: none;
   white-space: normal;

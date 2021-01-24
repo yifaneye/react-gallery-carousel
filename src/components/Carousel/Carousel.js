@@ -22,6 +22,7 @@ import {
   SizeButtons,
   IndicatorButtons
 } from '../Buttons';
+import Thumbnails from '../Thumbnails';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
 import useSwipe from '../../utils/useSwipe';
@@ -220,6 +221,14 @@ export const Carousel = (props) => {
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
         />
+        {props.images && (
+          <Thumbnails
+            images={props.images}
+            lazy={props.lazy}
+            curIndex={curIndex}
+            callbacks={indicatorsCallbacks}
+          />
+        )}
         <div className={slidesClassName} {...swipeEventHandlers}>
           <Slides reference={slidesRef} slides={slidesElements} {...props} />
         </div>

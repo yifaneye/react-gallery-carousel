@@ -1,0 +1,20 @@
+.ThumbnailsWrapper {
+  position: absolute;
+  z-index: 1;
+}
+
+.thumbnailsContainer {
+  height: 100%;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.bottomCenter {
+  height: 10%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

@@ -1,0 +1,21 @@
+.image {
+  height: 100%;
+  width: 11.11%;
+  opacity: 0.5;
+  margin-right: 5px;
+  background-color: #000;
+  object-fit: cover;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-drag: none;
+  box-sizing: border-box;
+}
+
+.currentImage {
+  opacity: 1;
+}
+
+.image:not(.currentImage):hover {
+  opacity: 0.75;
+}
