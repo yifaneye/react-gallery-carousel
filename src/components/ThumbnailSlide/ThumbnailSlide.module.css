@@ -18,6 +18,6 @@
   opacity: 1;
 }
 
-.slide:not(.currentImage):hover {
+.slide:not(.currentSlide):hover {
   opacity: 0.75;
 }

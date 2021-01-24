@@ -24,5 +24,6 @@ export const ThumbnailSlide = (props) => {
 
 ThumbnailSlide.propTypes = {
   slide: PropTypes.node.isRequired,
+  isCurrent: PropTypes.bool,
   clickCallback: PropTypes.func
 };

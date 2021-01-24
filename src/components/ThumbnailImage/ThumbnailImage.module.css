@@ -2,6 +2,7 @@
   height: 100%;
   width: 11.11%;
   opacity: 0.5;
+  overflow: hidden;
   margin-right: 5px;
   background-color: #000;
   object-fit: cover;

@@ -224,7 +224,7 @@ export const Carousel = (props) => {
         />
         <Thumbnails
           slides={rawSlides}
-          hasImages={Boolean(props.images)}
+          images={props.images}
           lazy={props.lazy}
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}

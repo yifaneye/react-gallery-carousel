@@ -1,35 +1,36 @@
 import React, { memo } from 'react';
 import styles from './Thumbnails.module.css';
 import Thumbnail from '../Thumbnail';
-import ThumbnailSlide from '../ThumbnailSlide';
+import PropTypes from 'prop-types';
 
 export const Thumbnails = memo((props) => {
-  if (props.disabled) return null;
+  const isImage = !!props.images;
   const callbacks = props.callbacks;
 
   return (
     <div className={styles.ThumbnailsWrapper + ' ' + styles.bottomCenter}>
       <div className={styles.thumbnailsContainer}>
-        {props.hasImages &&
-          Object.keys(callbacks).map((key, index) => (
+        {Object.keys(callbacks).map((key, index) => {
+          return (
             <Thumbnail
               key={index}
-              image={props.slides[index]}
+              slide={props.slides[index]}
+              isImage={isImage}
               lazy={props.lazy}
               isCurrent={Number(key) === props.curIndex}
               clickCallback={callbacks[key]}
             />
-          ))}
-        {!props.hasImages &&
-          Object.keys(callbacks).map((key, index) => (
-            <ThumbnailSlide
-              key={index}
-              slide={props.slides[index]}
-              isCurrent={Number(key) === props.curIndex}
-              clickCallback={callbacks[key]}
-            />
-          ))}
+          );
+        })}
       </div>
     </div>
   );
 });
+
+Thumbnails.propTypes = {
+  slides: PropTypes.array.isRequired,
+  images: PropTypes.array,
+  lazy: PropTypes.bool,
+  curIndex: PropTypes.number,
+  clickCallback: PropTypes.func
+};
