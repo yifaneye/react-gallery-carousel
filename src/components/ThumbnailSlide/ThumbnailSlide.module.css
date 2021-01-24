@@ -1,0 +1,23 @@
+.slide {
+  height: 100%;
+  width: 11.11%;
+  zoom: 11.11%;
+  overflow: hidden;
+  opacity: 0.5;
+  margin-right: 5px;
+  background-color: #eee;
+  object-fit: cover;
+  user-select: none;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-drag: none;
+  box-sizing: border-box;
+}
+
+.currentSlide {
+  opacity: 1;
+}
+
+.slide:not(.currentImage):hover {
+  opacity: 0.75;
+}

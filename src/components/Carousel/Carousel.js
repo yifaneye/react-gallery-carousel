@@ -32,10 +32,11 @@ import useEventListener from '../../utils/useEventListener';
 export const Carousel = (props) => {
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
-  const rawSlides = Array.isArray(props.children)
+  const children = Array.isArray(props.children)
     ? props.children
     : [props.children];
-  const [slides, slidesElements] = useSlides(props.images || rawSlides, props);
+  const rawSlides = props.images || children;
+  const [slides, slidesElements] = useSlides(rawSlides, props);
   const [curIndex, setCurIndex] = useState(slides.curIndex);
   const indexStep = props.rtl ? -1 : +1;
   const [isPlaying, setIsPlaying] = useTimer(props.auto && props.interval, () =>
@@ -221,14 +222,13 @@ export const Carousel = (props) => {
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
         />
-        {props.images && (
-          <Thumbnails
-            images={props.images}
-            lazy={props.lazy}
-            curIndex={curIndex}
-            callbacks={indicatorsCallbacks}
-          />
-        )}
+        <Thumbnails
+          slides={rawSlides}
+          hasImages={Boolean(props.images)}
+          lazy={props.lazy}
+          curIndex={curIndex}
+          callbacks={indicatorsCallbacks}
+        />
         <div className={slidesClassName} {...swipeEventHandlers}>
           <Slides reference={slidesRef} slides={slidesElements} {...props} />
         </div>
