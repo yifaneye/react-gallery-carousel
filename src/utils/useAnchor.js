@@ -16,9 +16,10 @@ const useAnchor = (
       element.scrollIntoView(optionsRef.current);
     };
 
-    element.addEventListener('click', handleClick);
+    if (element) element.addEventListener('click', handleClick);
+
     return () => {
-      element.removeEventListener('click', handleClick);
+      if (element) element.removeEventListener('click', handleClick);
     };
   }, [elementRef, optionsRef]);
 };
