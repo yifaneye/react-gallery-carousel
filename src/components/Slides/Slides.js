@@ -5,7 +5,6 @@ import Slide from '../Slide';
 
 export const Slides = memo((props) => {
   const slides = props.slides;
-  const hasImages = !!props.images;
 
   return (
     <ul className={styles.ribbon} ref={props.reference} tabIndex={0}>
@@ -14,7 +13,7 @@ export const Slides = memo((props) => {
           key={index}
           {...props}
           slide={slide}
-          isImage={hasImages}
+          isImage={props.hasImages}
           draggable='false'
         />
       ))}
@@ -24,5 +23,5 @@ export const Slides = memo((props) => {
 
 Slides.propTypes = {
   slides: PropTypes.array.isRequired,
-  images: PropTypes.array
+  hasImages: PropTypes.bool.isRequired
 };

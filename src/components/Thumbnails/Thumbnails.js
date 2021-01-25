@@ -4,7 +4,6 @@ import Thumbnail from '../Thumbnail';
 import PropTypes from 'prop-types';
 
 export const Thumbnails = memo((props) => {
-  const isImage = !!props.images;
   const callbacks = props.callbacks;
 
   return (
@@ -15,7 +14,7 @@ export const Thumbnails = memo((props) => {
             <Thumbnail
               key={index}
               slide={props.slides[index]}
-              isImage={isImage}
+              isImage={props.hasImages}
               lazy={props.lazy}
               isCurrent={Number(key) === props.curIndex}
               clickCallback={callbacks[key]}
@@ -29,7 +28,7 @@ export const Thumbnails = memo((props) => {
 
 Thumbnails.propTypes = {
   slides: PropTypes.array.isRequired,
-  images: PropTypes.array,
+  hasImages: PropTypes.bool.isRequired,
   lazy: PropTypes.bool,
   curIndex: PropTypes.number,
   clickCallback: PropTypes.func

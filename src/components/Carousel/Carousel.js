@@ -33,10 +33,13 @@ export const Carousel = (props) => {
   const carouselWrapperRef = useRef(null);
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
+
+  // process slides
+  const hasImages = 'images' in props;
   const children = Array.isArray(props.children)
     ? props.children
     : [props.children];
-  const rawSlides = props.images || children;
+  const rawSlides = hasImages ? props.images : children;
   const [slides, slidesElements] = useSlides(rawSlides, props);
   const [curIndex, setCurIndex] = useState(slides.curIndex);
   const indexStep = props.rtl ? -1 : +1;
@@ -175,11 +178,11 @@ export const Carousel = (props) => {
 
   // styles of the carousel
   const carouselWrapperMinimizedClassName = `${styles.carouselWrapper}${
-    'images' in props ? ' ' + styles.galleryCarousel : ''
+    hasImages ? ' ' + styles.galleryCarousel : ''
   }${'className' in props ? ' ' + props.className : ''}`;
   const carouselWrapperMaximizedClassName = `${
     styles.carouselWrapperMaximized
-  }${'images' in props ? ' ' + styles.galleryCarousel : ''}`;
+  }${hasImages ? ' ' + styles.galleryCarousel : ''}`;
   const carouselWrapperClassName = isMaximized
     ? carouselWrapperMaximizedClassName
     : carouselWrapperMinimizedClassName;
@@ -230,11 +233,16 @@ export const Carousel = (props) => {
             curIndex={curIndex}
             callbacks={indicatorsCallbacks}
           />
-          <Slides reference={slidesRef} slides={slidesElements} {...props} />
+          <Slides
+            reference={slidesRef}
+            slides={slidesElements}
+            hasImages={hasImages}
+            {...props}
+          />
         </div>
         <Thumbnails
           slides={rawSlides}
-          images={props.images}
+          hasImages={hasImages}
           lazy={props.lazy}
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
