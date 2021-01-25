@@ -257,7 +257,7 @@ export const Carousel = (props) => {
           />
         </div>
         <Thumbnails
-          slides={rawSlides}
+          slides={slidesElements}
           hasImages={hasImages}
           lazy={props.lazy}
           curIndex={curIndex}

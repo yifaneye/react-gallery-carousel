@@ -13,7 +13,7 @@ export const Thumbnails = memo((props) => {
           return (
             <Thumbnail
               key={index}
-              slide={props.slides[index]}
+              slide={props.slides[key]}
               isImage={props.hasImages}
               lazy={props.lazy}
               isCurrent={Number(key) === props.curIndex}
