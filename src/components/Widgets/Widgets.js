@@ -1,13 +1,13 @@
 import React, { Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '../IconButton';
-import styles from './Buttons.module.css';
+import styles from './Widgets.module.css';
 
 export const ArrowButtons = memo((props) => {
   if (props.disabled) return null;
 
   const leftButton = !props.isLeftDisabled && (
-    <div className={styles.buttonWrapper + ' ' + styles.centerLeft}>
+    <div className={styles.widgetWrapper + ' ' + styles.centerLeft}>
       <IconButton
         name='left'
         label={props.rtl ? 'Next Slide' : 'Previous Slide'}
@@ -17,7 +17,7 @@ export const ArrowButtons = memo((props) => {
   );
 
   const rightButton = !props.isRightDisabled && (
-    <div className={styles.buttonWrapper + ' ' + styles.centerRight}>
+    <div className={styles.widgetWrapper + ' ' + styles.centerRight}>
       <IconButton
         name='right'
         label={props.rtl ? 'Previous Slide' : 'Next Slide'}
@@ -47,7 +47,7 @@ export const MediaButtons = memo((props) => {
   if (props.disabled) return null;
 
   return (
-    <div className={styles.buttonWrapper + ' ' + styles.topLeft}>
+    <div className={styles.widgetWrapper + ' ' + styles.topCenter}>
       <IconButton
         name={props.isPlaying ? 'pause' : 'play'}
         label={props.isPlaying ? 'Pause Autoplay' : 'Start Autoplay'}
@@ -67,7 +67,7 @@ export const SizeButtons = memo((props) => {
   if (props.disabled) return null;
 
   return (
-    <div className={styles.buttonWrapper + ' ' + styles.topRight}>
+    <div className={styles.widgetWrapper + ' ' + styles.topRight}>
       <IconButton
         name={props.isMaximized ? 'minimize' : 'maximize'}
         label={props.isMaximized ? 'Minimize Slides' : 'Maximize Slides'}
@@ -83,13 +83,32 @@ SizeButtons.propTypes = {
   clickCallback: PropTypes.func.isRequired
 };
 
+export const IndexBoard = memo((props) => {
+  return (
+    <div
+      className={
+        styles.widgetWrapper + ' ' + styles.textWrapper + ' ' + styles.topLeft
+      }
+    >
+      <div className={styles.text}>
+        {props.curIndex} / {props.totalIndices}
+      </div>
+    </div>
+  );
+});
+
+IndexBoard.propTypes = {
+  curIndex: PropTypes.number.isRequired,
+  totalIndices: PropTypes.number.isRequired
+};
+
 export const IndicatorButtons = memo((props) => {
   if (props.disabled) return null;
   const callbacks = props.callbacks;
 
   return (
-    <div className={styles.buttonWrapper + ' ' + styles.bottomCenter}>
-      <div className={styles.buttonContainer}>
+    <div className={styles.widgetWrapper + ' ' + styles.bottomCenter}>
+      <div className={styles.buttonsContainer}>
         {Object.keys(callbacks).map((key, index) => (
           <IconButton
             key={index}

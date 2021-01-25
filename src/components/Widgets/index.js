@@ -2,5 +2,6 @@ export {
   ArrowButtons,
   MediaButtons,
   SizeButtons,
-  IndicatorButtons
-} from './Buttons';
+  IndicatorButtons,
+  IndexBoard
+} from './Widgets';

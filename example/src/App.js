@@ -36,23 +36,26 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 
 const App = () => {
   const kittenImageSizes = [
-    900,
-    800,
-    700,
-    600,
     500,
-    400,
-    900,
-    800,
-    700,
+    510,
+    520,
+    530,
+    540,
+    550,
+    560,
+    570,
+    580,
+    590,
     600,
-    500,
-    400,
-    800,
-    700,
-    600,
-    500,
-    400
+    610,
+    620,
+    630,
+    640,
+    650,
+    660,
+    670,
+    680,
+    690
   ];
   const images = kittenImageSizes.map((kittenImageSize) => ({
     src: `https://placekitten.com/${kittenImageSize}/${kittenImageSize}`,
@@ -77,7 +80,7 @@ const App = () => {
       {/*advanced carousel example*/}
       <Carousel
         images={images}
-        speed={0.1} // 0.1 pixels per millisecond
+        speed={1} // 1 pixels per millisecond
         threshold={0.1} // 10% of image width
         transitionMin={500} // 500 milliseconds of minimum transition duration
         interval={5000} // 5000 milliseconds auto play interval

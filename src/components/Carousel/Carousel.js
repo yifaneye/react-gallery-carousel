@@ -21,8 +21,9 @@ import {
   ArrowButtons,
   MediaButtons,
   SizeButtons,
-  IndicatorButtons
-} from '../Buttons';
+  IndicatorButtons,
+  IndexBoard
+} from '../Widgets';
 import Thumbnails from '../Thumbnails';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useKeyboard from '../../utils/useKeyboard';
@@ -221,6 +222,10 @@ export const Carousel = (props) => {
           className={styles.carousel}
           {...swipeEventHandlers}
         >
+          <IndexBoard
+            curIndex={props.loop ? curIndex : curIndex + 1}
+            totalIndices={indices.length}
+          />
           <MediaButtons
             disabled={!props.auto}
             isPlaying={isPlaying}
