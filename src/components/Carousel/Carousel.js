@@ -173,31 +173,33 @@ export const Carousel = (props) => {
 
   useEventListener(window, 'orientationchange', () => updateIndexBySwipe(0, 0));
 
-  let carouselWrapperClassName = `${styles.carouselWrapper}${
-    'className' in props ? ' ' + props.className : ''
+  // styles of the carousel
+  const carouselWrapperMinimizedClassName = `${styles.carouselWrapper}${
+    'images' in props ? ' ' + styles.galleryCarousel : ''
+  }${'className' in props ? ' ' + props.className : ''}`;
+  const carouselWrapperMaximizedClassName = `${
+    styles.carouselWrapperMaximized
   }${'images' in props ? ' ' + styles.galleryCarousel : ''}`;
+  const carouselWrapperClassName = isMaximized
+    ? carouselWrapperMaximizedClassName
+    : carouselWrapperMinimizedClassName;
 
-  const carouselPlaceholder = isMaximized && (
-    <div className={carouselWrapperClassName} style={props.style} />
+  // components for maximized carousel
+  const carouselMinimizedPlaceholder = isMaximized && (
+    <div className={carouselWrapperMinimizedClassName} style={props.style} />
   );
-
   const carouselMaximizedBackground = isMaximized && (
     <div className={styles.carouselWrapperMaximized} />
   );
 
-  carouselWrapperClassName = isMaximized
-    ? styles.carouselWrapperMaximized +
-      `${'images' in props ? ' ' + styles.galleryCarousel : ''}`
-    : carouselWrapperClassName;
-
   return (
     <>
-      {carouselPlaceholder}
+      {carouselMinimizedPlaceholder}
       {carouselMaximizedBackground}
       <div
+        ref={carouselWrapperRef}
         className={carouselWrapperClassName}
         style={isMaximized ? {} : props.style}
-        ref={carouselWrapperRef}
         data-is-keyboard-user='true'
       >
         <div
