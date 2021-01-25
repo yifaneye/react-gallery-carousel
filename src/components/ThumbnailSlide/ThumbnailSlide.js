@@ -9,14 +9,15 @@ export const ThumbnailSlide = (props) => {
     props.isCurrent ? ' ' + styles.currentSlide : ''
   }`;
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    props.clickCallback();
+  };
+
   useAnchor(slideRef, props.isCurrent);
 
   return (
-    <div
-      ref={slideRef}
-      className={slideClassName}
-      onClick={props.clickCallback}
-    >
+    <div ref={slideRef} className={slideClassName} onClick={handleClick}>
       {props.slide}
     </div>
   );
