@@ -10,7 +10,8 @@ const useAnchor = (
   useEffect(() => {
     const element = elementRef.current;
 
-    if (shouldScrollIntoView) element.scrollIntoView(optionsRef.current);
+    if (element && shouldScrollIntoView)
+      element.scrollIntoView(optionsRef.current);
 
     const handleClick = () => {
       element.scrollIntoView(optionsRef.current);

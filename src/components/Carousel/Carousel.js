@@ -53,7 +53,7 @@ export const Carousel = (props) => {
 
       // make transitionDuration slightly smaller (faster) than props.interval
       if (isPlaying && transitionDuration > props.interval) {
-        transitionDuration = props.interval * 0.999;
+        transitionDuration = props.interval * 1;
       }
 
       if (transitionDuration < props.transitionMin)

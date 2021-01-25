@@ -5,7 +5,7 @@ import 'react-gallery-carousel/dist/index.css';
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
-    <Carousel style={{ height: '50vh' }}>
+    <Carousel style={{ height: '20vh' }}>
       <div>
         <h1>react-gallery-carousel</h1>
         <p>
@@ -35,7 +35,25 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 };
 
 const App = () => {
-  const kittenImageSizes = [900, 800, 700, 600, 500, 400];
+  const kittenImageSizes = [
+    900,
+    800,
+    700,
+    600,
+    500,
+    400,
+    900,
+    800,
+    700,
+    600,
+    500,
+    400,
+    800,
+    700,
+    600,
+    500,
+    400
+  ];
   const images = kittenImageSizes.map((kittenImageSize) => ({
     src: `https://placekitten.com/${kittenImageSize}/${kittenImageSize}`,
     alt: `Kitten of size ${kittenImageSize} pixels`
@@ -59,35 +77,13 @@ const App = () => {
       {/*advanced carousel example*/}
       <Carousel
         images={images}
-        speed={1.5} // 1.5 pixels per millisecond
+        speed={0.1} // 0.1 pixels per millisecond
         threshold={0.1} // 10% of image width
         transitionMin={500} // 500 milliseconds of minimum transition duration
-        interval={3000} // 3000 milliseconds auto play interval
-        fit={'contain'}
-        auto
-        paused
-        lazy
-        loop
-        rtl
-        controls
-        style={{
-          height: '40vh',
-          border: '10px solid #bbb'
-        }}
-      />
-
-      {/*advanced carousel example*/}
-      <Carousel
-        images={images}
-        speed={1.5} // 1.5 pixels per millisecond
-        threshold={0.1} // 10% of image width
-        transitionMin={500} // 500 milliseconds of minimum transition duration
-        interval={4000} // 4000 milliseconds auto play interval
+        interval={5000} // 5000 milliseconds auto play interval
         fit={'contain'}
         className='framed'
         auto
-        paused
-        lazy
         loop
         rtl
         controls

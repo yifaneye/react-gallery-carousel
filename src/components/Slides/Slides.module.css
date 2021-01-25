@@ -12,6 +12,6 @@
   align-items: flex-start;
   transition-duration: 0s;
   transition-property: transform;
-  transition-timing-function: ease-out;
+  transition-timing-function: linear;
   box-sizing: border-box;
 }
