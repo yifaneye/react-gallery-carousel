@@ -26,6 +26,12 @@ const LazyLoadedImage = (props) => {
   );
 };
 
+LazyLoadedImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  objectFit: PropTypes.string.isRequired
+};
+
 export const Image = (props) => {
   const imageTitle = props.image.alt || null;
 
@@ -46,7 +52,9 @@ export const Image = (props) => {
       aria-label={imageTitle}
       title={imageTitle}
       loading='auto'
-      style={{ objectFit: props.objectFit || null }}
+      style={{
+        objectFit: props.objectFit === 'cover' ? null : props.objectFit
+      }}
       onError={(e) => {
         e.target.onerror = null;
         e.target.src = placeholder;
@@ -55,17 +63,11 @@ export const Image = (props) => {
   );
 };
 
-LazyLoadedImage.propTypes = {
-  src: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  objectFit: PropTypes.string
-};
-
 Image.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
     alt: PropTypes.string
   }).isRequired,
-  lazyLoad: PropTypes.bool,
-  objectFit: PropTypes.string
+  lazyLoad: PropTypes.bool.isRequired,
+  objectFit: PropTypes.string.isRequired
 };

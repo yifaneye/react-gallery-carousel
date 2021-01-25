@@ -29,7 +29,7 @@ export const Thumbnails = memo((props) => {
 Thumbnails.propTypes = {
   slides: PropTypes.array.isRequired,
   hasImages: PropTypes.bool.isRequired,
-  lazyLoad: PropTypes.bool,
-  curIndex: PropTypes.number,
-  clickCallback: PropTypes.func
+  lazyLoad: PropTypes.bool.isRequired,
+  curIndex: PropTypes.number.isRequired,
+  callbacks: PropTypes.objectOf(PropTypes.func.isRequired).isRequired
 };

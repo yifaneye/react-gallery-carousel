@@ -36,9 +36,9 @@ export const ArrowButtons = memo((props) => {
 
 ArrowButtons.propTypes = {
   disabled: PropTypes.bool,
-  isRTL: PropTypes.bool,
-  isLeftDisabled: PropTypes.bool,
-  isRightDisabled: PropTypes.bool,
+  isRTL: PropTypes.bool.isRequired,
+  isLeftDisabled: PropTypes.bool.isRequired,
+  isRightDisabled: PropTypes.bool.isRequired,
   onClickLeft: PropTypes.func.isRequired,
   onClickRight: PropTypes.func.isRequired
 };

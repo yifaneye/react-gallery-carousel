@@ -18,7 +18,10 @@ export const Slide = (props) => {
 
 Slide.propTypes = {
   isImage: PropTypes.bool.isRequired,
-  slide: PropTypes.oneOfType([PropTypes.object, PropTypes.element]).isRequired,
-  lazyLoad: PropTypes.bool,
-  objectFit: PropTypes.string
+  slide: PropTypes.oneOfType([
+    PropTypes.object.isRequired,
+    PropTypes.element.isRequired
+  ]).isRequired,
+  lazyLoad: PropTypes.bool.isRequired,
+  objectFit: PropTypes.string.isRequired
 };

@@ -69,8 +69,8 @@ export const ThumbnailImage = (props) => {
 
 LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  clickCallback: PropTypes.func
+  title: PropTypes.string.isRequired,
+  clickCallback: PropTypes.func.isRequired
 };
 
 ThumbnailImage.propTypes = {
@@ -78,6 +78,6 @@ ThumbnailImage.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string
   }).isRequired,
-  lazyLoad: PropTypes.bool,
-  clickCallback: PropTypes.func
+  lazyLoad: PropTypes.bool.isRequired,
+  clickCallback: PropTypes.func.isRequired
 };

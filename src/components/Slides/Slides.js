@@ -23,5 +23,6 @@ export const Slides = memo((props) => {
 
 Slides.propTypes = {
   slides: PropTypes.array.isRequired,
+  reference: PropTypes.shape({ current: PropTypes.object }).isRequired,
   hasImages: PropTypes.bool.isRequired
 };

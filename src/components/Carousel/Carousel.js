@@ -282,18 +282,13 @@ Carousel.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  isRTL: PropTypes.bool,
-  isLoop: PropTypes.bool,
-  lazyLoad: PropTypes.bool,
-  objectFit: PropTypes.oneOf([
-    'contain',
-    'cover',
-    'fill',
-    'none',
-    'scale-down'
-  ]),
-  autoPlay: PropTypes.bool,
-  autoPlayPaused: PropTypes.bool,
+  isRTL: PropTypes.bool.isRequired,
+  isLoop: PropTypes.bool.isRequired,
+  lazyLoad: PropTypes.bool.isRequired,
+  objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
+    .isRequired,
+  autoPlay: PropTypes.bool.isRequired,
+  autoPlayPaused: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(),
   swipeThreshold: numberBetween(0, 1),
   transitionSpeed: positiveNumber(),
@@ -307,6 +302,7 @@ Carousel.defaultProps = {
   isRTL: false,
   isLoop: true,
   lazyLoad: true,
+  objectFit: 'cover',
   autoPlay: false,
   autoPlayPaused: false,
   autoPlayInterval: 5000, // ms
