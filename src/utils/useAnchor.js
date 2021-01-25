@@ -2,16 +2,16 @@ import { useEffect, useRef } from 'react';
 
 const useAnchor = (
   elementRef,
-  options = {
-    behavior: 'smooth',
-    block: 'nearest',
-    inline: 'center'
-  }
+  shouldScrollIntoView,
+  options = { behavior: 'smooth', block: 'nearest', inline: 'center' }
 ) => {
   const optionsRef = useRef(options);
 
   useEffect(() => {
     const element = elementRef.current;
+
+    if (shouldScrollIntoView) element.scrollIntoView(optionsRef.current);
+
     const handleClick = () => {
       element.scrollIntoView(optionsRef.current);
     };
@@ -21,7 +21,7 @@ const useAnchor = (
     return () => {
       if (element) element.removeEventListener('click', handleClick);
     };
-  }, [elementRef, optionsRef]);
+  }, [elementRef, shouldScrollIntoView, optionsRef]);
 };
 
 export default useAnchor;

@@ -9,7 +9,7 @@ export const ThumbnailSlide = (props) => {
     props.isCurrent ? ' ' + styles.currentSlide : ''
   }`;
 
-  useAnchor(slideRef);
+  useAnchor(slideRef, props.isCurrent);
 
   return (
     <div

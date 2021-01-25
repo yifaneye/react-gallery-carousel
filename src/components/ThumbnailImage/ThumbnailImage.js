@@ -9,7 +9,7 @@ const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
 
-  useAnchor(imageRef);
+  useAnchor(imageRef, props.isCurrent);
 
   return (
     <img
@@ -36,7 +36,7 @@ export const ThumbnailImage = (props) => {
     props.isCurrent ? ' ' + styles.currentImage : ''
   }`;
 
-  useAnchor(imageRef);
+  useAnchor(imageRef, props.isCurrent);
 
   if (!props.lazy)
     return (
@@ -44,6 +44,7 @@ export const ThumbnailImage = (props) => {
         className={imageClassName}
         src={props.image.src}
         title={imageTitle}
+        isCurrent={props.isCurrent}
         clickCallback={props.clickCallback}
       />
     );
