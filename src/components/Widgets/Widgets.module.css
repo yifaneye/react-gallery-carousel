@@ -22,7 +22,7 @@
 }
 
 .buttonsContainer {
-  height: 30px;
+  height: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: row;
@@ -63,5 +63,4 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: fit-content;
 }
