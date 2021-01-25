@@ -54,7 +54,8 @@ To customize the carousel, use the following props:
 |interval     |Number                |5000     |Interval of auto play (in milliseconds).|
 |speed        |Number                |1.5      |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
 |threshold    |Number                |0.1      |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
-|transitionMin|Number                |200      |Minimum transition duration (in milliseconds).|
+|transitionMin|Number                |undefined|Minimum transition duration (in milliseconds).|
+|transitionMax|Number                |undefined|Maximum transition duration (in milliseconds). It has precedence over 'transitionMin'.|
 |className    |String                |undefined|Class name(s) to be placed on the carousel, when the carousel is not maximized.|
 |style        |Object                |{}       |Inline style(s) to be placed on the carousel.|
 

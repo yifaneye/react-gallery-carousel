@@ -12,6 +12,7 @@ import useSlides from '../../utils/useSlides';
 import Slides from '../Slides';
 import PropTypes from 'prop-types';
 import {
+  compareToProp,
   fallbackProps,
   numberBetween,
   positiveNumber
@@ -60,8 +61,12 @@ export const Carousel = (props) => {
         transitionDuration = props.interval * 1;
       }
 
-      if (transitionDuration < props.transitionMin)
+      // bound transition in an range
+      if (props.transitionMin && transitionDuration < props.transitionMin)
         transitionDuration = props.transitionMin;
+      // transitionMax has precedence over transitionMin
+      if (props.transitionMax && transitionDuration > props.transitionMax)
+        transitionDuration = props.transitionMax;
 
       slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
       setTimeout(
@@ -69,7 +74,13 @@ export const Carousel = (props) => {
         transitionDuration
       );
     },
-    [props.speed, isPlaying, props.interval, props.transitionMin]
+    [
+      props.speed,
+      isPlaying,
+      props.interval,
+      props.transitionMin,
+      props.transitionMax
+    ]
   );
 
   const applyTransition = useCallback(
@@ -268,6 +279,7 @@ Carousel.propTypes = {
   speed: positiveNumber(),
   threshold: numberBetween(0, 1),
   transitionMin: positiveNumber(),
+  transitionMax: compareToProp('>=', 'transitionMin'),
   style: PropTypes.object,
   className: PropTypes.string
 };
@@ -282,7 +294,6 @@ Carousel.defaultProps = {
   paused: false,
   interval: 5000, // ms
   speed: 1.5, // px/ms
-  threshold: 0.1, // %
-  transitionMin: 200, // ms
+  threshold: 0.05, // * 100%
   style: {}
 };

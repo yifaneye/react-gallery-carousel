@@ -20,6 +20,26 @@ export const numberBetween = (min, max, optional = true) => {
   };
 };
 
+const comparator = {
+  '>=': (a, b) => a >= b
+};
+
+export const compareToProp = (operator, otherPropName, optional = true) => {
+  return (props, propName, componentName) => {
+    const prop = props[propName];
+    const otherProp = props[otherPropName];
+    if (optional && prop === undefined) return;
+    if (
+      typeof prop !== 'number' ||
+      typeof otherProp !== 'number' ||
+      !comparator[operator](prop, otherProp)
+    )
+      return new Error(
+        `Invalid prop \`${propName}\` of type \`${typeof prop}\` supplied to \`${componentName}\`, expected ${propName} ${operator} ${otherPropName}.`
+      );
+  };
+};
+
 export const fallbackProps = (fallbackProps) => {
   return (props, propName, componentName) => {
     const prop = props[propName];
