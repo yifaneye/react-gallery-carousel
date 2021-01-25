@@ -97,13 +97,6 @@ export const Carousel = (props) => {
     applyTransition(swipeDisplacement);
   };
 
-  const goToIndex = (index) => {
-    slides.goToIndex(index);
-    applyTransitionDuration();
-    applyTransition();
-    setCurIndex(slides.curIndex);
-  };
-
   const updateIndexBySwipe = useCallback(
     (change, swipedDisplacement = 0) => {
       slides.updateIndex(change);
@@ -169,13 +162,6 @@ export const Carousel = (props) => {
     applyTransition();
   }, [applyTransition]);
 
-  const indices = slides.allIndices;
-  const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
-  const indicatorsCallbacks = indices.reduce(
-    (obj, key, index) => ({ ...obj, [key]: goToIndexCallbacks[index] }),
-    {}
-  );
-
   const [isMaximized, setIsMaximized] = useFixedPosition(
     false,
     carouselWrapperRef
@@ -187,6 +173,21 @@ export const Carousel = (props) => {
   useKeys(carouselWrapperRef, { Escape: () => setIsMaximized(() => false) });
 
   useEventListener(window, 'orientationchange', () => updateIndexBySwipe(0, 0));
+
+  // callbacks for go to each index
+  const goToIndex = (index) => {
+    setIsPlaying(false);
+    slides.goToIndex(index);
+    applyTransitionDuration();
+    applyTransition();
+    setCurIndex(slides.curIndex);
+  };
+  const indices = slides.allIndices;
+  const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
+  const goToIndexCallbacksObj = indices.reduce(
+    (obj, key, index) => ({ ...obj, [key]: goToIndexCallbacks[index] }),
+    {}
+  );
 
   // styles of the carousel
   const carouselWrapperMinimizedClassName = `${styles.carouselWrapper}${
@@ -247,7 +248,7 @@ export const Carousel = (props) => {
           <IndicatorButtons
             disabled={props.controls === false}
             curIndex={curIndex}
-            callbacks={indicatorsCallbacks}
+            callbacks={goToIndexCallbacksObj}
           />
           <Slides
             reference={slidesRef}
@@ -261,7 +262,7 @@ export const Carousel = (props) => {
           hasImages={hasImages}
           lazy={props.lazy}
           curIndex={curIndex}
-          callbacks={indicatorsCallbacks}
+          callbacks={goToIndexCallbacksObj}
         />
       </div>
     </>
