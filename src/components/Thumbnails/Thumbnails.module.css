@@ -10,6 +10,12 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.thumbnailsContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .bottomCenter {
