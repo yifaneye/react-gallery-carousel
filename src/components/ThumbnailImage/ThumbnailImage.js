@@ -38,7 +38,7 @@ export const ThumbnailImage = (props) => {
 
   useAnchor(imageRef, props.isCurrent);
 
-  if (!props.lazy)
+  if (!props.lazyLoad)
     return (
       <LazyLoadedImage
         className={imageClassName}
@@ -78,6 +78,6 @@ ThumbnailImage.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string
   }).isRequired,
-  lazy: PropTypes.bool,
+  lazyLoad: PropTypes.bool,
   clickCallback: PropTypes.func
 };

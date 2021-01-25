@@ -17,7 +17,7 @@ const LazyLoadedImage = (props) => {
       aria-label={props.title}
       title={props.title}
       loading='lazy'
-      style={{ objectFit: props.fit || null }}
+      style={{ objectFit: props.objectFit || null }}
       onError={(e) => {
         e.target.onerror = null;
         e.target.src = placeholder;
@@ -29,12 +29,12 @@ const LazyLoadedImage = (props) => {
 export const Image = (props) => {
   const imageTitle = props.image.alt || null;
 
-  if (props.lazy)
+  if (props.lazyLoad)
     return (
       <LazyLoadedImage
         src={props.image.src}
         title={imageTitle}
-        fit={props.fit}
+        objectFit={props.objectFit}
       />
     );
 
@@ -46,7 +46,7 @@ export const Image = (props) => {
       aria-label={imageTitle}
       title={imageTitle}
       loading='auto'
-      style={{ objectFit: props.fit || null }}
+      style={{ objectFit: props.objectFit || null }}
       onError={(e) => {
         e.target.onerror = null;
         e.target.src = placeholder;
@@ -58,7 +58,7 @@ export const Image = (props) => {
 LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
   title: PropTypes.string,
-  fit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
+  objectFit: PropTypes.string
 };
 
 Image.propTypes = {
@@ -66,6 +66,6 @@ Image.propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string
   }).isRequired,
-  lazy: PropTypes.bool,
-  fit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
+  lazyLoad: PropTypes.bool,
+  objectFit: PropTypes.string
 };

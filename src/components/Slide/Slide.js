@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 
 export const Slide = (props) => {
   const slide = props.isImage ? (
-    <Image image={props.slide} lazy={props.lazy} fit={props.fit} />
+    <Image
+      image={props.slide}
+      lazyLoad={props.lazyLoad}
+      objectFit={props.objectFit}
+    />
   ) : (
     props.slide
   );
@@ -15,6 +19,6 @@ export const Slide = (props) => {
 Slide.propTypes = {
   isImage: PropTypes.bool.isRequired,
   slide: PropTypes.oneOfType([PropTypes.object, PropTypes.element]).isRequired,
-  lazy: PropTypes.bool,
-  fit: PropTypes.string
+  lazyLoad: PropTypes.bool,
+  objectFit: PropTypes.string
 };

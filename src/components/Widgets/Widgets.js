@@ -10,7 +10,7 @@ export const ArrowButtons = memo((props) => {
     <div className={styles.widgetWrapper + ' ' + styles.centerLeft}>
       <IconButton
         name='left'
-        label={props.rtl ? 'Next Slide' : 'Previous Slide'}
+        label={props.isRTL ? 'Next Slide' : 'Previous Slide'}
         clickCallback={props.onClickLeft}
       />
     </div>
@@ -20,7 +20,7 @@ export const ArrowButtons = memo((props) => {
     <div className={styles.widgetWrapper + ' ' + styles.centerRight}>
       <IconButton
         name='right'
-        label={props.rtl ? 'Previous Slide' : 'Next Slide'}
+        label={props.isRTL ? 'Previous Slide' : 'Next Slide'}
         clickCallback={props.onClickRight}
       />
     </div>
@@ -36,7 +36,7 @@ export const ArrowButtons = memo((props) => {
 
 ArrowButtons.propTypes = {
   disabled: PropTypes.bool,
-  rtl: PropTypes.bool,
+  isRTL: PropTypes.bool,
   isLeftDisabled: PropTypes.bool,
   isRightDisabled: PropTypes.bool,
   onClickLeft: PropTypes.func.isRequired,

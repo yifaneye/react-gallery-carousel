@@ -1,12 +1,14 @@
 import Slides from './slides';
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
-const useSlides = (items, props) => {
+const useSlides = (items, options) => {
+  const itemsRef = useRef(items);
+  const optionsRef = useRef(options);
   return useMemo(() => {
-    const slides = new Slides(items, props);
+    const slides = new Slides(itemsRef.current, optionsRef.current);
     const slidesElements = slides.slides;
     return [slides, slidesElements];
-  }, [items, props]);
+  }, [itemsRef, optionsRef]);
 };
 
 export default useSlides;

@@ -42,11 +42,15 @@ export const Carousel = (props) => {
     ? props.children
     : [props.children];
   const rawSlides = hasImages ? props.images : children;
-  const [slides, slidesElements] = useSlides(rawSlides, props);
+  const [slides, slidesElements] = useSlides(rawSlides, {
+    rtl: props.isRTL,
+    loop: props.isLoop
+  });
   const [curIndex, setCurIndex] = useState(slides.curIndex);
-  const indexStep = props.rtl ? -1 : +1;
-  const [isPlaying, setIsPlaying] = useTimer(props.auto && props.interval, () =>
-    updateIndexByAutoPlay(indexStep)
+  const indexStep = props.isRTL ? -1 : +1;
+  const [isPlaying, setIsPlaying] = useTimer(
+    props.autoPlay && props.autoPlayInterval,
+    () => updateIndexByAutoPlay(indexStep)
   );
 
   const applyTransitionDuration = useCallback(
@@ -55,19 +59,23 @@ export const Carousel = (props) => {
       const transitionDistance = hasToUpdate
         ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
         : swipedDistance;
-      let transitionDuration = transitionDistance / props.speed;
+      let transitionDuration = transitionDistance / props.transitionSpeed;
 
-      // make transitionDuration slightly smaller (faster) than props.interval
-      if (isPlaying && transitionDuration > props.interval) {
-        transitionDuration = props.interval * 1;
-      }
-
-      // bound transition in an range
-      if (props.transitionMin && transitionDuration < props.transitionMin)
-        transitionDuration = props.transitionMin;
+      // bound transitionDuration match in an range
+      if (
+        props.transitionDurationMin &&
+        transitionDuration < props.transitionDurationMin
+      )
+        transitionDuration = props.transitionDurationMin;
       // transitionMax has precedence over transitionMin
-      if (props.transitionMax && transitionDuration > props.transitionMax)
-        transitionDuration = props.transitionMax;
+      if (
+        props.transitionDurationMax &&
+        transitionDuration > props.transitionDurationMax
+      )
+        transitionDuration = props.transitionDurationMax;
+      // make transitionDuration match autoPlayInterval
+      if (isPlaying && transitionDuration > props.autoPlayInterval)
+        transitionDuration = props.autoPlayInterval * 1;
 
       slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
       setTimeout(
@@ -76,18 +84,17 @@ export const Carousel = (props) => {
       );
     },
     [
-      props.speed,
+      props.transitionSpeed,
       isPlaying,
-      props.interval,
-      props.transitionMin,
-      props.transitionMax
+      props.autoPlayInterval,
+      props.transitionDurationMin,
+      props.transitionDurationMax
     ]
   );
 
   const applyTransition = useCallback(
-    (swipeDisplacement = 0) => {
-      slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
-    },
+    (swipeDisplacement = 0) =>
+      (slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`),
     [slides.curIndex]
   );
 
@@ -102,7 +109,7 @@ export const Carousel = (props) => {
       slides.updateIndex(change);
       applyTransitionDuration(swipedDisplacement, change !== 0);
       applyTransition();
-      if (change !== 0) setCurIndex(slides.curIndex);
+      setCurIndex(slides.curIndex);
     },
     [slides, applyTransitionDuration, applyTransition, setCurIndex]
   );
@@ -137,8 +144,8 @@ export const Carousel = (props) => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
   useEffect(() => {
-    if (props.paused) setIsPlaying(false);
-  }, [props.paused, setIsPlaying]);
+    if (props.autoPlayPaused) setIsPlaying(false);
+  }, [props.autoPlayPaused, setIsPlaying]);
 
   const handleMediaButtonClick = useCallback(() => {
     setIsPlaying((isPlaying) => !isPlaying);
@@ -151,7 +158,7 @@ export const Carousel = (props) => {
     ArrowRight: () => updateIndexByButtonOrKey(+1)
   });
 
-  const swipeEventHandlers = useSwipe(carouselRef, props.threshold, {
+  const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
@@ -224,11 +231,11 @@ export const Carousel = (props) => {
           {...swipeEventHandlers}
         >
           <IndexBoard
-            curIndex={props.loop ? curIndex : curIndex + 1}
+            curIndex={props.isLoop ? curIndex : curIndex + 1}
             totalIndices={indices.length}
           />
           <MediaButtons
-            disabled={!props.auto}
+            disabled={!props.autoPlay}
             isPlaying={isPlaying}
             clickCallback={handleMediaButtonClick}
           />
@@ -239,7 +246,7 @@ export const Carousel = (props) => {
           />
           <ArrowButtons
             disabled={props.controls === false}
-            rtl={props.rtl}
+            isRTL={props.isRTL}
             isLeftDisabled={!slides.canUpdateIndex(-1)}
             isRightDisabled={!slides.canUpdateIndex(+1)}
             onClickLeft={goLeft}
@@ -260,7 +267,7 @@ export const Carousel = (props) => {
         <Thumbnails
           slides={slidesElements}
           hasImages={hasImages}
-          lazy={props.lazy}
+          lazyLoad={props.lazyLoad}
           curIndex={curIndex}
           callbacks={goToIndexCallbacksObj}
         />
@@ -275,31 +282,34 @@ Carousel.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  fit: PropTypes.string,
-  lazy: PropTypes.bool,
-  loop: PropTypes.bool,
-  rtl: PropTypes.bool,
-  auto: PropTypes.bool,
-  paused: PropTypes.bool,
-  interval: positiveNumber(),
-  speed: positiveNumber(),
-  threshold: numberBetween(0, 1),
-  transitionMin: positiveNumber(),
-  transitionMax: compareToProp('>=', 'transitionMin'),
-  style: PropTypes.object,
-  className: PropTypes.string
+  isRTL: PropTypes.bool,
+  isLoop: PropTypes.bool,
+  lazyLoad: PropTypes.bool,
+  objectFit: PropTypes.oneOf([
+    'contain',
+    'cover',
+    'fill',
+    'none',
+    'scale-down'
+  ]),
+  autoPlay: PropTypes.bool,
+  autoPlayPaused: PropTypes.bool,
+  autoPlayInterval: positiveNumber(),
+  swipeThreshold: numberBetween(0, 1),
+  transitionSpeed: positiveNumber(),
+  transitionDurationMin: positiveNumber(),
+  transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
+  className: PropTypes.string,
+  style: PropTypes.object
 };
 
 Carousel.defaultProps = {
-  children: undefined,
-  fit: undefined,
-  lazy: false,
-  loop: false,
-  rtl: false,
-  auto: false,
-  paused: false,
-  interval: 5000, // ms
-  speed: 1.5, // px/ms
-  threshold: 0.05, // * 100%
-  style: {}
+  isRTL: false,
+  isLoop: true,
+  lazyLoad: true,
+  autoPlay: false,
+  autoPlayPaused: false,
+  autoPlayInterval: 5000, // ms
+  swipeThreshold: 0.05, // * 100%
+  transitionSpeed: 1.5 // px/ms
 };

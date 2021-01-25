@@ -15,7 +15,7 @@ export const Thumbnails = memo((props) => {
               key={index}
               slide={props.slides[key]}
               isImage={props.hasImages}
-              lazy={props.lazy}
+              lazyLoad={props.lazyLoad}
               isCurrent={Number(key) === props.curIndex}
               clickCallback={callbacks[key]}
             />
@@ -29,7 +29,7 @@ export const Thumbnails = memo((props) => {
 Thumbnails.propTypes = {
   slides: PropTypes.array.isRequired,
   hasImages: PropTypes.bool.isRequired,
-  lazy: PropTypes.bool,
+  lazyLoad: PropTypes.bool,
   curIndex: PropTypes.number,
   clickCallback: PropTypes.func
 };

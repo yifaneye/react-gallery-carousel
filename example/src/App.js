@@ -62,7 +62,7 @@ const App = () => {
     alt: `Kitten of size ${kittenImageSize} pixels`
   }));
 
-  const basicCarouselExampleCode = `<Carousel images={images} lazy loop style={{ height: '40vh' }} />`;
+  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '40vh' }} />`;
 
   return (
     <div
@@ -75,21 +75,24 @@ const App = () => {
       <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
 
       {/*basic carousel example*/}
-      <Carousel images={images} lazy loop style={{ height: '40vh' }} />
+      <Carousel images={images} style={{ height: '40vh' }} />
 
-      {/*advanced carousel example*/}
+      {/*customized carousel example*/}
       <Carousel
         images={images}
-        speed={1} // 1 pixels per millisecond
-        threshold={0.1} // 10% of image width
-        transitionMin={500} // 500 milliseconds of minimum transition duration
-        interval={5000} // 5000 milliseconds auto play interval
-        fit={'contain'}
+        isRTL
+        isLoop
+        lazyLoad
+        objectFit={'contain'}
+        autoPlay
+        autoPlayPaused
+        autoPlayInterval={5000} // 5000 milliseconds auto play interval
+        swipeThreshold={0.1} // 10% of image width
+        transitionSpeed={1} // 1 pixels per millisecond
+        transitionDurationMin={300} // 300 milliseconds of minimum transition duration
+        transitionDurationMax={700} // 700 milliseconds of minimum transition duration
         className='framed'
-        auto
-        loop
-        rtl
-        controls
+        style={{ height: '40vh' }}
       />
     </div>
   );
