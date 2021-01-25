@@ -84,20 +84,24 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
   useEffect(() => {
     const el = elementRef.current;
     // use active event listeners to have event.cancelable === true, for later use to in calling event.preventDefault()
-    el.addEventListener('touchstart', touchStartCallback.current, {
-      passive: false
-    });
-    el.addEventListener('touchmove', touchMoveCallback.current, {
-      passive: false
-    });
-    el.addEventListener('touchend', touchEndCallback.current, {
-      passive: false
-    });
+    if (el) {
+      el.addEventListener('touchstart', touchStartCallback.current, {
+        passive: false
+      });
+      el.addEventListener('touchmove', touchMoveCallback.current, {
+        passive: false
+      });
+      el.addEventListener('touchend', touchEndCallback.current, {
+        passive: false
+      });
+    }
 
     return () => {
-      el.removeEventListener('touchstart', touchStartCallback.current);
-      el.removeEventListener('touchmove', touchMoveCallback.current);
-      el.removeEventListener('touchend', touchEndCallback.current);
+      if (el) {
+        el.removeEventListener('touchstart', touchStartCallback.current);
+        el.removeEventListener('touchmove', touchMoveCallback.current);
+        el.removeEventListener('touchend', touchEndCallback.current);
+      }
     };
   }, [elementRef, touchStartCallback, touchMoveCallback, touchEndCallback]);
 };
