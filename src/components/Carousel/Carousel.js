@@ -171,7 +171,7 @@ export const Carousel = (props) => {
 
   let carouselWrapperClassName = `${styles.carouselWrapper}${
     'className' in props ? ' ' + props.className : ''
-  }`;
+  }${'images' in props ? ' ' + styles.galleryCarousel : ''}`;
 
   const carouselPlaceholder = isMaximized && (
     <div className={carouselWrapperClassName} style={props.style} />
@@ -182,12 +182,9 @@ export const Carousel = (props) => {
   );
 
   carouselWrapperClassName = isMaximized
-    ? styles.carouselWrapperMaximized
+    ? styles.carouselWrapperMaximized +
+      `${'images' in props ? ' ' + styles.galleryCarousel : ''}`
     : carouselWrapperClassName;
-
-  const slidesClassName = `${styles.carousel}${
-    'images' in props ? ' ' + styles.galleryCarousel : ''
-  }`;
 
   return (
     <>
@@ -199,29 +196,32 @@ export const Carousel = (props) => {
         ref={carouselRef}
         data-is-keyboard-user='true'
       >
-        <MediaButtons
-          disabled={!props.auto}
-          isPlaying={isPlaying}
-          clickCallback={handleMediaButtonClick}
-        />
-        <SizeButtons
-          disabled={false}
-          isMaximized={isMaximized}
-          clickCallback={handleSizeButtonClick}
-        />
-        <ArrowButtons
-          disabled={props.controls === false}
-          rtl={props.rtl}
-          isLeftDisabled={!slides.canUpdateIndex(-1)}
-          isRightDisabled={!slides.canUpdateIndex(+1)}
-          onClickLeft={goLeft}
-          onClickRight={goRight}
-        />
-        <IndicatorButtons
-          disabled={props.controls === false}
-          curIndex={curIndex}
-          callbacks={indicatorsCallbacks}
-        />
+        <div className={styles.carousel} {...swipeEventHandlers}>
+          <MediaButtons
+            disabled={!props.auto}
+            isPlaying={isPlaying}
+            clickCallback={handleMediaButtonClick}
+          />
+          <SizeButtons
+            disabled={false}
+            isMaximized={isMaximized}
+            clickCallback={handleSizeButtonClick}
+          />
+          <ArrowButtons
+            disabled={props.controls === false}
+            rtl={props.rtl}
+            isLeftDisabled={!slides.canUpdateIndex(-1)}
+            isRightDisabled={!slides.canUpdateIndex(+1)}
+            onClickLeft={goLeft}
+            onClickRight={goRight}
+          />
+          <IndicatorButtons
+            disabled={props.controls === false}
+            curIndex={curIndex}
+            callbacks={indicatorsCallbacks}
+          />
+          <Slides reference={slidesRef} slides={slidesElements} {...props} />
+        </div>
         <Thumbnails
           slides={rawSlides}
           images={props.images}
@@ -229,9 +229,6 @@ export const Carousel = (props) => {
           curIndex={curIndex}
           callbacks={indicatorsCallbacks}
         />
-        <div className={slidesClassName} {...swipeEventHandlers}>
-          <Slides reference={slidesRef} slides={slidesElements} {...props} />
-        </div>
       </div>
     </>
   );
