@@ -30,6 +30,7 @@ import useFixedPosition from '../../utils/useFixedPosition';
 import useEventListener from '../../utils/useEventListener';
 
 export const Carousel = (props) => {
+  const carouselWrapperRef = useRef(null);
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
   const children = Array.isArray(props.children)
@@ -135,7 +136,7 @@ export const Carousel = (props) => {
     setIsPlaying((isPlaying) => !isPlaying);
   }, [setIsPlaying]);
 
-  useKeyboard(carouselRef);
+  useKeyboard(carouselWrapperRef);
 
   useKeys(slidesRef, {
     ArrowLeft: () => updateIndexByButtonOrKey(-1),
@@ -160,12 +161,15 @@ export const Carousel = (props) => {
     {}
   );
 
-  const [isMaximized, setIsMaximized] = useFixedPosition(false, carouselRef);
+  const [isMaximized, setIsMaximized] = useFixedPosition(
+    false,
+    carouselWrapperRef
+  );
 
   const handleSizeButtonClick = () =>
     setIsMaximized((isMaximized) => !isMaximized);
 
-  useKeys(carouselRef, { Escape: () => setIsMaximized(() => false) });
+  useKeys(carouselWrapperRef, { Escape: () => setIsMaximized(() => false) });
 
   useEventListener(window, 'orientationchange', () => updateIndexBySwipe(0, 0));
 
@@ -193,10 +197,14 @@ export const Carousel = (props) => {
       <div
         className={carouselWrapperClassName}
         style={isMaximized ? {} : props.style}
-        ref={carouselRef}
+        ref={carouselWrapperRef}
         data-is-keyboard-user='true'
       >
-        <div className={styles.carousel} {...swipeEventHandlers}>
+        <div
+          ref={carouselRef}
+          className={styles.carousel}
+          {...swipeEventHandlers}
+        >
           <MediaButtons
             disabled={!props.auto}
             isPlaying={isPlaying}
