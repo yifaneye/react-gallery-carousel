@@ -48,6 +48,8 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
   ) => {
     if (
       Math.abs(swipeXDisplacement) > Math.abs(swipeYDisplacement) &&
+      // touch swiping vertically on overflowing slide should not be prevented
+      event.target === event.currentTarget &&
       event.cancelable
     )
       event.preventDefault();

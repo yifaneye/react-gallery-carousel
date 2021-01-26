@@ -13,28 +13,34 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       style={{ height: '20vh' }}
     >
       <div>
-        <h1>react-gallery-carousel</h1>
-        <p>
-          Customizable, lightweight, dependency-free React carousel component
-          with support for touch swiping and lazy loading
-        </p>
-        <a href='https://www.npmjs.com/package/react-gallery-carousel'>npm</a>
-        <span> / </span>
-        <a href='https://github.com/yifaneye/react-gallery-carousel'>GitHub</a>
+        <img
+          className='_Image-module__image__t1897'
+          src='https://placekitten.com/500/500'
+          alt='Kitten of size 500 pixels'
+          aria-label='Kitten of size 500 pixels'
+          title='Kitten of size 500 pixels'
+          loading='lazy'
+        />
       </div>
       <div>
-        <h2>Get Started</h2>
-        <code>npm install react-gallery-carousel --save</code>
-        <p>or</p>
-        <code>yarn add react-gallery-carousel</code>
+        <img
+          className='_Image-module__image__t1897'
+          src='https://placekitten.com/500/500'
+          alt='Kitten of size 500 pixels'
+          aria-label='Kitten of size 500 pixels'
+          title='Kitten of size 500 pixels'
+          loading='lazy'
+        />
       </div>
       <div>
-        <h2>Example</h2>
-        <p>The basic carousel shown below:</p>
-        <code>
-          {/*<pre>{exampleCode}</pre>*/}
-          {exampleCode}
-        </code>
+        <img
+          className='_Image-module__image__t1897'
+          src='https://placekitten.com/500/500'
+          alt='Kitten of size 500 pixels'
+          aria-label='Kitten of size 500 pixels'
+          title='Kitten of size 500 pixels'
+          loading='lazy'
+        />
       </div>
     </Carousel>
   );
