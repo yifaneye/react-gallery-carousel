@@ -69,5 +69,6 @@ Image.propTypes = {
     alt: PropTypes.string
   }).isRequired,
   lazyLoad: PropTypes.bool.isRequired,
-  objectFit: PropTypes.string.isRequired
+  objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
+    .isRequired
 };

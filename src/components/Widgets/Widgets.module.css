@@ -40,6 +40,8 @@
   right: 0;
 }
 
+/*top positions*/
+
 .topLeft {
   top: 0;
   left: 0;
@@ -53,9 +55,23 @@
   width: fit-content;
 }
 
+.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
 .topRight {
   top: 0;
   right: 0;
+}
+
+/*bottom positions*/
+
+.bottomLeft {
+  bottom: 0;
+  left: 0;
 }
 
 .bottomCenter {
@@ -63,4 +79,17 @@
   left: 0;
   right: 0;
   margin: 0 auto;
+  width: fit-content;
+}
+
+.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.bottomRight {
+  bottom: 0;
+  right: 0;
 }

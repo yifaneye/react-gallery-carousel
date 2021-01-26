@@ -5,7 +5,13 @@ import 'react-gallery-carousel/dist/index.css';
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
-    <Carousel style={{ height: '20vh' }}>
+    <Carousel
+      arrowButtons={true}
+      sizeButtons='topLeft'
+      indexBoard='topRight'
+      indicatorButtons={false}
+      style={{ height: '20vh' }}
+    >
       <div>
         <h1>react-gallery-carousel</h1>
         <p>
@@ -91,6 +97,11 @@ const App = () => {
         transitionSpeed={1} // 1 pixels per millisecond
         transitionDurationMin={300} // 300 milliseconds of minimum transition duration
         transitionDurationMax={700} // 700 milliseconds of minimum transition duration
+        arrowButtons={true}
+        mediaButtons='bottomLeft'
+        sizeButtons='bottomRight'
+        indexBoard='bottomCenter'
+        indicatorButtons={false}
         className='framed'
         style={{ height: '40vh' }}
       />

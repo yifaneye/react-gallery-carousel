@@ -42,7 +42,7 @@ ArrowButtons.propTypes = {
 
 export const MediaButtons = memo((props) => {
   return (
-    <div className={styles.widgetWrapper + ' ' + styles.topCenter}>
+    <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <IconButton
         name={props.isPlaying ? 'pause' : 'play'}
         label={props.isPlaying ? 'Pause Autoplay' : 'Start Autoplay'}
@@ -53,13 +53,22 @@ export const MediaButtons = memo((props) => {
 });
 
 MediaButtons.propTypes = {
+  position: PropTypes.oneOf([
+    false,
+    'topLeft',
+    'topCenter',
+    'topRight',
+    'bottomLeft',
+    'bottomCenter',
+    'bottomRight'
+  ]).isRequired,
   isPlaying: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 
 export const SizeButtons = memo((props) => {
   return (
-    <div className={styles.widgetWrapper + ' ' + styles.topRight}>
+    <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <IconButton
         name={props.isMaximized ? 'minimize' : 'maximize'}
         label={props.isMaximized ? 'Minimize Slides' : 'Maximize Slides'}
@@ -70,6 +79,15 @@ export const SizeButtons = memo((props) => {
 });
 
 SizeButtons.propTypes = {
+  position: PropTypes.oneOf([
+    false,
+    'topLeft',
+    'topCenter',
+    'topRight',
+    'bottomLeft',
+    'bottomCenter',
+    'bottomRight'
+  ]).isRequired,
   isMaximized: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
@@ -78,7 +96,11 @@ export const IndexBoard = memo((props) => {
   return (
     <div
       className={
-        styles.widgetWrapper + ' ' + styles.textWrapper + ' ' + styles.topLeft
+        styles.widgetWrapper +
+        ' ' +
+        styles.textWrapper +
+        ' ' +
+        styles[props.position]
       }
     >
       <div className={styles.text}>
@@ -89,6 +111,15 @@ export const IndexBoard = memo((props) => {
 });
 
 IndexBoard.propTypes = {
+  position: PropTypes.oneOf([
+    false,
+    'topLeft',
+    'topCenter',
+    'topRight',
+    'bottomLeft',
+    'bottomCenter',
+    'bottomRight'
+  ]).isRequired,
   curIndex: PropTypes.number.isRequired,
   totalIndices: PropTypes.number.isRequired
 };
@@ -97,7 +128,7 @@ export const IndicatorButtons = memo((props) => {
   const callbacks = props.callbacks;
 
   return (
-    <div className={styles.widgetWrapper + ' ' + styles.bottomCenter}>
+    <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <div className={styles.buttonsContainer}>
         {Object.keys(callbacks).map((key, index) => (
           <IconButton
@@ -117,6 +148,7 @@ export const IndicatorButtons = memo((props) => {
 });
 
 IndicatorButtons.propTypes = {
+  position: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
   curIndex: PropTypes.number.isRequired,
   callbacks: PropTypes.shape(PropTypes.function).isRequired
 };

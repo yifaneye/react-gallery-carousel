@@ -217,6 +217,7 @@ export const Carousel = (props) => {
 
   const indexBoard = props.indexBoard && (
     <IndexBoard
+      position={props.indexBoard}
       curIndex={props.isLoop ? curIndex : curIndex + 1}
       totalIndices={indices.length}
     />
@@ -224,6 +225,7 @@ export const Carousel = (props) => {
 
   const mediaButtons = props.mediaButtons && props.autoPlay && (
     <MediaButtons
+      position={props.mediaButtons}
       isPlaying={isPlaying}
       clickCallback={handleMediaButtonClick}
     />
@@ -231,6 +233,7 @@ export const Carousel = (props) => {
 
   const sizeButtons = props.sizeButtons && (
     <SizeButtons
+      position={props.sizeButtons}
       isMaximized={isMaximized}
       clickCallback={handleSizeButtonClick}
     />
@@ -247,7 +250,11 @@ export const Carousel = (props) => {
   );
 
   const indicatorButtons = props.indicatorButtons && (
-    <IndicatorButtons curIndex={curIndex} callbacks={goToIndexCallbacksObj} />
+    <IndicatorButtons
+      position={props.indicatorButtons}
+      curIndex={curIndex}
+      callbacks={goToIndexCallbacksObj}
+    />
   );
 
   return (
@@ -298,8 +305,7 @@ Carousel.propTypes = {
   isRTL: PropTypes.bool.isRequired,
   isLoop: PropTypes.bool.isRequired,
   lazyLoad: PropTypes.bool.isRequired,
-  objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
-    .isRequired,
+  objectFit: PropTypes.string.isRequired,
   autoPlay: PropTypes.bool.isRequired,
   autoPlayPaused: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(),
@@ -307,11 +313,23 @@ Carousel.propTypes = {
   transitionSpeed: positiveNumber(),
   transitionDurationMin: positiveNumber(),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
-  indexBoard: PropTypes.bool.isRequired,
   arrowButtons: PropTypes.bool.isRequired,
-  mediaButtons: PropTypes.bool.isRequired,
-  sizeButtons: PropTypes.bool.isRequired,
-  indicatorButtons: PropTypes.bool.isRequired,
+  indexBoard: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired,
+  mediaButtons: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired,
+  sizeButtons: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired,
+  indicatorButtons: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -326,9 +344,9 @@ Carousel.defaultProps = {
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.05, // * 100%
   transitionSpeed: 1.5, // px/ms
-  indexBoard: true,
   arrowButtons: true,
-  mediaButtons: true,
-  sizeButtons: true,
-  indicatorButtons: true
+  indexBoard: 'topLeft',
+  mediaButtons: 'topCenter',
+  sizeButtons: 'topRight',
+  indicatorButtons: 'bottom'
 };
