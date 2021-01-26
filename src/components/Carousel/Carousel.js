@@ -261,6 +261,16 @@ export const Carousel = (props) => {
     />
   );
 
+  const thumbnails = props.thumbnails && (
+    <Thumbnails
+      slides={slidesElements}
+      hasImages={hasImages}
+      lazyLoad={props.lazyLoad}
+      curIndex={curIndex}
+      callbacks={goToIndexCallbacksObj}
+    />
+  );
+
   return (
     <>
       {carouselMinimizedPlaceholder}
@@ -273,7 +283,9 @@ export const Carousel = (props) => {
       >
         <div
           ref={carouselRef}
-          className={styles.carousel}
+          className={`${styles.carousel}${
+            props.thumbnails ? ' ' + styles.shorterCarousel : ''
+          }`}
           {...swipeEventHandlers}
         >
           {indexBoard}
@@ -288,13 +300,7 @@ export const Carousel = (props) => {
             {...props}
           />
         </div>
-        <Thumbnails
-          slides={slidesElements}
-          hasImages={hasImages}
-          lazyLoad={props.lazyLoad}
-          curIndex={curIndex}
-          callbacks={goToIndexCallbacksObj}
-        />
+        {thumbnails}
       </div>
     </>
   );
@@ -334,6 +340,7 @@ Carousel.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
+  thumbnails: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -352,5 +359,6 @@ Carousel.defaultProps = {
   indexBoard: 'topLeft',
   mediaButtons: 'topCenter',
   sizeButtons: 'topRight',
-  indicatorButtons: 'bottom'
+  indicatorButtons: 'bottom',
+  thumbnails: true
 };

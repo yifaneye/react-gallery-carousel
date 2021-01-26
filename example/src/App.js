@@ -102,6 +102,7 @@ const App = () => {
         sizeButtons='bottomRight'
         indexBoard='bottomCenter'
         indicatorButtons={false}
+        thumbnails={false}
         className='framed'
         style={{ height: '40vh' }}
       />

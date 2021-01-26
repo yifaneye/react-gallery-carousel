@@ -18,7 +18,7 @@
 
 .carousel {
   width: 100%;
-  height: calc(90% - 5px);
+  height: 100%;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -27,6 +27,10 @@
   align-items: flex-start;
   touch-action: manipulation;
   box-sizing: border-box;
+}
+
+.shorterCarousel {
+  height: calc(90% - 5px) !important;
 }
 
 .galleryCarousel {
