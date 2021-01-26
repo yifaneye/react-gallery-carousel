@@ -69,7 +69,10 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
   };
 
   const handleTouchEnd = (event) => {
-    if (touchDistinguisher.isPinch(event)) return;
+    if (touchDistinguisher.isPinch(event)) {
+      swipeEnd(0, 0);
+      return;
+    }
     const swipeXDisplacement = event.changedTouches[0].clientX - swipeStartX;
     const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
     handleVerticalMovement(event, swipeXDisplacement, swipeYDisplacement);
