@@ -5,15 +5,24 @@ import useNoDrag from './useNoDrag';
 const useSwipe = (
   elementRef,
   swipePercentageMin,
-  { swipeMove, swipeEndRight, swipeEndLeft, swipeEndDisqualified }
+  { swipeMove, swipeEndRight, swipeEndLeft, swipeEndDown, swipeEndDisqualified }
 ) => {
-  const swipeEnd = (swipeDisplacement) => {
-    const swipeDistanceMin =
-      elementRef.current.clientWidth * swipePercentageMin;
-    if (swipeDisplacement >= swipeDistanceMin) swipeEndRight(swipeDisplacement);
-    else if (swipeDisplacement <= -swipeDistanceMin)
-      swipeEndLeft(swipeDisplacement);
-    else swipeEndDisqualified(swipeDisplacement);
+  const swipeEnd = (swipeXDisplacement, swipeYDisplacement) => {
+    const { clientWidth: width, clientHeight: height } = elementRef.current;
+    const swipeXDistanceMin = width * swipePercentageMin;
+    const swipeYDistanceMin = height * swipePercentageMin;
+    if (
+      swipeXDisplacement < -swipeYDisplacement &&
+      swipeXDisplacement <= -swipeXDistanceMin
+    )
+      swipeEndLeft(swipeXDisplacement);
+    else if (
+      swipeXDisplacement > swipeYDisplacement &&
+      swipeXDisplacement >= swipeXDistanceMin
+    )
+      swipeEndRight(swipeXDisplacement);
+    else if (swipeYDisplacement > swipeYDistanceMin) swipeEndDown();
+    else swipeEndDisqualified(swipeXDisplacement);
   };
 
   // have to use event listeners (active event listeners) to deal with undesired tiny vertical movements

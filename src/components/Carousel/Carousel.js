@@ -162,6 +162,10 @@ export const Carousel = (props) => {
     swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
+    swipeEndDown: () => {
+      setIsMaximized(() => false);
+      updateIndexBySwipe(0, 0);
+    },
     swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
   });
 
