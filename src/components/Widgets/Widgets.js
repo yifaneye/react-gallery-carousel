@@ -4,8 +4,6 @@ import IconButton from '../IconButton';
 import styles from './Widgets.module.css';
 
 export const ArrowButtons = memo((props) => {
-  if (props.disabled) return null;
-
   const leftButton = !props.isLeftDisabled && (
     <div className={styles.widgetWrapper + ' ' + styles.centerLeft}>
       <IconButton
@@ -35,7 +33,6 @@ export const ArrowButtons = memo((props) => {
 });
 
 ArrowButtons.propTypes = {
-  disabled: PropTypes.bool,
   isRTL: PropTypes.bool.isRequired,
   isLeftDisabled: PropTypes.bool.isRequired,
   isRightDisabled: PropTypes.bool.isRequired,
@@ -44,8 +41,6 @@ ArrowButtons.propTypes = {
 };
 
 export const MediaButtons = memo((props) => {
-  if (props.disabled) return null;
-
   return (
     <div className={styles.widgetWrapper + ' ' + styles.topCenter}>
       <IconButton
@@ -58,14 +53,11 @@ export const MediaButtons = memo((props) => {
 });
 
 MediaButtons.propTypes = {
-  disabled: PropTypes.bool,
   isPlaying: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 
 export const SizeButtons = memo((props) => {
-  if (props.disabled) return null;
-
   return (
     <div className={styles.widgetWrapper + ' ' + styles.topRight}>
       <IconButton
@@ -78,7 +70,6 @@ export const SizeButtons = memo((props) => {
 });
 
 SizeButtons.propTypes = {
-  disabled: PropTypes.bool,
   isMaximized: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
@@ -103,7 +94,6 @@ IndexBoard.propTypes = {
 };
 
 export const IndicatorButtons = memo((props) => {
-  if (props.disabled) return null;
   const callbacks = props.callbacks;
 
   return (
@@ -127,7 +117,6 @@ export const IndicatorButtons = memo((props) => {
 });
 
 IndicatorButtons.propTypes = {
-  disabled: PropTypes.bool,
   curIndex: PropTypes.number.isRequired,
   callbacks: PropTypes.shape(PropTypes.function).isRequired
 };

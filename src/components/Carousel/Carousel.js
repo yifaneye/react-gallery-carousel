@@ -215,6 +215,41 @@ export const Carousel = (props) => {
     <div className={styles.carouselWrapperMaximized} />
   );
 
+  const indexBoard = props.indexBoard && (
+    <IndexBoard
+      curIndex={props.isLoop ? curIndex : curIndex + 1}
+      totalIndices={indices.length}
+    />
+  );
+
+  const mediaButtons = props.mediaButtons && props.autoPlay && (
+    <MediaButtons
+      isPlaying={isPlaying}
+      clickCallback={handleMediaButtonClick}
+    />
+  );
+
+  const sizeButtons = props.sizeButtons && (
+    <SizeButtons
+      isMaximized={isMaximized}
+      clickCallback={handleSizeButtonClick}
+    />
+  );
+
+  const arrowButtons = props.arrowButtons && (
+    <ArrowButtons
+      isRTL={props.isRTL}
+      isLeftDisabled={!slides.canUpdateIndex(-1)}
+      isRightDisabled={!slides.canUpdateIndex(+1)}
+      onClickLeft={goLeft}
+      onClickRight={goRight}
+    />
+  );
+
+  const indicatorButtons = props.indicatorButtons && (
+    <IndicatorButtons curIndex={curIndex} callbacks={goToIndexCallbacksObj} />
+  );
+
   return (
     <>
       {carouselMinimizedPlaceholder}
@@ -230,33 +265,11 @@ export const Carousel = (props) => {
           className={styles.carousel}
           {...swipeEventHandlers}
         >
-          <IndexBoard
-            curIndex={props.isLoop ? curIndex : curIndex + 1}
-            totalIndices={indices.length}
-          />
-          <MediaButtons
-            disabled={!props.autoPlay}
-            isPlaying={isPlaying}
-            clickCallback={handleMediaButtonClick}
-          />
-          <SizeButtons
-            disabled={false}
-            isMaximized={isMaximized}
-            clickCallback={handleSizeButtonClick}
-          />
-          <ArrowButtons
-            disabled={props.controls === false}
-            isRTL={props.isRTL}
-            isLeftDisabled={!slides.canUpdateIndex(-1)}
-            isRightDisabled={!slides.canUpdateIndex(+1)}
-            onClickLeft={goLeft}
-            onClickRight={goRight}
-          />
-          <IndicatorButtons
-            disabled={props.controls === false}
-            curIndex={curIndex}
-            callbacks={goToIndexCallbacksObj}
-          />
+          {indexBoard}
+          {mediaButtons}
+          {sizeButtons}
+          {arrowButtons}
+          {indicatorButtons}
           <Slides
             reference={slidesRef}
             slides={slidesElements}
@@ -294,6 +307,11 @@ Carousel.propTypes = {
   transitionSpeed: positiveNumber(),
   transitionDurationMin: positiveNumber(),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
+  indexBoard: PropTypes.bool.isRequired,
+  arrowButtons: PropTypes.bool.isRequired,
+  mediaButtons: PropTypes.bool.isRequired,
+  sizeButtons: PropTypes.bool.isRequired,
+  indicatorButtons: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -307,5 +325,10 @@ Carousel.defaultProps = {
   autoPlayPaused: false,
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.05, // * 100%
-  transitionSpeed: 1.5 // px/ms
+  transitionSpeed: 1.5, // px/ms
+  indexBoard: true,
+  arrowButtons: true,
+  mediaButtons: true,
+  sizeButtons: true,
+  indicatorButtons: true
 };

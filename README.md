@@ -56,6 +56,11 @@ To customize the carousel, use the following props:
 |transitionSpeed      |Number                |1.5      |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
 |transitionDurationMin|Number                |undefined|Minimum transition duration (in milliseconds).|
 |transitionDurationMax|Number                |undefined|Maximum transition duration (in milliseconds). It has precedence over 'transitionMin'.|
+|indexBoard           |Boolean               |true     |If false, the carousel does not show index board (e.g. 8/10).|
+|arrowButtons         |Boolean               |true     |If false, the carousel does not show arrow buttons (i.e. left and right).|
+|mediaButtons         |Boolean               |true     |If false, the carousel does not show media buttons (i.e. play and pause).|
+|sizeButtons          |Boolean               |true     |If false, the carousel does not show size buttons (i.e. maximize and minimize).|
+|indicatorButtons     |Boolean               |true     |If false, the carousel does not show indicator buttons (i.e. array of dots).|
 |className            |String                |undefined|Class name(s) to be placed on the carousel, when the carousel is not maximized.|
 |style                |Object                |undefined|Inline style(s) to be placed on the carousel.|
 
