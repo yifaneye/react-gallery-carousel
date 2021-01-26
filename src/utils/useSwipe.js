@@ -7,7 +7,7 @@ const useSwipe = (
   swipePercentageMin,
   { swipeMove, swipeEndRight, swipeEndLeft, swipeEndDown, swipeEndDisqualified }
 ) => {
-  const swipeEnd = (swipeXDisplacement, swipeYDisplacement) => {
+  const swipeEnd = (swipeXDisplacement, swipeYDisplacement = 0) => {
     const { clientWidth: width, clientHeight: height } = elementRef.current;
     const swipeXDistanceMin = width * swipePercentageMin;
     const swipeYDistanceMin = height * swipePercentageMin;
