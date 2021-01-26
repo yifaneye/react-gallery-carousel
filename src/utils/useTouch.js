@@ -77,38 +77,30 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };
 
-  const touchStartCallback = useRef(null);
-  touchStartCallback.current = handleTouchStart;
-
-  const touchMoveCallback = useRef(null);
-  touchMoveCallback.current = handleTouchMove;
-
-  const touchEndCallback = useRef(null);
-  touchEndCallback.current = handleTouchEnd;
+  const events = [
+    { event: 'touchstart', callback: handleTouchStart },
+    { event: 'touchmove', callback: handleTouchMove },
+    { event: 'touchend', callback: handleTouchEnd },
+    { event: 'touchcancel', callback: handleTouchEnd }
+  ];
+  const eventsRef = useRef(events);
 
   useEffect(() => {
     const el = elementRef.current;
-    // use active event listeners to have event.cancelable === true, for later use to in calling event.preventDefault()
-    if (el) {
-      el.addEventListener('touchstart', touchStartCallback.current, {
-        passive: false
-      });
-      el.addEventListener('touchmove', touchMoveCallback.current, {
-        passive: false
-      });
-      el.addEventListener('touchend', touchEndCallback.current, {
-        passive: false
-      });
-    }
+    const events = eventsRef.current;
+    if (el)
+      // use active event listeners to have event.cancelable === true, for later use to in calling event.preventDefault()
+      events.forEach(({ event, callback }) =>
+        el.addEventListener(event, callback, { passive: false })
+      );
 
     return () => {
-      if (el) {
-        el.removeEventListener('touchstart', touchStartCallback.current);
-        el.removeEventListener('touchmove', touchMoveCallback.current);
-        el.removeEventListener('touchend', touchEndCallback.current);
-      }
+      if (el)
+        events.forEach(({ event, callback }) =>
+          el.removeEventListener(event, callback)
+        );
     };
-  }, [elementRef, touchStartCallback, touchMoveCallback, touchEndCallback]);
+  }, [elementRef, eventsRef]);
 };
 
 export default useTouch;
