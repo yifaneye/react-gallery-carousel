@@ -1,6 +1,6 @@
 .slide {
   --scale: 11%;
-  
+
   height: 100%;
   width: var(--scale);
   -ms-zoom: var(--scale);
@@ -21,8 +21,11 @@
   box-sizing: border-box;
 }
 
-.slide > * {
-  width: 100%;
+/* Only for FireFox */
+@-moz-document url-prefix() {
+  .slide {
+    font-size: var(--scale);
+  }
 }
 
 .currentSlide {
