@@ -6,17 +6,16 @@ export const IconButton = memo((props) => {
   return (
     <button
       className={`${styles.button} ${styles[props.name]}${
-        props.disabled ? ' ' + styles.disabled : ''
+        props.hasShadow ? ' ' + styles.buttonShadow : ''
       }`}
       aria-label={props.label}
-      aria-disabled={!!props.disabled}
+      aria-disabled={false}
       onClick={props.clickCallback}
     />
   );
 });
 
 IconButton.propTypes = {
-  disabled: PropTypes.bool,
   name: PropTypes.oneOf([
     'left',
     'right',
@@ -26,7 +25,8 @@ IconButton.propTypes = {
     'minimize',
     'circle',
     'circleLight'
-  ]),
-  label: PropTypes.string,
-  clickCallback: PropTypes.func
+  ]).isRequired,
+  hasShadow: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  clickCallback: PropTypes.func.isRequired
 };

@@ -9,6 +9,7 @@ export const ArrowButtons = memo((props) => {
       <IconButton
         name='left'
         label={props.isRTL ? 'Next Slide' : 'Previous Slide'}
+        hasShadow={props.hasShadow}
         clickCallback={props.onClickLeft}
       />
     </div>
@@ -19,6 +20,7 @@ export const ArrowButtons = memo((props) => {
       <IconButton
         name='right'
         label={props.isRTL ? 'Previous Slide' : 'Next Slide'}
+        hasShadow={props.hasShadow}
         clickCallback={props.onClickRight}
       />
     </div>
@@ -33,6 +35,7 @@ export const ArrowButtons = memo((props) => {
 });
 
 ArrowButtons.propTypes = {
+  hasShadow: PropTypes.bool.isRequired,
   isRTL: PropTypes.bool.isRequired,
   isLeftDisabled: PropTypes.bool.isRequired,
   isRightDisabled: PropTypes.bool.isRequired,
@@ -46,6 +49,7 @@ export const MediaButtons = memo((props) => {
       <IconButton
         name={props.isPlaying ? 'pause' : 'play'}
         label={props.isPlaying ? 'Pause Autoplay' : 'Start Autoplay'}
+        hasShadow={props.hasShadow}
         clickCallback={props.clickCallback}
       />
     </div>
@@ -53,6 +57,7 @@ export const MediaButtons = memo((props) => {
 });
 
 MediaButtons.propTypes = {
+  hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([
     false,
     'topLeft',
@@ -72,6 +77,7 @@ export const SizeButtons = memo((props) => {
       <IconButton
         name={props.isMaximized ? 'minimize' : 'maximize'}
         label={props.isMaximized ? 'Minimize Slides' : 'Maximize Slides'}
+        hasShadow={props.hasShadow}
         clickCallback={props.clickCallback}
       />
     </div>
@@ -79,6 +85,7 @@ export const SizeButtons = memo((props) => {
 });
 
 SizeButtons.propTypes = {
+  hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([
     false,
     'topLeft',
@@ -100,7 +107,8 @@ export const IndexBoard = memo((props) => {
         ' ' +
         styles.textWrapper +
         ' ' +
-        styles[props.position]
+        styles[props.position] +
+        (props.hasShadow ? ' ' + styles.shadow : '')
       }
     >
       <div className={styles.text}>
@@ -111,6 +119,7 @@ export const IndexBoard = memo((props) => {
 });
 
 IndexBoard.propTypes = {
+  hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([
     false,
     'topLeft',
@@ -134,6 +143,7 @@ export const IndicatorButtons = memo((props) => {
           <IconButton
             key={index}
             name={Number(key) === props.curIndex ? 'circleLight' : 'circle'}
+            hasShadow={props.hasShadow}
             label={
               Number(key) === props.curIndex
                 ? `Stay on Slide Number ${index + 1}`
@@ -148,6 +158,7 @@ export const IndicatorButtons = memo((props) => {
 });
 
 IndicatorButtons.propTypes = {
+  hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
   curIndex: PropTypes.number.isRequired,
   callbacks: PropTypes.shape(PropTypes.function).isRequired

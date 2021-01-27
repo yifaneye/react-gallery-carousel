@@ -221,6 +221,7 @@ export const Carousel = (props) => {
 
   const indexBoard = props.indexBoard && (
     <IndexBoard
+      hasShadow={props.widgetsShadow}
       position={props.indexBoard}
       curIndex={props.isLoop ? curIndex : curIndex + 1}
       totalIndices={indices.length}
@@ -229,6 +230,7 @@ export const Carousel = (props) => {
 
   const mediaButtons = props.mediaButtons && props.autoPlay && (
     <MediaButtons
+      hasShadow={props.widgetsShadow}
       position={props.mediaButtons}
       isPlaying={isPlaying}
       clickCallback={handleMediaButtonClick}
@@ -237,6 +239,7 @@ export const Carousel = (props) => {
 
   const sizeButtons = props.sizeButtons && (
     <SizeButtons
+      hasShadow={props.widgetsShadow}
       position={props.sizeButtons}
       isMaximized={isMaximized}
       clickCallback={handleSizeButtonClick}
@@ -245,6 +248,7 @@ export const Carousel = (props) => {
 
   const arrowButtons = props.arrowButtons && (
     <ArrowButtons
+      hasShadow={props.widgetsShadow}
       isRTL={props.isRTL}
       isLeftDisabled={!slides.canUpdateIndex(-1)}
       isRightDisabled={!slides.canUpdateIndex(+1)}
@@ -255,6 +259,7 @@ export const Carousel = (props) => {
 
   const indicatorButtons = props.indicatorButtons && (
     <IndicatorButtons
+      hasShadow={props.widgetsShadow}
       position={props.indicatorButtons}
       curIndex={curIndex}
       callbacks={goToIndexCallbacksObj}
@@ -323,6 +328,8 @@ Carousel.propTypes = {
   transitionSpeed: positiveNumber(),
   transitionDurationMin: positiveNumber(),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
+  thumbnails: PropTypes.bool.isRequired,
+  widgetsShadow: PropTypes.bool.isRequired,
   arrowButtons: PropTypes.bool.isRequired,
   indexBoard: PropTypes.oneOfType([
     PropTypes.bool.isRequired,
@@ -340,7 +347,6 @@ Carousel.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
-  thumbnails: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -355,10 +361,11 @@ Carousel.defaultProps = {
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.05, // * 100%
   transitionSpeed: 1.5, // px/ms
+  thumbnails: true,
   arrowButtons: true,
+  widgetsShadow: true,
   indexBoard: 'topLeft',
   mediaButtons: 'topCenter',
   sizeButtons: 'topRight',
-  indicatorButtons: 'bottom',
-  thumbnails: true
+  indicatorButtons: 'bottom'
 };

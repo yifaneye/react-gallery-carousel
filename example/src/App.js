@@ -104,11 +104,12 @@ const App = () => {
         transitionDurationMin={300} // 300 milliseconds of minimum transition duration
         transitionDurationMax={700} // 700 milliseconds of minimum transition duration
         arrowButtons={true}
+        thumbnails={false}
         mediaButtons='bottomLeft'
         sizeButtons='bottomRight'
         indexBoard='bottomCenter'
         indicatorButtons={false}
-        thumbnails={false}
+        widgetsShadow={false}
         className='framed'
         style={{ height: '40vh' }}
       />
