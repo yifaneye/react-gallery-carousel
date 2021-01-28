@@ -23,10 +23,9 @@ import 'react-gallery-carousel/dist/index.css';
 
 const App = () => {
   const sizes = [900, 800, 700, 600, 500, 400];
-    const images = sizes.map((size) => ({
-      src: `https://placekitten.com/${size}/${size}`,
-      alt: `Kitten of size ${size} pixels`
-    }));
+  const images = sizes.map((size) => ({
+    src: `https://placekitten.com/${size}/${size}`
+  }));
 
   return (
     <Carousel images={images} style={{ height: '40vh' }} />

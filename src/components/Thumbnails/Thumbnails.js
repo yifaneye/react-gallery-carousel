@@ -2,27 +2,20 @@ import React, { memo, useRef } from 'react';
 import styles from './Thumbnails.module.css';
 import Thumbnail from '../Thumbnail';
 import PropTypes from 'prop-types';
+import useNoOverScroll from '../../utils/useNoOverScroll';
 
 export const Thumbnails = memo((props) => {
   const callbacks = props.callbacks;
   const thumbnailsRef = useRef(null);
 
-  const handleWheel = (event) => {
-    if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
-    const { scrollLeft, scrollWidth, offsetWidth } = thumbnailsRef.current;
-    if (
-      scrollLeft + event.deltaX < 0 ||
-      scrollLeft + event.deltaX > scrollWidth - offsetWidth
-    )
-      event.preventDefault();
-  };
+  const wheelEventHandler = useNoOverScroll(thumbnailsRef);
 
   return (
     <div className={styles.ThumbnailsWrapper + ' ' + styles.bottomCenter}>
       <div
         ref={thumbnailsRef}
         className={styles.thumbnailsContainer}
-        onWheel={handleWheel}
+        onWheel={wheelEventHandler}
       >
         {Object.keys(callbacks).map((key, index) => {
           return (
