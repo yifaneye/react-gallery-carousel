@@ -1,14 +1,29 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
 import styles from './Thumbnails.module.css';
 import Thumbnail from '../Thumbnail';
 import PropTypes from 'prop-types';
 
 export const Thumbnails = memo((props) => {
   const callbacks = props.callbacks;
+  const thumbnailsRef = useRef(null);
+
+  const handleWheel = (event) => {
+    if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
+    const { scrollLeft, scrollWidth, offsetWidth } = thumbnailsRef.current;
+    if (
+      scrollLeft + event.deltaX < 0 ||
+      scrollLeft + event.deltaX > scrollWidth - offsetWidth
+    )
+      event.preventDefault();
+  };
 
   return (
     <div className={styles.ThumbnailsWrapper + ' ' + styles.bottomCenter}>
-      <div className={styles.thumbnailsContainer}>
+      <div
+        ref={thumbnailsRef}
+        className={styles.thumbnailsContainer}
+        onWheel={handleWheel}
+      >
         {Object.keys(callbacks).map((key, index) => {
           return (
             <Thumbnail

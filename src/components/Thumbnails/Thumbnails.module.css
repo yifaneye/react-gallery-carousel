@@ -8,6 +8,8 @@
   overflow-y: hidden;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
+  overscroll-behavior-x: contain;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
