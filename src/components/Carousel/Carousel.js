@@ -167,7 +167,6 @@ export const Carousel = (props) => {
   const goToIndex = (index) => {
     setIsPlaying(false);
     slides.goToIndex(index);
-    applyTransitionDuration();
     applyTransition();
     setCurIndex(slides.curIndex);
   };
