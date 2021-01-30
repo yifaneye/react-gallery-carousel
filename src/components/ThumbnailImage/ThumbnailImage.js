@@ -38,7 +38,7 @@ export const ThumbnailImage = (props) => {
 
   useAnchor(imageRef, props.isCurrent);
 
-  if (!props.lazyLoad)
+  if (props.lazyLoad)
     return (
       <LazyLoadedImage
         className={imageClassName}
