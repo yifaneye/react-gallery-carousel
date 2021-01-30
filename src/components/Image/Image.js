@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import styles from './Image.module.css';
+import { LoadingSpinner } from '../Widgets';
 import PropTypes from 'prop-types';
 import placeholder from 'placeholderImage.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
@@ -7,22 +8,31 @@ import useIntersectionObserver from '../../utils/useIntersectionObserver';
 const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
+
+  const handleLoad = () => {
+    if (isInViewport) setIsFullyLoaded(true);
+  };
 
   return (
-    <img
-      ref={imageRef}
-      className={styles.image}
-      src={isInViewport ? props.src : props.thumbnail}
-      alt={props.title}
-      aria-label={props.title}
-      title={props.title}
-      loading='lazy'
-      style={{ objectFit: props.objectFit || null }}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = placeholder;
-      }}
-    />
+    <>
+      {!isFullyLoaded && <LoadingSpinner hasShadow={props.hasShadow} />}
+      <img
+        ref={imageRef}
+        className={styles.image}
+        src={isInViewport ? props.src : props.thumbnail}
+        alt={props.title}
+        aria-label={props.title}
+        title={props.title}
+        loading='lazy'
+        style={{ objectFit: props.objectFit || null }}
+        onLoad={handleLoad}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = placeholder;
+        }}
+      />
+    </>
   );
 };
 
@@ -30,11 +40,15 @@ LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  objectFit: PropTypes.string.isRequired
+  objectFit: PropTypes.string.isRequired,
+  hasShadow: PropTypes.bool.isRequired
 };
 
 export const Image = (props) => {
   const imageTitle = props.image.alt || null;
+  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
+
+  const handleLoad = () => setIsFullyLoaded(true);
 
   if (props.lazyLoad)
     return (
@@ -43,25 +57,30 @@ export const Image = (props) => {
         thumbnail={props.image.thumbnail || placeholder}
         title={imageTitle}
         objectFit={props.objectFit}
+        hasShadow={props.hasShadow}
       />
     );
 
   return (
-    <img
-      className={styles.image}
-      src={props.image.src}
-      alt={imageTitle}
-      aria-label={imageTitle}
-      title={imageTitle}
-      loading='auto'
-      style={{
-        objectFit: props.objectFit === 'cover' ? null : props.objectFit
-      }}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = placeholder;
-      }}
-    />
+    <>
+      {!isFullyLoaded && <LoadingSpinner hasShadow={props.hasShadow} />}
+      <img
+        className={styles.image}
+        src={props.image.src}
+        alt={imageTitle}
+        aria-label={imageTitle}
+        title={imageTitle}
+        loading='auto'
+        style={{
+          objectFit: props.objectFit === 'cover' ? null : props.objectFit
+        }}
+        onLoad={handleLoad}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = placeholder;
+        }}
+      />
+    </>
   );
 };
 
@@ -73,5 +92,6 @@ Image.propTypes = {
   }).isRequired,
   lazyLoad: PropTypes.bool.isRequired,
   objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
-    .isRequired
+    .isRequired,
+  hasShadow: PropTypes.bool.isRequired
 };

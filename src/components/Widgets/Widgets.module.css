@@ -3,6 +3,12 @@
   z-index: 1;
 }
 
+.centerWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
 .textWrapper {
   height: 50px;
   padding: 0 10px 0;
@@ -34,9 +40,16 @@
   align-items: center;
 }
 
+/*center positions*/
+
 .centerLeft {
   top: calc(50% - 30px);
   left: 0;
+}
+
+.centerCenter {
+  top: calc(50% - 15px);
+  left: calc(50% - 15px);
 }
 
 .centerRight {
@@ -97,3 +110,32 @@
   bottom: 0;
   right: 0;
 }
+
+.spinner {
+  width: 60px;
+  height: 60px;
+}
+
+.spinner:after {
+  content: '';
+  display: block;
+  opacity: 0.75;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent #fff transparent;
+  animation: spin 1s cubic-bezier(0.5, 0.25, 0.5, 0.75) infinite;
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

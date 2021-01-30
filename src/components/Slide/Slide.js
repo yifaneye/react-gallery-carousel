@@ -9,6 +9,7 @@ export const Slide = (props) => {
       image={props.slide}
       lazyLoad={props.lazyLoad}
       objectFit={props.objectFit}
+      hasShadow={props.widgetsShadow}
     />
   ) : (
     props.slide
@@ -21,7 +22,5 @@ Slide.propTypes = {
   slide: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.element.isRequired
-  ]).isRequired,
-  lazyLoad: PropTypes.bool.isRequired,
-  objectFit: PropTypes.string.isRequired
+  ]).isRequired
 };

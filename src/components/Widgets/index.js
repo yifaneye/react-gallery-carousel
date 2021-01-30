@@ -3,5 +3,6 @@ export {
   MediaButtons,
   SizeButtons,
   IndicatorButtons,
-  IndexBoard
+  IndexBoard,
+  LoadingSpinner
 } from './Widgets';

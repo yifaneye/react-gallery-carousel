@@ -163,3 +163,22 @@ IndicatorButtons.propTypes = {
   curIndex: PropTypes.number.isRequired,
   callbacks: PropTypes.shape(PropTypes.function).isRequired
 };
+
+export const LoadingSpinner = memo((props) => {
+  return (
+    <div className={styles.centerWrapper}>
+      <div className={styles.widgetWrapper + ' ' + styles.centerCenter}>
+        <div
+          className={
+            styles.spinner + (props.hasShadow ? ' ' + styles.shadow : '')
+          }
+          aria-label='Loading'
+        />
+      </div>
+    </div>
+  );
+});
+
+LoadingSpinner.propTypes = {
+  hasShadow: PropTypes.bool.isRequired
+};
