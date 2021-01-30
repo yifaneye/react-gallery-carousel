@@ -12,7 +12,7 @@ const LazyLoadedImage = (props) => {
     <img
       ref={imageRef}
       className={styles.image}
-      src={isInViewport ? props.src : placeholder}
+      src={isInViewport ? props.src : props.thumbnail}
       alt={props.title}
       aria-label={props.title}
       title={props.title}
@@ -28,6 +28,7 @@ const LazyLoadedImage = (props) => {
 
 LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   objectFit: PropTypes.string.isRequired
 };
@@ -39,6 +40,7 @@ export const Image = (props) => {
     return (
       <LazyLoadedImage
         src={props.image.src}
+        thumbnail={props.image.thumbnail || placeholder}
         title={imageTitle}
         objectFit={props.objectFit}
       />
@@ -66,7 +68,8 @@ export const Image = (props) => {
 Image.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
-    alt: PropTypes.string
+    alt: PropTypes.string,
+    thumbnail: PropTypes.string
   }).isRequired,
   lazyLoad: PropTypes.bool.isRequired,
   objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])

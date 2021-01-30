@@ -46,7 +46,8 @@ const App = () => {
     .map((_, i) => i + 1);
   const images = imageIDs.map((imageID) => ({
     src: `https://placedog.net/800/640?id=${imageID}`,
-    alt: `Dog No. ${imageID}`
+    alt: `Dog No. ${imageID}`,
+    thumbnail: `https://placedog.net/80/64?id=${imageID}`
   }));
 
   const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '40vh' }} />`;

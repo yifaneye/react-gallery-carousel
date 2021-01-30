@@ -31,6 +31,7 @@ const LazyLoadedImage = (props) => {
 
 export const ThumbnailImage = (props) => {
   const imageRef = useRef(null);
+  const imageSource = props.image.thumbnail || props.image.src || placeholder;
   const imageTitle = props.image.alt || null;
   const imageClassName = `${styles.image}${
     props.isCurrent ? ' ' + styles.currentImage : ''
@@ -42,7 +43,7 @@ export const ThumbnailImage = (props) => {
     return (
       <LazyLoadedImage
         className={imageClassName}
-        src={props.image.src}
+        src={imageSource}
         title={imageTitle}
         isCurrent={props.isCurrent}
         clickCallback={props.clickCallback}
@@ -53,7 +54,7 @@ export const ThumbnailImage = (props) => {
     <img
       ref={imageRef}
       className={imageClassName}
-      src={props.image.src}
+      src={imageSource}
       alt={imageTitle}
       aria-label={imageTitle}
       title={imageTitle}
@@ -76,7 +77,8 @@ LazyLoadedImage.propTypes = {
 ThumbnailImage.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
-    alt: PropTypes.string
+    alt: PropTypes.string,
+    thumbnail: PropTypes.string
   }).isRequired,
   lazyLoad: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
