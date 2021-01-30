@@ -36,7 +36,7 @@ export const Carousel = (props) => {
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
 
-  // process slides
+  /* process slides */
   const hasImages = 'images' in props;
   const children = Array.isArray(props.children)
     ? props.children
@@ -47,12 +47,34 @@ export const Carousel = (props) => {
     loop: props.isLoop
   });
   const [curIndex, setCurIndex] = useState(slides.curIndex);
+
+  /* handle autoplay and reduced motion settings */
   const indexStep = props.isRTL ? -1 : +1;
   const [isPlaying, setIsPlaying] = useTimer(
     props.autoPlay && props.autoPlayInterval,
     () => updateIndexByAutoPlay(indexStep)
   );
+  const handleMediaButtonClick = useCallback(() => {
+    setIsPlaying((isPlaying) => !isPlaying);
+  }, [setIsPlaying]);
+  useEffect(() => {
+    if (props.autoPlayPaused) setIsPlaying(false);
+  }, [props.autoPlayPaused, setIsPlaying]);
 
+  const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  useEffect(() => {
+    if (isReducedMotion) setIsPlaying(false);
+  }, [isReducedMotion, setIsPlaying]);
+
+  /* handle maximization and full screen */
+  const [isMaximized, setIsMaximized] = useFixedPosition(
+    false,
+    carouselWrapperRef
+  );
+  const handleSizeButtonClick = () =>
+    setIsMaximized((isMaximized) => !isMaximized);
+
+  /* handle UI update */
   const applyTransitionDuration = useCallback(
     (swipedDisplacement = 0, hasToUpdate = true) => {
       const swipedDistance = Math.abs(swipedDisplacement);
@@ -98,6 +120,11 @@ export const Carousel = (props) => {
     [slides.curIndex]
   );
 
+  useEffect(() => {
+    applyTransition();
+  }, [applyTransition]);
+
+  /* handle neighbouring current index update */
   const calibrateIndexBySwipe = (swipeDisplacement) => {
     setIsPlaying(false);
     slides.calibrateIndex(-swipeDisplacement);
@@ -113,6 +140,7 @@ export const Carousel = (props) => {
     },
     [slides, applyTransitionDuration, applyTransition, setCurIndex]
   );
+  const rollBackUpdate = () => updateIndexBySwipe(0, 0);
 
   const updateIndexByAutoPlay = useCallback(
     (change) => {
@@ -123,69 +151,19 @@ export const Carousel = (props) => {
     [slides, applyTransition, updateIndexBySwipe]
   );
 
-  const updateIndexByButtonOrKey = useCallback(
+  const updateIndex = useCallback(
     (change) => {
       setIsPlaying(false);
       updateIndexByAutoPlay(change);
     },
     [setIsPlaying, updateIndexByAutoPlay]
   );
+  const goLeft = useCallback(() => updateIndex(-1), [updateIndex]);
+  const goRight = useCallback(() => updateIndex(+1), [updateIndex]);
 
-  const goLeft = useCallback(() => updateIndexByButtonOrKey(-1), [
-    updateIndexByButtonOrKey
-  ]);
+  useEventListener(window, 'orientationchange', rollBackUpdate);
 
-  const goRight = useCallback(() => updateIndexByButtonOrKey(+1), [
-    updateIndexByButtonOrKey
-  ]);
-
-  const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  useEffect(() => {
-    if (isReducedMotion) setIsPlaying(false);
-  }, [isReducedMotion, setIsPlaying]);
-  useEffect(() => {
-    if (props.autoPlayPaused) setIsPlaying(false);
-  }, [props.autoPlayPaused, setIsPlaying]);
-
-  const handleMediaButtonClick = useCallback(() => {
-    setIsPlaying((isPlaying) => !isPlaying);
-  }, [setIsPlaying]);
-
-  useKeyboard(carouselWrapperRef);
-
-  useKeys(slidesRef, {
-    ArrowLeft: () => updateIndexByButtonOrKey(-1),
-    ArrowRight: () => updateIndexByButtonOrKey(+1)
-  });
-
-  const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
-    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
-    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
-    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
-    swipeEndDown: () => {
-      setIsMaximized(() => false);
-      updateIndexBySwipe(0, 0);
-    },
-    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
-  });
-
-  useEffect(() => {
-    applyTransition();
-  }, [applyTransition]);
-
-  const [isMaximized, setIsMaximized] = useFixedPosition(
-    false,
-    carouselWrapperRef
-  );
-
-  const handleSizeButtonClick = () =>
-    setIsMaximized((isMaximized) => !isMaximized);
-
-  useKeys(carouselWrapperRef, { Escape: () => setIsMaximized(() => false) });
-
-  useEventListener(window, 'orientationchange', () => updateIndexBySwipe(0, 0));
-
-  // callbacks for go to each index
+  /* handle explicit current index update */
   const goToIndex = (index) => {
     setIsPlaying(false);
     slides.goToIndex(index);
@@ -200,7 +178,27 @@ export const Carousel = (props) => {
     {}
   );
 
-  // styles of the carousel
+  /* handle key press */
+  useKeyboard(carouselWrapperRef);
+  useKeys(carouselWrapperRef, { Escape: () => setIsMaximized(() => false) });
+  useKeys(slidesRef, {
+    ArrowLeft: () => updateIndex(-1),
+    ArrowRight: () => updateIndex(+1)
+  });
+
+  /* handle swipe */
+  const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
+    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
+    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
+    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
+    swipeEndDown: () => {
+      setIsMaximized(() => false);
+      rollBackUpdate();
+    },
+    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
+  });
+
+  /* process styles */
   const carouselWrapperMinimizedClassName = `${styles.carouselWrapper}${
     hasImages ? ' ' + styles.galleryCarousel : ''
   }${'className' in props ? ' ' + props.className : ''}`;
@@ -211,7 +209,7 @@ export const Carousel = (props) => {
     ? carouselWrapperMaximizedClassName
     : carouselWrapperMinimizedClassName;
 
-  // components for maximized carousel
+  /* process maximized carousel */
   const carouselMinimizedPlaceholder = isMaximized && (
     <div className={carouselWrapperMinimizedClassName} style={props.style} />
   );
@@ -219,6 +217,7 @@ export const Carousel = (props) => {
     <div className={styles.carouselWrapperMaximized} />
   );
 
+  /* process widgets */
   const indexBoard = props.indexBoard && (
     <IndexBoard
       hasShadow={props.widgetsShadow}
