@@ -36,46 +36,17 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
           {exampleCode}
         </code>
       </div>
-      <div>
-        <img
-          className='_Image-module__image__t1897'
-          src='https://placekitten.com/500/500'
-          alt='Kitten of size 500 pixels'
-          aria-label='Kitten of size 500 pixels'
-          title='Kitten of size 500 pixels'
-          loading='lazy'
-        />
-      </div>
     </Carousel>
   );
 };
 
 const App = () => {
-  const kittenImageSizes = [
-    500,
-    510,
-    520,
-    530,
-    540,
-    550,
-    560,
-    570,
-    580,
-    590,
-    600,
-    610,
-    620,
-    630,
-    640,
-    650,
-    660,
-    670,
-    680,
-    690
-  ];
-  const images = kittenImageSizes.map((kittenImageSize) => ({
-    src: `https://placekitten.com/${kittenImageSize}/${kittenImageSize}`,
-    alt: `Kitten of size ${kittenImageSize} pixels`
+  const imageIDs = Array(20)
+    .fill(1)
+    .map((_, i) => i + 1);
+  const images = imageIDs.map((imageID) => ({
+    src: `https://placedog.net/800/640?id=${imageID}`,
+    alt: `Dog No. ${imageID}`
   }));
 
   const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '40vh' }} />`;
