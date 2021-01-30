@@ -25,7 +25,7 @@ const LazyLoadedImage = (props) => {
         aria-label={props.title}
         title={props.title}
         loading='lazy'
-        style={{ objectFit: props.objectFit || null }}
+        style={{ objectFit: props.objectFit }}
         onLoad={handleLoad}
         onError={(e) => {
           e.target.onerror = null;
@@ -40,13 +40,14 @@ LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  objectFit: PropTypes.string.isRequired,
+  objectFit: PropTypes.string,
   hasShadow: PropTypes.bool.isRequired
 };
 
 export const Image = (props) => {
   const imageTitle = props.image.alt || null;
   const [isFullyLoaded, setIsFullyLoaded] = useState(false);
+  const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
 
   const handleLoad = () => setIsFullyLoaded(true);
 
@@ -56,7 +57,7 @@ export const Image = (props) => {
         src={props.image.src}
         thumbnail={props.image.thumbnail || placeholder}
         title={imageTitle}
-        objectFit={props.objectFit}
+        objectFit={objectFit}
         hasShadow={props.hasShadow}
       />
     );
@@ -71,9 +72,7 @@ export const Image = (props) => {
         aria-label={imageTitle}
         title={imageTitle}
         loading='auto'
-        style={{
-          objectFit: props.objectFit === 'cover' ? null : props.objectFit
-        }}
+        style={{ objectFit: objectFit }}
         onLoad={handleLoad}
         onError={(e) => {
           e.target.onerror = null;
