@@ -48,8 +48,8 @@
 }
 
 .centerCenter {
-  top: calc(50% - 15px);
-  left: calc(50% - 15px);
+  top: calc(50% - 17px);
+  left: calc(50% - 17px);
 }
 
 .centerRight {
@@ -111,22 +111,19 @@
   right: 0;
 }
 
-.spinner {
-  width: 60px;
-  height: 60px;
-}
-
 .spinner:after {
   content: '';
   display: block;
   opacity: 0.75;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
+  /* Math.PI * 17 * 17 ≈ 30 * 30
+     the size of the spinner is about the same as the size of other icons */
   border-radius: 50%;
-  border-width: 5px;
+  border-width: 5px 5px 0;
   border-style: solid;
   border-color: #fff transparent #fff transparent;
-  animation: spin 1s cubic-bezier(0.5, 0.25, 0.5, 0.75) infinite;
+  animation: spin 0.25s cubic-bezier(0.5, 0.25, 0.5, 0.75) infinite;
   box-sizing: border-box;
 }
 
