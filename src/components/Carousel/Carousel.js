@@ -2,6 +2,7 @@ import React, {
   Fragment,
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState
 } from 'react';
@@ -124,7 +125,8 @@ export const Carousel = (props) => {
     [slides.curIndex]
   );
 
-  useEffect(() => {
+  // change to current index before browser paints
+  useLayoutEffect(() => {
     applyTransition();
   }, [applyTransition]);
 

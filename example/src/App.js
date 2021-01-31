@@ -6,6 +6,7 @@ import 'react-gallery-carousel/dist/index.css';
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
     <Carousel
+      isLoop={false}
       arrowButtons={true}
       sizeButtons='topLeft'
       indexBoard='topRight'
@@ -27,6 +28,91 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         <code>npm install react-gallery-carousel --save</code>
         <p>or</p>
         <code>yarn add react-gallery-carousel</code>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
+        <p>or</p>
       </div>
       <div>
         <h2>Example</h2>
