@@ -32,6 +32,7 @@ import useFixedPosition from '../../utils/useFixedPosition';
 import useEventListener from '../../utils/useEventListener';
 
 export const Carousel = (props) => {
+  const documentRef = useRef(document);
   const carouselWrapperRef = useRef(null);
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
@@ -178,8 +179,8 @@ export const Carousel = (props) => {
   );
 
   /* handle key press */
+  useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
   useKeyboard(carouselWrapperRef);
-  useKeys(carouselWrapperRef, { Escape: () => setIsMaximized(() => false) });
   useKeys(slidesRef, {
     ArrowLeft: () => updateIndex(-1),
     ArrowRight: () => updateIndex(+1)
