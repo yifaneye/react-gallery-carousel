@@ -38,15 +38,26 @@ export default class Slides {
     return this._curIndex;
   }
 
+  get curIndexAsKey() {
+    if (this._curIndex < this._minIndex) return this._maxIndex;
+    if (this._curIndex > this._maxIndex) return this._minIndex;
+    return this._curIndex;
+  }
+
+  get curIndexForDisplay() {
+    if (!this._loop) return this._curIndex + 1;
+    return this.curIndexAsKey;
+  }
+
   get slides() {
     return this._slides;
   }
 
-  static _range(min, max, step = 1) {
+  static _range(min, max) {
     const length = max - min + 1;
     return Array(length)
       .fill(min)
-      .map((x, step) => x + step);
+      .map((x, index) => x + index);
   }
 
   get allIndices() {

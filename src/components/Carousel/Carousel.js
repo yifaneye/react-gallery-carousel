@@ -49,7 +49,7 @@ export const Carousel = (props) => {
     rtl: props.isRTL,
     loop: props.isLoop
   });
-  const [curIndex, setCurIndex] = useState(slides.curIndex);
+  const [, setCurIndex] = useState(slides.curIndex);
 
   /* handle autoplay and reduced motion settings */
   const indexStep = props.isRTL ? -1 : +1;
@@ -251,11 +251,14 @@ export const Carousel = (props) => {
   );
 
   /* process widgets */
+  const curIndexAsKey = slides.curIndexAsKey;
+  const curIndexForDisplay = slides.curIndexForDisplay;
+
   const indexBoard = props.indexBoard && (
     <IndexBoard
       hasShadow={props.widgetsShadow}
       position={props.indexBoard}
-      curIndex={props.isLoop ? curIndex : curIndex + 1}
+      curIndex={curIndexForDisplay}
       totalIndices={indices.length}
     />
   );
@@ -293,7 +296,7 @@ export const Carousel = (props) => {
     <IndicatorButtons
       hasShadow={props.widgetsShadow}
       position={props.indicatorButtons}
-      curIndex={curIndex}
+      curIndex={curIndexAsKey}
       callbacks={goToIndexCallbacksObj}
     />
   );
@@ -303,7 +306,7 @@ export const Carousel = (props) => {
       slides={slidesElements}
       hasImages={hasImages}
       lazyLoad={props.lazyLoad}
-      curIndex={curIndex}
+      curIndex={curIndexAsKey}
       callbacks={goToIndexCallbacksObj}
     />
   );
