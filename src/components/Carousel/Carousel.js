@@ -72,8 +72,11 @@ export const Carousel = (props) => {
     false,
     carouselWrapperRef
   );
-  const handleSizeButtonClick = () =>
+  const handleSizeButtonClick = () => {
+    // carousel is to be maximized
+    if (!isMaximized) slidesRef.current.focus();
     setIsMaximized((isMaximized) => !isMaximized);
+  };
 
   /* handle UI update */
   const applyTransitionDuration = useCallback(
