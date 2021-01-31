@@ -34,6 +34,7 @@ import useEventListener from '../../utils/useEventListener';
 
 export const Carousel = (props) => {
   const documentRef = useRef(document);
+  const maximizedBackgroundRef = useRef(null);
   const carouselWrapperRef = useRef(null);
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
@@ -119,42 +120,65 @@ export const Carousel = (props) => {
     ]
   );
 
-  const applyTransition = useCallback(
-    (swipeDisplacement = 0) =>
-      (slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`),
-    [slides.curIndex]
+  const applyTransitionY = useCallback(
+    (swipeDisplacement = 0) => {
+      carouselWrapperRef.current.style.top = `${swipeDisplacement}px`;
+      const scale = 1 - swipeDisplacement / 1000;
+      carouselWrapperRef.current.style.transform = `scale(${scale})`;
+      if (maximizedBackgroundRef.current)
+        maximizedBackgroundRef.current.style.opacity = scale;
+    },
+    [carouselWrapperRef, maximizedBackgroundRef]
+  );
+
+  const applyTransitionX = useCallback(
+    (swipeDisplacement = 0) => {
+      applyTransitionY(0);
+      slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+    },
+    [applyTransitionY, slides.curIndex]
   );
 
   // change to current index before browser paints
   useLayoutEffect(() => {
-    applyTransition();
-  }, [applyTransition]);
+    applyTransitionX();
+  }, [applyTransitionX]);
 
   /* handle neighbouring current index update */
-  const calibrateIndexBySwipe = (swipeDisplacement) => {
+  // store isMaximized to combat stale closure
+  const isMaximizedRef = useRef(isMaximized);
+  isMaximizedRef.current = isMaximized;
+  const calibrateIndexBySwipe = (
+    swipeXDisplacement,
+    swipeYDisplacement = 0
+  ) => {
+    if (Math.abs(swipeXDisplacement) < swipeYDisplacement) {
+      if (isMaximizedRef.current) applyTransitionY(swipeYDisplacement);
+      return;
+    }
     setIsPlaying(false);
-    slides.calibrateIndex(-swipeDisplacement);
-    applyTransition(swipeDisplacement);
+    slides.calibrateIndex(-swipeXDisplacement);
+    applyTransitionX(swipeXDisplacement);
   };
 
   const updateIndexBySwipe = useCallback(
     (change, swipedDisplacement = 0) => {
       slides.updateIndex(change);
       applyTransitionDuration(swipedDisplacement, change !== 0);
-      applyTransition();
+      applyTransitionX();
       setCurIndex(slides.curIndex);
     },
-    [slides, applyTransitionDuration, applyTransition, setCurIndex]
+    [slides, applyTransitionDuration, applyTransitionX, setCurIndex]
   );
   const rollBackUpdate = () => updateIndexBySwipe(0, 0);
 
   const updateIndexByAutoPlay = useCallback(
     (change) => {
       slides.calibrateIndex(change);
-      applyTransition();
+      applyTransitionX();
       updateIndexBySwipe(change);
     },
-    [slides, applyTransition, updateIndexBySwipe]
+    [slides, applyTransitionX, updateIndexBySwipe]
   );
 
   const updateIndex = useCallback(
@@ -173,7 +197,7 @@ export const Carousel = (props) => {
   const goToIndex = (index) => {
     setIsPlaying(false);
     slides.goToIndex(index);
-    applyTransition();
+    applyTransitionX();
     setCurIndex(slides.curIndex);
   };
   const indices = slides.allIndices;
@@ -193,7 +217,8 @@ export const Carousel = (props) => {
 
   /* handle swipe */
   const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
-    swipeMove: (displacement) => calibrateIndexBySwipe(displacement),
+    swipeMove: (displacementX, displacementY = 0) =>
+      calibrateIndexBySwipe(displacementX, displacementY),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
     swipeEndDown: () => {
@@ -219,7 +244,10 @@ export const Carousel = (props) => {
     <div className={carouselWrapperMinimizedClassName} style={props.style} />
   );
   const carouselMaximizedBackground = isMaximized && (
-    <div className={styles.carouselWrapperMaximized} />
+    <div
+      ref={maximizedBackgroundRef}
+      className={styles.carouselWrapperMaximized}
+    />
   );
 
   /* process widgets */

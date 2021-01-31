@@ -10,7 +10,6 @@
   right: 0;
   bottom: 0;
   z-index: 2;
-
   width: 100vw;
   height: 100vh;
   /*noinspection CssInvalidPropertyValue*/
@@ -18,6 +17,8 @@
   /*noinspection CssInvalidPropertyValue*/
   max-height: stretch;
   background-color: #fff;
+  transform: scale(1);
+  transform-origin: top center;
 }
 
 .carousel {

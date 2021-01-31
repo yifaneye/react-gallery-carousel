@@ -64,7 +64,7 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
     const swipeXDisplacement = event.changedTouches[0].clientX - swipeStartX;
     const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
     handleVerticalMovement(event, swipeXDisplacement, swipeYDisplacement);
-    swipeMove(swipeXDisplacement);
+    swipeMove(swipeXDisplacement, swipeYDisplacement);
     isTouchMoved = true;
   };
 
