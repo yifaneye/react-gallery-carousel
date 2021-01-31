@@ -14,6 +14,8 @@
   width: 100vw;
   height: 100vh;
   /*noinspection CssInvalidPropertyValue*/
+  max-width: stretch;
+  /*noinspection CssInvalidPropertyValue*/
   max-height: stretch;
   background-color: #fff;
 }
