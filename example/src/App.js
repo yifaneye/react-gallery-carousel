@@ -11,6 +11,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       sizeButtons='topLeft'
       indexBoard='topRight'
       indicatorButtons={false}
+      shouldCloseOnSwipeDown={false}
       style={{ height: '20vh' }}
     >
       <div>

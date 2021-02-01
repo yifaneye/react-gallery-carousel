@@ -210,10 +210,12 @@ export const Carousel = (props) => {
 
   /* handle swipe */
   const handleSwipeMoveDown = (displacement) => {
+    if (!props.shouldCloseOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacement);
   };
 
   const handleSwipeEndDown = () => {
+    if (!props.shouldCloseOnSwipeDown) return;
     setIsMaximized(() => false);
     rollBackUpdateIndex();
   };
@@ -381,6 +383,7 @@ Carousel.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
+  shouldCloseOnSwipeDown: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -401,5 +404,6 @@ Carousel.defaultProps = {
   indexBoard: 'topLeft',
   mediaButtons: 'topCenter',
   sizeButtons: 'topRight',
-  indicatorButtons: 'bottom'
+  indicatorButtons: 'bottom',
+  shouldCloseOnSwipeDown: true
 };
