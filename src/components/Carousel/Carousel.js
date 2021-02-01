@@ -148,14 +148,7 @@ export const Carousel = (props) => {
   // store isMaximized to combat stale closure
   const isMaximizedRef = useRef(isMaximized);
   isMaximizedRef.current = isMaximized;
-  const calibrateIndexBySwipe = (
-    swipeXDisplacement,
-    swipeYDisplacement = 0
-  ) => {
-    if (Math.abs(swipeXDisplacement) < swipeYDisplacement) {
-      if (isMaximizedRef.current) applyTransitionY(swipeYDisplacement);
-      return;
-    }
+  const calibrateIndexBySwipe = (swipeXDisplacement) => {
     setIsPlaying(false);
     slides.calibrateIndex(-swipeXDisplacement);
     applyTransitionX(swipeXDisplacement);
@@ -170,7 +163,7 @@ export const Carousel = (props) => {
     },
     [slides, applyTransitionDuration, applyTransitionX, setCurIndex]
   );
-  const rollBackUpdate = () => updateIndexBySwipe(0, 0);
+  const rollBackUpdateIndex = () => updateIndexBySwipe(0, 0);
 
   const updateIndexByAutoPlay = useCallback(
     (change) => {
@@ -191,7 +184,7 @@ export const Carousel = (props) => {
   const goLeft = useCallback(() => updateIndex(-1), [updateIndex]);
   const goRight = useCallback(() => updateIndex(+1), [updateIndex]);
 
-  useEventListener(window, 'orientationchange', rollBackUpdate);
+  useEventListener(window, 'orientationchange', rollBackUpdateIndex);
 
   /* handle explicit current index update */
   const goToIndex = (index) => {
@@ -216,15 +209,21 @@ export const Carousel = (props) => {
   });
 
   /* handle swipe */
+  const handleSwipeMoveDown = (displacement) => {
+    if (isMaximizedRef.current) applyTransitionY(displacement);
+  };
+
+  const handleSwipeEndDown = () => {
+    setIsMaximized(() => false);
+    rollBackUpdateIndex();
+  };
+
   const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
-    swipeMove: (displacementX, displacementY = 0) =>
-      calibrateIndexBySwipe(displacementX, displacementY),
+    swipeMove: (displacementX) => calibrateIndexBySwipe(displacementX),
+    swipeMoveDown: (displacementY) => handleSwipeMoveDown(displacementY),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
-    swipeEndDown: () => {
-      setIsMaximized(() => false);
-      rollBackUpdate();
-    },
+    swipeEndDown: () => handleSwipeEndDown(),
     swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
   });
 
