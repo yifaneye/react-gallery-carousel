@@ -7,6 +7,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
     <Carousel
       isLoop={false}
+      widgetsShadow={true}
       arrowButtons={true}
       sizeButtons='topLeft'
       indexBoard='topRight'

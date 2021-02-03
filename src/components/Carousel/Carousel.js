@@ -400,7 +400,7 @@ Carousel.defaultProps = {
   transitionSpeed: 1.5, // px/ms
   thumbnails: true,
   arrowButtons: true,
-  widgetsShadow: true,
+  widgetsShadow: false,
   indexBoard: 'topLeft',
   mediaButtons: 'topCenter',
   sizeButtons: 'topRight',
