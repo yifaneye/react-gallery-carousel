@@ -1,6 +1,5 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './Image.module.css';
-import { LoadingSpinner } from '../Widgets';
 import PropTypes from 'prop-types';
 import placeholder from 'placeholderImage.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
@@ -8,31 +7,34 @@ import useIntersectionObserver from '../../utils/useIntersectionObserver';
 const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
-  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
+  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
 
   const handleLoad = () => {
-    if (isInViewport) setIsFullyLoaded(true);
+    if (isInViewport) setIsThumbnailLoaded(true);
   };
 
+  const source = isThumbnailLoaded
+    ? props.src
+    : isInViewport
+    ? props.thumbnail
+    : placeholder;
+
   return (
-    <>
-      {!isFullyLoaded && <LoadingSpinner hasShadow={props.hasShadow} />}
-      <img
-        ref={imageRef}
-        className={styles.image}
-        src={isInViewport ? props.src : props.thumbnail}
-        alt={props.title}
-        aria-label={props.title}
-        title={props.title}
-        loading='lazy'
-        style={{ objectFit: props.objectFit }}
-        onLoad={handleLoad}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = placeholder;
-        }}
-      />
-    </>
+    <img
+      ref={imageRef}
+      className={styles.image}
+      src={source}
+      alt={props.title}
+      aria-label={props.title}
+      title={props.title}
+      loading='lazy'
+      style={{ objectFit: props.objectFit }}
+      onLoad={handleLoad}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = placeholder;
+      }}
+    />
   );
 };
 
@@ -45,41 +47,42 @@ LazyLoadedImage.propTypes = {
 };
 
 export const Image = (props) => {
+  const imageSource = props.image.src;
+  const imageThumbnail = props.image.thumbnail || placeholder;
   const imageTitle = props.image.alt || null;
-  const [isFullyLoaded, setIsFullyLoaded] = useState(false);
+  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
   const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
-
-  const handleLoad = () => setIsFullyLoaded(true);
 
   if (props.lazyLoad)
     return (
       <LazyLoadedImage
-        src={props.image.src}
-        thumbnail={props.image.thumbnail || placeholder}
+        src={imageSource}
+        thumbnail={imageThumbnail}
         title={imageTitle}
         objectFit={objectFit}
         hasShadow={props.hasShadow}
       />
     );
 
+  const handleLoad = () => setIsThumbnailLoaded(true);
+
+  const source = isThumbnailLoaded ? imageSource : placeholder;
+
   return (
-    <>
-      {!isFullyLoaded && <LoadingSpinner hasShadow={props.hasShadow} />}
-      <img
-        className={styles.image}
-        src={props.image.src}
-        alt={imageTitle}
-        aria-label={imageTitle}
-        title={imageTitle}
-        loading='auto'
-        style={{ objectFit: objectFit }}
-        onLoad={handleLoad}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = placeholder;
-        }}
-      />
-    </>
+    <img
+      className={styles.image}
+      src={source}
+      alt={imageTitle}
+      aria-label={imageTitle}
+      title={imageTitle}
+      loading='auto'
+      style={{ objectFit: objectFit }}
+      onLoad={handleLoad}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = placeholder;
+      }}
+    />
   );
 };
 
