@@ -30,10 +30,7 @@ const LazyLoadedImage = (props) => {
       loading='lazy'
       style={{ objectFit: props.objectFit }}
       onLoad={handleLoad}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = placeholder;
-      }}
+      onError={props.onError}
     />
   );
 };
@@ -53,6 +50,11 @@ export const Image = (props) => {
   const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
   const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
 
+  const handleError = (event) => {
+    event.target.onerror = null;
+    event.target.src = placeholder;
+  };
+
   if (props.lazyLoad)
     return (
       <LazyLoadedImage
@@ -61,6 +63,7 @@ export const Image = (props) => {
         title={imageTitle}
         objectFit={objectFit}
         hasShadow={props.hasShadow}
+        onError={handleError}
       />
     );
 
@@ -78,10 +81,7 @@ export const Image = (props) => {
       loading='auto'
       style={{ objectFit: objectFit }}
       onLoad={handleLoad}
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = placeholder;
-      }}
+      onError={handleError}
     />
   );
 };

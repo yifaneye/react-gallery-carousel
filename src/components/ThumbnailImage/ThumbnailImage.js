@@ -22,13 +22,19 @@ const LazyLoadedImage = (props) => {
       aria-label={props.title}
       title={props.title}
       loading='lazy'
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = placeholder;
-      }}
+      onError={props.onError}
       onClick={props.clickCallback}
     />
   );
+};
+
+LazyLoadedImage.propTypes = {
+  className: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  isCurrent: PropTypes.bool.isRequired,
+  onError: PropTypes.func.isRequired,
+  clickCallback: PropTypes.func.isRequired
 };
 
 export const ThumbnailImage = (props) => {
@@ -38,6 +44,11 @@ export const ThumbnailImage = (props) => {
   const imageClassName = `${styles.image}${
     props.isCurrent ? ' ' + styles.currentImage : ''
   }`;
+
+  const handleError = (event) => {
+    event.target.onerror = null;
+    event.target.src = placeholder;
+  };
 
   useAnchor(imageRef, props.isCurrent);
 
@@ -49,6 +60,7 @@ export const ThumbnailImage = (props) => {
         title={imageTitle}
         isCurrent={props.isCurrent}
         clickCallback={props.clickCallback}
+        onError={handleError}
       />
     );
 
@@ -61,21 +73,10 @@ export const ThumbnailImage = (props) => {
       aria-label={imageTitle}
       title={imageTitle}
       loading='auto'
-      onError={(e) => {
-        e.target.onerror = null;
-        e.target.src = placeholder;
-      }}
+      onError={handleError}
       onClick={props.clickCallback}
     />
   );
-};
-
-LazyLoadedImage.propTypes = {
-  className: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  isCurrent: PropTypes.bool.isRequired,
-  clickCallback: PropTypes.func.isRequired
 };
 
 ThumbnailImage.propTypes = {
