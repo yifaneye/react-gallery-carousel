@@ -59,7 +59,7 @@ To customize the carousel, use the following props:
 |transitionDurationMax |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionMin'.|
 |thumbnails            |Boolean               |true       |If true, the carousel shows thumbnails.|
 |arrowButtons          |Boolean               |true       |If true, the carousel shows arrow buttons (i.e. left and right).|
-|widgetsShadow         |Boolean               |true       |If true, the following widgets have shadows.|
+|widgetsShadow         |Boolean               |false      |If true, the following widgets have shadows. If true, the transition will drop frames when there are a large number (> 20) of images on all tested browsers (Safari, Chrome, Opera, Edge), except Firefox.|
 |indexBoard            |Boolean or String     |'topLeft'  |If false, the carousel does not show index board (e.g. 8/10). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |mediaButtons          |Boolean or String     |'topCenter'|If false, the carousel does not show media buttons (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |sizeButtons           |Boolean or String     |'topRight' |If false, the carousel does not show size buttons (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|

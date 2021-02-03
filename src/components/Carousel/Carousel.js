@@ -134,7 +134,7 @@ export const Carousel = (props) => {
   const applyTransitionX = useCallback(
     (swipeDisplacement = 0) => {
       applyTransitionY(0);
-      slidesRef.current.style.transform = `translate3d(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px), 0px, 0px)`;
+      slidesRef.current.style.transform = `translateX(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px))`;
     },
     [applyTransitionY, slides.curIndex]
   );

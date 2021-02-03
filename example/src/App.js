@@ -128,7 +128,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 };
 
 const App = () => {
-  const imageIDs = Array(20)
+  const imageIDs = Array(160)
     .fill(1)
     .map((_, i) => i + 1);
   const images = imageIDs.map((imageID) => ({
@@ -167,7 +167,7 @@ const App = () => {
         transitionDurationMin={300} // 300 milliseconds of minimum transition duration
         transitionDurationMax={700} // 700 milliseconds of minimum transition duration
         arrowButtons={true}
-        thumbnails={false}
+        thumbnails={true}
         mediaButtons='bottomLeft'
         sizeButtons='bottomRight'
         indexBoard='bottomCenter'
