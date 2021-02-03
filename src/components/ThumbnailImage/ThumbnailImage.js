@@ -11,11 +11,13 @@ const LazyLoadedImage = (props) => {
 
   useAnchor(imageRef, props.isCurrent);
 
+  const source = isInViewport ? props.src : placeholder;
+
   return (
     <img
       ref={imageRef}
       className={props.className}
-      src={isInViewport ? props.src : placeholder}
+      src={source}
       alt={props.title}
       aria-label={props.title}
       title={props.title}
@@ -31,7 +33,7 @@ const LazyLoadedImage = (props) => {
 
 export const ThumbnailImage = (props) => {
   const imageRef = useRef(null);
-  const imageSource = props.image.thumbnail || props.image.src || placeholder;
+  const imageSource = props.image.thumbnail || props.image.src;
   const imageTitle = props.image.alt || null;
   const imageClassName = `${styles.image}${
     props.isCurrent ? ' ' + styles.currentImage : ''
@@ -69,8 +71,10 @@ export const ThumbnailImage = (props) => {
 };
 
 LazyLoadedImage.propTypes = {
+  className: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  isCurrent: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 
@@ -81,5 +85,6 @@ ThumbnailImage.propTypes = {
     thumbnail: PropTypes.string
   }).isRequired,
   lazyLoad: PropTypes.bool.isRequired,
+  isCurrent: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
