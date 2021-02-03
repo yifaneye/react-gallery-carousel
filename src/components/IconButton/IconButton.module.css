@@ -78,17 +78,18 @@
 }
 
 .circle {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background-size: 15px 15px;
-  background-image: url("data:image/svg+xml,%3Csvg height='10' preserveAspectRatio='xMidYMid meet' viewBox='0 0 10 10' width='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z' fill='%23aaa'/%3E%3C/svg%3E");
+  background-size: 10px 10px;
+  background-image: url("data:image/svg+xml,%3Csvg height='10' preserveAspectRatio='xMidYMid meet' viewBox='0 0 10 10' width='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z' fill='%23bbb'/%3E%3C/svg%3E");
 }
 
 .circleLight {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.75;
   border-radius: 50%;
-  background-size: 15px 15px;
+  background-size: 10px 10px;
   background-image: url("data:image/svg+xml,%3Csvg height='10' preserveAspectRatio='xMidYMid meet' viewBox='0 0 10 10' width='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z' fill='%23fff'/%3E%3C/svg%3E")
 }
