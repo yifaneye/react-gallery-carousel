@@ -200,7 +200,7 @@ export const Carousel = (props) => {
     {}
   );
 
-  /* handle key press */
+  /* handle keyboard events */
   useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
   useKeyboard(carouselWrapperRef);
   useKeys(slidesRef, {
@@ -208,7 +208,7 @@ export const Carousel = (props) => {
     ArrowRight: () => updateIndex(+1)
   });
 
-  /* handle swipe */
+  /* handle mouse and touch events */
   const handleSwipeMoveDown = (displacement) => {
     if (!props.shouldCloseOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacement);
@@ -220,13 +220,21 @@ export const Carousel = (props) => {
     rollBackUpdateIndex();
   };
 
+  const handleTap = () => {
+    if (isMaximizedRef.current && props.shouldCloseOnTap)
+      setIsMaximized(() => false);
+    else if (!isMaximizedRef.current && props.shouldMaximizeOnTap)
+      setIsMaximized(() => true);
+  };
+
   const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
     swipeMove: (displacementX) => calibrateIndexBySwipe(displacementX),
     swipeMoveDown: (displacementY) => handleSwipeMoveDown(displacementY),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
-    swipeEndDown: () => handleSwipeEndDown(),
-    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement)
+    swipeEndDown: handleSwipeEndDown,
+    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement),
+    tap: handleTap
   });
 
   /* process styles */
@@ -383,6 +391,8 @@ Carousel.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
+  shouldMaximizeOnTap: PropTypes.bool.isRequired,
+  shouldCloseOnTap: PropTypes.bool.isRequired,
   shouldCloseOnSwipeDown: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
@@ -405,5 +415,7 @@ Carousel.defaultProps = {
   mediaButtons: 'topCenter',
   sizeButtons: 'topRight',
   indicatorButtons: 'bottom',
+  shouldMaximizeOnTap: true,
+  shouldCloseOnTap: true,
   shouldCloseOnSwipeDown: true
 };

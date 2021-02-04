@@ -174,6 +174,9 @@ const App = () => {
         indexBoard='bottomCenter'
         indicatorButtons={false}
         widgetsShadow={false}
+        shouldMaximizeOnTap={false}
+        shouldCloseOnTap={false}
+        shouldCloseOnSwipeDown={false}
         className='framed'
         style={{ height: '40vh' }}
       />

@@ -64,7 +64,10 @@ To customize the carousel, use the following props:
 |mediaButtons          |Boolean or String     |'topCenter'|If false, the carousel does not show media buttons (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |sizeButtons           |Boolean or String     |'topRight' |If false, the carousel does not show size buttons (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |indicatorButtons      |Boolean or String     |'bottom'   |If false, the carousel does not show indicator buttons (i.e. array of dots). Its position can be specified by one of ['top', 'bottom']|
+|shouldMaximizeOnTap   |Boolean               |true       |If true, the carousel can be maximized by tapping.|
+|shouldCloseOnTap      |Boolean               |true       |If true, the maximized carousel can be closed by tapping.|
 |shouldCloseOnSwipeDown|Boolean               |true       |If true, the maximized carousel can be closed by swiping down.|
+
 ## License
 
 MIT © [yifaneye](https://github.com/yifaneye/react-gallery-carousel)

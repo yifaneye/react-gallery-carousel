@@ -11,7 +11,8 @@ const useSwipe = (
     swipeEndRight,
     swipeEndLeft,
     swipeEndDown,
-    swipeEndDisqualified
+    swipeEndDisqualified,
+    tap
   }
 ) => {
   const swipeEnd = (swipeXDisplacement, swipeYDisplacement = 0) => {
@@ -28,7 +29,11 @@ const useSwipe = (
       swipeXDisplacement >= swipeXDistanceMin
     )
       swipeEndRight(swipeXDisplacement);
-    else if (swipeYDisplacement > swipeYDistanceMin) swipeEndDown();
+    else if (
+      Math.abs(swipeXDisplacement) < Math.abs(swipeYDisplacement) &&
+      swipeYDisplacement >= swipeYDistanceMin
+    )
+      swipeEndDown();
     else swipeEndDisqualified(swipeXDisplacement);
   };
 
@@ -40,7 +45,7 @@ const useSwipe = (
   };
 
   // have to use event listeners (active event listeners) to deal with undesired tiny vertical movements
-  useTouch(elementRef, { swipeMove: swipeMove, swipeEnd: swipeEnd });
+  useTouch(elementRef, { swipeMove: swipeMove, swipeEnd: swipeEnd, tap: tap });
 
   const mouseEventHandlers = useMouse({
     swipeMove: swipeMove,

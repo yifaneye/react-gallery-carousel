@@ -35,7 +35,7 @@ const getTouchDistinguisher = () => {
   return { isPinch };
 };
 
-const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
+const useTouch = (elementRef, { swipeMove, swipeEnd, tap }) => {
   const touchDistinguisher = getTouchDistinguisher();
   let swipeStartX = 0;
   let swipeStartY = 0;
@@ -77,6 +77,7 @@ const useTouch = (elementRef, { swipeMove, swipeEnd }) => {
     const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
     handleVerticalMovement(event, swipeXDisplacement, swipeYDisplacement);
     if (isTouchMoved) swipeEnd(swipeXDisplacement, swipeYDisplacement);
+    else tap();
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };
 
