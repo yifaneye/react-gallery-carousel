@@ -227,7 +227,7 @@ export const Carousel = (props) => {
       setIsMaximized(() => true);
   };
 
-  const swipeEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
+  const mouseEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
     swipeMove: (displacementX) => calibrateIndexBySwipe(displacementX),
     swipeMoveDown: (displacementY) => handleSwipeMoveDown(displacementY),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
@@ -335,7 +335,7 @@ export const Carousel = (props) => {
           className={`${styles.carousel}${
             props.thumbnails ? ' ' + styles.shorterCarousel : ''
           }`}
-          {...swipeEventHandlers}
+          {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           {indexBoard}
           {mediaButtons}
@@ -391,6 +391,7 @@ Carousel.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
+  shouldSwipeOnMouse: PropTypes.bool.isRequired,
   shouldMaximizeOnTap: PropTypes.bool.isRequired,
   shouldCloseOnTap: PropTypes.bool.isRequired,
   shouldCloseOnSwipeDown: PropTypes.bool.isRequired,
@@ -415,6 +416,7 @@ Carousel.defaultProps = {
   mediaButtons: 'topCenter',
   sizeButtons: 'topRight',
   indicatorButtons: 'bottom',
+  shouldSwipeOnMouse: true,
   shouldMaximizeOnTap: true,
   shouldCloseOnTap: true,
   shouldCloseOnSwipeDown: true
