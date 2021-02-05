@@ -53,14 +53,18 @@ const useTouch = (elementRef, { swipeMove, swipeEnd, tap }) => {
       event.preventDefault();
   };
 
+  const isPinch = (event) =>
+    ('visualViewport' in window && window.visualViewport.scale > 1) ||
+    touchDistinguisher.isPinch(event);
+
   const handleTouchStart = (event) => {
-    if (touchDistinguisher.isPinch(event)) return;
+    if (isPinch(event)) return;
     swipeStartX = event.touches[0].clientX;
     swipeStartY = event.touches[0].clientY;
   };
 
   const handleTouchMove = (event) => {
-    if (touchDistinguisher.isPinch(event)) return;
+    if (isPinch(event)) return;
     const swipeXDisplacement = event.changedTouches[0].clientX - swipeStartX;
     const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
     handleVerticalMovement(event, swipeXDisplacement, swipeYDisplacement);
@@ -69,7 +73,7 @@ const useTouch = (elementRef, { swipeMove, swipeEnd, tap }) => {
   };
 
   const handleTouchEnd = (event) => {
-    if (touchDistinguisher.isPinch(event)) {
+    if (isPinch(event)) {
       swipeEnd(0, 0);
       return;
     }
