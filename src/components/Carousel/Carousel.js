@@ -210,20 +210,20 @@ export const Carousel = (props) => {
 
   /* handle mouse and touch events */
   const handleSwipeMoveDown = (displacement) => {
-    if (!props.shouldCloseOnSwipeDown) return;
+    if (!props.shouldMinimizeOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacement);
   };
 
   const handleSwipeEndDown = () => {
-    if (!props.shouldCloseOnSwipeDown) return;
+    if (!props.shouldMinimizeOnSwipeDown) return;
     setIsMaximized(() => false);
     rollBackUpdateIndex();
   };
 
-  const handleTap = () => {
-    if (isMaximizedRef.current && props.shouldCloseOnTap)
+  const handleClick = () => {
+    if (isMaximizedRef.current && props.shouldMinimizeOnClick)
       setIsMaximized(() => false);
-    else if (!isMaximizedRef.current && props.shouldMaximizeOnTap)
+    else if (!isMaximizedRef.current && props.shouldMaximizeOnClick)
       setIsMaximized(() => true);
   };
 
@@ -234,7 +234,7 @@ export const Carousel = (props) => {
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
     swipeEndDown: handleSwipeEndDown,
     swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement),
-    tap: handleTap
+    click: handleClick
   });
 
   /* process styles */
@@ -394,9 +394,9 @@ Carousel.propTypes = {
     PropTypes.string.isRequired
   ]).isRequired,
   shouldSwipeOnMouse: PropTypes.bool.isRequired,
-  shouldMaximizeOnTap: PropTypes.bool.isRequired,
-  shouldCloseOnTap: PropTypes.bool.isRequired,
-  shouldCloseOnSwipeDown: PropTypes.bool.isRequired,
+  shouldMaximizeOnClick: PropTypes.bool.isRequired,
+  shouldMinimizeOnClick: PropTypes.bool.isRequired,
+  shouldMinimizeOnSwipeDown: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
@@ -420,7 +420,7 @@ Carousel.defaultProps = {
   sizeButtons: 'topRight',
   indicatorButtons: 'bottom',
   shouldSwipeOnMouse: true,
-  shouldMaximizeOnTap: true,
-  shouldCloseOnTap: true,
-  shouldCloseOnSwipeDown: true
+  shouldMaximizeOnClick: true,
+  shouldMinimizeOnClick: true,
+  shouldMinimizeOnSwipeDown: true
 };

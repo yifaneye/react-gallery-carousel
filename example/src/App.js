@@ -13,7 +13,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       indexBoard='topRight'
       indicatorButtons={false}
       shouldSwipeOnMouse={false}
-      shouldCloseOnSwipeDown={false}
+      shouldMinimizeOnSwipeDown={false}
       style={{ height: '40vh', userSelect: 'text' }}
     >
       <div>
@@ -176,9 +176,9 @@ const App = () => {
         indexBoard='topCenter'
         indicatorButtons={false}
         widgetsShadow={false}
-        shouldMaximizeOnTap={false}
-        shouldCloseOnTap={false}
-        shouldCloseOnSwipeDown={false}
+        shouldMaximizeOnClick={false}
+        shouldMinimizeOnClick={false}
+        shouldMinimizeOnSwipeDown={false}
         className='framed'
         style={{ height: '600px' }}
       />

@@ -12,7 +12,7 @@ const useSwipe = (
     swipeEndLeft,
     swipeEndDown,
     swipeEndDisqualified,
-    tap
+    click
   }
 ) => {
   const swipeEnd = (swipeXDisplacement, swipeYDisplacement = 0) => {
@@ -45,11 +45,16 @@ const useSwipe = (
   };
 
   // have to use event listeners (active event listeners) to deal with undesired tiny vertical movements
-  useTouch(elementRef, { swipeMove: swipeMove, swipeEnd: swipeEnd, tap: tap });
+  useTouch(elementRef, {
+    swipeMove: swipeMove,
+    swipeEnd: swipeEnd,
+    click: click
+  });
 
   const mouseEventHandlers = useMouse({
     swipeMove: swipeMove,
-    swipeEnd: swipeEnd
+    swipeEnd: swipeEnd,
+    click: click
   });
 
   useNoDrag(elementRef); // prevent dragging on FireFox
