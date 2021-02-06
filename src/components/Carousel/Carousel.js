@@ -389,6 +389,10 @@ Carousel.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
+  caption: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired,
   shouldSwipeOnMouse: PropTypes.bool.isRequired,
   shouldMaximizeOnTap: PropTypes.bool.isRequired,
   shouldCloseOnTap: PropTypes.bool.isRequired,
@@ -407,6 +411,7 @@ Carousel.defaultProps = {
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.05, // * 100%
   transitionSpeed: 1.5, // px/ms
+  caption: false,
   thumbnails: true,
   arrowButtons: true,
   widgetsShadow: false,

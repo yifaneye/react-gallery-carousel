@@ -57,6 +57,7 @@ To customize the carousel, use the following props:
 |transitionSpeed       |Number                |1.5        |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
 |transitionDurationMin |Number                |undefined  |Minimum transition duration (in milliseconds).|
 |transitionDurationMax |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionMin'.|
+|caption               |Boolean               |false      |If true, the carousel shows caption for each image.|
 |thumbnails            |Boolean               |true       |If true, the carousel shows thumbnails.|
 |arrowButtons          |Boolean               |true       |If true, the carousel shows arrow buttons (i.e. left and right).|
 |widgetsShadow         |Boolean               |false      |If true, the following widgets have shadows. If true, the transition will drop frames when there are a large number (> 20) of images on all tested browsers (Safari, Chrome, Opera, Edge), except Firefox.|

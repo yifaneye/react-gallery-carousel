@@ -1,7 +1,8 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment, memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '../IconButton';
 import styles from './Widgets.module.css';
+import useNoSwipe from '../../utils/useNoSwipe';
 
 export const ArrowButtons = memo((props) => {
   const leftButton = !props.isLeftDisabled && (
@@ -111,9 +112,9 @@ export const IndexBoard = memo((props) => {
         (props.hasShadow ? ' ' + styles.shadow : '')
       }
     >
-      <div className={styles.text}>
+      <span className={styles.text}>
         {props.curIndex} / {props.totalIndices}
-      </div>
+      </span>
     </div>
   );
 });
@@ -181,4 +182,34 @@ export const LoadingSpinner = memo((props) => {
 
 LoadingSpinner.propTypes = {
   hasShadow: PropTypes.bool.isRequired
+};
+
+export const Caption = memo((props) => {
+  const captionRef = useRef(null);
+
+  // allow the user to select hasCaptions text using cursor or finger
+  useNoSwipe(captionRef);
+
+  const caption = props.text ? props.text : '';
+
+  return (
+    <figcaption
+      ref={captionRef}
+      className={
+        styles.widgetWrapper +
+        ' ' +
+        styles.captionWrapper +
+        ' ' +
+        styles[props.position]
+      }
+      style={props.position === false || !caption ? { display: 'none' } : null}
+    >
+      <span className={styles.text}>{caption}</span>
+    </figcaption>
+  );
+});
+
+Caption.propTypes = {
+  text: PropTypes.string,
+  position: PropTypes.oneOf([false, 'top', 'bottom']).isRequired
 };

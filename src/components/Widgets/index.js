@@ -4,5 +4,6 @@ export {
   SizeButtons,
   IndicatorButtons,
   IndexBoard,
+  Caption,
   LoadingSpinner
 } from './Widgets';

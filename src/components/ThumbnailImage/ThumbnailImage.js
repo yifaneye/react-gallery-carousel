@@ -31,7 +31,7 @@ const LazyLoadedImage = (props) => {
 LazyLoadedImage.propTypes = {
   className: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   isCurrent: PropTypes.bool.isRequired,
   onError: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired

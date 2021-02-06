@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import styles from './Image.module.css';
 import PropTypes from 'prop-types';
 import placeholder from 'placeholderImage.jpg';
+import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 
 const LazyLoadedImage = (props) => {
@@ -20,27 +21,33 @@ const LazyLoadedImage = (props) => {
     : placeholder;
 
   return (
-    <img
-      ref={imageRef}
-      className={styles.image}
-      src={source}
-      alt={props.title}
-      aria-label={props.title}
-      title={props.title}
-      loading='lazy'
-      style={{ objectFit: props.objectFit }}
-      onLoad={handleLoad}
-      onError={props.onError}
-    />
+    <figure className={styles.figure}>
+      <img
+        ref={imageRef}
+        className={styles.image}
+        src={source}
+        alt={props.title}
+        aria-label={props.title}
+        loading='lazy'
+        style={{ objectFit: props.objectFit }}
+        onLoad={handleLoad}
+        onError={props.onError}
+      />
+      <Caption text={props.title} position={props.caption} />
+    </figure>
   );
 };
 
 LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   objectFit: PropTypes.string,
-  hasShadow: PropTypes.bool.isRequired
+  hasShadow: PropTypes.bool.isRequired,
+  onError: PropTypes.func.isRequired,
+  caption: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired
 };
 
 export const Image = (props) => {
@@ -63,6 +70,7 @@ export const Image = (props) => {
         title={imageTitle}
         objectFit={objectFit}
         hasShadow={props.hasShadow}
+        caption={props.caption}
         onError={handleError}
       />
     );
@@ -72,17 +80,19 @@ export const Image = (props) => {
   const source = isThumbnailLoaded ? imageSource : placeholder;
 
   return (
-    <img
-      className={styles.image}
-      src={source}
-      alt={imageTitle}
-      aria-label={imageTitle}
-      title={imageTitle}
-      loading='auto'
-      style={{ objectFit: objectFit }}
-      onLoad={handleLoad}
-      onError={handleError}
-    />
+    <>
+      <img
+        className={styles.image}
+        src={source}
+        alt={imageTitle}
+        aria-label={imageTitle}
+        loading='auto'
+        style={{ objectFit: objectFit }}
+        onLoad={handleLoad}
+        onError={handleError}
+      />
+      {props.caption && <Caption text={props.title} position={props.caption} />}
+    </>
   );
 };
 
@@ -95,5 +105,9 @@ Image.propTypes = {
   lazyLoad: PropTypes.bool.isRequired,
   objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
     .isRequired,
-  hasShadow: PropTypes.bool.isRequired
+  hasShadow: PropTypes.bool.isRequired,
+  caption: PropTypes.oneOfType([
+    PropTypes.bool.isRequired,
+    PropTypes.string.isRequired
+  ]).isRequired
 };

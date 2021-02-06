@@ -1,12 +1,21 @@
+.figure {
+  position: relative;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+
 .image {
   height: 100%;
   width: 100%;
   margin: auto;
-  background-color: #000;
   object-fit: cover;
   user-select: none;
-  cursor: default;
-  text-align: center;
   -webkit-user-drag: none;
-  box-sizing: border-box;
+  cursor: grab;
 }
