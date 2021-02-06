@@ -332,9 +332,7 @@ export const Carousel = (props) => {
       >
         <div
           ref={carouselRef}
-          className={`${styles.carousel}${
-            props.thumbnails ? ' ' + styles.shorterCarousel : ''
-          }`}
+          className={styles.carousel}
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           {indexBoard}

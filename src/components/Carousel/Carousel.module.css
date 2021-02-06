@@ -1,6 +1,9 @@
 .carouselWrapper {
   position: relative;
   user-select: none;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
 }
 
 .carouselWrapperMaximized {
@@ -19,6 +22,9 @@
   background-color: #fff;
   transform: scale(1);
   transform-origin: top center;
+  display: flex;
+  flex-flow: column;
+  align-items: stretch;
 }
 
 .carousel {
@@ -32,10 +38,7 @@
   align-items: flex-start;
   touch-action: manipulation;
   box-sizing: border-box;
-}
-
-.shorterCarousel {
-  height: calc(90% - 5px) !important;
+  flex: 0 1 auto;
 }
 
 .galleryCarousel {

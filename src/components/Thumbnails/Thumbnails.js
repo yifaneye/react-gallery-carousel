@@ -11,25 +11,23 @@ export const Thumbnails = memo((props) => {
   const wheelEventHandler = useNoOverScroll(thumbnailsRef);
 
   return (
-    <div className={styles.ThumbnailsWrapper + ' ' + styles.bottomCenter}>
-      <div
-        ref={thumbnailsRef}
-        className={styles.thumbnailsContainer}
-        onWheel={wheelEventHandler}
-      >
-        {Object.keys(callbacks).map((key, index) => {
-          return (
-            <Thumbnail
-              key={index}
-              slide={props.slides[key]}
-              isImage={props.hasImages}
-              lazyLoad={props.lazyLoad}
-              isCurrent={Number(key) === props.curIndex}
-              clickCallback={callbacks[key]}
-            />
-          );
-        })}
-      </div>
+    <div
+      ref={thumbnailsRef}
+      className={styles.thumbnailsContainer + ' ' + styles.bottomCenter}
+      onWheel={wheelEventHandler}
+    >
+      {Object.keys(callbacks).map((key, index) => {
+        return (
+          <Thumbnail
+            key={index}
+            slide={props.slides[key]}
+            isImage={props.hasImages}
+            lazyLoad={props.lazyLoad}
+            isCurrent={Number(key) === props.curIndex}
+            clickCallback={callbacks[key]}
+          />
+        );
+      })}
     </div>
   );
 });
