@@ -16,8 +16,7 @@ const useAnchor = (elementRef, shouldScrollToElement) => {
         left:
           element.offsetLeft -
           container.clientWidth / 2 +
-          element.clientWidth / 2,
-        behavior: 'smooth'
+          element.clientWidth / 2
       });
     };
 
