@@ -14,7 +14,6 @@ code {
 }
 
 .framed {
-  height: 40vh;
   border: 10px solid #bbb;
   overflow: hidden;
   border-radius: 20px;

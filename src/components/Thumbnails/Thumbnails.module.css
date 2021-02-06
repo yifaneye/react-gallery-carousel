@@ -4,6 +4,7 @@
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   -ms-scroll-chaining: none;
+  scroll-behavior: smooth;
   overscroll-behavior-x: contain;
   display: flex;
   flex-direction: row;

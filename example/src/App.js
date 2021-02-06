@@ -14,7 +14,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       indicatorButtons={false}
       shouldSwipeOnMouse={false}
       shouldCloseOnSwipeDown={false}
-      style={{ height: '20vh', userSelect: 'text' }}
+      style={{ height: '40vh', userSelect: 'text' }}
     >
       <div>
         <h1>react-gallery-carousel</h1>
@@ -152,7 +152,7 @@ const App = () => {
       <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
 
       {/*basic carousel example*/}
-      <Carousel images={images} style={{ height: '40vh' }} />
+      <Carousel images={images} style={{ height: '60vh' }} />
 
       {/*customized carousel example*/}
       <Carousel
@@ -180,7 +180,7 @@ const App = () => {
         shouldCloseOnTap={false}
         shouldCloseOnSwipeDown={false}
         className='framed'
-        style={{ height: '40vh' }}
+        style={{ height: '600px' }}
       />
     </div>
   );
