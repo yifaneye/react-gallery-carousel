@@ -198,7 +198,9 @@ export const Caption = memo((props) => {
         ' ' +
         styles.captionWrapper +
         ' ' +
-        styles[props.position]
+        styles[props.position] +
+        ' ' +
+        (props.hasShadow ? ' ' + styles.shadow : '')
       }
     >
       <span className={styles.text}>{props.text}</span>

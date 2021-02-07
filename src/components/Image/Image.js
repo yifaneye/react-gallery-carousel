@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './Image.module.css';
 import PropTypes from 'prop-types';
 import placeholder from 'placeholderImage.jpg';
@@ -34,7 +34,11 @@ const LazyLoadedImage = (props) => {
         onError={props.onError}
       />
       {props.caption && props.title && (
-        <Caption text={props.title} position={props.caption} />
+        <Caption
+          text={props.title}
+          position={props.caption}
+          hasShadow={props.hasShadow}
+        />
       )}
     </figure>
   );
@@ -82,7 +86,7 @@ export const Image = (props) => {
   const source = isThumbnailLoaded ? imageSource : placeholder;
 
   return (
-    <>
+    <figure className={styles.figure}>
       <img
         className={styles.image}
         src={source}
@@ -94,9 +98,13 @@ export const Image = (props) => {
         onError={handleError}
       />
       {props.caption && props.title && (
-        <Caption text={props.title} position={props.caption} />
+        <Caption
+          text={props.title}
+          position={props.caption}
+          hasShadow={props.hasShadow}
+        />
       )}
-    </>
+    </figure>
   );
 };
 
