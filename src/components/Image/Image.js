@@ -33,7 +33,9 @@ const LazyLoadedImage = (props) => {
         onLoad={handleLoad}
         onError={props.onError}
       />
-      <Caption text={props.title} position={props.caption} />
+      {props.caption && props.title && (
+        <Caption text={props.title} position={props.caption} />
+      )}
     </figure>
   );
 };
@@ -91,7 +93,9 @@ export const Image = (props) => {
         onLoad={handleLoad}
         onError={handleError}
       />
-      {props.caption && <Caption text={props.title} position={props.caption} />}
+      {props.caption && props.title && (
+        <Caption text={props.title} position={props.caption} />
+      )}
     </>
   );
 };

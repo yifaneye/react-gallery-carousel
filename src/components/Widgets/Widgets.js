@@ -190,8 +190,6 @@ export const Caption = memo((props) => {
   // allow the user to select hasCaptions text using cursor or finger
   useNoSwipe(captionRef);
 
-  const caption = props.text ? props.text : '';
-
   return (
     <figcaption
       ref={captionRef}
@@ -202,14 +200,13 @@ export const Caption = memo((props) => {
         ' ' +
         styles[props.position]
       }
-      style={props.position === false || !caption ? { display: 'none' } : null}
     >
-      <span className={styles.text}>{caption}</span>
+      <span className={styles.text}>{props.text}</span>
     </figcaption>
   );
 });
 
 Caption.propTypes = {
   text: PropTypes.string,
-  position: PropTypes.oneOf([false, 'top', 'bottom']).isRequired
+  position: PropTypes.oneOf(['top', 'bottom']).isRequired
 };
