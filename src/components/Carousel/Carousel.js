@@ -1,7 +1,6 @@
 import React, {
   Fragment,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState
@@ -60,12 +59,12 @@ export const Carousel = (props) => {
   const handleMediaButtonClick = useCallback(() => {
     setIsPlaying((isPlaying) => !isPlaying);
   }, [setIsPlaying]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (props.autoPlayPaused) setIsPlaying(false);
   }, [props.autoPlayPaused, setIsPlaying]);
 
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
 
