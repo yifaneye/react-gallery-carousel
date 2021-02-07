@@ -8,12 +8,12 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
     <Carousel
       isLoop={false}
       widgetsShadow={true}
-      arrowButtons={true}
-      sizeButtons='topLeft'
       indexBoard='topRight'
-      indicatorButtons={false}
-      shouldSwipeOnMouse={false}
-      shouldMinimizeOnSwipeDown={false}
+      sizeButtons='bottomLeft'
+      mediaButtons='bottomRight'
+      indicatorButtons='bottom'
+      shouldSwipeOnMouse={false} // for selecting text
+      shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       style={{ height: '40vh', userSelect: 'text' }}
     >
       <div>
@@ -157,28 +157,17 @@ const App = () => {
       {/*customized carousel example*/}
       <Carousel
         images={images}
-        isRTL
-        isLoop
-        lazyLoad
+        isRTL={true}
+        isLoop={false}
         objectFit={'contain'}
-        autoPlay
-        autoPlayPaused
-        autoPlayInterval={5000} // 5000 milliseconds auto play interval
-        swipeThreshold={0.1} // 10% of image width
-        transitionSpeed={1} // 1 pixels per millisecond
         transitionDurationMin={300} // 300 milliseconds of minimum transition duration
-        transitionDurationMax={700} // 700 milliseconds of minimum transition duration
-        caption={'bottom'}
-        arrowButtons={true}
-        thumbnails={true}
-        mediaButtons='topLeft'
-        sizeButtons='topRight'
-        indexBoard='topCenter'
-        indicatorButtons={false}
-        widgetsShadow={false}
-        shouldMaximizeOnClick={false}
-        shouldMinimizeOnClick={false}
-        shouldMinimizeOnSwipeDown={false}
+        transitionDurationMax={900} // 900 milliseconds of minimum transition duration
+        caption='top'
+        sizeButtons={false}
+        mediaButtons='bottomLeft'
+        indexBoard='bottomRight'
+        shouldMaximizeOnClick={true}
+        shouldMinimizeOnClick={true}
         className='framed'
         style={{ height: '600px' }}
       />

@@ -1,5 +1,9 @@
-.thumbnailsContainer {
-  height: 100%;
+.thumbnails {
+  --scale: 10%;
+
+  flex: 0 1 var(--scale);
+  height: var(--scale);
+  margin-top: 5px;
   overflow-y: hidden;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
@@ -13,12 +17,6 @@
   scrollbar-width: none;
 }
 
-.thumbnailsContainer::-webkit-scrollbar {
+.thumbnails::-webkit-scrollbar {
   display: none;
-}
-
-.bottomCenter {
-  flex: 0 1 10%;
-  height: 10%;
-  margin-top: 5px;
 }

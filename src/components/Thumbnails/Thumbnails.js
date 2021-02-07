@@ -13,7 +13,7 @@ export const Thumbnails = memo((props) => {
   return (
     <div
       ref={thumbnailsRef}
-      className={styles.thumbnailsContainer + ' ' + styles.bottomCenter}
+      className={styles.thumbnails}
       onWheel={wheelEventHandler}
     >
       {Object.keys(callbacks).map((key, index) => {

@@ -406,21 +406,21 @@ Carousel.defaultProps = {
   isLoop: true,
   lazyLoad: true,
   objectFit: 'cover',
-  autoPlay: false,
-  autoPlayPaused: false,
+  autoPlay: true,
+  autoPlayPaused: true,
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.05, // * 100%
-  transitionSpeed: 1.5, // px/ms
+  transitionSpeed: 1, // px/ms
+  widgetsShadow: false,
+  mediaButtons: 'topLeft',
+  indexBoard: 'topCenter',
+  sizeButtons: 'topRight',
+  arrowButtons: true,
   caption: false,
   thumbnails: true,
-  arrowButtons: true,
-  widgetsShadow: false,
-  indexBoard: 'topLeft',
-  mediaButtons: 'topCenter',
-  sizeButtons: 'topRight',
-  indicatorButtons: 'bottom',
+  indicatorButtons: false,
   shouldSwipeOnMouse: true,
-  shouldMaximizeOnClick: true,
-  shouldMinimizeOnClick: true,
+  shouldMaximizeOnClick: false,
+  shouldMinimizeOnClick: false,
   shouldMinimizeOnSwipeDown: true
 };

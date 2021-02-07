@@ -1,8 +1,10 @@
 .image {
+  --scale: 10%;
+
   height: 100%;
-  min-width: 11.11%;
-  width: 11.11%;
-  max-width: 11.11%;
+  min-width: var(--scale);
+  width: var(--scale);
+  max-width: var(--scale);
   opacity: 0.5;
   margin-right: 5px;
   object-fit: cover;
