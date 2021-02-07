@@ -367,7 +367,13 @@ Carousel.propTypes = {
   isRTL: PropTypes.bool.isRequired,
   isLoop: PropTypes.bool.isRequired,
   lazyLoad: PropTypes.bool.isRequired,
-  objectFit: PropTypes.string.isRequired,
+  objectFit: PropTypes.oneOf([
+    'contain',
+    'cover',
+    'fill',
+    'none',
+    'scale-down'
+  ]),
   autoPlay: PropTypes.bool.isRequired,
   autoPlayPaused: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(),
@@ -378,26 +384,35 @@ Carousel.propTypes = {
   thumbnails: PropTypes.bool.isRequired,
   widgetsShadow: PropTypes.bool.isRequired,
   arrowButtons: PropTypes.bool.isRequired,
-  indexBoard: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
+  indexBoard: PropTypes.oneOf([
+    false,
+    'topLeft',
+    'topCenter',
+    'topRight',
+    'bottomLeft',
+    'bottomCenter',
+    'bottomRight'
   ]).isRequired,
-  mediaButtons: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
+  mediaButtons: PropTypes.oneOf([
+    false,
+    'topLeft',
+    'topCenter',
+    'topRight',
+    'bottomLeft',
+    'bottomCenter',
+    'bottomRight'
   ]).isRequired,
-  sizeButtons: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
+  sizeButtons: PropTypes.oneOf([
+    false,
+    'topLeft',
+    'topCenter',
+    'topRight',
+    'bottomLeft',
+    'bottomCenter',
+    'bottomRight'
   ]).isRequired,
-  indicatorButtons: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired,
-  caption: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired,
+  indicatorButtons: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
+  caption: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
   shouldSwipeOnMouse: PropTypes.bool.isRequired,
   shouldMaximizeOnClick: PropTypes.bool.isRequired,
   shouldMinimizeOnClick: PropTypes.bool.isRequired,
