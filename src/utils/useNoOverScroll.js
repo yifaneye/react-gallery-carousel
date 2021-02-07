@@ -3,8 +3,9 @@ const useNoOverScroll = (elementRef) => {
     if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
     const { scrollLeft, scrollWidth, offsetWidth } = elementRef.current;
     if (
-      scrollLeft + event.deltaX < 0 ||
-      scrollLeft + event.deltaX > scrollWidth - offsetWidth
+      (scrollLeft + event.deltaX < 0 ||
+        scrollLeft + event.deltaX > scrollWidth - offsetWidth) &&
+      event.cancelable
     )
       event.preventDefault();
   };
