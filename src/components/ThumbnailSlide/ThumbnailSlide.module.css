@@ -19,12 +19,20 @@
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
+  font-size: var(--scale);
+}
+
+/* Only for Chrome */
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+  .slide {
+    font-size: 100%;
+  }
 }
 
 /* Only for FireFox */
 @-moz-document url-prefix() {
   .slide {
-    font-size: var(--scale);
+    font-size: 10%;
   }
 }
 

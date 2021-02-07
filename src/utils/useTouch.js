@@ -58,12 +58,14 @@ const useTouch = (elementRef, { swipeMove, swipeEnd, click }) => {
     touchDistinguisher.isPinch(event);
 
   const handleTouchStart = (event) => {
+    event.stopPropagation();
     if (isPinch(event)) return;
     swipeStartX = event.touches[0].clientX;
     swipeStartY = event.touches[0].clientY;
   };
 
   const handleTouchMove = (event) => {
+    event.stopPropagation();
     if (isPinch(event)) return;
     const swipeXDisplacement = event.changedTouches[0].clientX - swipeStartX;
     const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
@@ -73,6 +75,7 @@ const useTouch = (elementRef, { swipeMove, swipeEnd, click }) => {
   };
 
   const handleTouchEnd = (event) => {
+    event.stopPropagation();
     if (isPinch(event)) {
       swipeEnd(0, 0);
       return;

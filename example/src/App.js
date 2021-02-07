@@ -3,6 +3,15 @@ import React from 'react';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
+const imageIDs = Array(160)
+  .fill(1)
+  .map((_, i) => i + 1);
+const images = imageIDs.map((imageID) => ({
+  src: `https://placedog.net/800/640?id=${imageID}`,
+  alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
+  thumbnail: `https://placedog.net/80/64?id=${imageID}`
+}));
+
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
     <Carousel
@@ -120,26 +129,27 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       <div>
         <h2>Example</h2>
         <p>The basic carousel shown below:</p>
-        <code>
-          {/*<pre>{exampleCode}</pre>*/}
-          {exampleCode}
-        </code>
+        <code>{exampleCode}</code>
+      </div>
+      <div
+        style={{
+          height: 'calc(100% - 40px)',
+          width: 'calc(100% - 100px)',
+          margin: 'auto'
+        }}
+      >
+        <Carousel
+          images={images}
+          sizeButtons={false}
+          style={{ height: '100%' }}
+        />
       </div>
     </Carousel>
   );
 };
 
 const App = () => {
-  const imageIDs = Array(160)
-    .fill(1)
-    .map((_, i) => i + 1);
-  const images = imageIDs.map((imageID) => ({
-    src: `https://placedog.net/800/640?id=${imageID}`,
-    alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
-    thumbnail: `https://placedog.net/80/64?id=${imageID}`
-  }));
-
-  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '40vh' }} />`;
+  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '40vh' }}`;
 
   return (
     <div
