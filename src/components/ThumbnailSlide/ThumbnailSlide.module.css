@@ -6,7 +6,7 @@
   -ms-zoom: var(--scale);
   zoom: var(--scale);
   overflow: hidden;
-  opacity: 0.5;
+  opacity: 0.25;
   margin-right: 5px;
   object-fit: cover;
   user-select: none;
@@ -20,19 +20,28 @@
   align-items: flex-start;
   box-sizing: border-box;
   font-size: var(--scale);
+  text-size-adjust: none;
 }
 
-/* Only for Chrome */
+.slide * {
+  text-size-adjust: none;
+}
+
+.slide > * {
+  pointer-events: none;
+}
+
+/*Only for Chrome, Opera and Edge*/
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
   .slide {
     font-size: 100%;
   }
 }
 
-/* Only for FireFox */
+/*Only for FireFox*/
 @-moz-document url-prefix() {
   .slide {
-    font-size: 10%;
+    font-size: var(--scale);
   }
 }
 

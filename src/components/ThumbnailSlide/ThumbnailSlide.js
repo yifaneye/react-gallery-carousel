@@ -9,8 +9,7 @@ export const ThumbnailSlide = (props) => {
     props.isCurrent ? ' ' + styles.currentSlide : ''
   }`;
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = () => {
     props.clickCallback();
   };
 
