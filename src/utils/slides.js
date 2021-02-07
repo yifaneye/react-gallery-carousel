@@ -45,9 +45,15 @@ export default class Slides {
   }
 
   get curIndexForDisplay() {
-    if (this._rtl) return this._maxIndex - this._curIndex + 1; // no matter the value of this._loop
+    if (this._rtl) {
+      if (this._curIndex < this._minIndex) return this._minIndex;
+      if (this._curIndex > this._maxIndex) return this._maxIndex;
+      return this._maxIndex - this._curIndex + 1;
+    }
     if (!this._loop) return this._curIndex + 1;
-    return this.curIndexAsKey;
+    if (this._curIndex < this._minIndex) return this._maxIndex;
+    if (this._curIndex > this._maxIndex) return this._minIndex;
+    return this._curIndex;
   }
 
   get slides() {
