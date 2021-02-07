@@ -10,9 +10,10 @@ const useKeys = (elementRef, callbacks) => {
     };
 
     const element = elementRef.current;
-    element.addEventListener('keydown', handleKeyDown);
+    if (element) element.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      element.removeEventListener('keydown', handleKeyDown);
+      if (element) element.removeEventListener('keydown', handleKeyDown);
     };
   }, [elementRef, callbackRef]);
 };

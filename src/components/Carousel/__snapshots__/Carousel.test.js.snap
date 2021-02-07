@@ -2,58 +2,11 @@
 
 exports[`Carousel renders the same as snapshot 1`] = `
 <div
-  className="carouselWrapper"
+  className="carouselWrapper galleryCarousel"
   data-is-keyboard-user="true"
-  style={Object {}}
 >
   <div
-    className="buttonWrapper topRight"
-  >
-    <button
-      aria-disabled={false}
-      aria-label="Maximize Slides"
-      className="button maximize"
-      onClick={[Function]}
-    />
-  </div>
-  <div
-    className="buttonWrapper centerRight"
-  >
-    <button
-      aria-disabled={false}
-      aria-label="Next Slide"
-      className="button right"
-      onClick={[Function]}
-    />
-  </div>
-  <div
-    className="buttonWrapper bottomCenter"
-  >
-    <div
-      className="buttonContainer"
-    >
-      <button
-        aria-disabled={false}
-        aria-label="Stay on Slide Number 1"
-        className="button circleLight"
-        onClick={[Function]}
-      />
-      <button
-        aria-disabled={false}
-        aria-label="Go to Slide Number 2"
-        className="button circle"
-        onClick={[Function]}
-      />
-      <button
-        aria-disabled={false}
-        aria-label="Go to Slide Number 3"
-        className="button circle"
-        onClick={[Function]}
-      />
-    </div>
-  </div>
-  <div
-    className="carousel galleryCarousel"
+    className="carousel"
     onMouseDown={[Function]}
     onMouseLeave={[Function]}
     onMouseMove={[Function]}
@@ -66,58 +19,200 @@ exports[`Carousel renders the same as snapshot 1`] = `
       <li
         className="slide"
       >
-        <img
-          alt="Kitten of size 900 pixels"
-          aria-label="Kitten of size 900 pixels"
-          className="image"
-          loading="auto"
-          onError={[Function]}
-          src="https://placekitten.com/900/900"
-          style={
-            Object {
-              "objectFit": null,
+        <figure
+          className="figure"
+        >
+          <img
+            alt="Kitten of size 700 pixels"
+            aria-label="Kitten of size 700 pixels"
+            className="image"
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src=""
+            style={
+              Object {
+                "objectFit": null,
+              }
             }
-          }
-          title="Kitten of size 900 pixels"
-        />
+          />
+        </figure>
       </li>
       <li
         className="slide"
       >
-        <img
-          alt="Kitten of size 800 pixels"
-          aria-label="Kitten of size 800 pixels"
-          className="image"
-          loading="auto"
-          onError={[Function]}
-          src="https://placekitten.com/800/800"
-          style={
-            Object {
-              "objectFit": null,
+        <figure
+          className="figure"
+        >
+          <img
+            alt="Kitten of size 900 pixels"
+            aria-label="Kitten of size 900 pixels"
+            className="image"
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src=""
+            style={
+              Object {
+                "objectFit": null,
+              }
             }
-          }
-          title="Kitten of size 800 pixels"
-        />
+          />
+        </figure>
       </li>
       <li
         className="slide"
       >
-        <img
-          alt="Kitten of size 700 pixels"
-          aria-label="Kitten of size 700 pixels"
-          className="image"
-          loading="auto"
-          onError={[Function]}
-          src="https://placekitten.com/700/700"
-          style={
-            Object {
-              "objectFit": null,
+        <figure
+          className="figure"
+        >
+          <img
+            alt="Kitten of size 800 pixels"
+            aria-label="Kitten of size 800 pixels"
+            className="image"
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src=""
+            style={
+              Object {
+                "objectFit": null,
+              }
             }
-          }
-          title="Kitten of size 700 pixels"
-        />
+          />
+        </figure>
+      </li>
+      <li
+        className="slide"
+      >
+        <figure
+          className="figure"
+        >
+          <img
+            alt="Kitten of size 700 pixels"
+            aria-label="Kitten of size 700 pixels"
+            className="image"
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src=""
+            style={
+              Object {
+                "objectFit": null,
+              }
+            }
+          />
+        </figure>
+      </li>
+      <li
+        className="slide"
+      >
+        <figure
+          className="figure"
+        >
+          <img
+            alt="Kitten of size 900 pixels"
+            aria-label="Kitten of size 900 pixels"
+            className="image"
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src=""
+            style={
+              Object {
+                "objectFit": null,
+              }
+            }
+          />
+        </figure>
       </li>
     </ul>
+    <div
+      className="widgetWrapper textWrapper topCenter"
+    >
+      <span
+        className="text"
+      >
+        1
+         / 
+        3
+      </span>
+    </div>
+    <div
+      className="widgetWrapper topLeft"
+    >
+      <button
+        aria-disabled={false}
+        aria-label="Start Autoplay"
+        className="button play"
+        onClick={[Function]}
+      />
+    </div>
+    <div
+      className="widgetWrapper topRight"
+    >
+      <button
+        aria-disabled={false}
+        aria-label="Maximize Slides"
+        className="button maximize"
+        onClick={[Function]}
+      />
+    </div>
+    <div
+      className="widgetWrapper centerLeft"
+    >
+      <button
+        aria-disabled={false}
+        aria-label="Previous Slide"
+        className="button left"
+        onClick={[Function]}
+      />
+    </div>
+    <div
+      className="widgetWrapper centerRight"
+    >
+      <button
+        aria-disabled={false}
+        aria-label="Next Slide"
+        className="button right"
+        onClick={[Function]}
+      />
+    </div>
+  </div>
+  <div
+    className="thumbnails"
+    onWheel={[Function]}
+  >
+    <img
+      alt="Kitten of size 900 pixels"
+      aria-label="Kitten of size 900 pixels"
+      className="image currentImage"
+      loading="lazy"
+      onClick={[Function]}
+      onError={[Function]}
+      src=""
+      title="Kitten of size 900 pixels"
+    />
+    <img
+      alt="Kitten of size 800 pixels"
+      aria-label="Kitten of size 800 pixels"
+      className="image"
+      loading="lazy"
+      onClick={[Function]}
+      onError={[Function]}
+      src=""
+      title="Kitten of size 800 pixels"
+    />
+    <img
+      alt="Kitten of size 700 pixels"
+      aria-label="Kitten of size 700 pixels"
+      className="image"
+      loading="lazy"
+      onClick={[Function]}
+      onError={[Function]}
+      src=""
+      title="Kitten of size 700 pixels"
+    />
   </div>
 </div>
 `;

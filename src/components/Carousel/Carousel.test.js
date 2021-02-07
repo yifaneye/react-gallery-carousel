@@ -24,6 +24,12 @@ describe('Carousel', () => {
         removeEventListener: jest.fn()
       }))
     });
+
+    const observe = jest.fn();
+    window.IntersectionObserver = jest.fn(function () {
+      this.observe = observe;
+    });
+
     const component = renderer.create(<Carousel images={images} />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

@@ -5,9 +5,10 @@ const useNoDrag = (elementRef) => {
     const element = elementRef.current;
     const handleDrag = (e) => e.preventDefault();
 
-    element.addEventListener('dragstart', handleDrag);
+    if (element) element.addEventListener('dragstart', handleDrag);
+
     return () => {
-      element.removeEventListener('dragstart', handleDrag);
+      if (element) element.removeEventListener('dragstart', handleDrag);
     };
   }, [elementRef]);
 };

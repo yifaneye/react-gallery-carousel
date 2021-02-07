@@ -5,19 +5,25 @@ const useKeyboard = (elementRef) => {
     const element = elementRef.current;
 
     const handleMouseDown = () => {
+      if (!element) return;
       element.setAttribute('data-is-keyboard-user', 'false');
     };
 
     const handleKeyDown = () => {
+      if (!element) return;
       element.setAttribute('data-is-keyboard-user', 'true');
     };
 
-    element.addEventListener('mousedown', handleMouseDown);
-    element.addEventListener('keydown', handleKeyDown);
+    if (element) {
+      element.addEventListener('mousedown', handleMouseDown);
+      element.addEventListener('keydown', handleKeyDown);
+    }
 
     return () => {
-      element.removeEventListener('mousedown', handleMouseDown);
-      element.removeEventListener('keydown', handleKeyDown);
+      if (element) {
+        element.removeEventListener('mousedown', handleMouseDown);
+        element.removeEventListener('keydown', handleKeyDown);
+      }
     };
   }, [elementRef]);
 };
