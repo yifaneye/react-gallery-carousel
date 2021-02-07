@@ -82,6 +82,7 @@ export const Carousel = (props) => {
   /* handle UI update */
   const applyTransitionDuration = useCallback(
     (swipedDisplacement = 0, hasToUpdate = true) => {
+      if (isReducedMotion) return;
       const swipedDistance = Math.abs(swipedDisplacement);
       const transitionDistance = hasToUpdate
         ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
@@ -113,6 +114,7 @@ export const Carousel = (props) => {
     [
       props.transitionSpeed,
       isPlaying,
+      isReducedMotion,
       props.autoPlayInterval,
       props.transitionDurationMin,
       props.transitionDurationMax
