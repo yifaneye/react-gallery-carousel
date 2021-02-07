@@ -2,27 +2,28 @@ import { useEffect } from 'react';
 
 const useNoSwipe = (elementRef) => {
   useEffect(() => {
-    const element = elementRef.current;
+    const el = elementRef.current;
     const handleSwipe = (e) => e.stopPropagation();
 
-    if (element) {
-      element.addEventListener('mousedown', handleSwipe);
-      element.addEventListener('mousemove', handleSwipe);
-      element.addEventListener('mouseup', handleSwipe);
-      element.addEventListener('touchstart', handleSwipe);
-      element.addEventListener('touchmove', handleSwipe);
-      element.addEventListener('touchend', handleSwipe);
-      element.addEventListener('touchcancel', handleSwipe);
+    if (el) {
+      el.addEventListener('mousedown', handleSwipe);
+      el.addEventListener('mousemove', handleSwipe);
+      el.addEventListener('mouseup', handleSwipe);
+      el.addEventListener('touchstart', handleSwipe, { passive: true });
+      el.addEventListener('touchmove', handleSwipe, { passive: true });
+      el.addEventListener('touchend', handleSwipe, { passive: true });
+      el.addEventListener('touchcancel', handleSwipe, { passive: true });
     }
+
     return () => {
-      if (element) {
-        element.removeEventListener('mousedown', handleSwipe);
-        element.removeEventListener('mousemove', handleSwipe);
-        element.removeEventListener('mouseup', handleSwipe);
-        element.removeEventListener('touchstart', handleSwipe);
-        element.removeEventListener('touchmove', handleSwipe);
-        element.removeEventListener('touchend', handleSwipe);
-        element.removeEventListener('touchcancel', handleSwipe);
+      if (!el) {
+        el.removeEventListener('mousedown', handleSwipe);
+        el.removeEventListener('mousemove', handleSwipe);
+        el.removeEventListener('mouseup', handleSwipe);
+        el.removeEventListener('touchstart', handleSwipe, { passive: true });
+        el.removeEventListener('touchmove', handleSwipe, { passive: true });
+        el.removeEventListener('touchend', handleSwipe, { passive: true });
+        el.removeEventListener('touchcancel', handleSwipe, { passive: true });
       }
     };
   }, [elementRef]);
