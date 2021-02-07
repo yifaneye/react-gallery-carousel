@@ -19,10 +19,10 @@ import {
 } from '../../utils/validators';
 import {
   ArrowButtons,
-  MediaButtons,
-  SizeButtons,
+  IndexBoard,
   IndicatorButtons,
-  IndexBoard
+  MediaButtons,
+  SizeButtons
 } from '../Widgets';
 import Thumbnails from '../Thumbnails';
 import useMediaQuery from '../../utils/useMediaQuery';
@@ -121,11 +121,15 @@ export const Carousel = (props) => {
 
   const applyTransitionY = useCallback(
     (swipeDisplacement = 0) => {
-      carouselWrapperRef.current.style.top = `${swipeDisplacement}px`;
-      const scale = 1 - swipeDisplacement / 1000;
-      carouselWrapperRef.current.style.transform = `scale(${scale})`;
-      if (maximizedBackgroundRef.current)
-        maximizedBackgroundRef.current.style.opacity = scale;
+      if (carouselWrapperRef.current) {
+        carouselWrapperRef.current.style.transform = `translateY(${swipeDisplacement}px) scale(${
+          1 - swipeDisplacement / 10000
+        })`;
+      }
+      if (maximizedBackgroundRef.current) {
+        maximizedBackgroundRef.current.style.opacity =
+          1 - swipeDisplacement / 1000;
+      }
     },
     [carouselWrapperRef, maximizedBackgroundRef]
   );
@@ -334,17 +338,17 @@ export const Carousel = (props) => {
           className={styles.carousel}
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
-          {indexBoard}
-          {mediaButtons}
-          {sizeButtons}
-          {arrowButtons}
-          {indicatorButtons}
           <Slides
             reference={slidesRef}
             slides={slidesElements}
             hasImages={hasImages}
             {...props}
           />
+          {indexBoard}
+          {mediaButtons}
+          {sizeButtons}
+          {arrowButtons}
+          {indicatorButtons}
         </div>
         {thumbnails}
       </div>

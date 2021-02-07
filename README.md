@@ -41,7 +41,7 @@ export default App;
 To customize the carousel, use the following props:
 
 |Name                     |Type                  |Default    |Description|
-|:------------------------:---------------------|:-----------|:----------|
+|:-----------------------:|----------------------|:----------|:----------|
 |images                   |Array                 |undefined  |Images to be placed in the carousel.|
 |children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
 |className                |String                |undefined  |Class name(s) to be placed on the carousel, when the carousel is not maximized.|
