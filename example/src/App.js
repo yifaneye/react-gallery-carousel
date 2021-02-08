@@ -176,10 +176,8 @@ const App = () => {
         sizeButtons={false}
         mediaButtons='bottomLeft'
         indexBoard='bottomRight'
-        shouldMaximizeOnClick={true}
-        shouldMinimizeOnClick={true}
         className='framed'
-        style={{ height: '600px' }}
+        style={{ height: '700px' }}
       />
     </div>
   );

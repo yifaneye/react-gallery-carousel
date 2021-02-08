@@ -53,8 +53,8 @@ To customize the carousel, use the following props:
 |autoPlay                 |Boolean               |true       |If true, the carousel has auto play capability.|
 |autoPlayPaused           |Boolean               |true       |If true, the carousel's auto play is paused at start.|
 |autoPlayInterval         |Number                |5000       |Interval of auto play (in milliseconds).|
-|swipeThreshold           |Number                |0.05       |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
-|transitionSpeed          |Number                |1.5        |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
+|swipeThreshold           |Number                |0.1        |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
+|transitionSpeed          |Number                |1          |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
 |transitionDurationMin    |Number                |undefined  |Minimum transition duration (in milliseconds).|
 |transitionDurationMax    |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionDurationMin'.|
 |widgetsShadow            |Boolean               |false      |If true, the following widgets have shadows. If true, the transition will drop frames when there are a large number (> 20) of images on all tested browsers (Safari, Chrome, Opera, Edge), except Firefox.|

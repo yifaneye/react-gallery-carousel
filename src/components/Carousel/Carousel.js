@@ -256,7 +256,7 @@ export const Carousel = (props) => {
 
   /* process maximized carousel */
   const carouselMinimizedPlaceholder = isMaximized && (
-    <div className={carouselWrapperMinimizedClassName} style={props.style} />
+    <div className={carouselWrapperMinimizedClassName} style={props.style}/>
   );
   const carouselMaximizedBackground = isMaximized && (
     <div
@@ -430,7 +430,7 @@ Carousel.defaultProps = {
   autoPlay: true,
   autoPlayPaused: true,
   autoPlayInterval: 5000, // ms
-  swipeThreshold: 0.05, // * 100%
+  swipeThreshold: 0.1, // * 100%
   transitionSpeed: 1, // px/ms
   widgetsShadow: false,
   mediaButtons: 'topLeft',
