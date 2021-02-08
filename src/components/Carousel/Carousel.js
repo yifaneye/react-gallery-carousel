@@ -122,15 +122,14 @@ export const Carousel = (props) => {
   );
 
   const applyTransitionY = useCallback(
-    (swipeDisplacement = 0) => {
+    (displacementX = 0, displacementY = 0) => {
+      const hypothenuse = Math.hypot(displacementX, displacementY)
       if (carouselWrapperRef.current) {
-        carouselWrapperRef.current.style.transform = `translateY(${swipeDisplacement}px) scale(${
-          1 - swipeDisplacement / 10000
-        })`;
+        carouselWrapperRef.current.style.transform =
+          `translate(${displacementX}px, ${displacementY}px) scale(${1 - hypothenuse / 10000})`;
       }
       if (maximizedBackgroundRef.current) {
-        maximizedBackgroundRef.current.style.opacity =
-          1 - swipeDisplacement / 1000;
+        maximizedBackgroundRef.current.style.opacity = 1 - hypothenuse / 1000;
       }
     },
     [carouselWrapperRef, maximizedBackgroundRef]
@@ -215,9 +214,9 @@ export const Carousel = (props) => {
   });
 
   /* handle mouse and touch events */
-  const handleSwipeMoveDown = (displacement) => {
+  const handleSwipeMoveDown = (displacementX, displacementY) => {
     if (!props.shouldMinimizeOnSwipeDown) return;
-    if (isMaximizedRef.current) applyTransitionY(displacement);
+    if (isMaximizedRef.current) applyTransitionY(displacementX, displacementY);
   };
 
   const handleSwipeEndDown = () => {
@@ -235,7 +234,7 @@ export const Carousel = (props) => {
 
   const mouseEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
     swipeMove: (displacementX) => calibrateIndexBySwipe(displacementX),
-    swipeMoveDown: (displacementY) => handleSwipeMoveDown(displacementY),
+    swipeMoveDown: (displacementX, displacementY) => handleSwipeMoveDown(displacementX, displacementY),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
     swipeEndDown: handleSwipeEndDown,

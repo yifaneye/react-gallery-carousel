@@ -41,7 +41,7 @@ const useSwipe = (
     if (Math.abs(swipeXDisplacement) > Math.abs(swipeYDisplacement))
       swipeMoveX(swipeXDisplacement);
     else if (Math.abs(swipeXDisplacement) < swipeYDisplacement)
-      swipeMoveDown(swipeYDisplacement);
+      swipeMoveDown(swipeXDisplacement, swipeYDisplacement);
   };
 
   // have to use event listeners (active event listeners) to deal with undesired tiny vertical movements
