@@ -20,7 +20,7 @@ import {
 import {
   ArrowButtons,
   IndexBoard,
-  IndicatorButtons,
+  DotButtons,
   MediaButtons,
   SizeButtons
 } from '../Widgets';
@@ -86,7 +86,7 @@ export const Carousel = (props) => {
   );
   const handleSizeButtonClick = () => {
     // carousel is to be maximized
-    if (!isMaximized) slidesRef.current.focus();
+    if (!isMaximized) carouselRef.current.focus();
     setIsMaximized((isMaximized) => !isMaximized);
   };
 
@@ -134,13 +134,14 @@ export const Carousel = (props) => {
 
   const applyTransitionY = useCallback(
     (displacementX = 0, displacementY = 0) => {
-      const hypothenuse = Math.hypot(displacementX, displacementY)
+      const hypotenuse = Math.hypot(displacementX, displacementY);
       if (carouselWrapperRef.current) {
-        carouselWrapperRef.current.style.transform =
-          `translate(${displacementX}px, ${displacementY}px) scale(${1 - hypothenuse / 10000})`;
+        carouselWrapperRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${
+          1 - hypotenuse / 10000
+        })`;
       }
       if (maximizedBackgroundRef.current) {
-        maximizedBackgroundRef.current.style.opacity = 1 - hypothenuse / 1000;
+        maximizedBackgroundRef.current.style.opacity = 1 - hypotenuse / 1000;
       }
     },
     [carouselWrapperRef, maximizedBackgroundRef]
@@ -148,7 +149,7 @@ export const Carousel = (props) => {
 
   const applyTransitionX = useCallback(
     (swipeDisplacement = 0) => {
-      applyTransitionY(0);
+      applyTransitionY(0, 0);
       if (slidesRef.current)
         slidesRef.current.style.transform = `translateX(calc(-100% * ${slides.curIndex} + ${swipeDisplacement}px))`;
     },
@@ -245,7 +246,8 @@ export const Carousel = (props) => {
 
   const mouseEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
     swipeMove: (displacementX) => calibrateIndexBySwipe(displacementX),
-    swipeMoveDown: (displacementX, displacementY) => handleSwipeMoveDown(displacementX, displacementY),
+    swipeMoveDown: (displacementX, displacementY) =>
+      handleSwipeMoveDown(displacementX, displacementY),
     swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
     swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
     swipeEndDown: handleSwipeEndDown,
@@ -253,26 +255,22 @@ export const Carousel = (props) => {
     click: handleClick
   });
 
-  /* process styles */
-  const carouselWrapperMinimizedClassName = `${styles.carouselWrapper}${
-    hasImages ? ' ' + styles.galleryCarousel : ''
-  }${'className' in props ? ' ' + props.className : ''}`;
-  const carouselWrapperMaximizedClassName = `${
-    styles.carouselWrapperMaximized
-  }${hasImages ? ' ' + styles.galleryCarousel : ''}`;
+  /* process class names */
+  const propsClassName = 'className' in props ? ' ' + props.className : '';
+  const galleryClassName = hasImages ? ' ' + styles.gallery : '';
+  const minCarouselWrapperCN =
+    styles.carouselWrapper + propsClassName + galleryClassName;
+  const maxCarouselWrapperCN = styles.maxCarouselWrapper + galleryClassName;
   const carouselWrapperClassName = isMaximized
-    ? carouselWrapperMaximizedClassName
-    : carouselWrapperMinimizedClassName;
+    ? maxCarouselWrapperCN
+    : minCarouselWrapperCN;
 
-  /* process maximized carousel */
-  const carouselMinimizedPlaceholder = isMaximized && (
-    <div className={carouselWrapperMinimizedClassName} style={props.style}/>
+  /* process components for maximized carousel */
+  const minCarouselPlaceholder = isMaximized && (
+    <div className={minCarouselWrapperCN} style={props.style} />
   );
-  const carouselMaximizedBackground = isMaximized && (
-    <div
-      ref={maximizedBackgroundRef}
-      className={styles.carouselWrapperMaximized}
-    />
+  const maxCarouselBackground = isMaximized && (
+    <div ref={maximizedBackgroundRef} className={styles.maxCarouselWrapper} />
   );
 
   /* process widgets */
@@ -317,10 +315,10 @@ export const Carousel = (props) => {
     />
   );
 
-  const indicatorButtons = props.indicatorButtons && (
-    <IndicatorButtons
+  const dotButtons = props.dotButtons && (
+    <DotButtons
       hasShadow={props.widgetsShadow}
-      position={props.indicatorButtons}
+      position={props.dotButtons}
       curIndex={curIndexAsKey}
       callbacks={goToIndexCallbacksObj}
     />
@@ -338,8 +336,8 @@ export const Carousel = (props) => {
 
   return (
     <>
-      {carouselMinimizedPlaceholder}
-      {carouselMaximizedBackground}
+      {minCarouselPlaceholder}
+      {maxCarouselBackground}
       <div
         ref={carouselWrapperRef}
         className={carouselWrapperClassName}
@@ -357,11 +355,11 @@ export const Carousel = (props) => {
             hasImages={hasImages}
             {...props}
           />
-          {indexBoard}
           {mediaButtons}
+          {indexBoard}
           {sizeButtons}
           {arrowButtons}
-          {indicatorButtons}
+          {dotButtons}
         </div>
         {thumbnails}
       </div>
@@ -393,10 +391,8 @@ Carousel.propTypes = {
   transitionSpeed: positiveNumber(),
   transitionDurationMin: positiveNumber(),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
-  thumbnails: PropTypes.bool.isRequired,
   widgetsShadow: PropTypes.bool.isRequired,
-  arrowButtons: PropTypes.bool.isRequired,
-  indexBoard: PropTypes.oneOf([
+  mediaButtons: PropTypes.oneOf([
     false,
     'topLeft',
     'topCenter',
@@ -405,7 +401,7 @@ Carousel.propTypes = {
     'bottomCenter',
     'bottomRight'
   ]).isRequired,
-  mediaButtons: PropTypes.oneOf([
+  indexBoard: PropTypes.oneOf([
     false,
     'topLeft',
     'topCenter',
@@ -423,8 +419,10 @@ Carousel.propTypes = {
     'bottomCenter',
     'bottomRight'
   ]).isRequired,
-  indicatorButtons: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
+  arrowButtons: PropTypes.bool.isRequired,
+  dotButtons: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
   caption: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
+  thumbnails: PropTypes.bool.isRequired,
   shouldSwipeOnMouse: PropTypes.bool.isRequired,
   shouldMaximizeOnClick: PropTypes.bool.isRequired,
   shouldMinimizeOnClick: PropTypes.bool.isRequired,
@@ -450,11 +448,12 @@ Carousel.defaultProps = {
   indexBoard: 'topCenter',
   sizeButtons: 'topRight',
   arrowButtons: true,
+  dotButtons: false,
   caption: false,
   thumbnails: true,
-  indicatorButtons: false,
   shouldSwipeOnMouse: true,
   shouldMaximizeOnClick: false,
   shouldMinimizeOnClick: false,
-  shouldMinimizeOnSwipeDown: true
+  shouldMinimizeOnSwipeDown: true,
+  onIndexChange: () => {}
 };

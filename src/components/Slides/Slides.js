@@ -7,7 +7,7 @@ export const Slides = memo((props) => {
   const slides = props.slides;
 
   return (
-    <ul className={styles.ribbon} ref={props.reference} tabIndex={0}>
+    <ul className={styles.slides} ref={props.reference} tabIndex={0}>
       {slides.map((slide, index) => (
         <Slide
           key={index}

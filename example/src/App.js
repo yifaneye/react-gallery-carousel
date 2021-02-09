@@ -20,7 +20,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       indexBoard='topRight'
       sizeButtons='bottomLeft'
       mediaButtons='bottomRight'
-      indicatorButtons='bottom'
+      dotButtons='bottom'
       shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       index={Number(window.location.hash.replace('#', ''))}
@@ -130,7 +130,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       </div>
       <div>
         <h2>Example</h2>
-        <p>The basic carousel shown below:</p>
+        <p>The basic carousel shown below is created by:</p>
         <code>{exampleCode}</code>
       </div>
       <div

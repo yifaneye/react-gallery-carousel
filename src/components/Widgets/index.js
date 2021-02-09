@@ -2,7 +2,7 @@ export {
   ArrowButtons,
   MediaButtons,
   SizeButtons,
-  IndicatorButtons,
+  DotButtons,
   IndexBoard,
   Caption,
   LoadingSpinner

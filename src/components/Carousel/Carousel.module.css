@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-.carouselWrapperMaximized {
+.maxCarouselWrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -43,6 +43,6 @@
   flex: 0 1 auto;
 }
 
-.galleryCarousel {
+.gallery {
   background-color: #000;
 }

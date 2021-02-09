@@ -18,6 +18,6 @@ code {
   overflow: hidden;
   border-radius: 20px;
   will-change: transform;
-  webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: -webkit-radial-gradient(white, black);
   box-sizing: border-box;
 }

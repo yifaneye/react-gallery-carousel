@@ -60,7 +60,6 @@ export const MediaButtons = memo((props) => {
 MediaButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([
-    false,
     'topLeft',
     'topCenter',
     'topRight',
@@ -88,7 +87,6 @@ export const SizeButtons = memo((props) => {
 SizeButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([
-    false,
     'topLeft',
     'topCenter',
     'topRight',
@@ -122,7 +120,6 @@ export const IndexBoard = memo((props) => {
 IndexBoard.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
   position: PropTypes.oneOf([
-    false,
     'topLeft',
     'topCenter',
     'topRight',
@@ -134,7 +131,7 @@ IndexBoard.propTypes = {
   totalIndices: PropTypes.number.isRequired
 };
 
-export const IndicatorButtons = memo((props) => {
+export const DotButtons = memo((props) => {
   const callbacks = props.callbacks;
 
   return (
@@ -158,9 +155,9 @@ export const IndicatorButtons = memo((props) => {
   );
 });
 
-IndicatorButtons.propTypes = {
+DotButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
-  position: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
+  position: PropTypes.oneOf(['top', 'bottom']).isRequired,
   curIndex: PropTypes.number.isRequired,
   callbacks: PropTypes.shape(PropTypes.function).isRequired
 };

@@ -41,7 +41,7 @@ export default App;
 To customize the carousel, use the following props:
 
 |Name                     |Type                  |Default    |Description|
-|:-----------------------:|----------------------|:----------|:----------|
+|:------------------------|------s----------------|:----------|:----------|
 |images                   |Array                 |undefined  |Images to be placed in the carousel.|
 |children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
 |className                |String                |undefined  |Class name(s) to be placed on the carousel, when the carousel is not maximized.|
@@ -62,9 +62,9 @@ To customize the carousel, use the following props:
 |mediaButtons             |Boolean or String     |'topLeft'  |If false, the carousel does not show media buttons (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |indexBoard               |Boolean or String     |'topCenter'|If false, the carousel does not show index board (e.g. 8/10). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |sizeButtons              |Boolean or String     |'topRight' |If false, the carousel does not show size buttons (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
-|indicatorButtons         |Boolean or String     |false      |If false, the carousel does not show indicator buttons (i.e. array of dots). Its position can be specified by one of ['top', 'bottom']|
+|arrowButtons             |Boolean               |true       |If false, the carousel does not show arrow buttons (i.e. left and right).|
+|dotButtons               |Boolean or String     |false      |If false, the carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). Its position can be specified by one of ['top', 'bottom']|
 |caption                  |Boolean               |false      |If true, the carousel shows caption for each image. Its position can be specified by one of ['top', 'bottom']|
-|arrowButtons             |Boolean               |true       |If true, the carousel shows arrow buttons (i.e. left and right).|
 |thumbnails               |Boolean               |true       |If true, the carousel shows thumbnails.|
 |shouldSwipeOnMouse       |Boolean               |true       |If true, the carousel can be swiped by cursor using a mouse or a track pad.|
 |shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking.|
