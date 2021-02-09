@@ -45,10 +45,21 @@ export const Carousel = (props) => {
     : [props.children];
   const rawSlides = hasImages ? props.images : children;
   const [slides, slidesElements] = useSlides(rawSlides, {
+    index: props.index,
     rtl: props.isRTL,
     loop: props.isLoop
   });
+
   const [, setCurIndex] = useState(slides.curIndex);
+  const { onIndexChange } = props;
+  const onIndexChangeRef = useRef(onIndexChange);
+  const applyCurIndexUpdate = useCallback(
+    (curIndex) => {
+      setCurIndex(curIndex);
+      onIndexChangeRef.current(slides.curIndexForDisplay);
+    },
+    [setCurIndex, onIndexChangeRef, slides]
+  );
 
   /* handle autoplay and reduced motion settings */
   const indexStep = props.isRTL ? -1 : +1;
@@ -164,9 +175,9 @@ export const Carousel = (props) => {
       slides.updateIndex(change);
       applyTransitionDuration(swipedDisplacement, change !== 0);
       applyTransitionX();
-      setCurIndex(slides.curIndex);
+      applyCurIndexUpdate(slides.curIndex);
     },
-    [slides, applyTransitionDuration, applyTransitionX, setCurIndex]
+    [slides, applyTransitionDuration, applyTransitionX, applyCurIndexUpdate]
   );
   const rollBackUpdateIndex = () => updateIndexBySwipe(0, 0);
 
@@ -196,7 +207,7 @@ export const Carousel = (props) => {
     setIsPlaying(false);
     slides.goToIndex(index);
     applyTransitionX();
-    setCurIndex(slides.curIndex);
+    applyCurIndexUpdate(slides.curIndex);
   };
   const indices = slides.allIndices;
   const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
@@ -366,6 +377,7 @@ Carousel.propTypes = {
   ]),
   isRTL: PropTypes.bool.isRequired,
   isLoop: PropTypes.bool.isRequired,
+  index: positiveNumber(),
   lazyLoad: PropTypes.bool.isRequired,
   objectFit: PropTypes.oneOf([
     'contain',
@@ -417,11 +429,13 @@ Carousel.propTypes = {
   shouldMaximizeOnClick: PropTypes.bool.isRequired,
   shouldMinimizeOnClick: PropTypes.bool.isRequired,
   shouldMinimizeOnSwipeDown: PropTypes.bool.isRequired,
+  onIndexChange: PropTypes.func.isRequired,
   className: PropTypes.string,
   style: PropTypes.object
 };
 
 Carousel.defaultProps = {
+  index: 0,
   isRTL: false,
   isLoop: true,
   lazyLoad: true,

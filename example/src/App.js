@@ -23,6 +23,8 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       indicatorButtons='bottom'
       shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
+      index={Number(window.location.hash.replace('#', ''))}
+      onIndexChange={(index) => (window.location.hash = `${index}`)}
       style={{ height: '40vh', userSelect: 'text' }}
     >
       <div>

@@ -46,6 +46,7 @@ To customize the carousel, use the following props:
 |children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
 |className                |String                |undefined  |Class name(s) to be placed on the carousel, when the carousel is not maximized.|
 |style                    |Object                |undefined  |Inline style(s) to be placed on the carousel.|
+|index                    |Number                |undefined  |Current index of the slides of the carousel as a whole number starting from 1.|
 |isRTL                    |Boolean               |false      |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
 |isLoop                   |Boolean               |true       |If true, the carousel form a loop from the ribbon of slides.|
 |lazyLoad                 |Boolean               |true       |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
@@ -69,6 +70,7 @@ To customize the carousel, use the following props:
 |shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking.|
 |shouldMinimizeOnClick    |Boolean               |false      |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true       |If true, the carousel can be minimized by touch swiping down.|
+|onIndexChange            |Function              |() => {}   |Callback function invoked when the current index is being updated. It is called regardless of whether index value's before and after are the same.|
 
 ## License
 

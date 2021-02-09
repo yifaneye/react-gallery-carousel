@@ -1,11 +1,6 @@
 export default class Slides {
-  constructor(items, { rtl = false, loop = false }) {
+  constructor(items, { index, rtl = false, loop = false }) {
     this._items = items;
-    this._slides = null;
-    this._length = 0;
-    this._curIndex = null;
-    this._minIndex = null;
-    this._maxIndex = null;
     this._rtl = rtl;
     this._loop = loop;
 
@@ -29,9 +24,20 @@ export default class Slides {
     const tailIndex = this._rtl
       ? bufferLength
       : this._length - 1 - bufferLength;
-    this._curIndex = headIndex;
+    this._headIndex = headIndex;
+    this._tailIndex = tailIndex;
     this._minIndex = headIndex < tailIndex ? headIndex : tailIndex;
     this._maxIndex = headIndex < tailIndex ? tailIndex : headIndex;
+    this._curIndex = this._getCurIndexForCalculation(index);
+  }
+
+  _getCurIndexForCalculation(index) {
+    if (!index) return this._headIndex;
+    if (this._rtl && this._tailIndex <= index && index <= this._headIndex)
+      return this._headIndex - index + 1;
+    if (!this._rtl && this._headIndex <= index && index <= this._tailIndex)
+      return this._headIndex + index - 1;
+    return this._headIndex;
   }
 
   get curIndex() {
