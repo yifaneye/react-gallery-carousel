@@ -46,7 +46,6 @@ export const ThumbnailImage = (props) => {
   }`;
 
   const handleError = (event) => {
-    event.target.onerror = null;
     event.target.src = placeholder;
   };
 

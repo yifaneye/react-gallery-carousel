@@ -58,9 +58,8 @@ LazyLoadedImage.propTypes = {
 
 export const Image = (props) => {
   const imageSource = props.image.src;
-  const imageThumbnail = props.image.thumbnail || placeholder;
+  const imageThumbnail = props.image.thumbnail || props.image.src;
   const imageTitle = props.image.alt || null;
-  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
   const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
 
   const handleError = (event) => {
@@ -81,20 +80,15 @@ export const Image = (props) => {
       />
     );
 
-  const handleLoad = () => setIsThumbnailLoaded(true);
-
-  const source = isThumbnailLoaded ? imageSource : placeholder;
-
   return (
     <figure className={styles.figure}>
       <img
         className={styles.image}
-        src={source}
+        src={imageSource}
         alt={imageTitle}
         aria-label={imageTitle}
         loading='auto'
         style={{ objectFit: objectFit }}
-        onLoad={handleLoad}
         onError={handleError}
       />
       {props.caption && props.title && (
