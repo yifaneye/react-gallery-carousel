@@ -1,6 +1,7 @@
 import React, {
   Fragment,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState
@@ -78,6 +79,24 @@ export const Carousel = (props) => {
   useLayoutEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
+
+  const [wasPlaying, setWasPlaying] = useState(false);
+  const handleVisibilityChange = useCallback(() => {
+    if (document.visibilityState !== 'visible') {
+      // user switches tab away from the page
+      setWasPlaying(isPlaying);
+      setIsPlaying(false);
+    } else {
+      // user switches tab back to the page
+      setIsPlaying(wasPlaying);
+    }
+  }, [isPlaying, setIsPlaying, wasPlaying, setWasPlaying]);
+
+  useEffect(() => {
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [handleVisibilityChange]);
 
   /* handle maximization and full screen */
   const [isMaximized, setIsMaximized] = useFixedPosition(
