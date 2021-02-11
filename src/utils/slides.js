@@ -35,7 +35,11 @@ export default class Slides {
     if (!index) return this._headIndex;
     if (this._rtl && this._tailIndex <= index && index <= this._headIndex)
       return this._headIndex - index + 1;
-    if (!this._rtl && this._headIndex <= index && index <= this._tailIndex)
+    if (
+      !this._rtl &&
+      this._headIndex <= index - 1 &&
+      index - 1 <= this._tailIndex
+    )
       return this._headIndex + index - 1;
     return this._headIndex;
   }

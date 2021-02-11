@@ -2,6 +2,7 @@ import React from 'react';
 
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
+import TwoWayMap from './utils/twoWayMap';
 
 const imageIDs = Array(160)
   .fill(1)
@@ -13,6 +14,13 @@ const images = imageIDs.map((imageID) => ({
 }));
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
+  const indexToTitle = new TwoWayMap({
+    1: 'Introduction',
+    2: 'Installation',
+    3: 'Example',
+    4: 'Demo'
+  });
+
   return (
     <Carousel
       isLoop={false}
@@ -24,9 +32,15 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       autoPlayStarted={true}
       shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
-      index={Number(window.location.hash.replace('#', ''))}
-      onIndexChange={(index) => (window.location.hash = `${index}`)}
-      style={{ height: '40vh', userSelect: 'text' }}
+      index={Number(
+        indexToTitle.getReversed(window.location.hash.replace('#', ''))
+      )}
+      onIndexChange={(index) => {
+        const title = indexToTitle.get(index);
+        window.location.hash = title;
+        document.title = title;
+      }}
+      style={{ height: '300px', userSelect: 'text' }}
     >
       <div>
         <h1>react-gallery-carousel</h1>
