@@ -41,7 +41,7 @@ export default App;
 To customize the carousel, use the following props:
 
 |Name                     |Type                  |Default    |Description|
-|:------------------------|------s----------------|:----------|:----------|
+|:------------------------|----------------------|:----------|:----------|
 |images                   |Array                 |undefined  |Images to be placed in the carousel.|
 |children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
 |className                |String                |undefined  |Class name(s) to be placed on the carousel, when the carousel is not maximized.|
@@ -52,7 +52,7 @@ To customize the carousel, use the following props:
 |lazyLoad                 |Boolean               |true       |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
 |objectFit                |String                |'cover'    |CSS 'object-fit' style of the images.|
 |autoPlay                 |Boolean               |true       |If true, the carousel has auto play capability.|
-|autoPlayPaused           |Boolean               |true       |If true, the carousel's auto play is paused at start.|
+|autoPlayStarted          |Boolean               |false      |If true, the carousel's auto play is started initially.|
 |autoPlayInterval         |Number                |5000       |Interval of auto play (in milliseconds).|
 |swipeThreshold           |Number                |0.1        |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
 |transitionSpeed          |Number                |1          |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|

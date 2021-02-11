@@ -21,9 +21,9 @@ const getTimer = (interval, callback) => {
   return { start, stop, restart };
 };
 
-const useTimer = (interval, callback) => {
+const useTimer = (interval, isStarted, callback) => {
   const timer = interval ? getTimer(interval, callback) : null;
-  const [isRunning, setIsRunning] = useState(!!timer);
+  const [isRunning, setIsRunning] = useState(!!timer && isStarted);
 
   const start = () => !!timer && timer.start();
   const stop = () => !!timer && timer.stop();

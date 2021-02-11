@@ -66,14 +66,12 @@ export const Carousel = (props) => {
   const indexStep = props.isRTL ? -1 : +1;
   const [isPlaying, setIsPlaying] = useTimer(
     props.autoPlay && props.autoPlayInterval,
+    props.autoPlayStarted,
     () => updateIndexByAutoPlay(indexStep)
   );
   const handleMediaButtonClick = useCallback(() => {
     setIsPlaying((isPlaying) => !isPlaying);
   }, [setIsPlaying]);
-  useLayoutEffect(() => {
-    if (props.autoPlayPaused) setIsPlaying(false);
-  }, [props.autoPlayPaused, setIsPlaying]);
 
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   useLayoutEffect(() => {
@@ -404,7 +402,7 @@ Carousel.propTypes = {
     'scale-down'
   ]),
   autoPlay: PropTypes.bool.isRequired,
-  autoPlayPaused: PropTypes.bool.isRequired,
+  autoPlayStarted: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(),
   swipeThreshold: numberBetween(0, 1),
   transitionSpeed: positiveNumber(),
@@ -458,7 +456,7 @@ Carousel.defaultProps = {
   lazyLoad: true,
   objectFit: 'cover',
   autoPlay: true,
-  autoPlayPaused: true,
+  autoPlayStarted: false,
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.1, // * 100%
   transitionSpeed: 1, // px/ms

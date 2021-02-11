@@ -21,7 +21,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       sizeButtons='bottomLeft'
       mediaButtons='bottomRight'
       dotButtons='bottom'
-      autoPlayPaused={false}
+      autoPlayStarted={true}
       shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       index={Number(window.location.hash.replace('#', ''))}
