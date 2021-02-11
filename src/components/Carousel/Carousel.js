@@ -384,6 +384,16 @@ export const Carousel = (props) => {
   );
 };
 
+const widgetPositions = PropTypes.oneOf([
+  false,
+  'topLeft',
+  'topCenter',
+  'topRight',
+  'bottomLeft',
+  'bottomCenter',
+  'bottomRight'
+]).isRequired;
+
 Carousel.propTypes = {
   images: PropTypes.array && fallbackProps(['children']),
   children: PropTypes.oneOfType([
@@ -392,7 +402,7 @@ Carousel.propTypes = {
   ]),
   isRTL: PropTypes.bool.isRequired,
   isLoop: PropTypes.bool.isRequired,
-  index: positiveNumber(),
+  index: positiveNumber(true),
   lazyLoad: PropTypes.bool.isRequired,
   objectFit: PropTypes.oneOf([
     'contain',
@@ -403,39 +413,15 @@ Carousel.propTypes = {
   ]),
   autoPlay: PropTypes.bool.isRequired,
   autoPlayStarted: PropTypes.bool.isRequired,
-  autoPlayInterval: positiveNumber(),
+  autoPlayInterval: positiveNumber(false),
   swipeThreshold: numberBetween(0, 1),
-  transitionSpeed: positiveNumber(),
-  transitionDurationMin: positiveNumber(),
+  transitionSpeed: positiveNumber(true),
+  transitionDurationMin: positiveNumber(true),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
   widgetsShadow: PropTypes.bool.isRequired,
-  mediaButtons: PropTypes.oneOf([
-    false,
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight'
-  ]).isRequired,
-  indexBoard: PropTypes.oneOf([
-    false,
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight'
-  ]).isRequired,
-  sizeButtons: PropTypes.oneOf([
-    false,
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight'
-  ]).isRequired,
+  mediaButtons: widgetPositions,
+  indexBoard: widgetPositions,
+  sizeButtons: widgetPositions,
   arrowButtons: PropTypes.bool.isRequired,
   dotButtons: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
   caption: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,

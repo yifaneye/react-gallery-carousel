@@ -1,21 +1,34 @@
-export const positiveNumber = (optional = true) => {
+export const positiveNumber = (allow0 = false, optional = true) => {
   return (props, propName, componentName) => {
     const prop = props[propName];
     if (optional && prop === undefined) return;
-    if (typeof prop !== 'number' || prop <= 0)
+    if (typeof prop !== 'number' || prop < 0 || (!allow0 && prop === 0))
       return new Error(
-        `Invalid prop \`${propName}\` of type \`${typeof prop}\` supplied to \`${componentName}\`, expected \`number\`.`
+        `Invalid prop \`${propName}\` of type \`${typeof prop}\` supplied to \`${componentName}\`, expected \`number\` ${
+          allow0 ? '>=' : '>'
+        } 0.`
       );
   };
 };
 
-export const numberBetween = (min, max, optional = true) => {
+export const numberBetween = (
+  min,
+  max,
+  { includeMin = false, includeMax = false, optional = true } = {}
+) => {
   return (props, propName, componentName) => {
     const prop = props[propName];
     if (optional && prop === undefined) return;
-    if (typeof prop !== 'number' || min < prop < max)
+    if (
+      typeof prop !== 'number' ||
+      !(min <= prop <= max) ||
+      (!includeMin && min === prop) ||
+      (!includeMax && max === prop)
+    )
       return new Error(
-        `Invalid prop \`${propName}\` of type \`${typeof prop}\` supplied to \`${componentName}\`, expected ${min} < \`number\` < ${max}.`
+        `Invalid prop \`${propName}\` of type \`${typeof prop}\` supplied to \`${componentName}\`, expected ${min} ${
+          includeMin ? '<=' : '<'
+        } \`number\` ${includeMax ? '<=' : '<'} ${max}.`
       );
   };
 };
