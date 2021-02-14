@@ -12,12 +12,12 @@ export default class Slides {
       return;
     }
     if (this._rtl) slides = [...slides].reverse();
-    if (this._loop) slides = [slides[slidesLength - 1], ...slides, slides[0]];
+    if (this._loop) slides = [...slides];
     this._slides = slides;
     this._length = slides.length;
 
     // calculate indices
-    const bufferLength = this._loop ? 1 : 0;
+    const bufferLength = 0;
     const headIndex = this._rtl
       ? this._length - 1 - bufferLength
       : bufferLength;
@@ -46,6 +46,18 @@ export default class Slides {
 
   get curIndex() {
     return this._curIndex;
+  }
+
+  get length() {
+    return this._length;
+  }
+
+  isMin() {
+    return this._curIndex === this._minIndex;
+  }
+
+  isMax() {
+    return this._curIndex === this._maxIndex;
   }
 
   get curIndexAsKey() {

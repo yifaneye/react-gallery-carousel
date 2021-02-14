@@ -13,7 +13,7 @@
   transform: translateZ(0);
   transition-duration: 0s;
   transition-property: transform;
-  transition-timing-function: cubic-bezier(0.5, 1, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1, 0.9, 1);
   box-sizing: border-box;
   will-change: transform;
   backface-visibility: hidden;

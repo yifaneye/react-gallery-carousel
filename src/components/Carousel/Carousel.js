@@ -38,6 +38,8 @@ export const Carousel = (props) => {
   const carouselWrapperRef = useRef(null);
   const carouselRef = useRef(null);
   const slidesRef = useRef(null);
+  const slideMinRef = useRef(null);
+  const slideMaxRef = useRef(null);
 
   /* process slides */
   const hasImages = 'images' in props;
@@ -50,6 +52,9 @@ export const Carousel = (props) => {
     rtl: props.isRTL,
     loop: props.isLoop
   });
+  const nSlides = slides.length;
+  const slidesMin = `-${nSlides}00%`;
+  const slidesMax = `${nSlides}00%`;
 
   const [, setCurIndex] = useState(slides.curIndex);
   const { onIndexChange } = props;
@@ -184,11 +189,33 @@ export const Carousel = (props) => {
   isMaximizedRef.current = isMaximized;
   const calibrateIndexBySwipe = (swipeXDisplacement) => {
     setIsPlaying(false);
+    if (slideMinRef.current && slideMaxRef.current)
+      if (slides.isMin() && swipeXDisplacement > 0) {
+        slideMinRef.current.style.left = null;
+        slideMaxRef.current.style.left = slidesMin;
+      } else if (slides.isMax() && swipeXDisplacement < 0) {
+        slideMinRef.current.style.left = slidesMax;
+        slideMaxRef.current.style.left = null;
+      } else {
+        slideMinRef.current.style.left = null;
+        slideMaxRef.current.style.left = null;
+      }
     applyTransitionX(swipeXDisplacement);
   };
 
   const updateIndex = useCallback(
     (change, swipedDisplacement = 0) => {
+      if (slideMinRef.current && slideMaxRef.current)
+        if (slides.isMin() && change < 0) {
+          slideMinRef.current.style.left = slidesMax;
+          slideMaxRef.current.style.left = null;
+        } else if (slides.isMax() && change > 0) {
+          slideMinRef.current.style.left = null;
+          slideMaxRef.current.style.left = slidesMin;
+        } else {
+          slideMinRef.current.style.left = null;
+          slideMaxRef.current.style.left = null;
+        }
       if (change !== 0) {
         slides.calibrateIndex(change);
         applyTransitionX(swipedDisplacement);
@@ -198,7 +225,14 @@ export const Carousel = (props) => {
       applyTransitionX();
       applyCurIndexUpdate(slides.curIndex);
     },
-    [slides, applyTransitionDuration, applyTransitionX, applyCurIndexUpdate]
+    [
+      slidesMin,
+      slidesMax,
+      slides,
+      applyTransitionDuration,
+      applyTransitionX,
+      applyCurIndexUpdate
+    ]
   );
   const rollBackUpdateIndex = () => updateIndex(0, 0);
 
@@ -353,9 +387,12 @@ export const Carousel = (props) => {
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           <Slides
-            reference={slidesRef}
+            minRef={slideMinRef}
+            maxRef={slideMaxRef}
+            slidesRef={slidesRef}
             slides={slidesElements}
             hasImages={hasImages}
+            length={nSlides}
             {...props}
           />
           {mediaButtons}

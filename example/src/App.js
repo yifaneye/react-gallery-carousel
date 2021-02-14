@@ -148,19 +148,19 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         <p>The basic carousel shown below is created by:</p>
         <code>{exampleCode}</code>
       </div>
-      <div
-        style={{
-          height: 'calc(100% - 40px)',
-          width: 'calc(100% - 100px)',
-          margin: 'auto'
-        }}
-      >
-        <Carousel
-          images={images}
-          sizeButtons={false}
-          style={{ height: '100%' }}
-        />
-      </div>
+      {/*<div*/}
+      {/*  style={{*/}
+      {/*    height: 'calc(100% - 40px)',*/}
+      {/*    width: 'calc(100% - 100px)',*/}
+      {/*    margin: 'auto'*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  <Carousel*/}
+      {/*    images={images}*/}
+      {/*    sizeButtons={false}*/}
+      {/*    style={{ height: '100%' }}*/}
+      {/*  />*/}
+      {/*</div>*/}
     </Carousel>
   );
 };

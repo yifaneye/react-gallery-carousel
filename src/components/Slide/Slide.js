@@ -2,6 +2,7 @@ import React from 'react';
 import Image from '../Image';
 import styles from './Slide.module.css';
 import PropTypes from 'prop-types';
+import { ref } from '../../utils/validators';
 
 export const Slide = (props) => {
   const slide = props.isImage ? (
@@ -15,7 +16,11 @@ export const Slide = (props) => {
   ) : (
     props.slide
   );
-  return <li className={styles.slide}>{slide}</li>;
+  return (
+    <li className={styles.slide} ref={props.reference}>
+      {slide}
+    </li>
+  );
 };
 
 Slide.propTypes = {
@@ -27,5 +32,6 @@ Slide.propTypes = {
   caption: PropTypes.oneOfType([
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
-  ]).isRequired
+  ]).isRequired,
+  reference: ref
 };

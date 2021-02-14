@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export const positiveNumber = (allow0 = false, optional = true) => {
   return (props, propName, componentName) => {
     const prop = props[propName];
@@ -69,3 +71,5 @@ export const fallbackProps = (fallbackProps) => {
     );
   };
 };
+
+export const ref = PropTypes.shape({ current: PropTypes.object });
