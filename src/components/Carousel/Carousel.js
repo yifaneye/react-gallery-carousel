@@ -185,27 +185,23 @@ export const Carousel = (props) => {
 
   /* handle neighbouring current index update */
   // store isMaximized to combat stale closure
-  const isMaximizedRef = useRef(isMaximized);
-  isMaximizedRef.current = isMaximized;
-  const calibrateIndexBySwipe = (swipeXDisplacement) => {
+  const shouldCalibrateIndex = props.isLoop && nSlides > 1;
+  const calibrateIndexBySwipe = (displacementX) => {
     setIsPlaying(false);
-    if (slideMinRef.current && slideMaxRef.current && props.isLoop)
-      if (slides.isMin() && swipeXDisplacement > 0) {
-        slideMinRef.current.style.transform = null;
+    const change = -displacementX;
+    if (shouldCalibrateIndex) {
+      if (slides.isMin() && change < 0 && slideMaxRef.current) {
         slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
-      } else if (slides.isMax() && swipeXDisplacement < 0) {
+      } else if (slides.isMax() && change > 0 && slideMinRef.current) {
         slideMinRef.current.style.transform = `translateX(${slidesMax})`;
-        slideMaxRef.current.style.transform = null;
-      } else {
-        slideMinRef.current.style.transform = null;
-        slideMaxRef.current.style.transform = null;
       }
-    applyTransitionX(swipeXDisplacement);
+    }
+    applyTransitionX(displacementX);
   };
 
   const updateIndex = useCallback(
     (change, swipedDisplacement = 0) => {
-      if (slideMinRef.current && slideMaxRef.current && props.isLoop)
+      if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
         if (slides.isMin() && change < 0) {
           slideMinRef.current.style.transform = `translateX(${slidesMax})`;
           slideMaxRef.current.style.transform = null;
@@ -216,6 +212,7 @@ export const Carousel = (props) => {
           slideMinRef.current.style.transform = null;
           slideMaxRef.current.style.transform = null;
         }
+      }
       if (change !== 0) {
         slides.calibrateIndex(change);
         applyTransitionX(swipedDisplacement);
@@ -226,7 +223,7 @@ export const Carousel = (props) => {
       applyCurIndexUpdate(slides.curIndex);
     },
     [
-      props.isLoop,
+      shouldCalibrateIndex,
       slidesMin,
       slidesMax,
       slides,
@@ -264,6 +261,8 @@ export const Carousel = (props) => {
   });
 
   /* handle mouse and touch events */
+  const isMaximizedRef = useRef(isMaximized);
+  isMaximizedRef.current = isMaximized;
   const handleSwipeMoveDown = (displacementX, displacementY) => {
     if (!props.shouldMinimizeOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacementX, displacementY);
@@ -288,8 +287,8 @@ export const Carousel = (props) => {
       handleSwipeMoveDown(displacementX, displacementY),
     swipeEndRight: (displacement) => updateIndex(-1, displacement),
     swipeEndLeft: (displacement) => updateIndex(+1, displacement),
-    swipeEndDown: handleSwipeEndDown,
     swipeEndDisqualified: (displacement) => updateIndex(0, displacement),
+    swipeEndDown: handleSwipeEndDown,
     click: handleClick
   });
 
