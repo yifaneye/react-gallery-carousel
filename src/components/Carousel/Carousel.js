@@ -208,7 +208,7 @@ export const Carousel = (props) => {
         } else if (slides.isMax() && change > 0) {
           slideMinRef.current.style.transform = null;
           slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
-        } else {
+        } else if (change !== 0) {
           slideMinRef.current.style.transform = null;
           slideMaxRef.current.style.transform = null;
         }
