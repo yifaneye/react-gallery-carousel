@@ -189,7 +189,7 @@ export const Carousel = (props) => {
   isMaximizedRef.current = isMaximized;
   const calibrateIndexBySwipe = (swipeXDisplacement) => {
     setIsPlaying(false);
-    if (slideMinRef.current && slideMaxRef.current)
+    if (slideMinRef.current && slideMaxRef.current && props.isLoop)
       if (slides.isMin() && swipeXDisplacement > 0) {
         slideMinRef.current.style.left = null;
         slideMaxRef.current.style.left = slidesMin;
@@ -205,7 +205,7 @@ export const Carousel = (props) => {
 
   const updateIndex = useCallback(
     (change, swipedDisplacement = 0) => {
-      if (slideMinRef.current && slideMaxRef.current)
+      if (slideMinRef.current && slideMaxRef.current && props.isLoop)
         if (slides.isMin() && change < 0) {
           slideMinRef.current.style.left = slidesMax;
           slideMaxRef.current.style.left = null;
@@ -226,6 +226,7 @@ export const Carousel = (props) => {
       applyCurIndexUpdate(slides.curIndex);
     },
     [
+      props.isLoop,
       slidesMin,
       slidesMax,
       slides,
