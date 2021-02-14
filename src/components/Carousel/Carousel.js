@@ -191,14 +191,14 @@ export const Carousel = (props) => {
     setIsPlaying(false);
     if (slideMinRef.current && slideMaxRef.current && props.isLoop)
       if (slides.isMin() && swipeXDisplacement > 0) {
-        slideMinRef.current.style.left = null;
-        slideMaxRef.current.style.left = slidesMin;
+        slideMinRef.current.style.transform = null;
+        slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
       } else if (slides.isMax() && swipeXDisplacement < 0) {
-        slideMinRef.current.style.left = slidesMax;
-        slideMaxRef.current.style.left = null;
+        slideMinRef.current.style.transform = `translateX(${slidesMax})`;
+        slideMaxRef.current.style.transform = null;
       } else {
-        slideMinRef.current.style.left = null;
-        slideMaxRef.current.style.left = null;
+        slideMinRef.current.style.transform = null;
+        slideMaxRef.current.style.transform = null;
       }
     applyTransitionX(swipeXDisplacement);
   };
@@ -207,14 +207,14 @@ export const Carousel = (props) => {
     (change, swipedDisplacement = 0) => {
       if (slideMinRef.current && slideMaxRef.current && props.isLoop)
         if (slides.isMin() && change < 0) {
-          slideMinRef.current.style.left = slidesMax;
-          slideMaxRef.current.style.left = null;
+          slideMinRef.current.style.transform = `translateX(${slidesMax})`;
+          slideMaxRef.current.style.transform = null;
         } else if (slides.isMax() && change > 0) {
-          slideMinRef.current.style.left = null;
-          slideMaxRef.current.style.left = slidesMin;
+          slideMinRef.current.style.transform = null;
+          slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
         } else {
-          slideMinRef.current.style.left = null;
-          slideMaxRef.current.style.left = null;
+          slideMinRef.current.style.transform = null;
+          slideMaxRef.current.style.transform = null;
         }
       if (change !== 0) {
         slides.calibrateIndex(change);
