@@ -67,7 +67,7 @@ export const Carousel = (props) => {
   const [isPlaying, setIsPlaying] = useTimer(
     props.autoPlay && props.autoPlayInterval,
     props.autoPlayStarted,
-    () => updateIndexByAutoPlay(indexStep)
+    () => updateIndex(indexStep)
   );
   const handleMediaButtonClick = useCallback(() => {
     setIsPlaying((isPlaying) => !isPlaying);
@@ -184,12 +184,15 @@ export const Carousel = (props) => {
   isMaximizedRef.current = isMaximized;
   const calibrateIndexBySwipe = (swipeXDisplacement) => {
     setIsPlaying(false);
-    slides.calibrateIndex(-swipeXDisplacement);
     applyTransitionX(swipeXDisplacement);
   };
 
-  const updateIndexBySwipe = useCallback(
+  const updateIndex = useCallback(
     (change, swipedDisplacement = 0) => {
+      if (change !== 0) {
+        slides.calibrateIndex(change);
+        applyTransitionX(swipedDisplacement);
+      }
       slides.updateIndex(change);
       applyTransitionDuration(swipedDisplacement, change !== 0);
       applyTransitionX();
@@ -197,26 +200,7 @@ export const Carousel = (props) => {
     },
     [slides, applyTransitionDuration, applyTransitionX, applyCurIndexUpdate]
   );
-  const rollBackUpdateIndex = () => updateIndexBySwipe(0, 0);
-
-  const updateIndexByAutoPlay = useCallback(
-    (change) => {
-      slides.calibrateIndex(change);
-      applyTransitionX();
-      updateIndexBySwipe(change);
-    },
-    [slides, applyTransitionX, updateIndexBySwipe]
-  );
-
-  const updateIndex = useCallback(
-    (change) => {
-      setIsPlaying(false);
-      updateIndexByAutoPlay(change);
-    },
-    [setIsPlaying, updateIndexByAutoPlay]
-  );
-  const goLeft = useCallback(() => updateIndex(-1), [updateIndex]);
-  const goRight = useCallback(() => updateIndex(+1), [updateIndex]);
+  const rollBackUpdateIndex = () => updateIndex(0, 0);
 
   useEventListener(window, 'orientationchange', rollBackUpdateIndex);
 
@@ -237,9 +221,11 @@ export const Carousel = (props) => {
   /* handle keyboard events */
   useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
   useKeyboard(carouselWrapperRef);
+  const goLeft = useCallback(() => updateIndex(-1), [updateIndex]);
+  const goRight = useCallback(() => updateIndex(+1), [updateIndex]);
   useKeys(slidesRef, {
-    ArrowLeft: () => updateIndex(-1),
-    ArrowRight: () => updateIndex(+1)
+    ArrowLeft: goLeft,
+    ArrowRight: goRight
   });
 
   /* handle mouse and touch events */
@@ -265,10 +251,10 @@ export const Carousel = (props) => {
     swipeMove: (displacementX) => calibrateIndexBySwipe(displacementX),
     swipeMoveDown: (displacementX, displacementY) =>
       handleSwipeMoveDown(displacementX, displacementY),
-    swipeEndRight: (displacement) => updateIndexBySwipe(-1, displacement),
-    swipeEndLeft: (displacement) => updateIndexBySwipe(+1, displacement),
+    swipeEndRight: (displacement) => updateIndex(-1, displacement),
+    swipeEndLeft: (displacement) => updateIndex(+1, displacement),
     swipeEndDown: handleSwipeEndDown,
-    swipeEndDisqualified: (displacement) => updateIndexBySwipe(0, displacement),
+    swipeEndDisqualified: (displacement) => updateIndex(0, displacement),
     click: handleClick
   });
 
