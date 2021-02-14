@@ -117,6 +117,10 @@ export const Carousel = (props) => {
         : swipedDistance;
       let transitionDuration = transitionDistance / props.transitionSpeed;
 
+      // flatten transitionDurations
+      transitionDuration =
+        1000 *
+        Math.log((Math.E - 1) * Math.sqrt(transitionDuration / 1000) + 1);
       // bound transitionDuration match in an range
       if (
         props.transitionDurationMin &&
