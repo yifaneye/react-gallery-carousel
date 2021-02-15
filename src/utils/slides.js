@@ -19,7 +19,7 @@ export default class Slides {
   }
 
   _convertCurIndexForDisplay(index) {
-    if (!index || !this._minIndex <= index <= this._maxIndex)
+    if (!index || (!this._minIndex <= index && index <= this._maxIndex))
       return this._headIndex;
     if (this._rtl) return this._maxIndex - index + 1;
     return index - 1; // !this._rtl
@@ -74,7 +74,10 @@ export default class Slides {
     if (!this._length) return false;
     if (change === 0) return false;
     if (this._loop) return true;
-    return this._minIndex <= this._curIndex + change <= this._maxIndex;
+    return (
+      this._minIndex <= this._curIndex + change &&
+      this._curIndex + change <= this._maxIndex
+    );
   }
 
   updateIndex(change) {
@@ -88,7 +91,7 @@ export default class Slides {
 
   _canGoToIndex(index) {
     if (!this._length) return false;
-    return this._minIndex <= index <= this._maxIndex;
+    return this._minIndex <= index && index <= this._maxIndex;
   }
 
   goToIndex(index) {
