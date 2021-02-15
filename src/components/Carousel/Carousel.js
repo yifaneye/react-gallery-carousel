@@ -194,9 +194,9 @@ export const Carousel = (props) => {
     setIsPlaying(false);
     const change = -displacementX;
     if (shouldCalibrateIndex) {
-      if (slides.isMin() && change < 0 && slideMaxRef.current) {
+      if (slides.isMinIndex() && change < 0 && slideMaxRef.current) {
         slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
-      } else if (slides.isMax() && change > 0 && slideMinRef.current) {
+      } else if (slides.isMaxIndex() && change > 0 && slideMinRef.current) {
         slideMinRef.current.style.transform = `translateX(${slidesMax})`;
       }
     }
@@ -206,10 +206,10 @@ export const Carousel = (props) => {
   const updateIndex = useCallback(
     (change, swipedDisplacement = 0) => {
       if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
-        if (slides.isMin() && change < 0) {
+        if (slides.isMinIndex() && change < 0) {
           slideMinRef.current.style.transform = `translateX(${slidesMax})`;
           slideMaxRef.current.style.transform = null;
-        } else if (slides.isMax() && change > 0) {
+        } else if (slides.isMaxIndex() && change > 0) {
           slideMinRef.current.style.transform = null;
           slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
         } else if (change !== 0) {
@@ -315,14 +315,11 @@ export const Carousel = (props) => {
   );
 
   /* process widgets */
-  const curIndexAsKey = slides.curIndexAsKey;
-  const curIndexForDisplay = slides.curIndexForDisplay;
-
   const indexBoard = props.indexBoard && (
     <IndexBoard
       hasShadow={props.widgetsShadow}
       position={props.indexBoard}
-      curIndex={curIndexForDisplay}
+      curIndex={slides.curIndexForDisplay}
       totalIndices={indices.length}
     />
   );
@@ -360,7 +357,7 @@ export const Carousel = (props) => {
     <DotButtons
       hasShadow={props.widgetsShadow}
       position={props.dotButtons}
-      curIndex={curIndexAsKey}
+      curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObj}
     />
   );
@@ -370,7 +367,7 @@ export const Carousel = (props) => {
       slides={slidesElements}
       hasImages={hasImages}
       lazyLoad={props.lazyLoad}
-      curIndex={curIndexAsKey}
+      curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObj}
     />
   );

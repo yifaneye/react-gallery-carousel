@@ -1,85 +1,52 @@
 export default class Slides {
   constructor(items, { index, rtl = false, loop = false }) {
-    this._items = items;
     this._rtl = rtl;
     this._loop = loop;
 
     // generate _slides
-    let slides = this._items;
-    const slidesLength = slides.length;
-    if (!slidesLength) {
-      this._slides = slides;
-      return;
-    }
-    if (this._rtl) slides = [...slides].reverse();
-    if (this._loop) slides = [...slides];
-    this._slides = slides;
-    this._length = slides.length;
+    this._slides = this._rtl ? [...items].reverse() : items;
+    if (!this._slides || !this._slides.length) return;
+    this._length = this._slides.length;
 
     // calculate indices
-    const bufferLength = 0;
-    const headIndex = this._rtl
-      ? this._length - 1 - bufferLength
-      : bufferLength;
-    const tailIndex = this._rtl
-      ? bufferLength
-      : this._length - 1 - bufferLength;
+    const headIndex = this._rtl ? this._length - 1 : 0;
+    const tailIndex = this._rtl ? 0 : this._length - 1;
     this._headIndex = headIndex;
     this._tailIndex = tailIndex;
     this._minIndex = headIndex < tailIndex ? headIndex : tailIndex;
     this._maxIndex = headIndex < tailIndex ? tailIndex : headIndex;
-    this._curIndex = this._getCurIndexForCalculation(index);
+    this._curIndex = this._convertCurIndexForDisplay(index);
   }
 
-  _getCurIndexForCalculation(index) {
-    if (!index) return this._headIndex;
-    if (this._rtl && this._tailIndex <= index && index <= this._headIndex)
-      return this._headIndex - index + 1;
-    if (
-      !this._rtl &&
-      this._headIndex <= index - 1 &&
-      index - 1 <= this._tailIndex
-    )
-      return this._headIndex + index - 1;
-    return this._headIndex;
+  _convertCurIndexForDisplay(index) {
+    if (!index || !this._minIndex <= index <= this._maxIndex)
+      return this._headIndex;
+    if (this._rtl) return this._maxIndex - index + 1;
+    return index - 1; // !this._rtl
   }
 
-  get curIndex() {
-    return this._curIndex;
+  get slides() {
+    return this._slides;
   }
 
   get length() {
     return this._length;
   }
 
-  isMin() {
+  get curIndex() {
+    return this._curIndex;
+  }
+
+  isMinIndex() {
     return this._curIndex === this._minIndex;
   }
 
-  isMax() {
+  isMaxIndex() {
     return this._curIndex === this._maxIndex;
   }
 
-  get curIndexAsKey() {
-    if (this._curIndex < this._minIndex) return this._maxIndex;
-    if (this._curIndex > this._maxIndex) return this._minIndex;
-    return this._curIndex;
-  }
-
   get curIndexForDisplay() {
-    if (this._rtl) {
-      if (this._curIndex < this._minIndex) return this._minIndex;
-      if (this._curIndex > this._maxIndex) return this._maxIndex;
-      return this._maxIndex - this._curIndex + 1;
-    }
-    if (!this._loop) return this._curIndex + 1;
-    if (this._curIndex < this._minIndex) return this._maxIndex;
-    if (this._curIndex > this._maxIndex) return this._minIndex;
-    return this._curIndex;
-  }
-
-  get slides() {
-    return this._slides;
+    return this._curIndex + 1;
   }
 
   static _range(min, max) {
@@ -97,30 +64,17 @@ export default class Slides {
   calibrateIndex(change) {
     if (!this._length) return;
     if (!this._loop) return;
-    switch (this._curIndex) {
-      case this._minIndex - 1:
-        if (change < 0) this._curIndex = this._maxIndex;
-        break;
-      case this._minIndex:
-        if (change < 0) this._curIndex = this._maxIndex + 1;
-        break;
-      case this._maxIndex:
-        if (change > 0) this._curIndex = this._minIndex - 1;
-        break;
-      case this._maxIndex + 1:
-        if (change > 0) this._curIndex = this._minIndex;
-        break;
-    }
+    if (this._curIndex === this._minIndex && change < 0)
+      this._curIndex = this._maxIndex + 1;
+    else if (this._curIndex === this._maxIndex && change > 0)
+      this._curIndex = this._minIndex - 1;
   }
 
   canUpdateIndex(change) {
     if (!this._length) return false;
-    return (
-      change !== 0 &&
-      (this._loop ||
-        (this._curIndex + change >= this._minIndex &&
-          this._curIndex + change <= this._maxIndex))
-    );
+    if (change === 0) return false;
+    if (this._loop) return true;
+    return this._minIndex <= this._curIndex + change <= this._maxIndex;
   }
 
   updateIndex(change) {
