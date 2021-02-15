@@ -19,10 +19,12 @@ export default class Slides {
   }
 
   _convertCurIndexForDisplay(index) {
-    if (!index || (!this._minIndex <= index && index <= this._maxIndex))
+    if (!index) return this._headIndex;
+    index -= 1;
+    if (!(this._minIndex <= index && index <= this._maxIndex))
       return this._headIndex;
-    if (this._rtl) return this._maxIndex - index + 1;
-    return index - 1; // !this._rtl
+    if (this._rtl) return this._maxIndex - index;
+    return index; // !this._rtl
   }
 
   get slides() {
@@ -46,7 +48,8 @@ export default class Slides {
   }
 
   get curIndexForDisplay() {
-    return this._curIndex + 1;
+    if (this._rtl) return this._maxIndex - this._curIndex + 1;
+    return this._curIndex + 1; // !this._rtl
   }
 
   static _range(min, max) {
