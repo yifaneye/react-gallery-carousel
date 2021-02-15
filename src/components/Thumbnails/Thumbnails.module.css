@@ -3,7 +3,7 @@
 
   flex: 0 1 var(--scale);
   height: var(--scale);
-  margin-top: 5px;
+  padding-top: 1px; /* not 0.5px, for browser compatibility */
   overflow-y: hidden;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
