@@ -35,21 +35,14 @@ const getTouchDistinguisher = () => {
   return { isPinch };
 };
 
-const useTouch = (elementRef, { swipeMove, swipeEnd, click }) => {
+const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const touchDistinguisher = getTouchDistinguisher();
-  let swipeStartX = 0;
-  let swipeStartY = 0;
+  let touchStartX = 0;
+  let touchStartY = 0;
   let isTouchMoved = false;
 
-  const handleVerticalMovement = (
-    event,
-    swipeXDisplacement,
-    swipeYDisplacement
-  ) => {
-    if (
-      Math.abs(swipeXDisplacement) > Math.abs(swipeYDisplacement) &&
-      event.cancelable
-    )
+  const handleVerticalMovement = (event, displacementX, displacementY) => {
+    if (Math.abs(displacementX) > Math.abs(displacementY) && event.cancelable)
       event.preventDefault();
   };
 
@@ -60,31 +53,31 @@ const useTouch = (elementRef, { swipeMove, swipeEnd, click }) => {
   const handleTouchStart = (event) => {
     event.stopPropagation();
     if (isPinch(event)) return;
-    swipeStartX = event.touches[0].clientX;
-    swipeStartY = event.touches[0].clientY;
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
   };
 
   const handleTouchMove = (event) => {
     event.stopPropagation();
     if (isPinch(event)) return;
-    const swipeXDisplacement = event.changedTouches[0].clientX - swipeStartX;
-    const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
-    handleVerticalMovement(event, swipeXDisplacement, swipeYDisplacement);
-    swipeMove(swipeXDisplacement, swipeYDisplacement);
+    const displacementX = event.changedTouches[0].clientX - touchStartX;
+    const displacementY = event.changedTouches[0].clientY - touchStartY;
+    handleVerticalMovement(event, displacementX, displacementY);
+    onTouchMove(displacementX, displacementY);
     isTouchMoved = true;
   };
 
   const handleTouchEnd = (event) => {
     event.stopPropagation();
     if (isPinch(event)) {
-      swipeEnd(0, 0);
+      onTouchEnd(0, 0);
       return;
     }
-    const swipeXDisplacement = event.changedTouches[0].clientX - swipeStartX;
-    const swipeYDisplacement = event.changedTouches[0].clientY - swipeStartY;
-    handleVerticalMovement(event, swipeXDisplacement, swipeYDisplacement);
-    if (isTouchMoved) swipeEnd(swipeXDisplacement, swipeYDisplacement);
-    else click();
+    const displacementX = event.changedTouches[0].clientX - touchStartX;
+    const displacementY = event.changedTouches[0].clientY - touchStartY;
+    handleVerticalMovement(event, displacementX, displacementY);
+    if (isTouchMoved) onTouchEnd(displacementX, displacementY);
+    else onTap();
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };
 

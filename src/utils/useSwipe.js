@@ -6,55 +6,55 @@ const useSwipe = (
   elementRef,
   swipePercentageMin,
   {
-    swipeMove: swipeMoveX,
-    swipeMoveDown,
-    swipeEndRight,
-    swipeEndLeft,
-    swipeEndDown,
-    swipeEndDisqualified,
-    click
+    onSwipeMoveX,
+    onSwipeMoveDown,
+    onSwipeEndRight,
+    onSwipeEndLeft,
+    onSwipeEndDisqualified,
+    onSwipeEndDown,
+    onTap
   }
 ) => {
-  const swipeEnd = (swipeXDisplacement, swipeYDisplacement = 0) => {
+  const handleSwipeEnd = (displacementX, displacementY = 0) => {
     const { clientWidth: width, clientHeight: height } = elementRef.current;
     const swipeXDistanceMin = width * swipePercentageMin;
     const swipeYDistanceMin = height * swipePercentageMin;
     if (
-      swipeXDisplacement < -Math.abs(swipeYDisplacement) &&
-      swipeXDisplacement <= -swipeXDistanceMin
+      displacementX <= -Math.abs(displacementY) &&
+      displacementX <= -swipeXDistanceMin
     )
-      swipeEndLeft(swipeXDisplacement);
+      onSwipeEndLeft(displacementX);
     else if (
-      swipeXDisplacement > Math.abs(swipeYDisplacement) &&
-      swipeXDisplacement >= swipeXDistanceMin
+      displacementX >= Math.abs(displacementY) &&
+      displacementX >= swipeXDistanceMin
     )
-      swipeEndRight(swipeXDisplacement);
+      onSwipeEndRight(displacementX);
     else if (
-      Math.abs(swipeXDisplacement) < Math.abs(swipeYDisplacement) &&
-      swipeYDisplacement >= swipeYDistanceMin
+      Math.abs(displacementX) < Math.abs(displacementY) &&
+      displacementY >= swipeYDistanceMin
     )
-      swipeEndDown();
-    else swipeEndDisqualified(swipeXDisplacement);
+      onSwipeEndDown();
+    else onSwipeEndDisqualified(displacementX);
   };
 
-  const swipeMove = (swipeXDisplacement, swipeYDisplacement = 0) => {
-    if (Math.abs(swipeXDisplacement) > Math.abs(swipeYDisplacement))
-      swipeMoveX(swipeXDisplacement);
-    else if (Math.abs(swipeXDisplacement) < swipeYDisplacement)
-      swipeMoveDown(swipeXDisplacement, swipeYDisplacement);
+  const handleSwipeMove = (displacementX, displacementY = 0) => {
+    if (Math.abs(displacementX) >= Math.abs(displacementY))
+      onSwipeMoveX(displacementX);
+    else if (Math.abs(displacementX) < displacementY)
+      onSwipeMoveDown(displacementX, displacementY);
   };
 
   // have to use event listeners (active event listeners) to deal with undesired tiny vertical movements
   useTouch(elementRef, {
-    swipeMove: swipeMove,
-    swipeEnd: swipeEnd,
-    click: click
+    onTouchMove: handleSwipeMove,
+    onTouchEnd: handleSwipeEnd,
+    onTap: onTap
   });
 
   const mouseEventHandlers = useMouse({
-    swipeMove: swipeMove,
-    swipeEnd: swipeEnd,
-    click: click
+    onMouseMove: handleSwipeMove,
+    onMouseUp: handleSwipeEnd,
+    onTap: onTap
   });
 
   useNoDrag(elementRef); // prevent dragging on FireFox

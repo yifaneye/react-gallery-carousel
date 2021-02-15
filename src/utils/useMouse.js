@@ -1,27 +1,24 @@
-const useMouse = ({ swipeMove, swipeEnd, click }) => {
+const useMouse = ({ onMouseMove, onMouseUp, onTap }) => {
   let isMouseDown = false;
   let isMouseMoved = false;
-  let swipeStartX = 0;
+  let touchDownX = 0;
 
   const handleMouseDown = (event) => {
     if (event.buttons > 0) isMouseDown = true;
-    swipeStartX = event.clientX;
+    touchDownX = event.clientX;
   };
 
   const handleMouseMove = (event) => {
     if (isMouseDown && event.buttons > 0) {
-      const swipeDisplacement = event.clientX - swipeStartX;
-      swipeMove(swipeDisplacement);
+      onMouseMove(event.clientX - touchDownX);
       isMouseMoved = true;
     }
   };
 
   const handleMouseUp = (event) => {
     if (isMouseDown) {
-      if (isMouseMoved) {
-        const swipeDisplacement = event.clientX - swipeStartX;
-        swipeEnd(swipeDisplacement);
-      } else click();
+      if (isMouseMoved) onMouseUp(event.clientX - touchDownX);
+      else onTap();
     }
     isMouseDown = false; // reset isMouseDown for next series of touch events
     isMouseMoved = false; // reset isMouseMoved for next series of touch events
