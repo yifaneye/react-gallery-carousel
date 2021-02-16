@@ -57,15 +57,10 @@ export const Carousel = (props) => {
   const slidesMax = `${nSlides}00%`;
 
   const [, setCurIndex] = useState(slides.curIndex);
-  const { onIndexChange } = props;
-  const onIndexChangeRef = useRef(onIndexChange);
-  const applyCurIndexUpdate = useCallback(
-    (curIndex) => {
-      setCurIndex(curIndex);
-      onIndexChangeRef.current(slides.curIndexForDisplay);
-    },
-    [setCurIndex, onIndexChangeRef, slides]
-  );
+  const applyCurIndexUpdate = (curIndex) => {
+    setCurIndex(curIndex);
+    props.onIndexChange(slides.curIndexForDisplay);
+  };
 
   /* handle autoplay and reduced motion settings */
   const indexStep = props.isRTL ? -1 : +1;
@@ -74,9 +69,9 @@ export const Carousel = (props) => {
     props.autoPlayStarted,
     () => updateIndex(indexStep)
   );
-  const handleMediaButtonClick = useCallback(() => {
+  const handleMediaButtonClick = () => {
     setIsPlaying((isPlaying) => !isPlaying);
-  }, [setIsPlaying]);
+  };
 
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
   useLayoutEffect(() => {
@@ -210,37 +205,26 @@ export const Carousel = (props) => {
     applyTransitionX(displacementX);
   };
 
-  const updateIndex = useCallback(
-    (change, displacementX = 0, speed) => {
-      if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
-        if (slides.isMinIndex() && change < 0) {
-          slideMinRef.current.style.transform = `translateX(${slidesMax})`;
-          slideMaxRef.current.style.transform = null;
-        } else if (slides.isMaxIndex() && change > 0) {
-          slideMinRef.current.style.transform = null;
-          slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
-        } else if (change !== 0) {
-          slideMinRef.current.style.transform = null;
-          slideMaxRef.current.style.transform = null;
-        }
+  const updateIndex = (change, displacementX = 0, speed) => {
+    if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
+      if (slides.isMinIndex() && change < 0) {
+        slideMinRef.current.style.transform = `translateX(${slidesMax})`;
+        slideMaxRef.current.style.transform = null;
+      } else if (slides.isMaxIndex() && change > 0) {
+        slideMinRef.current.style.transform = null;
+        slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
+      } else if (change !== 0) {
+        slideMinRef.current.style.transform = null;
+        slideMaxRef.current.style.transform = null;
       }
-      slides.calibrateIndex(change);
-      applyTransitionX(displacementX);
-      slides.updateIndex(change);
-      applyTransitionDuration(displacementX, speed, change !== 0);
-      applyTransitionX();
-      applyCurIndexUpdate(slides.curIndex);
-    },
-    [
-      shouldCalibrateIndex,
-      slidesMin,
-      slidesMax,
-      slides,
-      applyTransitionDuration,
-      applyTransitionX,
-      applyCurIndexUpdate
-    ]
-  );
+    }
+    slides.calibrateIndex(change);
+    applyTransitionX(displacementX);
+    slides.updateIndex(change);
+    applyTransitionDuration(displacementX, speed, change !== 0);
+    applyTransitionX();
+    applyCurIndexUpdate(slides.curIndex);
+  };
   const rollBackUpdateIndex = () => updateIndex(0, 0);
 
   useEventListener(window, 'orientationchange', rollBackUpdateIndex);
@@ -262,8 +246,8 @@ export const Carousel = (props) => {
   /* handle keyboard events */
   useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
   useKeyboard(carouselWrapperRef);
-  const goLeft = useCallback(() => updateIndex(-1), [updateIndex]);
-  const goRight = useCallback(() => updateIndex(+1), [updateIndex]);
+  const goLeft = () => updateIndex(-1);
+  const goRight = () => updateIndex(+1);
   useKeys(slidesRef, {
     ArrowLeft: goLeft,
     ArrowRight: goRight
