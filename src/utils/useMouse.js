@@ -1,4 +1,6 @@
-const useMouse = ({ onMouseMove, onMouseUp, onTap }) => {
+import styles from '../components/Image/Image.module.css';
+
+const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
   let isMouseDown = false;
   let isMouseMoved = false;
   let mouseDownX = 0;
@@ -7,6 +9,7 @@ const useMouse = ({ onMouseMove, onMouseUp, onTap }) => {
   let instantaneousVelocity = 0;
 
   const handleMouseDown = (event) => {
+    if (elementRef.current) elementRef.current.classList.add(styles.isGrabbing);
     if (event.buttons > 0) isMouseDown = true;
     mouseDownX = event.clientX;
     previousX = event.clientX;
@@ -25,6 +28,8 @@ const useMouse = ({ onMouseMove, onMouseUp, onTap }) => {
   };
 
   const handleMouseUp = (event) => {
+    if (elementRef.current)
+      elementRef.current.classList.remove(styles.isGrabbing);
     if (isMouseDown) {
       if (isMouseMoved) {
         // can not calculate velocity here since event.clientX === previousX;

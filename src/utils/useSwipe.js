@@ -52,7 +52,7 @@ const useSwipe = (
     onTap: onTap
   });
 
-  const mouseEventHandlers = useMouse({
+  const mouseEventHandlers = useMouse(elementRef, {
     onMouseMove: handleSwipeMove,
     onMouseUp: handleSwipeEnd,
     onTap: onTap

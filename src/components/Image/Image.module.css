@@ -21,6 +21,10 @@
   cursor: grab;
 }
 
+.isGrabbing .image {
+  cursor: grabbing;
+}
+
 .image::before {
   content: '';
   display: block;
