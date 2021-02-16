@@ -1,23 +1,27 @@
 const useMouse = ({ onMouseMove, onMouseUp, onTap }) => {
   let isMouseDown = false;
   let isMouseMoved = false;
-  let touchDownX = 0;
+  let mouseDownX = 0;
+  let mouseDownTime = Date.now();
 
   const handleMouseDown = (event) => {
     if (event.buttons > 0) isMouseDown = true;
-    touchDownX = event.clientX;
+    mouseDownX = event.clientX;
+    mouseDownTime = Date.now();
   };
 
   const handleMouseMove = (event) => {
     if (isMouseDown && event.buttons > 0) {
-      onMouseMove(event.clientX - touchDownX);
+      onMouseMove(event.clientX - mouseDownX);
       isMouseMoved = true;
     }
   };
 
   const handleMouseUp = (event) => {
     if (isMouseDown) {
-      if (isMouseMoved) onMouseUp(event.clientX - touchDownX);
+      if (isMouseMoved)
+        // not passing vertical movements as argument
+        onMouseUp(event.clientX - mouseDownX, 0, Date.now() - mouseDownTime);
       else onTap();
     }
     isMouseDown = false; // reset isMouseDown for next series of touch events

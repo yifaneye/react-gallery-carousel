@@ -114,18 +114,22 @@ export const Carousel = (props) => {
 
   /* handle UI update */
   const applyTransitionDuration = useCallback(
-    (displacementX = 0, hasToUpdate = true) => {
+    (displacementX = 0, speed = props.transitionSpeed, hasToUpdate = true) => {
       if (isReducedMotion) return;
       const swipedDistance = Math.abs(displacementX);
       const transitionDistance = hasToUpdate
         ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
         : swipedDistance;
-      let transitionDuration = transitionDistance / props.transitionSpeed;
+      let transitionDuration = transitionDistance / speed;
 
       // flatten transitionDurations
+      // transitionDuration =
+      //   1000 *
+      //   Math.log((Math.E - 1) * Math.sqrt(transitionDuration / 1000) + 1);
+      // transitionDuration =
+      //   1000 * (2 / (-Math.sqrt(transitionDuration) / 1000 - 1) + 2);
       transitionDuration =
-        1000 *
-        Math.log((Math.E - 1) * Math.sqrt(transitionDuration / 1000) + 1);
+        (4000 * Math.atan(transitionDuration / 1000)) / Math.PI;
       // bound transitionDuration match in an range
       if (
         props.transitionDurationMin &&
@@ -204,7 +208,7 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = useCallback(
-    (change, displacementX = 0) => {
+    (change, displacementX = 0, speed) => {
       if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
         if (slides.isMinIndex() && change < 0) {
           slideMinRef.current.style.transform = `translateX(${slidesMax})`;
@@ -220,7 +224,7 @@ export const Carousel = (props) => {
       slides.calibrateIndex(change);
       applyTransitionX(displacementX);
       slides.updateIndex(change);
-      applyTransitionDuration(displacementX, change !== 0);
+      applyTransitionDuration(displacementX, speed, change !== 0);
       applyTransitionX();
       applyCurIndexUpdate(slides.curIndex);
     },
@@ -287,9 +291,12 @@ export const Carousel = (props) => {
     onSwipeMoveX: (displacementX) => handleSwipeMoveX(displacementX),
     onSwipeMoveDown: (displacementX, displacementY) =>
       handleSwipeMoveDown(displacementX, displacementY),
-    onSwipeEndRight: (displacementX) => updateIndex(-1, displacementX),
-    onSwipeEndLeft: (displacementX) => updateIndex(+1, displacementX),
-    onSwipeEndDisqualified: (displacementX) => updateIndex(0, displacementX),
+    onSwipeEndRight: (displacementX, speed) =>
+      updateIndex(-1, displacementX, speed),
+    onSwipeEndLeft: (displacementX, speed) =>
+      updateIndex(+1, displacementX, speed),
+    onSwipeEndDisqualified: (displacementX, speed) =>
+      updateIndex(0, displacementX, speed),
     onSwipeEndDown: handleSwipeEndDown,
     onTap: handleTap
   });

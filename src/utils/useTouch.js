@@ -40,6 +40,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   let touchStartX = 0;
   let touchStartY = 0;
   let isTouchMoved = false;
+  let touchStartTime = Date.now();
 
   const handleVerticalMovement = (event, displacementX, displacementY) => {
     if (Math.abs(displacementX) > Math.abs(displacementY) && event.cancelable)
@@ -53,6 +54,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const handleTouchStart = (event) => {
     event.stopPropagation();
     if (isPinch(event)) return;
+    touchStartTime = Date.now();
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
   };
@@ -70,13 +72,14 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const handleTouchEnd = (event) => {
     event.stopPropagation();
     if (isPinch(event)) {
-      onTouchEnd(0, 0);
+      onTouchEnd(0, 0, 0);
       return;
     }
     const displacementX = event.changedTouches[0].clientX - touchStartX;
     const displacementY = event.changedTouches[0].clientY - touchStartY;
     handleVerticalMovement(event, displacementX, displacementY);
-    if (isTouchMoved) onTouchEnd(displacementX, displacementY);
+    if (isTouchMoved)
+      onTouchEnd(displacementX, displacementY, Date.now() - touchStartTime);
     else onTap();
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };
