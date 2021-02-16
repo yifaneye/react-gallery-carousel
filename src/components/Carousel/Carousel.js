@@ -388,7 +388,6 @@ export const Carousel = (props) => {
         ref={carouselWrapperRef}
         className={carouselWrapperClassName}
         style={isMaximized ? {} : props.style}
-        data-is-keyboard-user='true'
       >
         <div
           ref={carouselRef}

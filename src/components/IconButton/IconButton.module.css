@@ -31,7 +31,8 @@
   }
 }
 
-[data-is-keyboard-user="false"] .button:focus {
+/*[data-is-keyboard-user="false"]*/
+.isNotKeyboardUser .button:focus {
   outline: none;
 }
 
