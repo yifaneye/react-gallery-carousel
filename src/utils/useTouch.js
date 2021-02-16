@@ -40,7 +40,9 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   let touchStartX = 0;
   let touchStartY = 0;
   let isTouchMoved = false;
-  let touchStartTime = Date.now();
+  let previousX = 0;
+  let previousTime = Date.now();
+  let instantaneousVelocity = 0;
 
   const handleVerticalMovement = (event, displacementX, displacementY) => {
     if (Math.abs(displacementX) > Math.abs(displacementY) && event.cancelable)
@@ -54,9 +56,10 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const handleTouchStart = (event) => {
     event.stopPropagation();
     if (isPinch(event)) return;
-    touchStartTime = Date.now();
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
+    previousX = touchStartX;
+    previousTime = Date.now();
   };
 
   const handleTouchMove = (event) => {
@@ -67,6 +70,10 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     handleVerticalMovement(event, displacementX, displacementY);
     onTouchMove(displacementX, displacementY);
     isTouchMoved = true;
+    instantaneousVelocity =
+      (event.clientX - previousX) / (Date.now() - previousTime);
+    previousX = event.changedTouches[0].clientX;
+    previousTime = Date.now();
   };
 
   const handleTouchEnd = (event) => {
@@ -79,7 +86,8 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     const displacementY = event.changedTouches[0].clientY - touchStartY;
     handleVerticalMovement(event, displacementX, displacementY);
     if (isTouchMoved)
-      onTouchEnd(displacementX, displacementY, Date.now() - touchStartTime);
+      // can not calculate velocity here since event.clientX === previousX;
+      onTouchEnd(displacementX, displacementY, instantaneousVelocity);
     else onTap();
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };

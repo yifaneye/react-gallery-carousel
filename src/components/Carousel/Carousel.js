@@ -120,6 +120,8 @@ export const Carousel = (props) => {
       const transitionDistance = hasToUpdate
         ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
         : swipedDistance;
+      if (hasToUpdate && speed < 1) speed = 1;
+      else if (!hasToUpdate && speed < 0.2) speed = 0.2;
       let transitionDuration = transitionDistance / speed;
 
       // flatten transitionDurations
@@ -128,8 +130,9 @@ export const Carousel = (props) => {
       //   Math.log((Math.E - 1) * Math.sqrt(transitionDuration / 1000) + 1);
       // transitionDuration =
       //   1000 * (2 / (-Math.sqrt(transitionDuration) / 1000 - 1) + 2);
-      transitionDuration =
-        (4000 * Math.atan(transitionDuration / 1000)) / Math.PI;
+      if (transitionDuration > 1000)
+        transitionDuration =
+          4000 * (Math.atan(transitionDuration / 1000) / Math.PI);
       // bound transitionDuration match in an range
       if (
         props.transitionDurationMin &&

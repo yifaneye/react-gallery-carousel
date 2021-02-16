@@ -15,11 +15,11 @@ const useSwipe = (
     onTap
   }
 ) => {
-  const handleSwipeEnd = (displacementX, displacementY = 0, duration = 0) => {
+  const handleSwipeEnd = (displacementX, displacementY = 0, velocity = 0) => {
     const { clientWidth: width, clientHeight: height } = elementRef.current;
     const distanceXMin = width * swipePercentageMin;
     const distanceYMin = height * swipePercentageMin;
-    const speed = Math.abs(displacementX) / duration;
+    const speed = Math.abs(velocity);
     if (
       displacementX <= -Math.abs(displacementY) &&
       displacementX <= -distanceXMin
