@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 it('renders without crashing', () => {
+  // since .scrollTo() isn't implemented in JSDOM
+  Element.prototype.scrollTo = () => {};
+
   const observe = jest.fn();
   window.IntersectionObserver = jest.fn(function () {
     this.observe = observe;
