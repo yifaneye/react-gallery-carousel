@@ -49,8 +49,8 @@ export const Carousel = (props) => {
   const rawSlides = hasImages ? props.images : children;
   const [slides, slidesElements] = useSlides(rawSlides, {
     index: props.index,
-    rtl: props.isRTL,
-    loop: props.isLoop
+    isRTL: props.isRTL,
+    isLoop: props.isLoop
   });
   const nSlides = slides.length;
   const slidesMin = `-${nSlides}00%`;
@@ -190,7 +190,6 @@ export const Carousel = (props) => {
   }, [applyTransitionX]);
 
   /* handle neighbouring current index update */
-  // store isMaximized to combat stale closure
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
   const handleSwipeMoveX = (displacementX) => {
     setIsPlaying(false);
@@ -200,6 +199,9 @@ export const Carousel = (props) => {
         slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
       } else if (slides.isMaxIndex() && change > 0 && slideMinRef.current) {
         slideMinRef.current.style.transform = `translateX(${slidesMax})`;
+      } else {
+        slideMinRef.current.style.transform = null;
+        slideMaxRef.current.style.transform = null;
       }
     }
     applyTransitionX(displacementX);
@@ -218,8 +220,8 @@ export const Carousel = (props) => {
         slideMaxRef.current.style.transform = null;
       }
     }
-    slides.calibrateIndex(change);
-    applyTransitionX(displacementX);
+    const isCalibrated = slides.calibrateIndex(change);
+    if (isCalibrated && shouldCalibrateIndex) applyTransitionX(displacementX);
     slides.updateIndex(change);
     applyTransitionDuration(displacementX, speed, change !== 0);
     applyTransitionX();
@@ -254,6 +256,7 @@ export const Carousel = (props) => {
   });
 
   /* handle mouse and touch events */
+  // store isMaximized to combat stale closure
   const isMaximizedRef = useRef(isMaximized);
   isMaximizedRef.current = isMaximized;
   const handleSwipeMoveDown = (displacementX, displacementY) => {
@@ -461,6 +464,7 @@ Carousel.defaultProps = {
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.1, // * 100%
   transitionSpeed: 1, // px/ms
+  transitionDurationMin: 200, // ms
   widgetsShadow: false,
   mediaButtons: 'topLeft',
   indexBoard: 'topCenter',

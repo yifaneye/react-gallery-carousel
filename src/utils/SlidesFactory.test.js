@@ -1,23 +1,24 @@
-import Slides from './slides';
+import SlidesFactory from './SlidesFactory';
+const { describe, it, expect } = global;
 
-describe('0 item', () => {
-  const slides = new Slides([], {});
+const slidesFactory = new SlidesFactory();
+
+describe('0 item without RTL', () => {
+  const slides = slidesFactory.CreateSlides([], {});
   const expectedCurIndex = undefined;
   it('constructs slides', () => {
     expect(slides.slides).toStrictEqual([]);
   });
-  it('has no index', () => {
+  it('does not have index', () => {
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('cannot move left', () => {
-    slides.calibrateIndex(-1);
-    slides.calibrateIndex(-1);
+    expect(slides.calibrateIndex(-1)).toBe(false);
     expect(slides.updateIndex(-1)).toBe(false);
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('cannot move right', () => {
-    slides.calibrateIndex(+1);
-    slides.calibrateIndex(+1);
+    expect(slides.calibrateIndex(+1)).toBe(false);
     expect(slides.updateIndex(+1)).toBe(false);
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
@@ -25,47 +26,43 @@ describe('0 item', () => {
 
 const items = [1, 2, 3, 4, 5, 6];
 
-describe('6 items', () => {
-  const slides = new Slides(items, {});
+describe('6 items without RTL', () => {
+  const slides = slidesFactory.CreateSlides(items, {});
   const expectedCurIndex = 0;
   it('constructs slides', () => {
     expect(slides.slides).toStrictEqual([1, 2, 3, 4, 5, 6]);
   });
-  it('has index', () => {
+  it('has correct index', () => {
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('cannot move left', () => {
-    slides.calibrateIndex(-1);
-    slides.calibrateIndex(-1);
+    expect(slides.calibrateIndex(-1)).toBe(false);
     expect(slides.updateIndex(-1)).toBe(false);
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('can move right', () => {
-    slides.calibrateIndex(+1);
-    slides.calibrateIndex(+1);
+    expect(slides.calibrateIndex(+1)).toBe(false);
     expect(slides.updateIndex(+1)).toBe(true);
     expect(slides.curIndex).toBe(expectedCurIndex + 1);
   });
 });
 
-describe('6 items, rtl', () => {
-  const slides = new Slides(items, { rtl: true });
+describe('6 items with RTL', () => {
+  const slides = slidesFactory.CreateSlides(items, { isRTL: true });
   const expectedCurIndex = 5;
   it('constructs slides', () => {
     expect(slides.slides).toStrictEqual([6, 5, 4, 3, 2, 1]);
   });
-  it('has index', () => {
+  it('has correct index', () => {
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('cannot move right', () => {
-    slides.calibrateIndex(+1);
-    slides.calibrateIndex(+1);
+    expect(slides.calibrateIndex(+1)).toBe(false);
     expect(slides.updateIndex(+1)).toBe(false);
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('can move left', () => {
-    slides.calibrateIndex(-1);
-    slides.calibrateIndex(-1);
+    expect(slides.calibrateIndex(-1)).toBe(false);
     expect(slides.updateIndex(-1)).toBe(true);
     expect(slides.curIndex).toBe(expectedCurIndex - 1);
   });
