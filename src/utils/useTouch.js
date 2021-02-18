@@ -71,7 +71,8 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     onTouchMove(displacementX, displacementY);
     isTouchMoved = true;
     instantaneousVelocity =
-      (event.clientX - previousX) / (Date.now() - previousTime);
+      (event.changedTouches[0].clientX - previousX) /
+      (Date.now() - previousTime);
     previousX = event.changedTouches[0].clientX;
     previousTime = Date.now();
   };
