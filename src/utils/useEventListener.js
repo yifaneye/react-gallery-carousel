@@ -1,16 +1,16 @@
 import { useEffect, useRef } from 'react';
 
-const useEventListener = (element, eventName, callback) => {
+const useEventListener = (element, event, callback) => {
   const callbackRef = useRef(null);
   callbackRef.current = callback;
 
   useEffect(() => {
     const callback = callbackRef.current;
-    window.addEventListener(eventName, callback);
+    if (element) element.addEventListener(event, callback);
     return () => {
-      window.removeEventListener(eventName, callback);
+      if (element) element.removeEventListener(event, callback);
     };
-  }, [element, eventName, callback]);
+  }, [element, event, callback]);
 };
 
 export default useEventListener;
