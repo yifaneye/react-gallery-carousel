@@ -16,7 +16,8 @@
     "react-scripts": "link:../node_modules/react-scripts"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-object-rest-spread": "^7.8.3"
+    "@babel/plugin-syntax-object-rest-spread": "^7.8.3",
+    "puppeteer": "^7.1.0"
   },
   "eslintConfig": {
     "extends": "react-app"
