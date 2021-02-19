@@ -2,17 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import puppeteer from 'puppeteer';
+const { test, it, expect } = global;
 
 it('renders without crashing', () => {
-  // since .scrollTo() isn't implemented in JSDOM
+  // since .scrollTo() isn't implemented in jsdom
   Element.prototype.scrollTo = () => {};
 
-  const observe = jest.fn();
-  window.IntersectionObserver = jest.fn(function () {
-    this.observe = observe;
-  });
-
-  global['IntersectionObserver'] = function () {
+  global.IntersectionObserver = function () {
     return {
       observe: () => {},
       disconnect: () => {}
@@ -21,13 +17,13 @@ it('renders without crashing', () => {
 
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation((query) => ({
+    value: (query) => ({
       matches: false,
       media: query,
       onchange: null,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn()
-    }))
+      addEventListener: () => {},
+      removeEventListener: () => {}
+    })
   });
 
   const div = document.createElement('div');

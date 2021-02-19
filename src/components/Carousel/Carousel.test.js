@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Carousel from '../Carousel';
+const { describe, it, expect } = global;
 
 const kittenImageSizes = [900, 800, 700];
 const images = kittenImageSizes.map((kittenImageSize) => ({
@@ -14,20 +15,22 @@ describe('Carousel', () => {
   });
 
   it('renders the same as snapshot', () => {
+    global.IntersectionObserver = function () {
+      return {
+        observe: () => {},
+        disconnect: () => {}
+      };
+    };
+
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: (query) => ({
         matches: false,
         media: query,
         onchange: null,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
-      }))
-    });
-
-    const observe = jest.fn();
-    window.IntersectionObserver = jest.fn(function () {
-      this.observe = observe;
+        addEventListener: () => {},
+        removeEventListener: () => {}
+      })
     });
 
     const component = renderer.create(<Carousel images={images} />);
