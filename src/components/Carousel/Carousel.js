@@ -177,11 +177,10 @@ export const Carousel = (props) => {
 
   const applyTransitionX = useCallback(
     (displacementX = 0) => {
-      applyTransitionY(0, 0);
       if (slidesRef.current)
         slidesRef.current.style.transform = `translateX(calc(-100% * ${slides.curIndex} + ${displacementX}px))`;
     },
-    [applyTransitionY, slides.curIndex]
+    [slides.curIndex]
   );
 
   // change to current index before browser paints
@@ -224,6 +223,7 @@ export const Carousel = (props) => {
     if (isCalibrated && shouldCalibrateIndex) applyTransitionX(displacementX);
     slides.updateIndex(change);
     applyTransitionDuration(displacementX, speed, change !== 0);
+    applyTransitionY(0, 0);
     applyTransitionX();
     applyCurIndexUpdate(slides.curIndex);
   };
@@ -266,6 +266,7 @@ export const Carousel = (props) => {
 
   const handleSwipeEndDown = () => {
     if (!props.shouldMinimizeOnSwipeDown) return;
+    applyTransitionY(0, 0);
     setIsMaximized(() => false);
     rollBackUpdateIndex();
   };
