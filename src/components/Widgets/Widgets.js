@@ -9,7 +9,7 @@ export const ArrowButtons = memo((props) => {
     <div className={styles.widgetWrapper + ' ' + styles.centerLeft}>
       <IconButton
         name='left'
-        label={props.isRTL ? 'Next Slide' : 'Previous Slide'}
+        label={props.isRTL ? 'Go to Next Slide' : 'Go to Previous Slide'}
         hasShadow={props.hasShadow}
         clickCallback={props.onClickLeft}
       />
@@ -20,7 +20,7 @@ export const ArrowButtons = memo((props) => {
     <div className={styles.widgetWrapper + ' ' + styles.centerRight}>
       <IconButton
         name='right'
-        label={props.isRTL ? 'Previous Slide' : 'Next Slide'}
+        label={props.isRTL ? 'Go to Previous Slide' : 'Go to Next Slide'}
         hasShadow={props.hasShadow}
         clickCallback={props.onClickRight}
       />
@@ -109,6 +109,7 @@ export const IndexBoard = memo((props) => {
         styles[props.position] +
         (props.hasShadow ? ' ' + styles.shadow : '')
       }
+      aria-label={`Slide ${props.curIndex} of ${props.totalIndices}`}
     >
       <span className={styles.text}>
         {props.curIndex} / {props.totalIndices}
@@ -144,8 +145,8 @@ export const DotButtons = memo((props) => {
             hasShadow={props.hasShadow}
             label={
               Number(key) === props.curIndex
-                ? `Stay on Slide Number ${index + 1}`
-                : `Go to Slide Number ${index + 1}`
+                ? `Stay on Slide ${index + 1}`
+                : `Go to Slide ${index + 1}`
             }
             clickCallback={callbacks[key]}
           />
