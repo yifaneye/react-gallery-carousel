@@ -2,6 +2,7 @@
   position: relative;
   user-select: none;
   display: flex;
+  background-color: #fff;
   flex-flow: column;
   align-items: stretch;
   box-sizing: border-box;
