@@ -4,7 +4,7 @@
   list-style: none;
   white-space: normal;
   margin: 0;
-  padding: 0 0 4px; /* not 4.5px, for browser compatibility */
+  padding: 0;
   display: flex;
   outline: none;
   flex-direction: row;
