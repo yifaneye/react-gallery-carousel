@@ -165,7 +165,7 @@ export const Carousel = (props) => {
       const hypotenuse = Math.hypot(displacementX, displacementY);
       if (carouselWrapperRef.current) {
         carouselWrapperRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${
-          1 - hypotenuse / 10000
+          1 - hypotenuse / 2000
         })`;
       }
       if (maximizedBackgroundRef.current) {
@@ -301,13 +301,12 @@ export const Carousel = (props) => {
   const carouselWrapperClassName = isMaximized
     ? maxCarouselWrapperCN
     : minCarouselWrapperCN;
-
   /* process components for maximized carousel */
   const minCarouselPlaceholder = isMaximized && (
     <div className={minCarouselWrapperCN} style={props.style} />
   );
   const maxCarouselBackground = isMaximized && (
-    <div ref={maximizedBackgroundRef} className={styles.maxCarouselWrapper} />
+    <div ref={maximizedBackgroundRef} className={maxCarouselWrapperCN} />
   );
 
   /* process widgets */
