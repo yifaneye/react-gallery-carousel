@@ -49,13 +49,23 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
       event.preventDefault();
   };
 
-  const isPinch = (event) =>
-    ('visualViewport' in window && window.visualViewport.scale > 1) ||
-    touchDistinguisher.isPinch(event);
+  const shouldOmitEvent = (event, displacementX = 0) => {
+    if (touchDistinguisher.isPinch(event)) return true;
+
+    // window.visualViewport is not yet supported on IE
+    if (!('visualViewport' in window)) return false;
+
+    const { scale, offsetLeft, width } = window.visualViewport;
+    if (scale <= 1) return false;
+    // pan right at or beyond the left edge
+    if (offsetLeft <= 0 && displacementX > 0) return false;
+    // pan left at or beyond the right edge
+    if (offsetLeft + width >= width * scale && displacementX < 0) return false;
+    return true;
+  };
 
   const handleTouchStart = (event) => {
     event.stopPropagation();
-    if (isPinch(event)) return;
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
     previousX = touchStartX;
@@ -64,9 +74,9 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
 
   const handleTouchMove = (event) => {
     event.stopPropagation();
-    if (isPinch(event)) return;
     const displacementX = event.changedTouches[0].clientX - touchStartX;
     const displacementY = event.changedTouches[0].clientY - touchStartY;
+    if (shouldOmitEvent(event, displacementX)) return;
     handleVerticalMovement(event, displacementX, displacementY);
     onTouchMove(displacementX, displacementY);
     isTouchMoved = true;
@@ -79,12 +89,12 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
 
   const handleTouchEnd = (event) => {
     event.stopPropagation();
-    if (isPinch(event)) {
+    const displacementX = event.changedTouches[0].clientX - touchStartX;
+    const displacementY = event.changedTouches[0].clientY - touchStartY;
+    if (shouldOmitEvent(event, displacementX)) {
       onTouchEnd(0, 0, 0);
       return;
     }
-    const displacementX = event.changedTouches[0].clientX - touchStartX;
-    const displacementY = event.changedTouches[0].clientY - touchStartY;
     handleVerticalMovement(event, displacementX, displacementY);
     if (isTouchMoved)
       // can not calculate velocity here since event.clientX === previousX;
