@@ -31,11 +31,6 @@
   }
 }
 
-/*[data-is-keyboard-user="false"]*/
-.isNotKeyboardUser .button:focus {
-  outline: none;
-}
-
 .left {
   width: 40px;
   height: 60px;
