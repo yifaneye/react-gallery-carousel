@@ -22,6 +22,7 @@ const LazyLoadedImage = (props) => {
       aria-label={props.title}
       title={props.title}
       loading='lazy'
+      tabIndex={0}
       onError={props.onError}
       onClick={props.clickCallback}
     />
@@ -72,6 +73,7 @@ export const ThumbnailImage = (props) => {
       aria-label={imageTitle}
       title={imageTitle}
       loading='auto'
+      tabIndex={0}
       onError={handleError}
       onClick={props.clickCallback}
     />

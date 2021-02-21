@@ -16,7 +16,12 @@ export const ThumbnailSlide = (props) => {
   useAnchor(slideRef, props.isCurrent);
 
   return (
-    <div ref={slideRef} className={slideClassName} onClick={handleClick}>
+    <div
+      ref={slideRef}
+      className={slideClassName}
+      tabIndex={0}
+      onClick={handleClick}
+    >
       {props.slide}
     </div>
   );
