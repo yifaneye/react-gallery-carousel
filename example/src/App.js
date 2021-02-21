@@ -190,7 +190,7 @@ const App = () => {
         transitionDurationMin={300} // 300 milliseconds of minimum transition duration
         transitionDurationMax={900} // 900 milliseconds of minimum transition duration
         caption='top'
-        sizeButtons={false}
+        sizeButtons='bottomCenter'
         mediaButtons='bottomLeft'
         indexBoard='bottomRight'
         className='framed'
