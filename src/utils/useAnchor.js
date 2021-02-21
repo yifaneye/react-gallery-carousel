@@ -1,10 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import useEventListener from './useEventListener';
 
 const useAnchor = (elementRef, shouldScrollToElement) => {
-  const element = elementRef.current;
-
   const scrollToCenter = useCallback(() => {
+    const element = elementRef.current;
     if (!element) return;
     if (!shouldScrollToElement) return;
     const container = element.parentNode;
@@ -17,12 +16,14 @@ const useAnchor = (elementRef, shouldScrollToElement) => {
       left:
         element.offsetLeft - container.clientWidth / 2 + element.clientWidth / 2
     });
-  }, [element, shouldScrollToElement]);
+  }, [elementRef, shouldScrollToElement]);
 
   if (shouldScrollToElement) scrollToCenter();
 
-  // both are only for centering the element that should be scrolled to
-  useEventListener(element, 'click', scrollToCenter);
+  useEffect(() => scrollToCenter(), [scrollToCenter]);
+
+  // both are only for centering the current element that should be scrolled to
+  useEventListener(elementRef.current, 'click', scrollToCenter);
   useEventListener(window, 'resize', scrollToCenter);
 };
 
