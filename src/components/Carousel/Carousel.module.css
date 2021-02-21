@@ -15,12 +15,13 @@
   right: 0;
   bottom: 0;
   z-index: 2147483647; /* int max */
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   /*noinspection CssInvalidPropertyValue*/
-  max-width: stretch;
+  /*max-width: stretch;*/
   /*noinspection CssInvalidPropertyValue*/
-  max-height: stretch;
+  /*max-height: stretch;*/
+  overflow: hidden;
   background-color: #fff;
   transform: scale(1);
   transform-origin: top center;
