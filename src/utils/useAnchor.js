@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react';
 import useEventListener from './useEventListener';
 
-const useAnchor = (elementRef, shouldScrollToElement) => {
+const useAnchor = (elementRef, options) => {
   const scrollToCenter = useCallback(() => {
+    if (!options.isCurrent) return;
     const element = elementRef.current;
     if (!element) return;
-    if (!shouldScrollToElement) return;
     const container = element.parentNode;
 
     // Can not use element.scrollIntoView(element, { behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -16,11 +16,9 @@ const useAnchor = (elementRef, shouldScrollToElement) => {
       left:
         element.offsetLeft - container.clientWidth / 2 + element.clientWidth / 2
     });
-  }, [elementRef, shouldScrollToElement]);
+  }, [elementRef, options]);
 
-  if (shouldScrollToElement) scrollToCenter();
-
-  useEffect(() => scrollToCenter(), [scrollToCenter]);
+  useEffect(() => scrollToCenter(), [scrollToCenter, options]);
 
   // both are only for centering the current element that should be scrolled to
   useEventListener(elementRef.current, 'click', scrollToCenter);

@@ -9,12 +9,14 @@ export const Thumbnail = memo((props) => {
       image={props.slide}
       lazyLoad={props.lazyLoad}
       isCurrent={props.isCurrent}
+      isMaximized={props.isMaximized}
       clickCallback={props.clickCallback}
     />
   ) : (
     <ThumbnailSlide
       slide={props.slide}
       isCurrent={props.isCurrent}
+      isMaximized={props.isMaximized}
       clickCallback={props.clickCallback}
     />
   );
@@ -27,5 +29,6 @@ Thumbnail.propTypes = {
   ]).isRequired,
   isImage: PropTypes.bool.isRequired,
   lazyLoad: PropTypes.bool.isRequired,
+  isMaximized: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };

@@ -359,6 +359,7 @@ export const Carousel = (props) => {
 
   const thumbnails = props.thumbnails && (
     <Thumbnails
+      isMaximized={isMaximizedRef.current}
       slides={slidesElements}
       hasImages={hasImages}
       lazyLoad={props.lazyLoad}

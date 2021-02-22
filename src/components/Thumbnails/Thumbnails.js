@@ -1,10 +1,10 @@
-import React, { memo, useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from './Thumbnails.module.css';
 import Thumbnail from '../Thumbnail';
 import PropTypes from 'prop-types';
 import useNoOverScroll from '../../utils/useNoOverScroll';
 
-export const Thumbnails = memo((props) => {
+export const Thumbnails = (props) => {
   const callbacks = props.callbacks;
   const thumbnailsRef = useRef(null);
 
@@ -24,13 +24,14 @@ export const Thumbnails = memo((props) => {
             isImage={props.hasImages}
             lazyLoad={props.lazyLoad}
             isCurrent={Number(key) === props.curIndex}
+            isMaximized={props.isMaximized}
             clickCallback={callbacks[key]}
           />
         );
       })}
     </div>
   );
-});
+};
 
 Thumbnails.propTypes = {
   slides: PropTypes.array.isRequired,

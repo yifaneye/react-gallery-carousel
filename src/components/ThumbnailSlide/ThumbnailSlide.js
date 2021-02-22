@@ -13,7 +13,10 @@ export const ThumbnailSlide = (props) => {
     props.clickCallback();
   };
 
-  useAnchor(slideRef, props.isCurrent);
+  useAnchor(slideRef, {
+    isCurrent: props.isCurrent,
+    isMaximized: props.isMaximized
+  });
 
   return (
     <div
@@ -30,5 +33,6 @@ export const ThumbnailSlide = (props) => {
 ThumbnailSlide.propTypes = {
   slide: PropTypes.node.isRequired,
   isCurrent: PropTypes.bool.isRequired,
+  isMaximized: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };

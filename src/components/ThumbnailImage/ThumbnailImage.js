@@ -9,7 +9,10 @@ const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
 
-  useAnchor(imageRef, props.isCurrent);
+  useAnchor(imageRef, {
+    isCurrent: props.isCurrent,
+    isMaximized: props.isMaximized
+  });
 
   const source = isInViewport ? props.src : placeholder;
 
@@ -34,6 +37,7 @@ LazyLoadedImage.propTypes = {
   src: PropTypes.string.isRequired,
   title: PropTypes.string,
   isCurrent: PropTypes.bool.isRequired,
+  isMaximized: PropTypes.bool.isRequired,
   onError: PropTypes.func.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
@@ -50,7 +54,10 @@ export const ThumbnailImage = (props) => {
     event.target.src = placeholder;
   };
 
-  useAnchor(imageRef, props.isCurrent);
+  useAnchor(imageRef, {
+    isCurrent: props.isCurrent,
+    isMaximized: props.isMaximized
+  });
 
   if (props.lazyLoad)
     return (
@@ -59,6 +66,7 @@ export const ThumbnailImage = (props) => {
         src={imageSource}
         title={imageTitle}
         isCurrent={props.isCurrent}
+        isMaximized={props.isMaximized}
         clickCallback={props.clickCallback}
         onError={handleError}
       />
@@ -88,5 +96,6 @@ ThumbnailImage.propTypes = {
   }).isRequired,
   lazyLoad: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
+  isMaximized: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
