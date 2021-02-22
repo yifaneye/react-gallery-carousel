@@ -160,22 +160,17 @@ export const Carousel = (props) => {
     ]
   );
 
-  const getPositiveDistance = (displacementX, displacementY) => {
-    // non-positive vertical displacement should have a hypotenuse value of 0
-    if (displacementY <= 0) return 0;
-    // Math.hypot() is not yet supported on IE
-    return Math.sqrt(Math.pow(displacementX, 2) + Math.pow(displacementY, 2));
-  };
-
   const applyTransitionY = (displacementX = 0, displacementY = 0) => {
-    const hypotenuse = getPositiveDistance(displacementX, displacementY);
+    // do not update the maximized carousel when it is above its original position
+    // to hint the user that swiping up will not be able to minimize the carousel
+    const distance = displacementY > 0 ? displacementY : 0;
     if (carouselWrapperRef.current) {
       carouselWrapperRef.current.style.transform = `translate3d(${displacementX}px, ${displacementY}px, 0) scale(${
-        1 - hypotenuse / 2000
+        1 - distance / 2000
       })`;
     }
     if (maximizedBackgroundRef.current) {
-      maximizedBackgroundRef.current.style.opacity = 1 - hypotenuse / 1000;
+      maximizedBackgroundRef.current.style.opacity = 1 - distance / 1000;
     }
   };
 
