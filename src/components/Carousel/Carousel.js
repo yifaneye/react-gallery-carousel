@@ -240,7 +240,9 @@ export const Carousel = (props) => {
 
   /* handle explicit current index update */
   const goToIndex = (index) => {
-    setIsPlaying(false);
+    // set both the first and the last slide back into their respective original places
+    slideMinRef.current.style.transform = null;
+    slideMaxRef.current.style.transform = null;
     slides.goToIndex(index);
     applyTransitionX();
     applyCurIndexUpdate(slides.curIndex);
