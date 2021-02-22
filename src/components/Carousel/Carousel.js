@@ -160,11 +160,18 @@ export const Carousel = (props) => {
     ]
   );
 
+  const getPositiveDistance = useCallback((x, y) => {
+    // any non-positive value should have a hypotenuse value of 0
+    if (!(x > 0 || y > 0)) return 0;
+    // Math.hypot() is not yet supported on IE
+    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+  }, []);
+
   const applyTransitionY = useCallback(
     (displacementX = 0, displacementY = 0) => {
-      const hypotenuse = Math.hypot(displacementX, displacementY);
+      const hypotenuse = getPositiveDistance(displacementX, displacementY);
       if (carouselWrapperRef.current) {
-        carouselWrapperRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${
+        carouselWrapperRef.current.style.transform = `translate3d(${displacementX}px, ${displacementY}px, 0) scale(${
           1 - hypotenuse / 2000
         })`;
       }
@@ -172,7 +179,7 @@ export const Carousel = (props) => {
         maximizedBackgroundRef.current.style.opacity = 1 - hypotenuse / 1000;
       }
     },
-    [carouselWrapperRef, maximizedBackgroundRef]
+    [getPositiveDistance, carouselWrapperRef, maximizedBackgroundRef]
   );
 
   const applyTransitionX = useCallback(
