@@ -99,8 +99,13 @@ SizeButtons.propTypes = {
 };
 
 export const IndexBoard = memo((props) => {
+  const ref = useRef(null);
+
+  useNoSwipe(ref);
+
   return (
     <div
+      ref={ref}
       className={
         styles.widgetWrapper +
         ' ' +
