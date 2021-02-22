@@ -160,27 +160,24 @@ export const Carousel = (props) => {
     ]
   );
 
-  const getPositiveDistance = useCallback((x, y) => {
-    // any non-positive value should have a hypotenuse value of 0
-    if (!(x > 0 || y > 0)) return 0;
+  const getPositiveDistance = (displacementX, displacementY) => {
+    // non-positive vertical displacement should have a hypotenuse value of 0
+    if (displacementY <= 0) return 0;
     // Math.hypot() is not yet supported on IE
-    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-  }, []);
+    return Math.sqrt(Math.pow(displacementX, 2) + Math.pow(displacementY, 2));
+  };
 
-  const applyTransitionY = useCallback(
-    (displacementX = 0, displacementY = 0) => {
-      const hypotenuse = getPositiveDistance(displacementX, displacementY);
-      if (carouselWrapperRef.current) {
-        carouselWrapperRef.current.style.transform = `translate3d(${displacementX}px, ${displacementY}px, 0) scale(${
-          1 - hypotenuse / 2000
-        })`;
-      }
-      if (maximizedBackgroundRef.current) {
-        maximizedBackgroundRef.current.style.opacity = 1 - hypotenuse / 1000;
-      }
-    },
-    [getPositiveDistance, carouselWrapperRef, maximizedBackgroundRef]
-  );
+  const applyTransitionY = (displacementX = 0, displacementY = 0) => {
+    const hypotenuse = getPositiveDistance(displacementX, displacementY);
+    if (carouselWrapperRef.current) {
+      carouselWrapperRef.current.style.transform = `translate3d(${displacementX}px, ${displacementY}px, 0) scale(${
+        1 - hypotenuse / 2000
+      })`;
+    }
+    if (maximizedBackgroundRef.current) {
+      maximizedBackgroundRef.current.style.opacity = 1 - hypotenuse / 1000;
+    }
+  };
 
   const applyTransitionX = useCallback(
     (displacementX = 0) => {
