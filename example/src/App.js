@@ -7,18 +7,20 @@ import TwoWayMap from './utils/twoWayMap';
 const imageIDs = Array(160)
   .fill(1)
   .map((_, i) => i + 1);
-const images = imageIDs.map((imageID) => ({
-  src: `https://placedog.net/800/640?id=${imageID}`,
-  alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
-  thumbnail: `https://placedog.net/80/64?id=${imageID}`
-}));
+const images = imageIDs.map((imageID) => {
+  const value = (imageID % 2) * 5;
+  return {
+    src: `https://placedog.net/800/6${value}0?id=${imageID}`,
+    alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
+    thumbnail: `https://placedog.net/80/6${value}?id=${imageID}`
+  };
+});
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   const indexToTitle = new TwoWayMap({
     1: 'Introduction',
-    2: 'Installation',
-    3: 'Example',
-    4: 'Demo'
+    2: 'Get Started',
+    3: 'Example'
   });
 
   return (
@@ -40,7 +42,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         window.location.hash = title;
         document.title = title;
       }}
-      style={{ height: '300px', userSelect: 'text' }}
+      style={{ width: '100%', height: '40vh', userSelect: 'text' }}
     >
       <div>
         <h1>react-gallery-carousel</h1>
@@ -57,91 +59,6 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         <code>npm install react-gallery-carousel --save</code>
         <p>or</p>
         <code>yarn add react-gallery-carousel</code>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
-        <p>or</p>
       </div>
       <div>
         <h2>Example</h2>
@@ -166,7 +83,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 };
 
 const App = () => {
-  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '40vh' }}`;
+  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '60vh' }} />`;
 
   return (
     <div
@@ -179,23 +96,24 @@ const App = () => {
       <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
 
       {/*basic carousel example*/}
-      <Carousel images={images} style={{ height: '60vh' }} />
+      <div style={{ width: '100%', height: '60vh' }}>
+        <Carousel images={images} />
+      </div>
 
       {/*customized carousel example*/}
-      <Carousel
-        images={images}
-        isRTL={true}
-        isLoop={false}
-        objectFit={'contain'}
-        transitionDurationMin={300} // 300 milliseconds of minimum transition duration
-        transitionDurationMax={900} // 900 milliseconds of minimum transition duration
-        caption='top'
-        sizeButtons='bottomCenter'
-        mediaButtons='bottomLeft'
-        indexBoard='bottomRight'
-        className='framed'
-        style={{ height: '700px' }}
-      />
+      <div style={{ width: '100%', height: '60vh' }}>
+        <Carousel
+          images={images}
+          isRTL={true}
+          isLoop={false}
+          objectFit={'contain'}
+          caption='top'
+          sizeButtons='bottomCenter'
+          mediaButtons='bottomLeft'
+          indexBoard='bottomRight'
+          className='framed'
+        />
+      </div>
     </div>
   );
 };
