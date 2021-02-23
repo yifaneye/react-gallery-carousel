@@ -7,7 +7,7 @@ const useSwipe = (
   swipePercentageMin,
   {
     onSwipeMoveX,
-    onSwipeMoveDown,
+    onSwipeMoveY,
     onSwipeEndRight,
     onSwipeEndLeft,
     onSwipeEndDisqualified,
@@ -46,7 +46,7 @@ const useSwipe = (
 
   const handleSwipeMove = (displacementX, displacementY = 0) => {
     if (isInitialSwipeDown === false) onSwipeMoveX(displacementX);
-    else if (isInitialSwipeDown) onSwipeMoveDown(displacementX, displacementY);
+    else if (isInitialSwipeDown) onSwipeMoveY(displacementX, displacementY);
     else {
       // when isInitialSwipeDown is undefined
       if (Math.abs(displacementX) >= displacementY) isInitialSwipeDown = false;

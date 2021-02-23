@@ -260,7 +260,7 @@ export const Carousel = (props) => {
   // store isMaximized to combat stale closure
   const isMaximizedRef = useRef(isMaximized);
   isMaximizedRef.current = isMaximized;
-  const handleSwipeMoveDown = (displacementX, displacementY) => {
+  const handleSwipeMoveY = (displacementX, displacementY) => {
     if (!props.shouldMinimizeOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacementX, displacementY);
   };
@@ -280,9 +280,8 @@ export const Carousel = (props) => {
   };
 
   const mouseEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
-    onSwipeMoveX: (displacementX) => handleSwipeMoveX(displacementX),
-    onSwipeMoveDown: (displacementX, displacementY) =>
-      handleSwipeMoveDown(displacementX, displacementY),
+    onSwipeMoveX: handleSwipeMoveX,
+    onSwipeMoveY: handleSwipeMoveY,
     onSwipeEndRight: (displacementX, speed) =>
       updateIndex(-1, displacementX, speed),
     onSwipeEndLeft: (displacementX, speed) =>
