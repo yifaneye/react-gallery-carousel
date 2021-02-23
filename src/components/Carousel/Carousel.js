@@ -1,23 +1,13 @@
 import React, {
   Fragment,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState
 } from 'react';
 import styles from './Carousel.module.css';
-import useKeys from '../../utils/useKeys';
-import useTimer from '../../utils/useTimer';
-import useSlides from '../../utils/useSlides';
 import Slides from '../Slides';
-import PropTypes from 'prop-types';
-import {
-  compareToProp,
-  fallbackProps,
-  numberBetween,
-  positiveNumber
-} from '../../utils/validators';
+import Thumbnails from '../Thumbnails';
 import {
   ArrowButtons,
   IndexBoard,
@@ -25,12 +15,28 @@ import {
   MediaButtons,
   SizeButtons
 } from '../Widgets';
-import Thumbnails from '../Thumbnails';
-import useMediaQuery from '../../utils/useMediaQuery';
-import useKeyboard from '../../utils/useKeyboard';
+import useKeys from '../../utils/useKeys';
 import useSwipe from '../../utils/useSwipe';
-import useFixedPosition from '../../utils/useFixedPosition';
+import useTimer from '../../utils/useTimer';
+import useSlides from '../../utils/useSlides';
+import useKeyboard from '../../utils/useKeyboard';
+import useMediaQuery from '../../utils/useMediaQuery';
 import useEventListener from '../../utils/useEventListener';
+import useFixedPosition from '../../utils/useFixedPosition';
+import PropTypes from 'prop-types';
+import {
+  compareToProp,
+  fallbackProps,
+  numberBetween,
+  positiveNumber
+} from '../../utils/validators';
+
+// constants
+const MIN_SPEED = 0.2;
+const MIN_SPEED_TO_UPDATE = 1;
+const TRANSITION_DURATION_THRESHOLD = 1000; // ms
+const MAX_TRANSITION_DURATION = 2000; // ms
+const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 
 export const Carousel = (props) => {
   const documentRef = useRef(document);
@@ -90,13 +96,9 @@ export const Carousel = (props) => {
     }
   }, [isPlaying, setIsPlaying, wasPlaying, setWasPlaying]);
 
-  useEffect(() => {
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () =>
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [handleVisibilityChange]);
+  useEventListener(document, 'visibilitychange', handleVisibilityChange);
 
-  /* handle maximization and full screen */
+  /* handle maximization/minimization and full screen */
   const [isMaximized, setIsMaximized] = useFixedPosition(
     false,
     carouselWrapperRef
@@ -108,90 +110,93 @@ export const Carousel = (props) => {
   };
 
   /* handle UI update */
-  const applyTransitionDuration = useCallback(
-    (displacementX = 0, speed = props.transitionSpeed, hasToUpdate = true) => {
-      if (isReducedMotion) return;
-      const swipedDistance = Math.abs(displacementX);
-      const transitionDistance = hasToUpdate
-        ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
-        : swipedDistance;
-      if (hasToUpdate && speed < 1) speed = 1;
-      else if (!hasToUpdate && speed < 0.2) speed = 0.2;
-      let transitionDuration = transitionDistance / speed;
+  const applyTransitionDuration = (
+    displacementX = 0,
+    speed = props.transitionSpeed,
+    hasToUpdate = true
+  ) => {
+    if (isReducedMotion) return;
 
-      // flatten transitionDurations
-      // transitionDuration =
-      //   1000 *
-      //   Math.log((Math.E - 1) * Math.sqrt(transitionDuration / 1000) + 1);
-      // transitionDuration =
-      //   1000 * (2 / (-Math.sqrt(transitionDuration) / 1000 - 1) + 2);
-      if (transitionDuration > 1000)
-        transitionDuration =
-          4000 * (Math.atan(transitionDuration / 1000) / Math.PI);
-      // bound transitionDuration match in an range
-      if (
-        props.transitionDurationMin &&
-        transitionDuration < props.transitionDurationMin
-      )
-        transitionDuration = props.transitionDurationMin;
-      // transitionMax has precedence over transitionMin
-      if (
-        props.transitionDurationMax &&
-        transitionDuration > props.transitionDurationMax
-      )
-        transitionDuration = props.transitionDurationMax;
-      // make transitionDuration match autoPlayInterval
-      if (isPlaying && transitionDuration > props.autoPlayInterval)
-        transitionDuration = props.autoPlayInterval * 1;
+    // calculate transition duration
+    const swipedDistance = Math.abs(displacementX);
+    const transitionDistance = hasToUpdate
+      ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
+      : swipedDistance;
+    speed = hasToUpdate
+      ? Math.min(speed, MIN_SPEED_TO_UPDATE)
+      : Math.min(speed, MIN_SPEED);
+    let transitionDuration = transitionDistance / speed;
 
-      slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
-      setTimeout(
-        () => (slidesRef.current.style.transitionDuration = null),
-        transitionDuration
+    // flatten transitionDurations
+    if (transitionDuration > TRANSITION_DURATION_THRESHOLD)
+      transitionDuration =
+        (Math.atan(transitionDuration / TRANSITION_DURATION_THRESHOLD) *
+          MAX_TRANSITION_DURATION *
+          2) /
+        Math.PI;
+
+    // bound transitionDuration to a range
+    if (props.transitionDurationMin)
+      transitionDuration = Math.max(
+        transitionDuration,
+        props.transitionDurationMin
       );
-    },
-    [
-      props.transitionSpeed,
-      isPlaying,
-      isReducedMotion,
-      props.autoPlayInterval,
-      props.transitionDurationMin,
-      props.transitionDurationMax
-    ]
-  );
+
+    // transitionMax has precedence over transitionMin
+    if (props.transitionDurationMax)
+      transitionDuration = Math.min(
+        transitionDuration,
+        props.transitionDurationMax
+      );
+
+    // make transitionDuration match autoPlayInterval
+    if (isPlaying && transitionDuration > props.autoPlayInterval)
+      transitionDuration = props.autoPlayInterval * 1;
+
+    // apply transition duration for the period of transitionDuration
+    slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
+    setTimeout(
+      () => (slidesRef.current.style.transitionDuration = null),
+      transitionDuration
+    );
+  };
 
   const applyTransitionY = (displacementX = 0, displacementY = 0) => {
     // do not update the maximized carousel when it is above its original position
     // to hint the user that swiping up will not be able to minimize the carousel
     const distance = displacementY > 0 ? displacementY : 0;
+    const portion = 1 - distance / MAX_SWIPE_DOWN_DISTANCE;
+
+    // move and scale the element
     if (carouselWrapperRef.current) {
-      carouselWrapperRef.current.style.transform = `translate3d(${displacementX}px, ${displacementY}px, 0) scale(${
-        1 - distance / 2000
-      })`;
+      carouselWrapperRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${portion})`;
     }
+
+    // update opacity of the background
     if (maximizedBackgroundRef.current) {
-      maximizedBackgroundRef.current.style.opacity = 1 - distance / 1000;
+      maximizedBackgroundRef.current.style.opacity = portion;
     }
   };
 
   const applyTransitionX = useCallback(
     (displacementX = 0) => {
+      // move the element
       if (slidesRef.current)
         slidesRef.current.style.transform = `translateX(calc(-100% * ${slides.curIndex} + ${displacementX}px))`;
     },
     [slides.curIndex]
   );
 
-  // change to current index before browser paints
-  useLayoutEffect(() => {
-    applyTransitionX();
-  }, [applyTransitionX]);
+  // change to the current slide before browser paints
+  useLayoutEffect(() => applyTransitionX(), [applyTransitionX]);
 
-  /* handle neighbouring current index update */
+  /* handle implicit current index update */
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
+
   const handleSwipeMoveX = (displacementX) => {
-    setIsPlaying(false);
     const change = -displacementX;
+
+    // calibrate index for looping of the carousel
     if (shouldCalibrateIndex) {
       if (slides.isMinIndex() && change < 0 && slideMaxRef.current) {
         slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
@@ -202,10 +207,13 @@ export const Carousel = (props) => {
         slideMaxRef.current.style.transform = null;
       }
     }
+
+    // update UI
     applyTransitionX(displacementX);
   };
 
   const updateIndex = (change, displacementX = 0, speed) => {
+    // calibrate index for looping of the carousel
     if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
       if (slides.isMinIndex() && change < 0) {
         slideMinRef.current.style.transform = `translateX(${slidesMax})`;
@@ -218,27 +226,34 @@ export const Carousel = (props) => {
         slideMaxRef.current.style.transform = null;
       }
     }
-    const isCalibrated = slides.calibrateIndex(change);
-    if (isCalibrated && shouldCalibrateIndex) applyTransitionX(displacementX);
+
+    // update carousel
+    if (slides.calibrateIndex(change) && shouldCalibrateIndex)
+      applyTransitionX(displacementX);
     slides.updateIndex(change);
     applyTransitionDuration(displacementX, speed, change !== 0);
     applyTransitionY(0, 0);
     applyTransitionX();
     applyCurIndexUpdate(slides.curIndex);
   };
-  const rollBackUpdateIndex = () => updateIndex(0, 0);
 
-  useEventListener(window, 'orientationchange', rollBackUpdateIndex);
+  const rollBackIndexUpdate = () => updateIndex(0, 0, 0);
+
+  useEventListener(window, 'orientationchange', rollBackIndexUpdate);
 
   /* handle explicit current index update */
   const goToIndex = (index) => {
     // set both the first and the last slide back into their respective original places
     slideMinRef.current.style.transform = null;
     slideMaxRef.current.style.transform = null;
+
+    // update carousel
     slides.goToIndex(index);
     applyTransitionX();
     applyCurIndexUpdate(slides.curIndex);
   };
+
+  // process callbacks, one for each for dotButton and thumbnail
   const indices = slides.allIndices;
   const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
   const goToIndexCallbacksObj = indices.reduce(
@@ -248,9 +263,12 @@ export const Carousel = (props) => {
 
   /* handle keyboard events */
   useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
+
   useKeyboard(carouselWrapperRef);
+
   const goLeft = () => updateIndex(-1);
   const goRight = () => updateIndex(+1);
+
   useKeys(slidesRef, {
     ArrowLeft: goLeft,
     ArrowRight: goRight
@@ -260,6 +278,7 @@ export const Carousel = (props) => {
   // store isMaximized to combat stale closure
   const isMaximizedRef = useRef(isMaximized);
   isMaximizedRef.current = isMaximized;
+
   const handleSwipeMoveY = (displacementX, displacementY) => {
     if (!props.shouldMinimizeOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacementX, displacementY);
@@ -269,7 +288,7 @@ export const Carousel = (props) => {
     if (!props.shouldMinimizeOnSwipeDown) return;
     applyTransitionY(0, 0);
     setIsMaximized(() => false);
-    rollBackUpdateIndex();
+    rollBackIndexUpdate();
   };
 
   const handleTap = () => {
@@ -291,6 +310,7 @@ export const Carousel = (props) => {
     onSwipeEndDown: handleSwipeEndDown,
     onTap: handleTap
   });
+  // touch event handlers are already added to carouselRef by useSwipe hook at this point
 
   /* process class names */
   const propsClassName = 'className' in props ? ' ' + props.className : '';
@@ -301,10 +321,12 @@ export const Carousel = (props) => {
   const carouselWrapperClassName = isMaximized
     ? maxCarouselWrapperCN
     : minCarouselWrapperCN;
+
   /* process components for maximized carousel */
   const minCarouselPlaceholder = isMaximized && (
     <div className={minCarouselWrapperCN} style={props.style} />
   );
+
   const maxCarouselBackground = isMaximized && (
     <div ref={maximizedBackgroundRef} className={maxCarouselWrapperCN} />
   );

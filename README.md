@@ -56,8 +56,8 @@ To customize the carousel, use the following props:
 |autoPlayInterval         |Number                |5000       |Interval of auto play (in milliseconds).|
 |swipeThreshold           |Number                |0.1        |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
 |transitionSpeed          |Number                |1          |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
-|transitionDurationMin    |Number                |undefined  |Minimum transition duration (in milliseconds).|
-|transitionDurationMax    |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionDurationMin'.|
+|transitionDurationMin    |Number                |undefined  |Minimum transition duration (in milliseconds). Together with transitionDurationMax, they can be used to set constant transition duration with transitionDurationMin === transitionDurationMax.|
+|transitionDurationMax    |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionDurationMin' when transitionDurationMin > transitionDurationMax.|
 |widgetsShadow            |Boolean               |false      |If true, the following widgets have shadows. If true, the transition will drop frames when there are a large number (> 20) of images on all tested browsers (Safari, Chrome, Opera, Edge), except Firefox.|
 |mediaButtons             |Boolean or String     |'topLeft'  |If false, the carousel does not show media buttons (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |indexBoard               |Boolean or String     |'topCenter'|If false, the carousel does not show index board (e.g. 8/10). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
