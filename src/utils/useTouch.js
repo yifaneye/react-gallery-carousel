@@ -17,7 +17,7 @@ const getTouchDistinguisher = () => {
   }
 
   function _wasPinch(event) {
-    // only check one changedTouch because touchEnd event that would be recognized as swiping only has one changedTouch
+    // check for the one finger that was part of a multi-finger pinch zoom
     return (
       event.changedTouches &&
       pinchTouchIdentifiers.has(event.changedTouches[0].identifier)
@@ -75,8 +75,8 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const handleTouchMove = (event) => {
     event.stopPropagation();
     const displacementX = event.changedTouches[0].clientX - touchStartX;
-    const displacementY = event.changedTouches[0].clientY - touchStartY;
     if (shouldOmitEvent(event, displacementX)) return;
+    const displacementY = event.changedTouches[0].clientY - touchStartY;
     handleVerticalMovement(event, displacementX, displacementY);
     onTouchMove(displacementX, displacementY);
     isTouchMoved = true;
@@ -90,11 +90,11 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const handleTouchEnd = (event) => {
     event.stopPropagation();
     const displacementX = event.changedTouches[0].clientX - touchStartX;
-    const displacementY = event.changedTouches[0].clientY - touchStartY;
     if (shouldOmitEvent(event, displacementX)) {
       onTouchEnd(0, 0, 0);
       return;
     }
+    const displacementY = event.changedTouches[0].clientY - touchStartY;
     handleVerticalMovement(event, displacementX, displacementY);
     if (isTouchMoved)
       // can not calculate velocity here since event.clientX === previousX;
