@@ -1,89 +1,54 @@
 import React, { useRef } from 'react';
 import styles from './ThumbnailImage.module.css';
-import PropTypes from 'prop-types';
 import placeholder from 'placeholderImage.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
-import useAnchor from '../../utils/useAnchor';
+import PropTypes from 'prop-types';
+
+const handleError = (event) => {
+  // permanently replace image with placeholder
+  event.target.src = placeholder;
+};
 
 const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
 
-  useAnchor(imageRef, {
-    isCurrent: props.isCurrent,
-    isMaximized: props.isMaximized
-  });
-
-  const source = isInViewport ? props.src : placeholder;
+  // temporarily replace image with placeholder
+  const src = isInViewport ? props.src : placeholder;
 
   return (
     <img
       ref={imageRef}
-      className={props.className}
-      src={source}
-      alt={props.title}
-      aria-label={props.title}
-      title={props.title}
+      className={styles.image}
+      src={src}
+      alt={props.alt}
+      aria-label={props.alt}
       loading='lazy'
-      tabIndex={0}
-      onError={props.onError}
-      onClick={props.clickCallback}
+      onError={handleError}
     />
   );
 };
 
 LazyLoadedImage.propTypes = {
-  className: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  isCurrent: PropTypes.bool.isRequired,
-  isMaximized: PropTypes.bool.isRequired,
-  onError: PropTypes.func.isRequired,
-  clickCallback: PropTypes.func.isRequired
+  alt: PropTypes.string
 };
 
 export const ThumbnailImage = (props) => {
-  const imageRef = useRef(null);
-  const imageSource = props.image.thumbnail || props.image.src;
-  const imageTitle = props.image.alt || null;
-  const imageClassName = `${styles.image}${
-    props.isCurrent ? ' ' + styles.currentImage : ''
-  }`;
+  // use the original image as fallback for the thumbnail
+  const src = props.image.thumbnail || props.image.src;
+  const alt = props.image.alt || null;
 
-  const handleError = (event) => {
-    event.target.src = placeholder;
-  };
-
-  useAnchor(imageRef, {
-    isCurrent: props.isCurrent,
-    isMaximized: props.isMaximized
-  });
-
-  if (props.lazyLoad)
-    return (
-      <LazyLoadedImage
-        className={imageClassName}
-        src={imageSource}
-        title={imageTitle}
-        isCurrent={props.isCurrent}
-        isMaximized={props.isMaximized}
-        clickCallback={props.clickCallback}
-        onError={handleError}
-      />
-    );
+  if (props.lazyLoad) return <LazyLoadedImage src={src} alt={alt} />;
 
   return (
     <img
-      ref={imageRef}
-      className={imageClassName}
-      src={imageSource}
-      alt={imageTitle}
-      aria-label={imageTitle}
-      title={imageTitle}
+      className={styles.image}
+      src={src}
+      alt={alt}
+      aria-label={alt}
       loading='auto'
-      tabIndex={0}
       onError={handleError}
-      onClick={props.clickCallback}
     />
   );
 };
@@ -94,8 +59,5 @@ ThumbnailImage.propTypes = {
     alt: PropTypes.string,
     thumbnail: PropTypes.string
   }).isRequired,
-  lazyLoad: PropTypes.bool.isRequired,
-  isCurrent: PropTypes.bool.isRequired,
-  isMaximized: PropTypes.bool.isRequired,
-  clickCallback: PropTypes.func.isRequired
+  lazyLoad: PropTypes.bool.isRequired
 };

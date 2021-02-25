@@ -1,26 +1,17 @@
 .slide {
-  --scale: 10%;
-
   height: 100%;
-  width: var(--scale);
-  -ms-zoom: var(--scale);
-  zoom: var(--scale);
-  overflow: hidden;
-  opacity: 0.25;
-  margin-right: 5px;
-  object-fit: cover;
-  user-select: none;
-  cursor: pointer;
-  -webkit-user-drag: none;
-  overflow-wrap: break-word;
-  word-break: normal;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  box-sizing: border-box;
+  -ms-zoom: var(--scale);
+  zoom: var(--scale);
+  overflow-wrap: break-word;
+  word-break: normal;
   font-size: var(--scale);
   text-size-adjust: none;
+  pointer-events: none;
 }
 
 .slide * {
@@ -43,12 +34,4 @@
   .slide {
     font-size: var(--scale);
   }
-}
-
-.currentSlide {
-  opacity: 1;
-}
-
-.slide:not(.currentSlide):hover {
-  opacity: 0.75;
 }

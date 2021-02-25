@@ -11,7 +11,7 @@ export const Thumbnails = (props) => {
   const wheelEventHandler = useNoOverScroll(thumbnailsRef);
 
   return (
-    <div
+    <ul
       ref={thumbnailsRef}
       className={styles.thumbnails}
       onWheel={wheelEventHandler}
@@ -25,11 +25,11 @@ export const Thumbnails = (props) => {
             lazyLoad={props.lazyLoad}
             isCurrent={Number(key) === props.curIndex}
             isMaximized={props.isMaximized}
-            clickCallback={callbacks[key]}
+            onClick={callbacks[key]}
           />
         );
       })}
-    </div>
+    </ul>
   );
 };
 
