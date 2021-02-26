@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './IconButton.module.css';
 import PropTypes from 'prop-types';
 
-export const IconButton = memo((props) => {
+export const IconButton = (props) => {
   return (
     <button
       className={`${styles.button} ${styles[props.name]}${
@@ -13,7 +13,7 @@ export const IconButton = memo((props) => {
       onClick={props.clickCallback}
     />
   );
-});
+};
 
 IconButton.propTypes = {
   name: PropTypes.oneOf([

@@ -4,7 +4,7 @@ import IconButton from '../IconButton';
 import styles from './Widgets.module.css';
 import useNoSwipe from '../../utils/useNoSwipe';
 
-export const ArrowButtons = memo((props) => {
+export const ArrowButtons = (props) => {
   const leftButton = !props.isLeftDisabled && (
     <div className={styles.widgetWrapper + ' ' + styles.centerLeft}>
       <IconButton
@@ -33,7 +33,7 @@ export const ArrowButtons = memo((props) => {
       {rightButton}
     </Fragment>
   );
-});
+};
 
 ArrowButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
@@ -44,7 +44,7 @@ ArrowButtons.propTypes = {
   onClickRight: PropTypes.func.isRequired
 };
 
-export const MediaButtons = memo((props) => {
+export const MediaButtons = (props) => {
   return (
     <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <IconButton
@@ -55,7 +55,7 @@ export const MediaButtons = memo((props) => {
       />
     </div>
   );
-});
+};
 
 MediaButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
@@ -71,7 +71,7 @@ MediaButtons.propTypes = {
   clickCallback: PropTypes.func.isRequired
 };
 
-export const SizeButtons = memo((props) => {
+export const SizeButtons = (props) => {
   return (
     <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <IconButton
@@ -82,7 +82,7 @@ export const SizeButtons = memo((props) => {
       />
     </div>
   );
-});
+};
 
 SizeButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
@@ -98,7 +98,7 @@ SizeButtons.propTypes = {
   clickCallback: PropTypes.func.isRequired
 };
 
-export const IndexBoard = memo((props) => {
+export const IndexBoard = (props) => {
   const ref = useRef(null);
 
   useNoSwipe(ref);
@@ -121,7 +121,7 @@ export const IndexBoard = memo((props) => {
       </span>
     </div>
   );
-});
+};
 
 IndexBoard.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
@@ -137,7 +137,7 @@ IndexBoard.propTypes = {
   totalIndices: PropTypes.number.isRequired
 };
 
-export const DotButtons = memo((props) => {
+export const DotButtons = (props) => {
   const callbacks = props.callbacks;
 
   return (
@@ -159,7 +159,7 @@ export const DotButtons = memo((props) => {
       </div>
     </div>
   );
-});
+};
 
 DotButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired,
@@ -168,7 +168,7 @@ DotButtons.propTypes = {
   callbacks: PropTypes.shape(PropTypes.function).isRequired
 };
 
-export const LoadingSpinner = memo((props) => {
+export const LoadingSpinner = (props) => {
   return (
     <div className={styles.centerWrapper}>
       <div className={styles.widgetWrapper + ' ' + styles.centerCenter}>
@@ -181,12 +181,13 @@ export const LoadingSpinner = memo((props) => {
       </div>
     </div>
   );
-});
+};
 
 LoadingSpinner.propTypes = {
   hasShadow: PropTypes.bool.isRequired
 };
 
+// memo is useful here
 export const Caption = memo((props) => {
   const captionRef = useRef(null);
 

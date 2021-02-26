@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Slides.module.css';
 import Slide from '../Slide';
 import PropTypes from 'prop-types';
 import { positiveNumber, elementRef } from '../../utils/validators';
 
 // memo is useful here
-export const Slides = (props) => {
+export const Slides = memo((props) => {
   const slides = props.slides;
 
   return (
@@ -27,7 +27,7 @@ export const Slides = (props) => {
       })}
     </ul>
   );
-};
+});
 
 Slides.propTypes = {
   slides: PropTypes.array.isRequired,

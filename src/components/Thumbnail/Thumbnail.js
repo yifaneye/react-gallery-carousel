@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './Thumbnail.module.css';
 import ThumbnailImage from '../ImageThumbnail';
 import { UserSlideThumbnail } from '../UserSlide';
 import PropTypes from 'prop-types';
 
-export const Thumbnail = memo((props) => {
+export const Thumbnail = (props) => {
   const slide = props.isImage ? (
     <ThumbnailImage image={props.slide} lazyLoad={props.lazyLoad} />
   ) : (
@@ -22,7 +22,7 @@ export const Thumbnail = memo((props) => {
       {slide}
     </li>
   );
-});
+};
 
 Thumbnail.propTypes = {
   slide: PropTypes.oneOfType([
