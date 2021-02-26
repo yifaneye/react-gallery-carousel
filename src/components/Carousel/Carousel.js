@@ -35,8 +35,8 @@ const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 export const Carousel = (props) => {
   const documentRef = useRef(document);
   const maximizedBackgroundRef = useRef(null);
-  const carouselWrapperRef = useRef(null);
   const carouselRef = useRef(null);
+  const slidesWrapperRef = useRef(null);
   const slidesRef = useRef(null);
   const slideMinRef = useRef(null);
   const slideMaxRef = useRef(null);
@@ -93,13 +93,10 @@ export const Carousel = (props) => {
   useEventListener(document, 'visibilitychange', handleVisibilityChange);
 
   /* handle maximization/minimization and full screen */
-  const [isMaximized, setIsMaximized] = useFixedPosition(
-    false,
-    carouselWrapperRef
-  );
+  const [isMaximized, setIsMaximized] = useFixedPosition(false, carouselRef);
   const handleSizeButtonClick = () => {
     // carousel is to be maximized
-    if (!isMaximized) carouselRef.current.focus();
+    if (!isMaximized) slidesWrapperRef.current.focus();
     setIsMaximized((isMaximized) => !isMaximized);
   };
 
@@ -162,8 +159,8 @@ export const Carousel = (props) => {
     const portion = 1 - distance / MAX_SWIPE_DOWN_DISTANCE;
 
     // move and scale the element
-    if (carouselWrapperRef.current) {
-      carouselWrapperRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${portion})`;
+    if (carouselRef.current) {
+      carouselRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${portion})`;
     }
 
     // update opacity of the background
@@ -258,7 +255,7 @@ export const Carousel = (props) => {
   /* handle keyboard events */
   useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
 
-  useKeyboard(carouselWrapperRef);
+  useKeyboard(carouselRef);
 
   const goLeft = () => updateIndex(-1);
   const goRight = () => updateIndex(+1);
@@ -292,7 +289,7 @@ export const Carousel = (props) => {
       setIsMaximized(() => true);
   };
 
-  const mouseEventHandlers = useSwipe(carouselRef, props.swipeThreshold, {
+  const mouseEventHandlers = useSwipe(slidesWrapperRef, props.swipeThreshold, {
     onSwipeMoveX: handleSwipeMoveX,
     onSwipeMoveY: handleSwipeMoveY,
     onSwipeEndRight: (displacementX, speed) =>
@@ -304,25 +301,21 @@ export const Carousel = (props) => {
     onSwipeEndDown: handleSwipeEndDown,
     onTap: handleTap
   });
-  // touch event handlers are already added to carouselRef by useSwipe hook at this point
+  // touch event handlers are already added to slidesWrapperRef by useSwipe hook at this point
 
   /* process class names */
   const propsClassName = 'className' in props ? ' ' + props.className : '';
   const galleryClassName = hasImages ? ' ' + styles.gallery : '';
-  const minCarouselWrapperCN =
-    styles.carouselWrapper + propsClassName + galleryClassName;
-  const maxCarouselWrapperCN = styles.maxCarouselWrapper + galleryClassName;
-  const carouselWrapperClassName = isMaximized
-    ? maxCarouselWrapperCN
-    : minCarouselWrapperCN;
+  const carouselClassName = styles.carousel + propsClassName + galleryClassName;
+  const maxCarouselClassName = styles.maxCarousel + galleryClassName;
 
   /* process components for maximized carousel */
   const minCarouselPlaceholder = isMaximized && (
-    <div className={minCarouselWrapperCN} style={props.style} />
+    <div className={carouselClassName} style={props.style} />
   );
 
   const maxCarouselBackground = isMaximized && (
-    <div ref={maximizedBackgroundRef} className={maxCarouselWrapperCN} />
+    <div ref={maximizedBackgroundRef} className={maxCarouselClassName} />
   );
 
   /* process widgets */
@@ -389,13 +382,13 @@ export const Carousel = (props) => {
       {minCarouselPlaceholder}
       {maxCarouselBackground}
       <div
-        ref={carouselWrapperRef}
-        className={carouselWrapperClassName}
+        ref={carouselRef}
+        className={isMaximized ? maxCarouselClassName : carouselClassName}
         style={isMaximized ? {} : props.style}
       >
         <div
-          ref={carouselRef}
-          className={styles.carousel}
+          ref={slidesWrapperRef}
+          className={styles.slidesWrapper}
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           <Slides

@@ -15,7 +15,7 @@ export const Thumbnails = (props) => {
   return (
     <div
       ref={thumbnailsRef}
-      className={styles.thumbnailsContainer}
+      className={styles.thumbnailsWrapper}
       onWheel={wheelEventHandler}
     >
       <ul className={styles.thumbnails}>

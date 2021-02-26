@@ -142,7 +142,7 @@ export const DotButtons = (props) => {
 
   return (
     <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
-      <div className={styles.buttonsContainer}>
+      <div className={styles.buttonsWrapper}>
         {Object.keys(callbacks).map((key, index) => (
           <IconButton
             key={index}
