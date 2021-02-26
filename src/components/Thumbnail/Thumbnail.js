@@ -1,12 +1,10 @@
-import React, { memo, useRef } from 'react';
+import React, { memo } from 'react';
 import styles from './Thumbnail.module.css';
 import ThumbnailImage from '../ImageThumbnail';
 import { UserSlideThumbnail } from '../UserSlide';
 import PropTypes from 'prop-types';
 
 export const Thumbnail = memo((props) => {
-  const ref = useRef(null);
-
   const slide = props.isImage ? (
     <ThumbnailImage image={props.slide} lazyLoad={props.lazyLoad} />
   ) : (
@@ -17,10 +15,7 @@ export const Thumbnail = memo((props) => {
     props.isCurrent ? ' ' + styles.currentThumbnail : ''
   }`;
 
-  useAnchor(ref, {
-    isCurrent: props.isCurrent,
-    isMaximized: props.isMaximized
-  });
+  const ref = props.isCurrent ? props.reference : null;
 
   return (
     <li ref={ref} className={className} tabIndex={0} onClick={props.onClick}>

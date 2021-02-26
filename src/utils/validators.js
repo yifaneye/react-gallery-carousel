@@ -72,4 +72,4 @@ export const fallbackProps = (fallbackProps) => {
   };
 };
 
-export const ref = PropTypes.shape({ current: PropTypes.object });
+export const elementRef = PropTypes.shape({ current: PropTypes.object });
