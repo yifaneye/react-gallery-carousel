@@ -1,37 +1,44 @@
-.slide {
+.userSlide {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  -ms-zoom: var(--scale);
-  zoom: var(--scale);
   overflow-wrap: break-word;
   word-break: normal;
+  white-space: normal;
+  user-select: auto;
+}
+
+.thumbnail {
+  user-select: none;
+  -ms-zoom: var(--scale);
+  zoom: var(--scale);
   font-size: var(--scale);
   text-size-adjust: none;
   pointer-events: none;
 }
 
-.slide * {
+.thumbnail * {
   text-size-adjust: none;
 }
 
-.slide > * {
+.thumbnail > * {
   pointer-events: none;
 }
 
 /*Only for Chrome, Opera and Edge*/
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
-  .slide {
+  .thumbnail {
     font-size: 100%;
   }
 }
 
 /*Only for FireFox*/
 @-moz-document url-prefix() {
-  .slide {
+  .thumbnail {
     font-size: var(--scale);
   }
 }
+

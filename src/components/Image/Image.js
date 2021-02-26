@@ -1,99 +1,79 @@
 import React, { useRef, useState } from 'react';
 import styles from './Image.module.css';
-import PropTypes from 'prop-types';
 import placeholder from 'placeholderImage.jpg';
 import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
+import PropTypes from 'prop-types';
+
+const handleError = (event) => {
+  event.target.src = placeholder;
+};
 
 const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
-  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false);
+  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(
+    !props.image.thumbnail
+  );
 
   const handleLoad = () => {
     if (isInViewport) setIsThumbnailLoaded(true);
   };
 
   const source = isThumbnailLoaded
-    ? props.src
+    ? props.image.src
     : isInViewport
-    ? props.thumbnail
+    ? props.image.thumbnail
     : placeholder;
 
   return (
-    <figure className={styles.figure}>
-      <img
-        ref={imageRef}
-        className={styles.image}
-        src={source}
-        alt={props.title}
-        aria-label={props.title}
-        loading='lazy'
-        style={{ objectFit: props.objectFit }}
-        onLoad={handleLoad}
-        onError={props.onError}
-      />
-      {props.caption && props.title && (
-        <Caption
-          text={props.title}
-          position={props.caption}
-          hasShadow={props.hasShadow}
-        />
-      )}
-    </figure>
+    <img
+      ref={imageRef}
+      className={styles.image}
+      src={source}
+      alt={props.image.alt || null}
+      aria-label={props.image.alt || null}
+      loading='lazy'
+      style={props.style}
+      onLoad={handleLoad}
+      onError={handleError}
+    />
   );
 };
 
 LazyLoadedImage.propTypes = {
-  src: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  objectFit: PropTypes.string,
-  hasShadow: PropTypes.bool.isRequired,
-  onError: PropTypes.func.isRequired,
-  caption: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired
+  image: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string,
+    thumbnail: PropTypes.string
+  }).isRequired,
+  style: PropTypes.object
 };
 
 export const Image = (props) => {
-  const imageSource = props.image.src;
-  const imageThumbnail = props.image.thumbnail || props.image.src;
-  const imageTitle = props.image.alt || null;
   const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
+  const style = { objectFit: objectFit };
 
-  const handleError = (event) => {
-    event.target.onerror = null;
-    event.target.src = placeholder;
-  };
-
-  if (props.lazyLoad)
-    return (
-      <LazyLoadedImage
-        src={imageSource}
-        thumbnail={imageThumbnail}
-        title={imageTitle}
-        objectFit={objectFit}
-        hasShadow={props.hasShadow}
-        caption={props.caption}
-        onError={handleError}
-      />
-    );
+  const image = props.lazyLoad ? (
+    <LazyLoadedImage image={props.image} style={style} />
+  ) : (
+    <img
+      className={styles.image}
+      src={props.image.src}
+      alt={props.image.alt || null}
+      aria-label={props.image.alt || null}
+      loading='auto'
+      style={style}
+      onError={handleError}
+    />
+  );
 
   return (
     <figure className={styles.figure}>
-      <img
-        className={styles.image}
-        src={imageSource}
-        alt={imageTitle}
-        aria-label={imageTitle}
-        loading='auto'
-        style={{ objectFit: objectFit }}
-        onError={handleError}
-      />
-      {props.caption && props.title && (
+      {image}
+      {props.caption && props.image.alt && (
         <Caption
-          text={props.title}
+          text={props.image.alt || null}
           position={props.caption}
           hasShadow={props.hasShadow}
         />

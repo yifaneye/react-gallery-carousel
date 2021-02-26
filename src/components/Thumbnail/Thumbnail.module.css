@@ -1,18 +1,18 @@
 .thumbnail {
-  --scale: 10%;
-
   display: block;
   height: 100%;
   min-width: var(--scale);
   width: var(--scale);
   max-width: var(--scale);
   overflow: hidden;
-  margin-right: 5px;
+  margin: 0 var(--margin) 0 0;
+  padding: 0;
   opacity: 0.5;
   list-style: none;
   user-select: none;
   cursor: pointer;
   -webkit-user-drag: none;
+  z-index: 1;
 }
 
 .currentThumbnail {

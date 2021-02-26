@@ -1,8 +1,7 @@
 import React, { memo, useRef } from 'react';
 import styles from './Thumbnail.module.css';
-import ThumbnailImage from '../ThumbnailImage';
-import ThumbnailSlide from '../ThumbnailSlide';
-import useAnchor from '../../utils/useAnchor';
+import ThumbnailImage from '../ImageThumbnail';
+import { UserSlideThumbnail } from '../UserSlide';
 import PropTypes from 'prop-types';
 
 export const Thumbnail = memo((props) => {
@@ -11,7 +10,7 @@ export const Thumbnail = memo((props) => {
   const slide = props.isImage ? (
     <ThumbnailImage image={props.slide} lazyLoad={props.lazyLoad} />
   ) : (
-    <ThumbnailSlide slide={props.slide} />
+    <UserSlideThumbnail slide={props.slide} />
   );
 
   const className = `${styles.thumbnail}${

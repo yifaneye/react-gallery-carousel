@@ -1,8 +1,9 @@
 import React from 'react';
-import Image from '../Image';
 import styles from './Slide.module.css';
+import Image from '../Image';
+import UserSlide from '../UserSlide';
 import PropTypes from 'prop-types';
-import { ref } from '../../utils/validators';
+import { elementRef } from '../../utils/validators';
 
 export const Slide = (props) => {
   const slide = props.isImage ? (
@@ -14,10 +15,10 @@ export const Slide = (props) => {
       hasShadow={props.widgetsShadow}
     />
   ) : (
-    props.slide
+    <UserSlide slide={props.slide} />
   );
   return (
-    <li className={styles.slide} ref={props.reference}>
+    <li ref={props.reference} className={styles.slide}>
       {slide}
     </li>
   );
@@ -33,5 +34,5 @@ Slide.propTypes = {
     PropTypes.bool.isRequired,
     PropTypes.string.isRequired
   ]).isRequired,
-  reference: ref
+  reference: elementRef
 };

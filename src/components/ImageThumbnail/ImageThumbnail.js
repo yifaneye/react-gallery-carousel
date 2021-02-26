@@ -34,7 +34,7 @@ LazyLoadedImage.propTypes = {
   alt: PropTypes.string
 };
 
-export const ThumbnailImage = (props) => {
+export const ImageThumbnail = (props) => {
   // use the original image as fallback for the thumbnail
   const src = props.image.thumbnail || props.image.src;
   const alt = props.image.alt || null;
@@ -53,7 +53,7 @@ export const ThumbnailImage = (props) => {
   );
 };
 
-ThumbnailImage.propTypes = {
+ImageThumbnail.propTypes = {
   image: PropTypes.shape({
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,

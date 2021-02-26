@@ -1,17 +1,9 @@
 .slide {
   height: 100%;
   min-width: 100%;
+  width: 100%;
   max-width: 100%;
-  margin: auto;
+  margin: 0;
   padding: 0;
   overflow: auto;
-  overflow-wrap: break-word;
-  word-break: normal;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  transition-duration: 0s;
-  user-select: auto;
-  box-sizing: border-box;
 }

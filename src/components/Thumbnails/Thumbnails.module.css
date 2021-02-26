@@ -1,20 +1,21 @@
 .thumbnails {
   --scale: 10%;
+  --margin: 5px;
 
   flex: 0 1 var(--scale);
   height: var(--scale);
-  margin: 0;
-  padding: 5px 0 0;
   list-style: none;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  -ms-scroll-chaining: none;
-  overscroll-behavior-x: contain;
+  margin: var(--margin) 0 0;
+  padding: 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  /*overflow-y: hidden;*/
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-scroll-chaining: none;
+  overscroll-behavior-x: contain;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
