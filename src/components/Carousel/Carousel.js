@@ -322,6 +322,8 @@ export const Carousel = (props) => {
 
   const mediaButtons = props.mediaButtons && props.autoPlay && (
     <MediaButtons
+      playIcon={props.playIcon}
+      pauseIcon={props.pauseIcon}
       hasShadow={props.widgetsShadow}
       position={props.mediaButtons}
       isPlaying={isPlaying}
@@ -331,6 +333,8 @@ export const Carousel = (props) => {
 
   const sizeButtons = props.sizeButtons && (
     <SizeButtons
+      minIcon={props.minIcon}
+      maxIcon={props.maxIcon}
       hasShadow={props.widgetsShadow}
       position={props.sizeButtons}
       isMaximized={isMaximized}
@@ -340,6 +344,8 @@ export const Carousel = (props) => {
 
   const arrowButtons = props.arrowButtons && (
     <ArrowButtons
+      leftIcon={props.leftIcon}
+      rightIcon={props.rightIcon}
       hasShadow={props.widgetsShadow}
       isRTL={props.isRTL}
       isLeftDisabled={!slides.canUpdateIndex(-1)}
@@ -351,6 +357,8 @@ export const Carousel = (props) => {
 
   const dotButtons = props.dotButtons && (
     <DotButtons
+      activeIcon={props.activeIcon}
+      passiveIcon={props.passiveIcon}
       hasShadow={props.widgetsShadow}
       position={props.dotButtons}
       curIndex={slides.curIndex}

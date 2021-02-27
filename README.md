@@ -1,6 +1,6 @@
 # react-gallery-carousel
 
-React carousel component with support for swiping, image lazy loading and accessibility.
+Dependency-free, ready-to-go Carousel with support for lazy loading, thumbnail, swiping, pinch zoom, velocity detection and maximisation.
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
@@ -28,7 +28,7 @@ const App = () => {
   }));
 
   return (
-    <Carousel images={images} style={{ height: '40vh' }} />
+    <Carousel images={images} />
   );
 };
 
@@ -43,7 +43,7 @@ To customize the carousel, use the following props:
 |Name                     |Type                  |Default    |Description|
 |:------------------------|----------------------|:----------|:----------|
 |images                   |Array                 |undefined  |Images to be placed in the carousel.|
-|children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is not present.|
+|children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is falsy.|
 |className                |String                |undefined  |Class name(s) to be placed on the carousel, when the carousel is not maximized.|
 |style                    |Object                |undefined  |Inline style(s) to be placed on the carousel.|
 |index                    |Number                |undefined  |Current index of the slides of the carousel as a whole number starting from 1.|
@@ -64,6 +64,14 @@ To customize the carousel, use the following props:
 |sizeButtons              |Boolean or String     |'topRight' |If false, the carousel does not show size buttons (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
 |arrowButtons             |Boolean               |true       |If false, the carousel does not show arrow buttons (i.e. left and right).|
 |dotButtons               |Boolean or String     |false      |If false, the carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). Its position can be specified by one of ['top', 'bottom']|
+|leftIcon                 |node                  |undefined  |Left icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'arrowButtons' prop is truthy.|
+|rightIcon                |node                  |undefined  |Right icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'arrowButtons' prop is truthy.|
+|playIcon                 |node                  |undefined  |Play icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButtons' prop is truthy.|
+|pauseIcon                |node                  |undefined  |Pause icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButtons' prop is truthy.|
+|minIcon                  |node                  |undefined  |Minimize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButtons' prop is truthy.|
+|maxIcon                  |node                  |undefined  |Maximize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButtons' prop is truthy.|
+|activeIcon               |node                  |undefined  |Active dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'dotButtons' prop is truthy.|
+|passiveIcon              |node                  |undefined  |Passive dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'dotButtons' prop is truthy.|
 |caption                  |Boolean               |false      |If true, the carousel shows caption for each image. Its position can be specified by one of ['top', 'bottom']|
 |thumbnails               |Boolean               |true       |If true, the carousel shows thumbnails.|
 |shouldSwipeOnMouse       |Boolean               |true       |If true, the carousel can be swiped by cursor using a mouse or a track pad.|

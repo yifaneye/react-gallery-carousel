@@ -21,3 +21,7 @@ code {
   mask-image: -webkit-radial-gradient(white, black);
   box-sizing: border-box;
 }
+
+.text {
+  color: white;
+}

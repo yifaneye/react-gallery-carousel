@@ -111,6 +111,9 @@ const App = () => {
           sizeButtons='bottomCenter'
           mediaButtons='bottomLeft'
           indexBoard='bottomRight'
+          dotButtons='bottom'
+          activeIcon={<span className='text'>x</span>}
+          passiveIcon={<span className='text'>o</span>}
           className='framed'
         />
       </div>
