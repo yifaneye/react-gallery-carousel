@@ -26,10 +26,10 @@ import useFixedPosition from '../../utils/useFixedPosition';
 import { propTypes, defaultProps } from './props';
 
 // constants
-const MIN_SPEED = 0.2;
+const MIN_SPEED = 0.1;
 const MIN_SPEED_TO_UPDATE = 1;
-const TRANSITION_DURATION_THRESHOLD = 1000; // ms
-const MAX_TRANSITION_DURATION = 2000; // ms
+const TRANSITION_DURATION_THRESHOLD = 500; // ms
+const MAX_TRANSITION_DURATION = 1000; // ms
 const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 
 export const Carousel = (props) => {
@@ -113,42 +113,34 @@ export const Carousel = (props) => {
     const transitionDistance = hasToUpdate
       ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
       : swipedDistance;
-    speed = hasToUpdate
-      ? Math.min(speed, MIN_SPEED_TO_UPDATE)
-      : Math.min(speed, MIN_SPEED);
-    let transitionDuration = transitionDistance / speed;
+    speed = hasToUpdate ? Math.max(speed, MIN_SPEED_TO_UPDATE) : MIN_SPEED;
+    let duration = transitionDistance / speed;
 
     // flatten transitionDurations
-    if (transitionDuration > TRANSITION_DURATION_THRESHOLD)
-      transitionDuration =
-        (Math.atan(transitionDuration / TRANSITION_DURATION_THRESHOLD) *
+    if (duration > TRANSITION_DURATION_THRESHOLD)
+      duration =
+        (Math.atan(duration / TRANSITION_DURATION_THRESHOLD) *
           MAX_TRANSITION_DURATION *
           2) /
         Math.PI;
 
-    // bound transitionDuration to a range
+    // bound duration to a range
     if (props.transitionDurationMin)
-      transitionDuration = Math.max(
-        transitionDuration,
-        props.transitionDurationMin
-      );
+      duration = Math.max(duration, props.transitionDurationMin);
 
     // transitionMax has precedence over transitionMin
     if (props.transitionDurationMax)
-      transitionDuration = Math.min(
-        transitionDuration,
-        props.transitionDurationMax
-      );
+      duration = Math.min(duration, props.transitionDurationMax);
 
-    // make transitionDuration match autoPlayInterval
-    if (isPlaying && transitionDuration > props.autoPlayInterval)
-      transitionDuration = props.autoPlayInterval * 1;
+    // make duration match autoPlayInterval
+    if (isPlaying && duration > props.autoPlayInterval)
+      duration = props.autoPlayInterval * 1;
 
-    // apply transition duration for the period of transitionDuration
-    slidesRef.current.style.transitionDuration = `${transitionDuration}ms`;
+    // apply transition duration for the period of duration
+    slidesRef.current.style.transitionDuration = `${duration}ms`;
     setTimeout(
       () => (slidesRef.current.style.transitionDuration = null),
-      transitionDuration
+      duration
     );
   };
 
