@@ -4,6 +4,11 @@ import placeholder from 'placeholderImage.jpg';
 import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
+import {
+  objectFitStyles,
+  largeWidgetPositions,
+  imageObject
+} from '../../utils/validators';
 
 const handleError = (event) => {
   event.target.src = placeholder;
@@ -42,12 +47,8 @@ const LazyLoadedImage = (props) => {
 };
 
 LazyLoadedImage.propTypes = {
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    thumbnail: PropTypes.string
-  }).isRequired,
-  style: PropTypes.object
+  image: imageObject.isRequired,
+  style: PropTypes.object.isRequired
 };
 
 export const Image = (props) => {
@@ -71,11 +72,11 @@ export const Image = (props) => {
   return (
     <figure className={styles.figure}>
       {image}
-      {props.caption && props.image.alt && (
+      {props.hasCaption && props.image.alt && (
         <Caption
           text={props.image.alt || null}
-          position={props.caption}
-          hasShadow={props.hasShadow}
+          position={props.hasCaption}
+          hasShadow={props.widgetsHasShadow}
         />
       )}
     </figure>
@@ -83,17 +84,9 @@ export const Image = (props) => {
 };
 
 Image.propTypes = {
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    thumbnail: PropTypes.string
-  }).isRequired,
+  objectFit: objectFitStyles.isRequired,
   lazyLoad: PropTypes.bool.isRequired,
-  objectFit: PropTypes.oneOf(['contain', 'cover', 'fill', 'none', 'scale-down'])
-    .isRequired,
-  hasShadow: PropTypes.bool.isRequired,
-  caption: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired
+  image: imageObject.isRequired,
+  hasCaption: largeWidgetPositions.isRequired,
+  widgetsHasShadow: PropTypes.bool.isRequired
 };

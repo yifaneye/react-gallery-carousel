@@ -73,3 +73,34 @@ export const fallbackProps = (fallbackProps) => {
 };
 
 export const elementRef = PropTypes.shape({ current: PropTypes.object });
+
+export const objectFitStyles = PropTypes.oneOf([
+  'contain',
+  'cover',
+  'fill',
+  'none',
+  'scale-down'
+]);
+
+export const smallWidgetPositions = PropTypes.oneOf([
+  false,
+  'topLeft',
+  'topCenter',
+  'topRight',
+  'bottomLeft',
+  'bottomCenter',
+  'bottomRight'
+]);
+
+export const largeWidgetPositions = PropTypes.oneOf([false, 'top', 'bottom']);
+
+export const slideObject = PropTypes.oneOfType([
+  PropTypes.object.isRequired,
+  PropTypes.element.isRequired
+]);
+
+export const imageObject = PropTypes.shape({
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+  thumbnail: PropTypes.string
+});

@@ -3,6 +3,7 @@ import styles from './ThumbnailImage.module.css';
 import placeholder from 'placeholderImage.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
+import { imageObject } from '../../utils/validators';
 
 const handleError = (event) => {
   // permanently replace image with placeholder
@@ -54,10 +55,6 @@ export const ImageThumbnail = (props) => {
 };
 
 ImageThumbnail.propTypes = {
-  image: PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-    thumbnail: PropTypes.string
-  }).isRequired,
+  image: imageObject.isRequired,
   lazyLoad: PropTypes.bool.isRequired
 };

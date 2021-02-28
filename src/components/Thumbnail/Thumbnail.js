@@ -3,6 +3,7 @@ import styles from './Thumbnail.module.css';
 import ThumbnailImage from '../ImageThumbnail';
 import { UserSlideThumbnail } from '../UserSlide';
 import PropTypes from 'prop-types';
+import { elementRef, slideObject } from '../../utils/validators';
 
 export const Thumbnail = (props) => {
   const slide = props.isImage ? (
@@ -25,12 +26,11 @@ export const Thumbnail = (props) => {
 };
 
 Thumbnail.propTypes = {
-  slide: PropTypes.oneOfType([
-    PropTypes.object.isRequired,
-    PropTypes.element.isRequired
-  ]).isRequired,
   isImage: PropTypes.bool.isRequired,
+  slide: slideObject.isRequired,
   lazyLoad: PropTypes.bool.isRequired,
+  isCurrent: PropTypes.bool.isRequired,
   isMaximized: PropTypes.bool.isRequired,
+  reference: elementRef.isRequired,
   onClick: PropTypes.func.isRequired
 };

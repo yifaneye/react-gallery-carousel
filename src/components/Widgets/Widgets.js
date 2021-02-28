@@ -3,6 +3,10 @@ import styles from './Widgets.module.css';
 import IconButton from '../IconButton';
 import useNoSwipe from '../../utils/useNoSwipe';
 import PropTypes from 'prop-types';
+import {
+  smallWidgetPositions,
+  largeWidgetPositions
+} from '../../utils/validators';
 
 export const ArrowButtons = (props) => {
   const leftButton = !props.isLeftDisabled && (
@@ -38,13 +42,13 @@ export const ArrowButtons = (props) => {
 };
 
 ArrowButtons.propTypes = {
-  leftIcon: PropTypes.node,
-  rightIcon: PropTypes.node,
-  hasShadow: PropTypes.bool.isRequired,
-  isRTL: PropTypes.bool.isRequired,
   isLeftDisabled: PropTypes.bool.isRequired,
-  isRightDisabled: PropTypes.bool.isRequired,
+  leftIcon: PropTypes.node,
+  isRTL: PropTypes.bool.isRequired,
+  hasShadow: PropTypes.bool.isRequired,
   onClickLeft: PropTypes.func.isRequired,
+  isRightDisabled: PropTypes.bool.isRequired,
+  rightIcon: PropTypes.node,
   onClickRight: PropTypes.func.isRequired
 };
 
@@ -63,18 +67,11 @@ export const MediaButtons = (props) => {
 };
 
 MediaButtons.propTypes = {
-  playIcon: PropTypes.node,
-  pauseIcon: PropTypes.node,
-  hasShadow: PropTypes.bool.isRequired,
-  position: PropTypes.oneOf([
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight'
-  ]).isRequired,
+  position: smallWidgetPositions.isRequired,
   isPlaying: PropTypes.bool.isRequired,
+  pauseIcon: PropTypes.node,
+  playIcon: PropTypes.node,
+  hasShadow: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 
@@ -93,18 +90,11 @@ export const SizeButtons = (props) => {
 };
 
 SizeButtons.propTypes = {
+  position: smallWidgetPositions.isRequired,
+  isMaximized: PropTypes.bool.isRequired,
   minIcon: PropTypes.node,
   maxIcon: PropTypes.node,
   hasShadow: PropTypes.bool.isRequired,
-  position: PropTypes.oneOf([
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight'
-  ]).isRequired,
-  isMaximized: PropTypes.bool.isRequired,
   clickCallback: PropTypes.func.isRequired
 };
 
@@ -134,15 +124,8 @@ export const IndexBoard = (props) => {
 };
 
 IndexBoard.propTypes = {
+  position: smallWidgetPositions.isRequired,
   hasShadow: PropTypes.bool.isRequired,
-  position: PropTypes.oneOf([
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight'
-  ]).isRequired,
   curIndex: PropTypes.number.isRequired,
   totalIndices: PropTypes.number.isRequired
 };
@@ -181,12 +164,13 @@ export const DotButtons = (props) => {
 };
 
 DotButtons.propTypes = {
+  callbacks: PropTypes.shape(PropTypes.function).isRequired,
+  position: largeWidgetPositions.isRequired,
+  isRTL: PropTypes.bool.isRequired,
+  curIndex: PropTypes.number.isRequired,
   activeIcon: PropTypes.node,
   passiveIcon: PropTypes.node,
-  hasShadow: PropTypes.bool.isRequired,
-  position: PropTypes.oneOf(['top', 'bottom']).isRequired,
-  curIndex: PropTypes.number.isRequired,
-  callbacks: PropTypes.shape(PropTypes.function).isRequired
+  hasShadow: PropTypes.bool.isRequired
 };
 
 export const LoadingSpinner = (props) => {
@@ -234,6 +218,7 @@ export const Caption = memo((props) => {
 });
 
 Caption.propTypes = {
-  text: PropTypes.string,
-  position: PropTypes.oneOf(['top', 'bottom']).isRequired
+  position: largeWidgetPositions.isRequired,
+  hasShadow: PropTypes.bool.isRequired,
+  text: PropTypes.string
 };

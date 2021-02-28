@@ -49,7 +49,6 @@ export const Carousel = (props) => {
   const rawSlides = hasImages ? props.images : children;
   const [slides, slidesElements] = useSlides(rawSlides, {
     index: props.index,
-    isRTL: props.isRTL,
     isLoop: props.isLoop
   });
   const nSlides = slides.length;
@@ -245,7 +244,7 @@ export const Carousel = (props) => {
   // process callbacks, one for each for dotButton and thumbnail
   const indices = slides.allIndices;
   const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
-  const goToIndexCallbacksObj = indices.reduce(
+  const goToIndexCallbacksObject = indices.reduce(
     (obj, key, index) => ({ ...obj, [key]: goToIndexCallbacks[index] }),
     {}
   );
@@ -316,31 +315,43 @@ export const Carousel = (props) => {
     <div ref={maximizedBackgroundRef} className={maxCarouselClassName} />
   );
 
-  const objectFit = isMaximized ? props.objectFitAtMax : props.objectFit;
+  /* process settings */
+  const objectFit = isMaximized
+    ? ('objectFitAtMax' in props && props.objectFitAtMax) || props.objectFit
+    : props.objectFit;
   const hasArrowButtons = isMaximized
-    ? props.hasArrowButtonsAtMax
+    ? ('hasArrowButtonsAtMax' in props && props.hasArrowButtonsAtMax) ||
+      props.hasArrowButtons
     : props.hasArrowButtons;
   const hasMediaButton = isMaximized
-    ? props.hasMediaButtonAtMax
+    ? ('hasMediaButtonAtMax' in props && props.hasMediaButtonAtMax) ||
+      props.hasMediaButton
     : props.hasMediaButton;
   const hasSizeButton = isMaximized
-    ? props.hasSizeButtonAtMax
+    ? ('hasSizeButtonAtMax' in props && props.hasSizeButtonAtMax) ||
+      props.hasSizeButton
     : props.hasSizeButton;
   const hasDotButtons = isMaximized
-    ? props.hasDotButtonsAtMax
+    ? ('hasDotButtonsAtMax' in props && props.hasDotButtonsAtMax) ||
+      props.hasDotButtons
     : props.hasDotButtons;
   const hasIndexBoard = isMaximized
-    ? props.hasIndexBoardAtMax
+    ? ('hasIndexBoardAtMax' in props && props.hasIndexBoardAtMax) ||
+      props.hasIndexBoard
     : props.hasIndexBoard;
-  const hasCaptions = isMaximized ? props.hasCaptionsAtMax : props.hasCaptions;
+  const hasCaptions = isMaximized
+    ? ('hasCaptionsAtMax' in props && props.hasCaptionsAtMax) ||
+      props.hasCaptions
+    : props.hasCaptions;
   const hasThumbnails = isMaximized
-    ? props.hasThumbnailsAtMax
+    ? ('hasThumbnailsAtMax' in props && props.hasThumbnailsAtMax) ||
+      props.hasThumbnails
     : props.hasThumbnails;
 
   /* process widgets */
   const indexBoard = hasIndexBoard && (
     <IndexBoard
-      hasShadow={props.widgetsShadow}
+      hasShadow={props.widgetsHasShadow}
       position={hasIndexBoard}
       curIndex={slides.curIndexForDisplay}
       totalIndices={indices.length}
@@ -351,7 +362,7 @@ export const Carousel = (props) => {
     <MediaButtons
       playIcon={props.playIcon}
       pauseIcon={props.pauseIcon}
-      hasShadow={props.widgetsShadow}
+      hasShadow={props.widgetsHasShadow}
       position={hasMediaButton}
       isPlaying={isPlaying}
       clickCallback={handleMediaButtonClick}
@@ -362,7 +373,7 @@ export const Carousel = (props) => {
     <SizeButtons
       minIcon={props.minIcon}
       maxIcon={props.maxIcon}
-      hasShadow={props.widgetsShadow}
+      hasShadow={props.widgetsHasShadow}
       position={hasSizeButton}
       isMaximized={isMaximized}
       clickCallback={handleSizeButtonClick}
@@ -373,7 +384,7 @@ export const Carousel = (props) => {
     <ArrowButtons
       leftIcon={props.leftIcon}
       rightIcon={props.rightIcon}
-      hasShadow={props.widgetsShadow}
+      hasShadow={props.widgetsHasShadow}
       isRTL={props.isRTL}
       isLeftDisabled={!slides.canUpdateIndex(-increment)}
       isRightDisabled={!slides.canUpdateIndex(+increment)}
@@ -387,10 +398,10 @@ export const Carousel = (props) => {
       isRTL={props.isRTL}
       activeIcon={props.activeIcon}
       passiveIcon={props.passiveIcon}
-      hasShadow={props.widgetsShadow}
+      hasShadow={props.widgetsHasShadow}
       position={hasDotButtons}
       curIndex={slides.curIndex}
-      callbacks={goToIndexCallbacksObj}
+      callbacks={goToIndexCallbacksObject}
     />
   );
 
@@ -402,7 +413,7 @@ export const Carousel = (props) => {
       hasImages={hasImages}
       lazyLoad={props.lazyLoad}
       curIndex={slides.curIndex}
-      callbacks={goToIndexCallbacksObj}
+      callbacks={goToIndexCallbacksObject}
     />
   );
 
@@ -421,15 +432,17 @@ export const Carousel = (props) => {
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           <Slides
-            {...props}
             minRef={slideMinRef}
             maxRef={slideMaxRef}
             slidesRef={slidesRef}
+            length={nSlides}
             slides={slidesElements}
             hasImages={hasImages}
-            length={nSlides}
+            isRTL={props.isRTL}
+            lazyLoad={props.lazyLoad}
             objectFit={objectFit}
-            caption={hasCaptions}
+            widgetsHasShadow={props.widgetsHasShadow}
+            hasCaptions={hasCaptions}
           />
           {mediaButtons}
           {indexBoard}

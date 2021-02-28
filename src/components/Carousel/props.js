@@ -3,28 +3,11 @@ import {
   compareToProp,
   fallbackProps,
   numberBetween,
-  positiveNumber
+  positiveNumber,
+  objectFitStyles,
+  smallWidgetPositions,
+  largeWidgetPositions
 } from '../../utils/validators';
-
-const objectFitStyles = PropTypes.oneOf([
-  'contain',
-  'cover',
-  'fill',
-  'none',
-  'scale-down'
-]).isRequired;
-const smallWidgetPositions = PropTypes.oneOf([
-  false,
-  'topLeft',
-  'topCenter',
-  'topRight',
-  'bottomLeft',
-  'bottomCenter',
-  'bottomRight'
-]).isRequired;
-
-const largeWidgetPositions = PropTypes.oneOf([false, 'top', 'bottom'])
-  .isRequired;
 
 export const propTypes = {
   images: PropTypes.array && fallbackProps(['children']),
@@ -36,8 +19,8 @@ export const propTypes = {
   isLoop: PropTypes.bool.isRequired,
   index: positiveNumber(true),
   lazyLoad: PropTypes.bool.isRequired,
-  objectFit: objectFitStyles,
-  objectFitAtMax: objectFitStyles,
+  objectFit: objectFitStyles.isRequired,
+  objectFitAtMax: objectFitStyles.isRequired,
   autoPlay: PropTypes.bool.isRequired,
   autoPlayStarted: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(false),
@@ -45,21 +28,21 @@ export const propTypes = {
   transitionSpeed: positiveNumber(true),
   transitionDurationMin: positiveNumber(true),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
-  widgetsShadow: PropTypes.bool.isRequired,
+  widgetsHasShadow: PropTypes.bool.isRequired,
   hasArrowButtons: PropTypes.bool.isRequired,
-  hasMediaButton: smallWidgetPositions,
-  hasSizeButton: smallWidgetPositions,
-  hasDotButtons: largeWidgetPositions,
-  hasIndexBoard: smallWidgetPositions,
-  hasCaptions: largeWidgetPositions,
+  hasMediaButton: smallWidgetPositions.isRequired,
+  hasSizeButton: smallWidgetPositions.isRequired,
+  hasIndexBoard: smallWidgetPositions.isRequired,
+  hasDotButtons: largeWidgetPositions.isRequired,
+  hasCaptions: largeWidgetPositions.isRequired,
   hasThumbnails: PropTypes.bool.isRequired,
-  hasArrowButtonsAtMax: PropTypes.bool.isRequired,
+  hasArrowButtonsAtMax: PropTypes.bool,
   hasMediaButtonAtMax: smallWidgetPositions,
   hasSizeButtonAtMax: smallWidgetPositions,
-  hasDotButtonsAtMax: largeWidgetPositions,
   hasIndexBoardAtMax: smallWidgetPositions,
+  hasDotButtonsAtMax: largeWidgetPositions,
   hasCaptionsAtMax: largeWidgetPositions,
-  hasThumbnailsAtMax: PropTypes.bool.isRequired,
+  hasThumbnailsAtMax: PropTypes.bool,
   leftIcon: PropTypes.node,
   rightIcon: PropTypes.node,
   playIcon: PropTypes.node,
@@ -90,7 +73,7 @@ export const defaultProps = {
   swipeThreshold: 0.1, // * 100%
   transitionSpeed: 1, // px/ms
   transitionDurationMin: 200, // ms
-  widgetsShadow: false,
+  widgetsHasShadow: false,
   hasMediaButton: 'topLeft',
   hasIndexBoard: 'topCenter',
   hasSizeButton: 'topRight',
@@ -98,13 +81,6 @@ export const defaultProps = {
   hasDotButtons: false,
   hasCaptions: false,
   hasThumbnails: true,
-  hasMediaButtonAtMax: 'topLeft',
-  hasIndexBoardAtMax: 'topCenter',
-  hasSizeButtonAtMax: 'topRight',
-  hasArrowButtonsAtMax: true,
-  hasDotButtonsAtMax: false,
-  hasCaptionsAtMax: false,
-  hasThumbnailsAtMax: true,
   shouldSwipeOnMouse: true,
   shouldMaximizeOnClick: false,
   shouldMinimizeOnClick: false,

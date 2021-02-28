@@ -3,7 +3,12 @@ import styles from './Slide.module.css';
 import Image from '../Image';
 import UserSlide from '../UserSlide';
 import PropTypes from 'prop-types';
-import { elementRef } from '../../utils/validators';
+import {
+  elementRef,
+  largeWidgetPositions,
+  objectFitStyles,
+  slideObject
+} from '../../utils/validators';
 
 export const Slide = (props) => {
   const slide = props.isImage ? (
@@ -11,8 +16,8 @@ export const Slide = (props) => {
       image={props.slide}
       lazyLoad={props.lazyLoad}
       objectFit={props.objectFit}
-      caption={props.caption}
-      hasShadow={props.widgetsShadow}
+      widgetsHasShadow={props.widgetsHasShadow}
+      hasCaption={props.hasCaption}
     />
   ) : (
     <UserSlide slide={props.slide} />
@@ -26,13 +31,10 @@ export const Slide = (props) => {
 
 Slide.propTypes = {
   isImage: PropTypes.bool.isRequired,
-  slide: PropTypes.oneOfType([
-    PropTypes.object.isRequired,
-    PropTypes.element.isRequired
-  ]).isRequired,
-  caption: PropTypes.oneOfType([
-    PropTypes.bool.isRequired,
-    PropTypes.string.isRequired
-  ]).isRequired,
+  slide: slideObject.isRequired,
+  lazyLoad: PropTypes.bool.isRequired,
+  objectFit: objectFitStyles.isRequired,
+  widgetsHasShadow: PropTypes.bool.isRequired,
+  hasCaption: largeWidgetPositions.isRequired,
   reference: elementRef
 };
