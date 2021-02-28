@@ -27,9 +27,9 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
     <Carousel
       isLoop={false}
       widgetsShadow={true}
-      indexBoard='topRight'
-      sizeButtons='bottomLeft'
-      mediaButtons='bottomRight'
+      hasIndexBoard='topRight'
+      hasSizeButton='bottomLeft'
+      hasMediaButton='bottomRight'
       dotButtons='bottom'
       autoPlayStarted={true}
       shouldSwipeOnMouse={false} // for selecting text
@@ -105,13 +105,9 @@ const App = () => {
         <Carousel
           images={images}
           isRTL={true}
-          isLoop={false}
-          objectFit={'contain'}
-          caption='top'
-          sizeButtons='bottomCenter'
-          mediaButtons='bottomLeft'
-          indexBoard='bottomRight'
-          dotButtons='bottom'
+          hasCaptions='bottom'
+          hasCaptionsAtMax='bottom'
+          hasDotButtons='bottom'
           activeIcon={<span className='text'>x</span>}
           passiveIcon={<span className='text'>o</span>}
           className='framed'

@@ -6,7 +6,14 @@ import {
   positiveNumber
 } from '../../utils/validators';
 
-const widgetPositions = PropTypes.oneOf([
+const objectFitStyles = PropTypes.oneOf([
+  'contain',
+  'cover',
+  'fill',
+  'none',
+  'scale-down'
+]).isRequired;
+const smallWidgetPositions = PropTypes.oneOf([
   false,
   'topLeft',
   'topCenter',
@@ -15,6 +22,9 @@ const widgetPositions = PropTypes.oneOf([
   'bottomCenter',
   'bottomRight'
 ]).isRequired;
+
+const largeWidgetPositions = PropTypes.oneOf([false, 'top', 'bottom'])
+  .isRequired;
 
 export const propTypes = {
   images: PropTypes.array && fallbackProps(['children']),
@@ -26,13 +36,8 @@ export const propTypes = {
   isLoop: PropTypes.bool.isRequired,
   index: positiveNumber(true),
   lazyLoad: PropTypes.bool.isRequired,
-  objectFit: PropTypes.oneOf([
-    'contain',
-    'cover',
-    'fill',
-    'none',
-    'scale-down'
-  ]),
+  objectFit: objectFitStyles,
+  objectFitAtMax: objectFitStyles,
   autoPlay: PropTypes.bool.isRequired,
   autoPlayStarted: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(false),
@@ -41,11 +46,20 @@ export const propTypes = {
   transitionDurationMin: positiveNumber(true),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
   widgetsShadow: PropTypes.bool.isRequired,
-  mediaButtons: widgetPositions,
-  indexBoard: widgetPositions,
-  sizeButtons: widgetPositions,
-  arrowButtons: PropTypes.bool.isRequired,
-  dotButtons: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
+  hasArrowButtons: PropTypes.bool.isRequired,
+  hasMediaButton: smallWidgetPositions,
+  hasSizeButton: smallWidgetPositions,
+  hasDotButtons: largeWidgetPositions,
+  hasIndexBoard: smallWidgetPositions,
+  hasCaptions: largeWidgetPositions,
+  hasThumbnails: PropTypes.bool.isRequired,
+  hasArrowButtonsAtMax: PropTypes.bool.isRequired,
+  hasMediaButtonAtMax: smallWidgetPositions,
+  hasSizeButtonAtMax: smallWidgetPositions,
+  hasDotButtonsAtMax: largeWidgetPositions,
+  hasIndexBoardAtMax: smallWidgetPositions,
+  hasCaptionsAtMax: largeWidgetPositions,
+  hasThumbnailsAtMax: PropTypes.bool.isRequired,
   leftIcon: PropTypes.node,
   rightIcon: PropTypes.node,
   playIcon: PropTypes.node,
@@ -54,8 +68,6 @@ export const propTypes = {
   maxIcon: PropTypes.node,
   activeIcon: PropTypes.node,
   passiveIcon: PropTypes.node,
-  caption: PropTypes.oneOf([false, 'top', 'bottom']).isRequired,
-  thumbnails: PropTypes.bool.isRequired,
   shouldSwipeOnMouse: PropTypes.bool.isRequired,
   shouldMaximizeOnClick: PropTypes.bool.isRequired,
   shouldMinimizeOnClick: PropTypes.bool.isRequired,
@@ -71,6 +83,7 @@ export const defaultProps = {
   isLoop: true,
   lazyLoad: true,
   objectFit: 'cover',
+  objectFitAtMax: 'contain',
   autoPlay: true,
   autoPlayStarted: false,
   autoPlayInterval: 5000, // ms
@@ -78,13 +91,20 @@ export const defaultProps = {
   transitionSpeed: 1, // px/ms
   transitionDurationMin: 200, // ms
   widgetsShadow: false,
-  mediaButtons: 'topLeft',
-  indexBoard: 'topCenter',
-  sizeButtons: 'topRight',
-  arrowButtons: true,
-  dotButtons: false,
-  caption: false,
-  thumbnails: true,
+  hasMediaButton: 'topLeft',
+  hasIndexBoard: 'topCenter',
+  hasSizeButton: 'topRight',
+  hasArrowButtons: true,
+  hasDotButtons: false,
+  hasCaptions: false,
+  hasThumbnails: true,
+  hasMediaButtonAtMax: 'topLeft',
+  hasIndexBoardAtMax: 'topCenter',
+  hasSizeButtonAtMax: 'topRight',
+  hasArrowButtonsAtMax: true,
+  hasDotButtonsAtMax: false,
+  hasCaptionsAtMax: false,
+  hasThumbnailsAtMax: true,
   shouldSwipeOnMouse: true,
   shouldMaximizeOnClick: false,
   shouldMinimizeOnClick: false,

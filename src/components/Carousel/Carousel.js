@@ -310,39 +310,60 @@ export const Carousel = (props) => {
     <div ref={maximizedBackgroundRef} className={maxCarouselClassName} />
   );
 
+  const objectFit = isMaximized ? props.objectFitAtMax : props.objectFit;
+  const hasArrowButtons = isMaximized
+    ? props.hasArrowButtonsAtMax
+    : props.hasArrowButtons;
+  const hasMediaButton = isMaximized
+    ? props.hasMediaButtonAtMax
+    : props.hasMediaButton;
+  const hasSizeButton = isMaximized
+    ? props.hasSizeButtonAtMax
+    : props.hasSizeButton;
+  const hasDotButtons = isMaximized
+    ? props.hasDotButtonsAtMax
+    : props.hasDotButtons;
+  const hasIndexBoard = isMaximized
+    ? props.hasIndexBoardAtMax
+    : props.hasIndexBoard;
+  const hasCaptions = isMaximized ? props.hasCaptionsAtMax : props.hasCaptions;
+  const hasThumbnails = isMaximized
+    ? props.hasThumbnailsAtMax
+    : props.hasThumbnails;
+
   /* process widgets */
-  const indexBoard = props.indexBoard && (
+  const indexBoard = hasIndexBoard && (
     <IndexBoard
       hasShadow={props.widgetsShadow}
-      position={props.indexBoard}
+      position={hasIndexBoard}
       curIndex={slides.curIndexForDisplay}
       totalIndices={indices.length}
     />
   );
 
-  const mediaButtons = props.mediaButtons && props.autoPlay && (
+  const mediaButtons = hasMediaButton && props.autoPlay && (
     <MediaButtons
       playIcon={props.playIcon}
       pauseIcon={props.pauseIcon}
       hasShadow={props.widgetsShadow}
-      position={props.mediaButtons}
+      position={hasMediaButton}
       isPlaying={isPlaying}
       clickCallback={handleMediaButtonClick}
     />
   );
 
-  const sizeButtons = props.sizeButtons && (
+  const sizeButtons = hasSizeButton && (
     <SizeButtons
       minIcon={props.minIcon}
       maxIcon={props.maxIcon}
       hasShadow={props.widgetsShadow}
-      position={props.sizeButtons}
+      position={hasSizeButton}
       isMaximized={isMaximized}
       clickCallback={handleSizeButtonClick}
     />
   );
 
-  const arrowButtons = props.arrowButtons && (
+  const arrowButtons = hasArrowButtons && (
     <ArrowButtons
       leftIcon={props.leftIcon}
       rightIcon={props.rightIcon}
@@ -355,18 +376,18 @@ export const Carousel = (props) => {
     />
   );
 
-  const dotButtons = props.dotButtons && (
+  const dotButtons = hasDotButtons && (
     <DotButtons
       activeIcon={props.activeIcon}
       passiveIcon={props.passiveIcon}
       hasShadow={props.widgetsShadow}
-      position={props.dotButtons}
+      position={hasDotButtons}
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObj}
     />
   );
 
-  const thumbnails = props.thumbnails && (
+  const thumbnails = hasThumbnails && (
     <Thumbnails
       isMaximized={isMaximizedRef.current}
       slides={slidesElements}
@@ -392,13 +413,15 @@ export const Carousel = (props) => {
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           <Slides
+            {...props}
             minRef={slideMinRef}
             maxRef={slideMaxRef}
             slidesRef={slidesRef}
             slides={slidesElements}
             hasImages={hasImages}
             length={nSlides}
-            {...props}
+            objectFit={objectFit}
+            caption={hasCaptions}
           />
           {mediaButtons}
           {indexBoard}

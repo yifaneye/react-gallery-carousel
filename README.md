@@ -59,24 +59,31 @@ To customize the carousel, use the following props:
 |transitionDurationMin    |Number                |undefined  |Minimum transition duration (in milliseconds). Together with transitionDurationMax, they can be used to set constant transition duration with transitionDurationMin === transitionDurationMax.|
 |transitionDurationMax    |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionDurationMin' when transitionDurationMin > transitionDurationMax.|
 |widgetsShadow            |Boolean               |false      |If true, the following widgets have shadows. If true, the transition will drop frames when there are a large number (> 20) of images on all tested browsers (Safari, Chrome, Opera, Edge), except Firefox.|
-|mediaButtons             |Boolean or String     |'topLeft'  |If false, the carousel does not show media buttons (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
-|indexBoard               |Boolean or String     |'topCenter'|If false, the carousel does not show index board (e.g. 8/10). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
-|sizeButtons              |Boolean or String     |'topRight' |If false, the carousel does not show size buttons (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
-|arrowButtons             |Boolean               |true       |If false, the carousel does not show arrow buttons (i.e. left and right).|
-|dotButtons               |Boolean or String     |false      |If false, the carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). Its position can be specified by one of ['top', 'bottom']|
+|hasArrowButtons          |Boolean               |true       |If false, the carousel does not show arrow buttons (i.e. left and right).|
+|hasMediaButton           |Boolean or String     |'topLeft'  |If false, the carousel does not show media button (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
+|hasSizeButton            |Boolean or String     |'topRight' |If false, the carousel does not show size button (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
+|hasIndexBoard            |Boolean or String     |'topCenter'|If false, the carousel does not show index board (e.g. 8/10). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
+|hasDotButtons            |Boolean or String     |false      |If false, the carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). Its position can be specified by one of ['top', 'bottom']|
+|hasCaptions              |Boolean or String     |false      |If false, the carousel does not show caption for each image. Its position can be specified by one of ['top', 'bottom']|
+|hasThumbnails            |Boolean               |true       |If false, the carousel does not show thumbnails.|
+|hasArrowButtonsAtMax     |Boolean               |true       |If false, the maximized carousel does not show arrow buttons (i.e. left and right).|
+|hasMediaButtonAtMax      |Boolean or String     |'topLeft'  |If false, the maximized carousel does not show media button (i.e. play and pause). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
+|hasSizeButtonAtMax       |Boolean or String     |'topRight' |If false, the maximized carousel does not show size button (i.e. maximize and minimize). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
+|hasIndexBoardAtMax       |Boolean or String     |'topCenter'|If false, the maximized carousel does not show index board (e.g. 8/10). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter','bottomRight'].|
+|hasDotButtonsAtMax       |Boolean or String     |false      |If false, the maximized carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). Its position can be specified by one of ['top', 'bottom']|
+|hasCaptionsAtMax         |Boolean or String     |false      |If false, the maximized carousel does not show caption for each image. Its position can be specified by one of ['top', 'bottom']|
+|hasThumbnailsAtMax       |Boolean               |true       |If false, the maximized carousel does not show thumbnails.|
 |leftIcon                 |node                  |undefined  |Left icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'arrowButtons' prop is truthy.|
 |rightIcon                |node                  |undefined  |Right icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'arrowButtons' prop is truthy.|
-|playIcon                 |node                  |undefined  |Play icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButtons' prop is truthy.|
-|pauseIcon                |node                  |undefined  |Pause icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButtons' prop is truthy.|
-|minIcon                  |node                  |undefined  |Minimize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButtons' prop is truthy.|
-|maxIcon                  |node                  |undefined  |Maximize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButtons' prop is truthy.|
+|playIcon                 |node                  |undefined  |Play icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButton' prop is truthy.|
+|pauseIcon                |node                  |undefined  |Pause icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButton' prop is truthy.|
+|minIcon                  |node                  |undefined  |Minimize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButton' prop is truthy.|
+|maxIcon                  |node                  |undefined  |Maximize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButton' prop is truthy.|
 |activeIcon               |node                  |undefined  |Active dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'dotButtons' prop is truthy.|
 |passiveIcon              |node                  |undefined  |Passive dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'dotButtons' prop is truthy.|
-|caption                  |Boolean               |false      |If true, the carousel shows caption for each image. Its position can be specified by one of ['top', 'bottom']|
-|thumbnails               |Boolean               |true       |If true, the carousel shows thumbnails.|
 |shouldSwipeOnMouse       |Boolean               |true       |If true, the carousel can be swiped by cursor using a mouse or a track pad.|
-|shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking.|
-|shouldMinimizeOnClick    |Boolean               |false      |If true, the carousel can be minimized by clicking.|
+|shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking. It is suitable for when there is no control widget.|
+|shouldMinimizeOnClick    |Boolean               |false      |If true, the carousel can be minimized by clicking. It is suitable for when there is no control widget.|
 |shouldMinimizeOnSwipeDown|Boolean               |true       |If true, the carousel can be minimized by touch swiping down.|
 |onIndexChange            |Function              |() => {}   |Callback function invoked when the current index is being updated. It is called regardless of whether index value's before and after are the same.|
 
