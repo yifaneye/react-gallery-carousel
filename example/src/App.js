@@ -4,7 +4,7 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/twoWayMap';
 
-const imageIDs = Array(6)
+const imageIDs = Array(16)
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
@@ -105,6 +105,7 @@ const App = () => {
         <Carousel
           images={images}
           isRTL={true}
+          hasTransition={false}
           hasCaptions={false}
           hasCaptionsAtMax='bottom'
           hasDotButtons='bottom'

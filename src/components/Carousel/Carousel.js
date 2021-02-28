@@ -105,6 +105,7 @@ export const Carousel = (props) => {
     speed = props.transitionSpeed,
     hasToUpdate = true
   ) => {
+    if (!props.hasTransition) return;
     if (isReducedMotion) return;
 
     // calculate transition duration

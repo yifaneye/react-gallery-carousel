@@ -25,6 +25,7 @@ export const propTypes = {
   autoPlayStarted: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(false),
   swipeThreshold: numberBetween(0, 1),
+  hasTransition: PropTypes.bool.isRequired,
   transitionSpeed: positiveNumber(true),
   transitionDurationMin: positiveNumber(true),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
@@ -71,6 +72,7 @@ export const defaultProps = {
   autoPlayStarted: false,
   autoPlayInterval: 5000, // ms
   swipeThreshold: 0.1, // * 100%
+  hasTransition: true,
   transitionSpeed: 1, // px/ms
   transitionDurationMin: 200, // ms
   widgetsHasShadow: false,
