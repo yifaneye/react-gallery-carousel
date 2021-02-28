@@ -14,11 +14,10 @@ const useKeyboard = (elementRef) => {
       // element.classList.add(styles.isNotKeyboardUser);
     };
 
-    const handleKeyDown = () => {
+    const handleKeyDown = (event) => {
       if (!element) return;
+      if (event.key !== 'Tab') return;
       element.setAttribute('data-is-not-keyboard-user', 'false');
-      // cannot use classList due to classList will get changed
-      // element.classList.remove(styles.isNotKeyboardUser);
     };
 
     if (element) {
