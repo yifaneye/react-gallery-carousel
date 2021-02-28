@@ -9,7 +9,11 @@ export const Slides = memo((props) => {
   const slides = props.slides;
 
   return (
-    <ul className={styles.slides} ref={props.slidesRef} tabIndex={0}>
+    <ul
+      className={styles.slides + `${props.isRTL ? ' ' + styles.RTL : ''}`}
+      ref={props.slidesRef}
+      tabIndex={0}
+    >
       {slides.map((slide, index) => {
         let reference = null;
         if (index === 0) reference = props.minRef;

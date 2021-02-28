@@ -15,3 +15,7 @@
   will-change: transform;
   backface-visibility: hidden;
 }
+
+.slides.RTL {
+  flex-direction: row-reverse;
+}

@@ -18,7 +18,9 @@ export const Thumbnails = (props) => {
       className={styles.thumbnailsWrapper}
       onWheel={wheelEventHandler}
     >
-      <ul className={styles.thumbnails}>
+      <ul
+        className={styles.thumbnails + `${props.isRTL ? ' ' + styles.RTL : ''}`}
+      >
         {Object.keys(callbacks).map((key, index) => {
           return (
             <Thumbnail

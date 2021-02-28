@@ -4,7 +4,7 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/twoWayMap';
 
-const imageIDs = Array(160)
+const imageIDs = Array(6)
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {

@@ -1,7 +1,8 @@
+// keep SlidesFactory for future use (for other features)
 export default class SlidesFactory {
   CreateSlides(slides, options) {
-    if (options.isRTL) return new SlidesWithRTL(slides, options);
-    else return new Slides(slides, options);
+    // if (options.isRTL) return new SlidesWithRTL(slides, options);
+    return new Slides(slides, options);
   }
 }
 
@@ -110,6 +111,11 @@ class Slides {
   }
 }
 
+/*
+// deprecated code in favour of CSS flex-direction: row-reverse,
+// since merely reverse the order of slides in RTL carousel can not reverse
+// the order of tabbing (keyboard navigation) of dot buttons and thumbnails.
+
 class SlidesWithRTL extends Slides {
   constructor(items, options) {
     super(items, options);
@@ -133,3 +139,4 @@ class SlidesWithRTL extends Slides {
     return this._headIndex - this._curIndex + 1;
   }
 }
+*/

@@ -30,3 +30,8 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+.thumbnails.RTL {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}

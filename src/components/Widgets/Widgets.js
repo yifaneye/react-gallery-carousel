@@ -152,7 +152,11 @@ export const DotButtons = (props) => {
 
   return (
     <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
-      <div className={styles.buttonsWrapper}>
+      <div
+        className={
+          styles.buttonsWrapper + `${props.isRTL ? ' ' + styles.RTL : ''}`
+        }
+      >
         {Object.keys(callbacks).map((key, index) => (
           <IconButton
             key={index}

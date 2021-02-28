@@ -53,8 +53,9 @@ export const Carousel = (props) => {
     isLoop: props.isLoop
   });
   const nSlides = slides.length;
-  const slidesMin = `-${nSlides}00%`;
-  const slidesMax = `${nSlides}00%`;
+  const increment = props.isRTL ? -1 : +1;
+  const slidesMin = `${nSlides * -increment}00%`;
+  const slidesMax = `${nSlides * increment}00%`;
 
   const [, setCurIndex] = useState(slides.curIndex);
   const applyCurIndexUpdate = (curIndex) => {
@@ -63,11 +64,10 @@ export const Carousel = (props) => {
   };
 
   /* handle autoplay and reduced motion settings */
-  const indexStep = props.isRTL ? -1 : +1;
   const [isPlaying, setIsPlaying] = useTimer(
     props.autoPlay && props.autoPlayInterval,
     props.autoPlayStarted,
-    () => updateIndex(indexStep)
+    () => updateIndex(+1)
   );
   const handleMediaButtonClick = () => {
     setIsPlaying((isPlaying) => !isPlaying);
@@ -165,9 +165,11 @@ export const Carousel = (props) => {
     (displacementX = 0) => {
       // move the element
       if (slidesRef.current)
-        slidesRef.current.style.transform = `translateX(calc(-100% * ${slides.curIndex} + ${displacementX}px))`;
+        slidesRef.current.style.transform = `translateX(calc(${
+          -100 * slides.curIndex * increment
+        }% + ${displacementX}px))`;
     },
-    [slides.curIndex]
+    [slides.curIndex, increment]
   );
 
   // change to the current slide before browser paints
@@ -177,7 +179,7 @@ export const Carousel = (props) => {
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
 
   const handleSwipeMoveX = (displacementX) => {
-    const change = -displacementX;
+    const change = -displacementX * increment;
 
     // calibrate index for looping of the carousel
     if (shouldCalibrateIndex) {
@@ -204,15 +206,19 @@ export const Carousel = (props) => {
       } else if (slides.isMaxIndex() && change > 0) {
         slideMinRef.current.style.transform = null;
         slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
-      } else if (change !== 0) {
+      } else if (!slides.isMinIndex() && !slides.isMaxIndex() && change !== 0) {
         slideMinRef.current.style.transform = null;
         slideMaxRef.current.style.transform = null;
       }
     }
 
     // update carousel
-    if (slides.calibrateIndex(change) && shouldCalibrateIndex)
+    if (slides.calibrateIndex(change) && shouldCalibrateIndex) {
+      // remove carry-over transitionDuration
+      slidesRef.current.style.transitionDuration = null;
       applyTransitionX(displacementX);
+    }
+
     slides.updateIndex(change);
     applyTransitionDuration(displacementX, speed, change !== 0);
     applyTransitionY(0, 0);
@@ -249,8 +255,8 @@ export const Carousel = (props) => {
 
   useKeyboard(carouselRef);
 
-  const goLeft = () => updateIndex(-1);
-  const goRight = () => updateIndex(+1);
+  const goLeft = () => updateIndex(-increment);
+  const goRight = () => updateIndex(+increment);
 
   useKeys(slidesRef, {
     ArrowLeft: goLeft,
@@ -284,10 +290,10 @@ export const Carousel = (props) => {
   const mouseEventHandlers = useSwipe(slidesWrapperRef, props.swipeThreshold, {
     onSwipeMoveX: handleSwipeMoveX,
     onSwipeMoveY: handleSwipeMoveY,
-    onSwipeEndRight: (displacementX, speed) =>
-      updateIndex(-1, displacementX, speed),
     onSwipeEndLeft: (displacementX, speed) =>
-      updateIndex(+1, displacementX, speed),
+      updateIndex(increment, displacementX, speed),
+    onSwipeEndRight: (displacementX, speed) =>
+      updateIndex(-increment, displacementX, speed),
     onSwipeEndDisqualified: (displacementX, speed) =>
       updateIndex(0, displacementX, speed),
     onSwipeEndDown: handleSwipeEndDown,
@@ -302,7 +308,7 @@ export const Carousel = (props) => {
   const maxCarouselClassName = styles.maxCarousel + galleryClassName;
 
   /* process components for maximized carousel */
-  const minCarouselPlaceholder = isMaximized && (
+  const carouselPlaceholder = isMaximized && (
     <div className={carouselClassName} style={props.style} />
   );
 
@@ -369,8 +375,8 @@ export const Carousel = (props) => {
       rightIcon={props.rightIcon}
       hasShadow={props.widgetsShadow}
       isRTL={props.isRTL}
-      isLeftDisabled={!slides.canUpdateIndex(-1)}
-      isRightDisabled={!slides.canUpdateIndex(+1)}
+      isLeftDisabled={!slides.canUpdateIndex(-increment)}
+      isRightDisabled={!slides.canUpdateIndex(+increment)}
       onClickLeft={goLeft}
       onClickRight={goRight}
     />
@@ -378,6 +384,7 @@ export const Carousel = (props) => {
 
   const dotButtons = hasDotButtons && (
     <DotButtons
+      isRTL={props.isRTL}
       activeIcon={props.activeIcon}
       passiveIcon={props.passiveIcon}
       hasShadow={props.widgetsShadow}
@@ -389,6 +396,7 @@ export const Carousel = (props) => {
 
   const thumbnails = hasThumbnails && (
     <Thumbnails
+      isRTL={props.isRTL}
       isMaximized={isMaximizedRef.current}
       slides={slidesElements}
       hasImages={hasImages}
@@ -400,7 +408,7 @@ export const Carousel = (props) => {
 
   return (
     <>
-      {minCarouselPlaceholder}
+      {carouselPlaceholder}
       {maxCarouselBackground}
       <div
         ref={carouselRef}
