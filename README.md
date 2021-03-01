@@ -49,6 +49,7 @@ To customize the carousel, use the following props:
 |index                    |Number                |undefined  |Current index of the slides of the carousel as a whole number starting from 1.|
 |isRTL                    |Boolean               |false      |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
 |isLoop                   |Boolean               |true       |If true, the carousel form a loop from the ribbon of slides.|
+|isMaximized              |Boolean               |false      |If true, the carousel is maximized initially.|
 |lazyLoad                 |Boolean               |true       |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
 |objectFit                |String                |'cover'    |CSS 'object-fit' style of the images.|
 |autoPlay                 |Boolean               |true       |If true, the carousel has auto play capability.|

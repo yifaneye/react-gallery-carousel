@@ -92,7 +92,11 @@ export const Carousel = (props) => {
   useEventListener(document, 'visibilitychange', handleVisibilityChange);
 
   /* handle maximization/minimization and full screen */
-  const [isMaximized, setIsMaximized] = useFixedPosition(false, carouselRef);
+  const [isMaximized, setIsMaximized] = useFixedPosition(
+    props.isMaximized,
+    slidesRef
+  );
+
   const handleSizeButtonClick = () => {
     // carousel is to be maximized
     if (!isMaximized) slidesWrapperRef.current.focus();

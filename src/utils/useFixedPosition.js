@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useFixedPosition = (initialState, elementRef) => {
-  const [isFixed, setIsFixed] = useState(false);
+  const [isFixed, setIsFixed] = useState(initialState);
 
   useEffect(() => {
     const scrollX = window.scrollX;
