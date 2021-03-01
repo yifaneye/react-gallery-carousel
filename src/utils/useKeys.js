@@ -5,8 +5,8 @@ const useKeys = (elementRef, callbacks) => {
   callbackRef.current = callbacks;
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      callbackRef.current[e.key] && callbackRef.current[e.key]();
+    const handleKeyDown = (event) => {
+      callbackRef.current[event.key] && callbackRef.current[event.key](event);
     };
 
     const element = elementRef.current;
