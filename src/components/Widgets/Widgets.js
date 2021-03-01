@@ -173,6 +173,8 @@ DotButtons.propTypes = {
   hasShadow: PropTypes.bool.isRequired
 };
 
+/*
+// not used for performance gains
 export const LoadingSpinner = (props) => {
   return (
     <div className={styles.centerWrapper}>
@@ -191,6 +193,7 @@ export const LoadingSpinner = (props) => {
 LoadingSpinner.propTypes = {
   hasShadow: PropTypes.bool.isRequired
 };
+*/
 
 // memo is useful here
 export const Caption = memo((props) => {
