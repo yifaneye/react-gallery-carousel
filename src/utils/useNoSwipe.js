@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 const useNoSwipe = (elementRef) => {
   useEffect(() => {
     const el = elementRef.current;
-    const handleSwipe = (e) => e.stopPropagation();
+    const handleSwipe = (e) => {
+      e.stopPropagation();
+    };
 
     if (el) {
       el.addEventListener('mousedown', handleSwipe);

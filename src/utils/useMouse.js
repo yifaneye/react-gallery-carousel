@@ -37,8 +37,8 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
         onMouseUp(event.clientX - mouseDownX, 0, instantaneousVelocity);
       } else onTap();
     }
-    isMouseDown = false; // reset isMouseDown for next series of touch events
-    isMouseMoved = false; // reset isMouseMoved for next series of touch events
+    isMouseDown = false; // reset isMouseDown for next series of mouse events
+    isMouseMoved = false; // reset isMouseMoved for next series of mouse events
   };
 
   return {

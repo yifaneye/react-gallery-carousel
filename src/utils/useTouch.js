@@ -39,6 +39,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   const touchDistinguisher = getTouchDistinguisher();
   let touchStartX = 0;
   let touchStartY = 0;
+  let isTouchStarted = false;
   let isTouchMoved = false;
   let previousX = 0;
   let previousTime = Date.now();
@@ -66,6 +67,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
 
   const handleTouchStart = (event) => {
     event.stopPropagation();
+    isTouchStarted = true;
     touchStartX = event.touches[0].clientX;
     touchStartY = event.touches[0].clientY;
     previousX = touchStartX;
@@ -74,6 +76,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
 
   const handleTouchMove = (event) => {
     event.stopPropagation();
+    if (!isTouchStarted) return;
     const displacementX = event.changedTouches[0].clientX - touchStartX;
     if (shouldOmitEvent(event, displacementX)) return;
     const displacementY = event.changedTouches[0].clientY - touchStartY;
@@ -89,6 +92,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
 
   const handleTouchEnd = (event) => {
     event.stopPropagation();
+    if (!isTouchStarted) return;
     const displacementX = event.changedTouches[0].clientX - touchStartX;
     if (shouldOmitEvent(event, displacementX)) {
       onTouchEnd(0, 0, 0);
@@ -100,6 +104,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
       // can not calculate velocity here since event.clientX === previousX;
       onTouchEnd(displacementX, displacementY, instantaneousVelocity);
     else onTap();
+    isTouchStarted = false; // reset isTouchStarted for next series of touch events
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };
 
