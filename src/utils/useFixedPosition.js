@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useFixedPosition = (initialState, elementRef) => {
+const useFixedPosition = (initialState, elementToFocusRef) => {
   const [isFixed, setIsFixed] = useState(initialState);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const useFixedPosition = (initialState, elementRef) => {
 
     if (isFixed) {
       bodyElement.style.overflow = 'hidden';
-      elementRef.current.focus();
+      elementToFocusRef.current.focus();
     }
 
     return () => {
@@ -21,7 +21,7 @@ const useFixedPosition = (initialState, elementRef) => {
         bodyElement.style.overflow = overflowValue;
       }
     };
-  }, [isFixed, elementRef]);
+  }, [isFixed, elementToFocusRef]);
 
   return [isFixed, setIsFixed];
 };

@@ -98,8 +98,6 @@ export const Carousel = (props) => {
   );
 
   const handleSizeButtonClick = () => {
-    // carousel is to be maximized
-    if (!isMaximized) slidesWrapperRef.current.focus();
     setIsMaximized((isMaximized) => !isMaximized);
   };
 
@@ -264,7 +262,14 @@ export const Carousel = (props) => {
 
   useKeys(slidesWrapperRef, {
     ArrowLeft: goLeft,
-    ArrowRight: goRight
+    ArrowRight: goRight,
+    /* can not use useEnter hook here to mimic user click, since a click
+    on slidesWrapper should not and will not trigger anything */
+    Enter: (event) => {
+      // ignore ('Enter' key) keydown events on widgets (buttons) bubbling up to here
+      if (event.target !== event.currentTarget) return;
+      handleSizeButtonClick();
+    }
   });
 
   /* handle mouse and touch events */
@@ -430,6 +435,7 @@ export const Carousel = (props) => {
         ref={carouselRef}
         className={isMaximized ? maxCarouselClassName : carouselClassName}
         style={isMaximized ? {} : props.style}
+        data-is-not-keyboard-user='true'
       >
         <div
           ref={slidesWrapperRef}
