@@ -94,7 +94,7 @@ export const Carousel = (props) => {
   /* handle maximization/minimization and full screen */
   const [isMaximized, setIsMaximized] = useFixedPosition(
     props.isMaximized,
-    slidesRef
+    slidesWrapperRef
   );
 
   const handleSizeButtonClick = () => {
@@ -262,7 +262,7 @@ export const Carousel = (props) => {
   const goLeft = () => updateIndex(-increment);
   const goRight = () => updateIndex(+increment);
 
-  useKeys(slidesRef, {
+  useKeys(slidesWrapperRef, {
     ArrowLeft: goLeft,
     ArrowRight: goRight
   });
@@ -434,6 +434,7 @@ export const Carousel = (props) => {
         <div
           ref={slidesWrapperRef}
           className={styles.slidesWrapper}
+          tabIndex={0}
           {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
         >
           <Slides

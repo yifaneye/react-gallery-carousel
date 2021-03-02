@@ -31,7 +31,6 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       hasSizeButton='bottomLeft'
       hasMediaButton='bottomRight'
       hasDotButtons='bottom'
-      autoPlayStarted={true}
       shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       index={Number(
@@ -106,7 +105,6 @@ const App = () => {
           images={images}
           isRTL={true}
           isMaximized={true}
-          hasTransition={false}
           hasCaptions={false}
           hasCaptionsAtMax='bottom'
           hasDotButtons='bottom'
