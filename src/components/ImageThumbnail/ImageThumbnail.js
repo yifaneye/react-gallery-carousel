@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
 import styles from './ThumbnailImage.module.css';
-import placeholder from 'placeholderImage.jpg';
+import placeholderImage from 'placeholder.jpg';
+import fallbackImage from 'fallback.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
 import { imageObject } from '../../utils/validators';
 
 const handleError = (event) => {
   // permanently replace image with placeholder
-  event.target.src = placeholder;
+  event.target.src = fallbackImage;
 };
 
 const LazyLoadedImage = (props) => {
@@ -15,7 +16,7 @@ const LazyLoadedImage = (props) => {
   const isInViewport = useIntersectionObserver(imageRef);
 
   // temporarily replace image with placeholder
-  const src = isInViewport ? props.src : placeholder;
+  const src = isInViewport ? props.src : placeholderImage;
 
   return (
     <img

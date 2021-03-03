@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styles from './Image.module.css';
-import placeholder from 'placeholderImage.jpg';
+import placeholderImage from 'placeholder.jpg';
+import fallbackImage from 'fallback.jpg';
 import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
@@ -11,7 +12,7 @@ import {
 } from '../../utils/validators';
 
 const handleError = (event) => {
-  event.target.src = placeholder;
+  event.target.src = fallbackImage;
 };
 
 const LazyLoadedImage = (props) => {
@@ -29,7 +30,7 @@ const LazyLoadedImage = (props) => {
     ? props.image.src
     : isInViewport
     ? props.image.thumbnail
-    : placeholder;
+    : placeholderImage;
 
   return (
     <img
