@@ -50,7 +50,8 @@ const useSwipe = (
     else {
       // when isInitialVerticalSwipe is undefined
       isInitialSwipeVertical =
-        Math.abs(displacementX) <= Math.abs(displacementY);
+        displacementY !== 0 &&
+        Math.abs(displacementX) < Math.abs(displacementY);
       handleSwipeMove(displacementX, displacementY);
     }
   };

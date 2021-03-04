@@ -18,7 +18,7 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
 
   const handleMouseMove = (event) => {
     if (isMouseDown && event.buttons > 0) {
-      onMouseMove(event.clientX - mouseDownX);
+      onMouseMove(event.clientX - mouseDownX, 0);
       isMouseMoved = true;
       instantaneousVelocity =
         (event.clientX - previousX) / (Date.now() - previousTime);
