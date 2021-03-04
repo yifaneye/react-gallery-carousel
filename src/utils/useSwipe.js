@@ -15,7 +15,7 @@ const useSwipe = (
     onTap
   }
 ) => {
-  let isInitialSwipeDown;
+  let isInitialSwipeVertical;
 
   const handleSwipeEnd = (displacementX, displacementY = 0, velocity = 0) => {
     const { clientWidth: width, clientHeight: height } = elementRef.current;
@@ -23,35 +23,34 @@ const useSwipe = (
     const distanceYMin = height * swipePercentageMin;
     const speed = Math.abs(velocity);
     if (
-      !isInitialSwipeDown &&
+      !isInitialSwipeVertical &&
       // displacementX <= -Math.abs(displacementY) &&
       displacementX <= -distanceXMin
     )
       onSwipeEndLeft(displacementX, speed);
     else if (
-      !isInitialSwipeDown &&
+      !isInitialSwipeVertical &&
       // displacementX >= Math.abs(displacementY) &&
       displacementX >= distanceXMin
     )
       onSwipeEndRight(displacementX, speed);
     else if (
-      isInitialSwipeDown &&
+      isInitialSwipeVertical &&
       // Math.abs(displacementX) < displacementY &&
       displacementY >= distanceYMin
     )
       onSwipeEndDown();
     else onSwipeEndDisqualified(displacementX, speed);
-    isInitialSwipeDown = undefined;
+    isInitialSwipeVertical = undefined;
   };
 
   const handleSwipeMove = (displacementX, displacementY = 0) => {
-    if (isInitialSwipeDown === false) onSwipeMoveX(displacementX);
-    else if (isInitialSwipeDown) onSwipeMoveY(displacementX, displacementY);
+    if (isInitialSwipeVertical === false) onSwipeMoveX(displacementX);
+    else if (isInitialSwipeVertical) onSwipeMoveY(displacementX, displacementY);
     else {
-      // when isInitialSwipeDown is undefined
-      if (Math.abs(displacementX) >= displacementY) isInitialSwipeDown = false;
-      else if (Math.abs(displacementX) < displacementY)
-        isInitialSwipeDown = true;
+      // when isInitialVerticalSwipe is undefined
+      isInitialSwipeVertical =
+        Math.abs(displacementX) <= Math.abs(displacementY);
       handleSwipeMove(displacementX, displacementY);
     }
   };
