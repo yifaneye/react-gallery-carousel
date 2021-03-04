@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import styles from './Image.module.css';
 import placeholderImage from 'placeholder.jpg';
 import fallbackImage from 'fallback.jpg';
@@ -18,32 +18,39 @@ const handleError = (event) => {
 const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
-  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(
-    !props.image.thumbnail
-  );
+  const [isLoaded, setIsLoaded] = useState(!props.image.thumbnail);
 
   const handleLoad = () => {
-    if (isInViewport) setIsThumbnailLoaded(true);
+    if (isInViewport) setIsLoaded(true);
   };
 
-  const source = isThumbnailLoaded
-    ? props.image.src
-    : isInViewport
-    ? props.image.thumbnail
-    : placeholderImage;
+  const src = isInViewport ? props.image.src : placeholderImage;
+  const alt = props.image.alt || null;
+  const thumbnail = isInViewport ? props.image.thumbnail : placeholderImage;
 
   return (
-    <img
-      ref={imageRef}
-      className={styles.image}
-      src={source}
-      alt={props.image.alt || null}
-      aria-label={props.image.alt || null}
-      loading='lazy'
-      style={props.style}
-      onLoad={handleLoad}
-      onError={handleError}
-    />
+    <>
+      <img
+        className={styles.image}
+        src={src}
+        alt={alt}
+        aria-label={alt}
+        loading='lazy'
+        style={props.style}
+        onLoad={handleLoad}
+        onError={handleError}
+      />
+      <img
+        ref={imageRef}
+        className={styles.thumbnail + (isLoaded ? ' ' + styles.hidden : '')}
+        src={thumbnail}
+        alt={alt}
+        aria-label={alt}
+        loading='lazy'
+        style={props.style}
+        onError={handleError}
+      />
+    </>
   );
 };
 

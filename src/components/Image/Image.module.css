@@ -11,12 +11,30 @@
 .image {
   height: 100%;
   width: 100%;
-  margin: auto;
+  margin: 0;
   padding: 0;
   object-fit: cover;
   user-select: none;
   -webkit-user-drag: none;
   cursor: grab;
+}
+
+.thumbnail {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: grab;
+}
+
+.thumbnail.hidden {
+  display: none;
 }
 
 .isGrabbing .image {
@@ -33,5 +51,5 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #888;
+  background: #000;
 }
