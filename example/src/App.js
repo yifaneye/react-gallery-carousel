@@ -108,8 +108,11 @@ const App = () => {
           hasCaptions={false}
           hasCaptionsAtMax='bottom'
           hasDotButtons='bottom'
-          activeIcon={<span className='text'>x</span>}
-          passiveIcon={<span className='text'>o</span>}
+          hasDotButtonsAtMax={false}
+          hasThumbnails={false}
+          hasThumbnailsAtMax={true}
+          // activeIcon={<span className='text'>x</span>}
+          // passiveIcon={<span className='text'>o</span>}
           className='framed'
         />
       </div>

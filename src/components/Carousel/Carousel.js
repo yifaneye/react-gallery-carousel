@@ -326,37 +326,38 @@ export const Carousel = (props) => {
   );
 
   /* process settings */
-  const objectFit = isMaximized
-    ? ('objectFitAtMax' in props && props.objectFitAtMax) || props.objectFit
-    : props.objectFit;
-  const hasArrowButtons = isMaximized
-    ? ('hasArrowButtonsAtMax' in props && props.hasArrowButtonsAtMax) ||
-      props.hasArrowButtons
-    : props.hasArrowButtons;
-  const hasMediaButton = isMaximized
-    ? ('hasMediaButtonAtMax' in props && props.hasMediaButtonAtMax) ||
-      props.hasMediaButton
-    : props.hasMediaButton;
-  const hasSizeButton = isMaximized
-    ? ('hasSizeButtonAtMax' in props && props.hasSizeButtonAtMax) ||
-      props.hasSizeButton
-    : props.hasSizeButton;
-  const hasDotButtons = isMaximized
-    ? ('hasDotButtonsAtMax' in props && props.hasDotButtonsAtMax) ||
-      props.hasDotButtons
-    : props.hasDotButtons;
-  const hasIndexBoard = isMaximized
-    ? ('hasIndexBoardAtMax' in props && props.hasIndexBoardAtMax) ||
-      props.hasIndexBoard
-    : props.hasIndexBoard;
-  const hasCaptions = isMaximized
-    ? ('hasCaptionsAtMax' in props && props.hasCaptionsAtMax) ||
-      props.hasCaptions
-    : props.hasCaptions;
-  const hasThumbnails = isMaximized
-    ? ('hasThumbnailsAtMax' in props && props.hasThumbnailsAtMax) ||
-      props.hasThumbnails
-    : props.hasThumbnails;
+  const objectFit =
+    isMaximized && 'objectFitAtMax' in props
+      ? props.objectFitAtMax
+      : props.objectFit;
+  const hasArrowButtons =
+    isMaximized && 'hasArrowButtonsAtMax' in props
+      ? props.hasArrowButtonsAtMax
+      : props.hasArrowButtons;
+  const hasMediaButton =
+    isMaximized && 'hasMediaButtonAtMax' in props
+      ? props.hasMediaButtonAtMax
+      : props.hasMediaButton;
+  const hasSizeButton =
+    isMaximized && 'hasSizeButtonAtMax' in props
+      ? props.hasSizeButtonAtMax
+      : props.hasSizeButton;
+  const hasDotButtons =
+    isMaximized && 'hasDotButtonsAtMax' in props
+      ? props.hasDotButtonsAtMax
+      : props.hasDotButtons;
+  const hasIndexBoard =
+    isMaximized && 'hasIndexBoardAtMax' in props
+      ? props.hasIndexBoardAtMax
+      : props.hasIndexBoard;
+  const hasCaptions =
+    isMaximized && 'hasCaptionsAtMax' in props
+      ? props.hasCaptionsAtMax
+      : props.hasCaptions;
+  const hasThumbnails =
+    isMaximized && 'hasThumbnailsAtMax' in props
+      ? props.hasThumbnailsAtMax
+      : props.hasThumbnails;
 
   /* process widgets */
   const indexBoard = hasIndexBoard && (
