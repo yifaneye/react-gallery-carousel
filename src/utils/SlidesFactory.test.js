@@ -49,21 +49,21 @@ describe('6 items without RTL', () => {
 
 describe('6 items with RTL', () => {
   const slides = slidesFactory.CreateSlides(items, { isRTL: true });
-  const expectedCurIndex = 5;
+  const expectedCurIndex = 0;
   it('constructs slides', () => {
-    expect(slides.slides).toStrictEqual([6, 5, 4, 3, 2, 1]);
+    expect(slides.slides).toStrictEqual([1, 2, 3, 4, 5, 6]);
   });
   it('has correct index', () => {
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('cannot move right', () => {
-    expect(slides.calibrateIndex(+1)).toBe(false);
-    expect(slides.updateIndex(+1)).toBe(false);
+    expect(slides.calibrateIndex(-1)).toBe(false);
+    expect(slides.updateIndex(-1)).toBe(false);
     expect(slides.curIndex).toBe(expectedCurIndex);
   });
   it('can move left', () => {
-    expect(slides.calibrateIndex(-1)).toBe(false);
-    expect(slides.updateIndex(-1)).toBe(true);
-    expect(slides.curIndex).toBe(expectedCurIndex - 1);
+    expect(slides.calibrateIndex(+1)).toBe(false);
+    expect(slides.updateIndex(+1)).toBe(true);
+    expect(slides.curIndex).toBe(expectedCurIndex + 1);
   });
 });
