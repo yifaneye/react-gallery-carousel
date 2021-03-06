@@ -8,11 +8,16 @@
   padding: 0;
   overflow-y: hidden;
   overflow-x: scroll;
+  cursor: grab;
   -webkit-overflow-scrolling: touch;
   -ms-scroll-chaining: none;
   overscroll-behavior-x: contain;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+:global(.isGrabbing).thumbnailsWrapper {
+  cursor: grabbing;
 }
 
 .thumbnailsWrapper::-webkit-scrollbar {

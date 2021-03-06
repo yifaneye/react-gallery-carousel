@@ -3,6 +3,7 @@ import styles from './Thumbnails.module.css';
 import Thumbnail from '../Thumbnail';
 import useAnchor from '../../utils/useAnchor';
 import useNoOverScroll from '../../utils/useNoOverScroll';
+import useMouseDrag from '../../utils/useMouseDrag';
 import PropTypes from 'prop-types';
 
 export const Thumbnails = (props) => {
@@ -11,12 +12,14 @@ export const Thumbnails = (props) => {
   const thumbnailRef = useRef(null);
   useAnchor(thumbnailRef, { isMaximized: props.isMaximized });
   const wheelEventHandler = useNoOverScroll(thumbnailsRef);
+  const mouseEventHandlers = useMouseDrag(thumbnailsRef);
 
   return (
     <div
       ref={thumbnailsRef}
       className={styles.thumbnailsWrapper}
       onWheel={wheelEventHandler}
+      {...mouseEventHandlers}
     >
       <ul
         className={styles.thumbnails + `${props.isRTL ? ' ' + styles.RTL : ''}`}

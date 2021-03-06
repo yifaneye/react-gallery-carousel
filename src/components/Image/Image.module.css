@@ -6,6 +6,11 @@
   border: 0;
   padding: 0;
   overflow: hidden;
+  cursor: grab;
+}
+
+:global(.isGrabbing) .figure {
+  cursor: grabbing;
 }
 
 .image {
@@ -16,7 +21,6 @@
   object-fit: cover;
   user-select: none;
   -webkit-user-drag: none;
-  cursor: grab;
 }
 
 .thumbnail {
@@ -30,15 +34,10 @@
   object-fit: cover;
   user-select: none;
   -webkit-user-drag: none;
-  cursor: grab;
 }
 
 .thumbnail.hidden {
   display: none;
-}
-
-.isGrabbing .image {
-  cursor: grabbing;
 }
 
 .image::before {

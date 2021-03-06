@@ -10,7 +10,6 @@
   opacity: 0.5;
   list-style: none;
   user-select: none;
-  cursor: pointer;
   -webkit-user-drag: none;
   z-index: 1;
 }

@@ -2,9 +2,10 @@ import React, { useRef } from 'react';
 import styles from './Thumbnail.module.css';
 import ThumbnailImage from '../ImageThumbnail';
 import { UserSlideThumbnail } from '../UserSlide';
+import useNoDrag from '../../utils/useNoDrag';
+import useEnter from '../../utils/useEnter';
 import PropTypes from 'prop-types';
 import { elementRef, slideObject } from '../../utils/validators';
-import useEnter from '../../utils/useEnter';
 
 export const Thumbnail = (props) => {
   const reference = useRef(null);
@@ -21,10 +22,17 @@ export const Thumbnail = (props) => {
 
   const ref = props.isCurrent ? props.reference : reference;
 
+  useNoDrag(ref); // prevent dragging on FireFox
+
   useEnter(ref);
 
   return (
-    <li ref={ref} className={className} tabIndex={0} onClick={props.onClick}>
+    <li
+      ref={ref}
+      className={className}
+      tabIndex={0}
+      onMouseUpCapture={props.onClick} // onmouseup also works for tap on touch devices
+    >
       {slide}
     </li>
   );

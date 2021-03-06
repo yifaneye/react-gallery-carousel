@@ -1,5 +1,3 @@
-import styles from '../components/Image/Image.module.css';
-
 const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
   let isMouseDown = false;
   let isMouseMoved = false;
@@ -9,7 +7,7 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
   let instantaneousVelocity = 0;
 
   const handleMouseDown = (event) => {
-    if (elementRef.current) elementRef.current.classList.add(styles.isGrabbing);
+    if (elementRef.current) elementRef.current.classList.add('isGrabbing');
     if (event.buttons > 0) isMouseDown = true;
     mouseDownX = event.clientX;
     previousX = event.clientX;
@@ -18,7 +16,7 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
 
   const handleMouseMove = (event) => {
     if (isMouseDown && event.buttons > 0) {
-      onMouseMove(event.clientX - mouseDownX, 0);
+      onMouseMove(event.clientX - mouseDownX, 0, event.clientX - previousX);
       isMouseMoved = true;
       instantaneousVelocity =
         (event.clientX - previousX) / (Date.now() - previousTime);
@@ -28,13 +26,12 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
   };
 
   const handleMouseUp = (event) => {
-    if (elementRef.current)
-      elementRef.current.classList.remove(styles.isGrabbing);
+    if (elementRef.current) elementRef.current.classList.remove('isGrabbing');
     if (isMouseDown) {
       if (isMouseMoved) {
         // can not calculate velocity here since event.clientX === previousX;
         // ignore vertical displacement by not passing it as argument
-        onMouseUp(event.clientX - mouseDownX, 0, instantaneousVelocity);
+        onMouseUp(event.clientX - mouseDownX, 0, instantaneousVelocity, event);
       } else onTap();
     }
     isMouseDown = false; // reset isMouseDown for next series of mouse events
@@ -44,7 +41,7 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
   return {
     onMouseDown: (event) => handleMouseDown(event),
     onMouseMove: (event) => handleMouseMove(event),
-    onMouseUp: (event) => handleMouseUp(event),
+    onMouseUpCapture: (event) => handleMouseUp(event),
     onMouseLeave: (event) => handleMouseUp(event)
   };
 };
