@@ -101,7 +101,8 @@ SizeButtons.propTypes = {
 export const IndexBoard = (props) => {
   const ref = useRef(null);
 
-  // useNoSwipe(ref);
+  // allow the user to select text using cursor or finger
+  useNoSwipe(ref);
 
   return (
     <div
@@ -199,7 +200,7 @@ LoadingSpinner.propTypes = {
 export const Caption = memo((props) => {
   const captionRef = useRef(null);
 
-  // allow the user to select hasCaptions text using cursor or finger
+  // allow the user to select text using cursor or finger
   useNoSwipe(captionRef);
 
   return (

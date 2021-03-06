@@ -24,7 +24,7 @@ import 'react-gallery-carousel/dist/index.css';
 const App = () => {
   const sizes = [900, 800, 700, 600, 500, 400];
   const images = sizes.map((size) => ({
-    src: `https://placekitten.com/${size}/${size}`
+    src: `https://placedog.net/${size}/${size}`
   }));
 
   return (
@@ -57,7 +57,7 @@ To customize the carousel, use the following props:
 |autoPlayInterval         |Number                |5000       |Interval of auto play (in milliseconds).|
 |swipeThreshold           |Number                |0.1        |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
 |hasTransition            |Boolean               |true       |If false, the carousel does not have transition.|
-|transitionSpeed          |Number                |1          |Speed of the transition (in pixels per milliseconds) in moving to the previous or the next slide.|
+|transitionSpeed          |Number                |1          |Speed of the transition (in pixels per millisecond) in moving to the previous or the next slide.|
 |transitionDurationMin    |Number                |undefined  |Minimum transition duration (in milliseconds). Together with transitionDurationMax, they can be used to set constant transition duration with transitionDurationMin === transitionDurationMax.|
 |transitionDurationMax    |Number                |undefined  |Maximum transition duration (in milliseconds). It has precedence over 'transitionDurationMin' when transitionDurationMin > transitionDurationMax.|
 |widgetsHasShadow         |Boolean               |false      |If true, the following widgets have shadows. If true, the transition will drop frames when there are a large number (> 20) of images on all tested browsers (Safari, Chrome, Opera, Edge), except Firefox.|
@@ -75,14 +75,14 @@ To customize the carousel, use the following props:
 |hasDotButtonsAtMax       |Boolean or String     |false      |If false, the maximized carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). It overrides 'hasDotButtons' prop for the maximized carousel. Its position can be specified by one of ['top', 'bottom']|
 |hasCaptionsAtMax         |Boolean or String     |false      |If false, the maximized carousel does not show caption for each image. It overrides 'hasCaptions' prop for the maximized carousel. Its position can be specified by one of ['top', 'bottom']|
 |hasThumbnailsAtMax       |Boolean               |true       |If false, the maximized carousel does not show thumbnails. It overrides 'hasThumbnails' for the maximized carousel.|
-|leftIcon                 |node                  |undefined  |Left icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'arrowButtons' prop is truthy.|
-|rightIcon                |node                  |undefined  |Right icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'arrowButtons' prop is truthy.|
-|playIcon                 |node                  |undefined  |Play icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButton' prop is truthy.|
-|pauseIcon                |node                  |undefined  |Pause icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'mediaButton' prop is truthy.|
-|minIcon                  |node                  |undefined  |Minimize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButton' prop is truthy.|
-|maxIcon                  |node                  |undefined  |Maximize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'sizeButton' prop is truthy.|
-|activeIcon               |node                  |undefined  |Active dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'dotButtons' prop is truthy.|
-|passiveIcon              |node                  |undefined  |Passive dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'dotButtons' prop is truthy.|
+|leftIcon                 |node                  |undefined  |Left icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'hasArrowButtons' prop is truthy.|
+|rightIcon                |node                  |undefined  |Right icon (HTML element) to be placed into arrowButtons, but it (they) will be placed only if the 'hasArrowButtons' prop is truthy.|
+|playIcon                 |node                  |undefined  |Play icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'hasMediaButton' prop is truthy.|
+|pauseIcon                |node                  |undefined  |Pause icon (HTML element) to be placed into mediaButtons, but it (they) will be placed only if the 'hasMediaButton' prop is truthy.|
+|minIcon                  |node                  |undefined  |Minimize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'hasSizeButton' prop is truthy.|
+|maxIcon                  |node                  |undefined  |Maximize icon (HTML element) to be placed into sizeButtons, but it (they) will be placed only if the 'hasSizeButton' prop is truthy.|
+|activeIcon               |node                  |undefined  |Active dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'hasDotButtons' prop is truthy.|
+|passiveIcon              |node                  |undefined  |Passive dot icon (HTML element) to be placed into dotButtons, but it (they) will be placed only if the 'hasDotButtons' prop is truthy.|
 |shouldSwipeOnMouse       |Boolean               |true       |If true, the carousel can be swiped by cursor using a mouse or a track pad.|
 |shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking. It is suitable for when there is no control widget.|
 |shouldMinimizeOnClick    |Boolean               |false      |If true, the carousel can be minimized by clicking. It is suitable for when there is no control widget.|

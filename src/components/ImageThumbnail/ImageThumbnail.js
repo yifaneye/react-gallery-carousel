@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { imageObject } from '../../utils/validators';
 
 const handleError = (event) => {
-  // permanently replace image with placeholder
+  // permanently replace the image with the fallback image
   event.target.src = fallbackImage;
 };
 
@@ -15,7 +15,7 @@ const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
   const isInViewport = useIntersectionObserver(imageRef);
 
-  // temporarily replace image with placeholder
+  // temporarily replace the image with the placeholder image
   const src = isInViewport ? props.src : placeholderImage;
 
   return (

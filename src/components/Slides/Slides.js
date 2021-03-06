@@ -15,8 +15,8 @@ export const Slides = memo((props) => {
 
   return (
     <ul
-      className={styles.slides + `${props.isRTL ? ' ' + styles.RTL : ''}`}
       ref={props.slidesRef}
+      className={styles.slides + `${props.isRTL ? ' ' + styles.RTL : ''}`}
     >
       {slides.map((slide, index) => {
         let reference = null;
