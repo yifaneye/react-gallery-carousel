@@ -37,7 +37,7 @@
 
 .text {
   background: #fff;
-  color: #888;
+  /*color: #888;*/
   font-weight: bold;
   padding: 5px;
   opacity: 0.75;

@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import puppeteer from 'puppeteer';
-const { test, it, expect } = global;
+const { test, expect } = global;
 
-it('renders without crashing', () => {
+// unit testing
+test('Carousel renders without crashing', () => {
   // since .scrollTo() isn't implemented in jsdom
   Element.prototype.scrollTo = () => {};
 

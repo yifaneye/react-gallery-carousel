@@ -34,7 +34,6 @@ const LazyLoadedImage = (props) => {
         className={styles.image}
         src={src}
         alt={alt}
-        aria-label={alt}
         loading='lazy'
         style={props.style}
         onLoad={handleLoad}
@@ -45,7 +44,6 @@ const LazyLoadedImage = (props) => {
         className={styles.thumbnail + (isLoaded ? ' ' + styles.hidden : '')}
         src={thumbnail}
         alt={alt}
-        aria-label={alt}
         loading='lazy'
         style={props.style}
         onError={handleError}
@@ -70,7 +68,6 @@ export const Image = (props) => {
       className={styles.image}
       src={props.image.src}
       alt={props.image.alt || null}
-      aria-label={props.image.alt || null}
       loading='auto'
       style={style}
       onError={handleError}
@@ -78,7 +75,7 @@ export const Image = (props) => {
   );
 
   return (
-    <figure className={styles.figure}>
+    <figure className={styles.figure} aria-label={props.image.alt || null}>
       {image}
       {props.hasCaption && props.image.alt && (
         <Caption

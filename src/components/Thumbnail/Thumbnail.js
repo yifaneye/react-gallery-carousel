@@ -30,6 +30,7 @@ export const Thumbnail = (props) => {
     <li
       ref={ref}
       className={className}
+      role='button'
       tabIndex={0}
       onMouseUpCapture={props.onClick} // onmouseup also works for tap on touch devices
     >

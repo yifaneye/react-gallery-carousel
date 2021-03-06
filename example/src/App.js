@@ -104,7 +104,7 @@ const App = () => {
         <Carousel
           images={images}
           isRTL={true}
-          isMaximized={true}
+          isMaximized={false}
           hasCaptions={false}
           hasCaptionsAtMax='bottom'
           hasDotButtons='bottom'

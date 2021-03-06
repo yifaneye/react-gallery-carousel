@@ -101,7 +101,7 @@ SizeButtons.propTypes = {
 export const IndexBoard = (props) => {
   const ref = useRef(null);
 
-  useNoSwipe(ref);
+  // useNoSwipe(ref);
 
   return (
     <div
@@ -114,7 +114,7 @@ export const IndexBoard = (props) => {
         styles[props.position] +
         (props.hasShadow ? ' ' + styles.shadow : '')
       }
-      aria-label={`Slide ${props.curIndex} of ${props.totalIndices}`}
+      tabIndex='-1'
     >
       <span className={styles.text}>
         {props.curIndex} / {props.totalIndices}
@@ -214,6 +214,7 @@ export const Caption = memo((props) => {
         ' ' +
         (props.hasShadow ? ' ' + styles.shadow : '')
       }
+      tabIndex='-1'
     >
       <span className={styles.text}>{props.text}</span>
     </figcaption>
