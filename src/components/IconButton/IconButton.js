@@ -12,7 +12,6 @@ const icons = {
         viewBox='0 0 20 40'
         width='20'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='left-title left-desc'
       >
         <title id='left-title'>Left</title>
         <desc id='left-desc'>Obtuse triangle pointing left</desc>
@@ -28,7 +27,6 @@ const icons = {
         viewBox='0 0 20 40'
         width='20'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='right-title right-desc'
       >
         <title id='right-title'>Right</title>
         <desc id='right-desc'>Obtuse triangle pointing right</desc>
@@ -44,7 +42,6 @@ const icons = {
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='play-title play-desc'
       >
         <title id='play-title'>Play</title>
         <desc id='play-desc'>Equilateral triangle pointing right</desc>
@@ -60,7 +57,6 @@ const icons = {
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='pause-title pause-desc'
       >
         <title id='pause-title'>Pause</title>
         <desc id='pause-desc'>2 vertical rectangles side by side</desc>
@@ -79,7 +75,6 @@ const icons = {
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='max-title max-desc'
       >
         <title id='max-title'>Maximize</title>
         <desc id='max-desc'>4 small arrows pointing outwards</desc>
@@ -104,7 +99,6 @@ const icons = {
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='min-title min-desc'
       >
         <title id='min-title'>Minimize</title>
         <desc id='min-desc'>4 small arrows pointing inwards</desc>
@@ -129,7 +123,6 @@ const icons = {
         viewBox='0 0 10 10'
         width='10'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='active-title active-desc'
       >
         <title id='active-title'>Active</title>
         <desc id='active-desc'>Small circle in light colour</desc>
@@ -148,7 +141,6 @@ const icons = {
         viewBox='0 0 10 10'
         width='10'
         xmlns='http://www.w3.org/2000/svg'
-        aria-labelledby='passive-title passive-desc'
       >
         <title id='passive-title'>Passive</title>
         <desc id='passive-desc'>Small circle in dark colour</desc>
