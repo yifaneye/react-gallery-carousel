@@ -14,7 +14,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='left-title'>Left</title>
-        <desc id='left-desc'>Obtuse triangle pointing left</desc>
         <path d='m20 0v40l-20-20z' fill='#fff' />
       </svg>
     </div>
@@ -29,7 +28,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='right-title'>Right</title>
-        <desc id='right-desc'>Obtuse triangle pointing right</desc>
         <path d='m0 40v-40l20 20z' fill='#fff' />
       </svg>
     </div>
@@ -44,7 +42,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='play-title'>Play</title>
-        <desc id='play-desc'>Equilateral triangle pointing right</desc>
         <path d='m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z' fill='#fff' />
       </svg>
     </div>
@@ -59,7 +56,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='pause-title'>Pause</title>
-        <desc id='pause-desc'>2 vertical rectangles side by side</desc>
         <g fill='#fff'>
           <path d='m0 0h10v30h-10z' />
           <path d='m20 0h10v30h-10z' />
@@ -77,7 +73,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='max-title'>Maximize</title>
-        <desc id='max-desc'>4 small arrows pointing outwards</desc>
         <g fill='#fff'>
           <path d='m0 0h10v5h-10z' />
           <path d='m0 25h10v5h-10z' />
@@ -101,7 +96,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='min-title'>Minimize</title>
-        <desc id='min-desc'>4 small arrows pointing inwards</desc>
         <g fill='#fff'>
           <path d='m0 5h10v5h-10z' />
           <path d='m0 20h10v5h-10z' />
@@ -125,7 +119,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='active-title'>Active</title>
-        <desc id='active-desc'>Small circle in light colour</desc>
         <path
           d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z'
           fill='#fff'
@@ -143,7 +136,6 @@ const icons = {
         xmlns='http://www.w3.org/2000/svg'
       >
         <title id='passive-title'>Passive</title>
-        <desc id='passive-desc'>Small circle in dark colour</desc>
         <path
           d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z'
           fill='#bbb'
