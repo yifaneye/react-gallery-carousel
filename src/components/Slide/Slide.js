@@ -14,7 +14,7 @@ export const Slide = (props) => {
   const slide = props.isImage ? (
     <Image
       image={props.slide}
-      lazyLoad={props.lazyLoad}
+      shouldLazyLoad={props.shouldLazyLoad}
       objectFit={props.objectFit}
       widgetsHasShadow={props.widgetsHasShadow}
       hasCaption={props.hasCaption}
@@ -32,7 +32,7 @@ export const Slide = (props) => {
 Slide.propTypes = {
   isImage: PropTypes.bool.isRequired,
   slide: slideObject.isRequired,
-  lazyLoad: PropTypes.bool.isRequired,
+  shouldLazyLoad: PropTypes.bool.isRequired,
   objectFit: objectFitStyles.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasCaption: largeWidgetPositions.isRequired,

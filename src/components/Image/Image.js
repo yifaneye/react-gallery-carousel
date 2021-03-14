@@ -61,7 +61,7 @@ export const Image = (props) => {
   const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
   const style = { objectFit: objectFit };
 
-  const image = props.lazyLoad ? (
+  const image = props.shouldLazyLoad ? (
     <LazyLoadedImage image={props.image} style={style} />
   ) : (
     <img
@@ -90,7 +90,7 @@ export const Image = (props) => {
 
 Image.propTypes = {
   objectFit: objectFitStyles.isRequired,
-  lazyLoad: PropTypes.bool.isRequired,
+  shouldLazyLoad: PropTypes.bool.isRequired,
   image: imageObject.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired

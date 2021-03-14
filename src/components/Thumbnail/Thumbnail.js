@@ -11,7 +11,7 @@ export const Thumbnail = (props) => {
   const reference = useRef(null);
 
   const slide = props.isImage ? (
-    <ThumbnailImage image={props.slide} lazyLoad={props.lazyLoad} />
+    <ThumbnailImage image={props.slide} shouldLazyLoad={props.shouldLazyLoad} />
   ) : (
     <UserSlideThumbnail slide={props.slide} />
   );
@@ -42,7 +42,7 @@ export const Thumbnail = (props) => {
 Thumbnail.propTypes = {
   isImage: PropTypes.bool.isRequired,
   slide: slideObject.isRequired,
-  lazyLoad: PropTypes.bool.isRequired,
+  shouldLazyLoad: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
   isMaximized: PropTypes.bool.isRequired,
   reference: elementRef.isRequired,

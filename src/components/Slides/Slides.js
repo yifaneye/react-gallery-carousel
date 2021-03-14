@@ -29,7 +29,7 @@ export const Slides = memo((props) => {
             reference={reference}
             slide={slide}
             isImage={props.hasImages}
-            lazyLoad={props.lazyLoad}
+            shouldLazyLoad={props.shouldLazyLoad}
             objectFit={props.objectFit}
             widgetsHasShadow={props.widgetsHasShadow}
             hasCaption={props.hasCaptions}
@@ -48,7 +48,7 @@ Slides.propTypes = {
   length: positiveNumber(true),
   maxRef: elementRef.isRequired,
   hasImages: PropTypes.bool.isRequired,
-  lazyLoad: PropTypes.bool.isRequired,
+  shouldLazyLoad: PropTypes.bool.isRequired,
   objectFit: objectFitStyles.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasCaptions: largeWidgetPositions.isRequired

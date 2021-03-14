@@ -41,7 +41,7 @@ export const ImageThumbnail = (props) => {
   const src = props.image.thumbnail || props.image.src;
   const alt = props.image.alt || null;
 
-  if (props.lazyLoad) return <LazyLoadedImage src={src} alt={alt} />;
+  if (props.shouldLazyLoad) return <LazyLoadedImage src={src} alt={alt} />;
 
   return (
     <img
@@ -57,5 +57,5 @@ export const ImageThumbnail = (props) => {
 
 ImageThumbnail.propTypes = {
   image: imageObject.isRequired,
-  lazyLoad: PropTypes.bool.isRequired
+  shouldLazyLoad: PropTypes.bool.isRequired
 };

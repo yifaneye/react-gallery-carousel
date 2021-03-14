@@ -19,30 +19,30 @@ export const propTypes = {
   isLoop: PropTypes.bool.isRequired,
   isMaximized: PropTypes.bool.isRequired,
   index: positiveNumber(true),
-  lazyLoad: PropTypes.bool.isRequired,
-  objectFit: objectFitStyles.isRequired,
-  objectFitAtMax: objectFitStyles.isRequired,
-  autoPlay: PropTypes.bool.isRequired,
-  autoPlayStarted: PropTypes.bool.isRequired,
+  shouldLazyLoad: PropTypes.bool.isRequired,
+  canAutoPlay: PropTypes.bool.isRequired,
+  isAutoPlaying: PropTypes.bool.isRequired,
   autoPlayInterval: positiveNumber(false),
-  swipeThreshold: numberBetween(0, 1),
   hasTransition: PropTypes.bool.isRequired,
+  swipeThreshold: numberBetween(0, 1),
+  swipeRollbackSpeed: positiveNumber(true),
   transitionSpeed: positiveNumber(true),
+  transitionDurationLimit: positiveNumber(true),
   transitionDurationMin: positiveNumber(true),
   transitionDurationMax: compareToProp('>=', 'transitionDurationMin'),
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasArrowButtons: PropTypes.bool.isRequired,
   hasMediaButton: smallWidgetPositions.isRequired,
   hasSizeButton: smallWidgetPositions.isRequired,
-  hasIndexBoard: smallWidgetPositions.isRequired,
   hasDotButtons: largeWidgetPositions.isRequired,
+  hasIndexBoard: smallWidgetPositions.isRequired,
   hasCaptions: largeWidgetPositions.isRequired,
   hasThumbnails: PropTypes.bool.isRequired,
   hasArrowButtonsAtMax: PropTypes.bool,
   hasMediaButtonAtMax: smallWidgetPositions,
   hasSizeButtonAtMax: smallWidgetPositions,
-  hasIndexBoardAtMax: smallWidgetPositions,
   hasDotButtonsAtMax: largeWidgetPositions,
+  hasIndexBoardAtMax: smallWidgetPositions,
   hasCaptionsAtMax: largeWidgetPositions,
   hasThumbnailsAtMax: PropTypes.bool,
   leftIcon: PropTypes.node,
@@ -59,7 +59,9 @@ export const propTypes = {
   shouldMinimizeOnSwipeDown: PropTypes.bool.isRequired,
   onIndexChange: PropTypes.func.isRequired,
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  objectFit: objectFitStyles.isRequired,
+  objectFitAtMax: objectFitStyles.isRequired
 };
 
 export const defaultProps = {
@@ -67,27 +69,28 @@ export const defaultProps = {
   isRTL: false,
   isLoop: true,
   isMaximized: false,
-  lazyLoad: true,
-  objectFit: 'cover',
-  objectFitAtMax: 'contain',
-  autoPlay: true,
-  autoPlayStarted: false,
+  shouldLazyLoad: true,
+  canAutoPlay: true,
+  isAutoPlaying: false,
   autoPlayInterval: 5000, // ms
-  swipeThreshold: 0.1, // * 100%
   hasTransition: true,
+  swipeThreshold: 0.1, // * 100%
+  swipeRollbackSpeed: 0.1, // px/ms
   transitionSpeed: 1, // px/ms
-  transitionDurationMin: 200, // ms
+  transitionDurationLimit: 1000, // ms
   widgetsHasShadow: false,
-  hasMediaButton: 'topLeft',
-  hasIndexBoard: 'topCenter',
-  hasSizeButton: 'topRight',
   hasArrowButtons: true,
+  hasMediaButton: 'topLeft',
+  hasSizeButton: 'topRight',
   hasDotButtons: false,
+  hasIndexBoard: 'topCenter',
   hasCaptions: false,
   hasThumbnails: true,
   shouldSwipeOnMouse: true,
   shouldMaximizeOnClick: false,
   shouldMinimizeOnClick: false,
   shouldMinimizeOnSwipeDown: true,
-  onIndexChange: () => {}
+  onIndexChange: () => {},
+  objectFit: 'cover',
+  objectFitAtMax: 'contain'
 };

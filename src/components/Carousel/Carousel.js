@@ -10,10 +10,10 @@ import Slides from '../Slides';
 import Thumbnails from '../Thumbnails';
 import {
   ArrowButtons,
-  IndexBoard,
-  DotButtons,
   MediaButtons,
-  SizeButtons
+  SizeButtons,
+  DotButtons,
+  IndexBoard
 } from '../Widgets';
 import useKeys from '../../utils/useKeys';
 import useSwipe from '../../utils/useSwipe';
@@ -25,11 +25,8 @@ import useEventListener from '../../utils/useEventListener';
 import useFixedPosition from '../../utils/useFixedPosition';
 import { propTypes, defaultProps } from './props';
 
-// constants
-const MIN_SPEED = 0.1;
-const MIN_SPEED_TO_UPDATE = 1;
-const TRANSITION_DURATION_THRESHOLD = 500; // ms
-const MAX_TRANSITION_DURATION = 1000; // ms
+// constant(s)
+// Swiping down longer than MAX_SWIPE_DOWN_DISTANCE will not have more visual changes
 const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 
 export const Carousel = (props) => {
@@ -65,7 +62,7 @@ export const Carousel = (props) => {
   /* handle autoplay and reduced motion settings */
   const [isPlaying, setIsPlaying] = useTimer(
     props.autoPlay && props.autoPlayInterval,
-    props.autoPlayStarted,
+    props.isAutoPlaying,
     () => updateIndex(+1)
   );
   const handleMediaButtonClick = () => {
@@ -115,14 +112,14 @@ export const Carousel = (props) => {
     const transitionDistance = hasToUpdate
       ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
       : swipedDistance;
-    speed = hasToUpdate ? Math.max(speed, MIN_SPEED_TO_UPDATE) : MIN_SPEED;
+    speed = hasToUpdate ? speed : props.swipeRollbackSpeed;
     let duration = transitionDistance / speed;
 
     // flatten transitionDurations
-    if (duration > TRANSITION_DURATION_THRESHOLD)
+    if (duration > props.transitionDurationLimit / 2)
       duration =
-        (Math.atan(duration / TRANSITION_DURATION_THRESHOLD) *
-          MAX_TRANSITION_DURATION *
+        (Math.atan((2 * duration) / props.transitionDurationLimit) *
+          props.transitionDurationLimit *
           2) /
         Math.PI;
 
@@ -130,11 +127,11 @@ export const Carousel = (props) => {
     if (props.transitionDurationMin)
       duration = Math.max(duration, props.transitionDurationMin);
 
-    // transitionMax has precedence over transitionMin
+    // transitionDurationMax has precedence over transitionDurationMin
     if (props.transitionDurationMax)
       duration = Math.min(duration, props.transitionDurationMax);
 
-    // make duration match autoPlayInterval
+    // make duration greater or equal to autoPlayInterval
     if (isPlaying && duration > props.autoPlayInterval)
       duration = props.autoPlayInterval * 1;
 
@@ -369,7 +366,7 @@ export const Carousel = (props) => {
     />
   );
 
-  const mediaButtons = hasMediaButton && props.autoPlay && (
+  const mediaButtons = hasMediaButton && props.canAutoPlay && (
     <MediaButtons
       playIcon={props.playIcon}
       pauseIcon={props.pauseIcon}
@@ -422,7 +419,7 @@ export const Carousel = (props) => {
       isMaximized={isMaximized}
       slides={slidesElements}
       hasImages={hasImages}
-      lazyLoad={props.lazyLoad}
+      shouldLazyLoad={props.shouldLazyLoad}
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObject}
     />
@@ -452,7 +449,7 @@ export const Carousel = (props) => {
             slides={slidesElements}
             hasImages={hasImages}
             isRTL={props.isRTL}
-            lazyLoad={props.lazyLoad}
+            shouldLazyLoad={props.shouldLazyLoad}
             objectFit={objectFit}
             widgetsHasShadow={props.widgetsHasShadow}
             hasCaptions={hasCaptions}

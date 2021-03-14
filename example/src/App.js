@@ -4,7 +4,7 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/twoWayMap';
 
-const imageIDs = Array(160)
+const imageIDs = Array(100)
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
@@ -41,13 +41,14 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         window.location.hash = title;
         document.title = title;
       }}
-      style={{ width: '100%', height: '40vh', userSelect: 'text' }}
+      style={{ width: '100%', height: '200px', userSelect: 'text' }}
     >
       <div>
         <h1>react-gallery-carousel</h1>
         <p>
-          Customizable, lightweight, dependency-free React carousel component
-          with support for touch swiping and lazy loading
+          Carousel component with support for lazy loading, velocity detection,
+          pinch zoom, touch swiping, mouse dragging, keyboard navigation, full
+          screen mode and thumbnails.
         </p>
         <a href='https://www.npmjs.com/package/react-gallery-carousel'>npm</a>
         <span> / </span>
@@ -56,7 +57,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       <div>
         <h2>Get Started</h2>
         <code>npm install react-gallery-carousel --save</code>
-        <p>or</p>
+        <span>or</span>
         <code>yarn add react-gallery-carousel</code>
       </div>
       <div>
@@ -64,19 +65,6 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         <p>The basic carousel shown below is created by:</p>
         <code>{exampleCode}</code>
       </div>
-      {/*<div*/}
-      {/*  style={{*/}
-      {/*    height: 'calc(100% - 40px)',*/}
-      {/*    width: 'calc(100% - 100px)',*/}
-      {/*    margin: 'auto'*/}
-      {/*  }}*/}
-      {/*>*/}
-      {/*  <Carousel*/}
-      {/*    images={images}*/}
-      {/*    sizeButtons={false}*/}
-      {/*    style={{ height: '100%' }}*/}
-      {/*  />*/}
-      {/*</div>*/}
     </Carousel>
   );
 };
@@ -114,6 +102,22 @@ const App = () => {
           // activeIcon={<span className='text'>x</span>}
           // passiveIcon={<span className='text'>o</span>}
           className='framed'
+        />
+      </div>
+
+      {/*control-less carousel example*/}
+      <div style={{ width: '100%', height: '60vh' }}>
+        <Carousel
+          images={images}
+          autoplay={false}
+          hasMediaButton={false}
+          hasSizeButton={false}
+          hasArrowButtons={false}
+          hasIndexBoard={false}
+          hasIndexBoardAtMax={'topCenter'}
+          hasCaptionsAtMax={'bottom'}
+          shouldMaximizeOnClick={true}
+          shouldMinimizeOnClick={true}
         />
       </div>
     </div>
