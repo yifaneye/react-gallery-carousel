@@ -18,9 +18,9 @@ const images = imageIDs.map((imageID) => {
 
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   const indexToTitle = new TwoWayMap({
-    1: 'Introduction',
-    2: 'Get Started',
-    3: 'Example'
+    0: 'Introduction',
+    1: 'Get Started',
+    2: 'Example'
   });
 
   return (
@@ -36,8 +36,8 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       index={Number(
         indexToTitle.getReversed(window.location.hash.replace('#', ''))
       )}
-      onIndexChange={(index) => {
-        const title = indexToTitle.get(index);
+      onIndexChange={({ curIndex }) => {
+        const title = indexToTitle.get(curIndex);
         window.location.hash = title;
         document.title = title;
       }}
@@ -91,6 +91,7 @@ const App = () => {
       <div style={{ width: '100%', height: '60vh' }}>
         <Carousel
           images={images}
+          index={10}
           isRTL={true}
           isMaximized={false}
           hasCaptions={false}
@@ -109,6 +110,7 @@ const App = () => {
       <div style={{ width: '100%', height: '60vh' }}>
         <Carousel
           images={images}
+          index={20}
           autoplay={false}
           hasMediaButton={false}
           hasSizeButton={false}

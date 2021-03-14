@@ -44,7 +44,7 @@ To customize the carousel, use the following props:
 |:------------------------|----------------------|:----------|:----------|
 |images                   |Array                 |undefined  |Images to be placed in the carousel.|
 |children                 |node or Array of nodes|undefined  |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is falsy.|
-|index                    |Number                |undefined  |Current index of the slides of the carousel as a whole number starting from 1.|
+|index                    |Number                |undefined  |Current index of the slides of the carousel as a whole number starting from 0.|
 |isRTL                    |Boolean               |false      |If true, the carousel shows the right-most slide first (and auto plays from the right to the left).|
 |isLoop                   |Boolean               |true       |If true, the carousel form a loop from the ribbon of slides.|
 |isMaximized              |Boolean               |false      |If true, the carousel is maximized initially.|

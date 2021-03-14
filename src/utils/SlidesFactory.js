@@ -28,7 +28,6 @@ class Slides {
 
   _convertCurIndexForDisplayToCurIndex(index) {
     if (!index) return this._headIndex;
-    index -= 1;
     if (!this._isIndexInRange(index)) return this._headIndex;
     return index;
   }

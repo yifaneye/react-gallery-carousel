@@ -56,7 +56,10 @@ export const Carousel = (props) => {
   const [, setCurIndex] = useState(slides.curIndex);
   const applyCurIndexUpdate = (curIndex) => {
     setCurIndex(curIndex);
-    props.onIndexChange(slides.curIndexForDisplay);
+    props.onIndexChange({
+      curIndex: slides.curIndex,
+      curIndexForDisplay: slides.curIndexForDisplay
+    });
   };
 
   /* handle autoplay and reduced motion settings */
