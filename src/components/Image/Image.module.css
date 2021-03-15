@@ -40,7 +40,7 @@
   display: none;
 }
 
-.image::before {
+.thumbnail::before, .image::before {
   content: '';
   display: block;
   position: absolute;

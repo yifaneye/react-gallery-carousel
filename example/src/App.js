@@ -8,11 +8,12 @@ const imageIDs = Array(100)
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
-  const value = (imageID % 2) * 5;
   return {
-    src: `https://placedog.net/800/6${value}0?id=${imageID}`,
+    src: `https://placedog.net/400/300?id=${imageID}`,
+    srcset: `https://placedog.net/400/240?id=${imageID} 400w, https://placedog.net/700/420?id=${imageID} 700w, https://placedog.net/1000/600?id=${imageID} 1000w`,
+    sizes: '(max-width: 1000px) 400px, (max-width: 2000px) 700px, 1000px',
     alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
-    thumbnail: `https://placedog.net/80/6${value}?id=${imageID}`
+    thumbnail: `https://placedog.net/100/60?id=${imageID}`
   };
 });
 

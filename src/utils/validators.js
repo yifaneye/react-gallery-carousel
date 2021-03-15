@@ -101,6 +101,7 @@ export const slideObject = PropTypes.oneOfType([
 
 export const imageObject = PropTypes.shape({
   src: PropTypes.string.isRequired,
+  srcset: PropTypes.string,
   alt: PropTypes.string,
   thumbnail: PropTypes.string
 });

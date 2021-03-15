@@ -24,25 +24,25 @@ const LazyLoadedImage = (props) => {
     if (isInViewport) setIsLoaded(true);
   };
 
-  const src = isInViewport ? props.image.src : placeholderImage;
-  const alt = props.image.alt || null;
-  const thumbnail = isInViewport ? props.image.thumbnail : placeholderImage;
+  const { src, srcset, alt, thumbnail, ...otherImageProps } = props.image;
 
   return (
     <>
       <img
         className={styles.image}
-        src={src}
-        alt={alt}
+        src={isInViewport ? src : placeholderImage}
+        alt={alt || null}
+        srcSet={isInViewport ? srcset : null}
         loading='lazy'
         style={props.style}
         onLoad={handleLoad}
         onError={handleError}
+        {...otherImageProps}
       />
       <img
         ref={imageRef}
         className={styles.thumbnail + (isLoaded ? ' ' + styles.hidden : '')}
-        src={thumbnail}
+        src={isInViewport ? thumbnail : placeholderImage}
         alt={alt}
         loading='lazy'
         style={props.style}
@@ -61,16 +61,20 @@ export const Image = (props) => {
   const objectFit = props.objectFit === 'cover' ? null : props.objectFit;
   const style = { objectFit: objectFit };
 
+  const { src, alt, srcset, thumbnail, ...otherImageProps } = props.image;
+
   const image = props.shouldLazyLoad ? (
     <LazyLoadedImage image={props.image} style={style} />
   ) : (
     <img
       className={styles.image}
-      src={props.image.src}
-      alt={props.image.alt || null}
+      src={src}
+      alt={alt || null}
+      srcSet={srcset}
       loading='auto'
       style={style}
       onError={handleError}
+      {...otherImageProps}
     />
   );
 
