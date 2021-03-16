@@ -17,7 +17,7 @@
 }
 
 .buttonShadow {
-  filter: drop-shadow(0px 0px 3px #999); /* box-shadow  */
+  filter: drop-shadow(0px 0px 3px #888);
 }
 
 .button:hover {
@@ -37,7 +37,7 @@
 }
 
 .rectangle {
-  width: 40px;
+  width: 50px;
   height: 60px;
 }
 
@@ -50,4 +50,11 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
+}
+
+.icon {
+  stroke: #bbb;
+  stroke-opacity: 1;
+  stroke-width: 1px;
+  fill: #fff;
 }

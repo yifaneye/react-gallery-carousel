@@ -7,139 +7,128 @@ const icons = {
   left: (
     <div className={styles.iconWrapper + ' ' + styles.rectangle}>
       <svg
+        className={styles.icon}
         height='40'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 20 40'
         width='20'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='left-title'>Left</title>
-        <path d='m20 0v40l-20-20z' fill='#fff' />
+        <title>Left</title>
+        <path d='m19 1v37l-18-20z' />
       </svg>
     </div>
   ),
   right: (
     <div className={styles.iconWrapper + ' ' + styles.rectangle}>
       <svg
+        className={styles.icon}
         height='40'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 20 40'
         width='20'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='right-title'>Right</title>
-        <path d='m0 40v-40l20 20z' fill='#fff' />
+        <title>Right</title>
+        <path d='m1 1v38l18-19z' />
       </svg>
     </div>
   ),
   play: (
     <div className={styles.iconWrapper + ' ' + styles.square}>
       <svg
+        className={styles.icon}
         height='30'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='play-title'>Play</title>
-        <path d='m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z' fill='#fff' />
+        <title>Play</title>
+        <path d='m1 1v28l28-14z' />
       </svg>
     </div>
   ),
   pause: (
     <div className={styles.iconWrapper + ' ' + styles.square}>
       <svg
+        className={styles.icon}
         height='30'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='pause-title'>Pause</title>
-        <g fill='#fff'>
-          <path d='m0 0h10v30h-10z' />
-          <path d='m20 0h10v30h-10z' />
-        </g>
+        <title>Pause</title>
+        <path d='m1 1v28h9v-28zm19 0v28h9v-28z' />
       </svg>
     </div>
   ),
   max: (
     <div className={styles.iconWrapper + ' ' + styles.square}>
       <svg
+        className={styles.icon}
         height='30'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='max-title'>Maximize</title>
-        <g fill='#fff'>
-          <path d='m0 0h10v5h-10z' />
-          <path d='m0 25h10v5h-10z' />
-          <path d='m5 0v10h-5v-10z' />
-          <path d='m5 20v10h-5v-10z' />
-          <path d='m20 0h10v5h-10z' />
-          <path d='m20 25h10v5h-10z' />
-          <path d='m30 0v10h-5v-10z' />
-          <path d='m30 20v10h-5v-10z' />
-        </g>
+        <title>Maximize</title>
+        <path d='m1 1v10h5v-5h5v-5zm18 0v5h5v5h5v-10zm-18 18v10h10v-5h-5v-5zm18 5v5h10v-10h-5v5z' />
       </svg>
     </div>
   ),
   min: (
     <div className={styles.iconWrapper + ' ' + styles.square}>
       <svg
+        className={styles.icon}
         height='30'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 30 30'
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='min-title'>Minimize</title>
-        <g fill='#fff'>
-          <path d='m0 5h10v5h-10z' />
-          <path d='m0 20h10v5h-10z' />
-          <path d='m10 0v10h-5v-10z' />
-          <path d='m10 20v10h-5v-10z' />
-          <path d='m20 5h10v5h-10z' />
-          <path d='m20 20h10v5h-10z' />
-          <path d='m25 0v10h-5v-10z' />
-          <path d='m25 20v10h-5v-10z' />
-        </g>
+        <title>Minimize</title>
+        <path d='m6 1v5h-5v5h10v-10zm13 0v10h10v-5h-5v-5zm-18 18v5h5v5h5v-10zm18 0v10h5v-5h5v-5z' />
       </svg>
     </div>
   ),
   active: (
     <div className={styles.iconWrapper + ' ' + styles.circle}>
       <svg
+        className={styles.icon}
         height='10'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 10 10'
         width='10'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='active-title'>Active</title>
-        <path
-          d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z'
-          fill='#fff'
-        />
+        <title>Active</title>
+        <circle cx='5' cy='5' r='4' fill='#888' />
       </svg>
     </div>
   ),
   passive: (
     <div className={styles.iconWrapper + ' ' + styles.circle}>
       <svg
+        className={styles.icon}
         height='10'
         preserveAspectRatio='xMidYMid meet'
+        role='img'
         viewBox='0 0 10 10'
         width='10'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title id='passive-title'>Passive</title>
-        <path
-          d='m10 5c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z'
-          fill='#bbb'
-        />
+        <title>Passive</title>
+        <circle cx='5' cy='5' r='4' />
       </svg>
     </div>
   )

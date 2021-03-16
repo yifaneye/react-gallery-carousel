@@ -27,7 +27,6 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
   return (
     <Carousel
       isLoop={false}
-      widgetsHasShadow={true}
       hasIndexBoard='topRight'
       hasSizeButton='bottomLeft'
       hasMediaButton='bottomRight'
