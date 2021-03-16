@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styles from './ThumbnailImage.module.css';
+import styles from './ImageThumbnail.module.css';
 import placeholderImage from 'placeholder.jpg';
 import fallbackImage from 'fallback.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';

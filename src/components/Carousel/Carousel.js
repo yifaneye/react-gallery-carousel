@@ -64,7 +64,7 @@ export const Carousel = (props) => {
 
   /* handle autoplay and reduced motion settings */
   const [isPlaying, setIsPlaying] = useTimer(
-    props.autoPlay && props.autoPlayInterval,
+    props.canAutoPlay && props.autoPlayInterval,
     props.isAutoPlaying,
     () => updateIndex(+1)
   );

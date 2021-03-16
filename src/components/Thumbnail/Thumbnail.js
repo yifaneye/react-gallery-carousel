@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styles from './Thumbnail.module.css';
-import ThumbnailImage from '../ImageThumbnail';
+import ImageThumbnail from '../ImageThumbnail';
 import { UserSlideThumbnail } from '../UserSlide';
 import useNoDrag from '../../utils/useNoDrag';
 import useEnter from '../../utils/useEnter';
@@ -11,7 +11,7 @@ export const Thumbnail = (props) => {
   const reference = useRef(null);
 
   const slide = props.isImage ? (
-    <ThumbnailImage image={props.slide} shouldLazyLoad={props.shouldLazyLoad} />
+    <ImageThumbnail image={props.slide} shouldLazyLoad={props.shouldLazyLoad} />
   ) : (
     <UserSlideThumbnail slide={props.slide} />
   );
