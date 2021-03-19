@@ -87,6 +87,9 @@ export const smallWidgetPositions = PropTypes.oneOf([
   'topLeft',
   'topCenter',
   'topRight',
+  'centerLeft',
+  'centerCenter',
+  'centerRight',
   'bottomLeft',
   'bottomCenter',
   'bottomRight'
