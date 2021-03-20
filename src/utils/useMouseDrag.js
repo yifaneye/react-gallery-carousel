@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useMouse from './useMouse';
 
 const useMouseDrag = (elementRef) => {
@@ -21,6 +22,12 @@ const useMouseDrag = (elementRef) => {
     event.stopPropagation();
     return false;
   };
+
+  useEffect(() => {
+    // disable selection on the element to ensure the value of
+    // CSS 'cursor' property is not the default 'text' on select on Safari
+    elementRef.current.onselectstart = () => false;
+  }, [elementRef]);
 
   return useMouse(elementRef, {
     onMouseMove: handleMouseMove,
