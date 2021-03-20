@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './UserSlide.module.css';
+import styles from './UserSlide.module.scss';
 import PropTypes from 'prop-types';
 
 export const UserSlide = (props) => {

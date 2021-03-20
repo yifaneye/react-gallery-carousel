@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styles from './Thumbnails.module.css';
+import styles from './Thumbnails.module.scss';
 import Thumbnail from '../Thumbnail';
 import useAnchor from '../../utils/useAnchor';
 import useNoOverScroll from '../../utils/useNoOverScroll';

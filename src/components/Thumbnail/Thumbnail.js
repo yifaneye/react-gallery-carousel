@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styles from './Thumbnail.module.css';
+import styles from './Thumbnail.module.scss';
 import ImageThumbnail from '../ImageThumbnail';
 import { UserSlideThumbnail } from '../UserSlide';
 import useNoDrag from '../../utils/useNoDrag';

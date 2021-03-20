@@ -1,3 +1,5 @@
+@import '../../common/common.scss';
+
 .userSlide {
   height: 100%;
   width: 100%;
@@ -13,9 +15,9 @@
 
 .thumbnail {
   user-select: none;
-  -ms-zoom: var(--scale);
-  zoom: var(--scale);
-  font-size: var(--scale);
+  -ms-zoom: $scale;
+  zoom: $scale;
+  font-size: $scale;
   text-size-adjust: none;
   pointer-events: none;
 }
@@ -29,7 +31,7 @@
 }
 
 /*Only for Chrome, Opera and Edge*/
-@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   .thumbnail {
     font-size: 100%;
   }
@@ -38,7 +40,6 @@
 /*Only for FireFox*/
 @-moz-document url-prefix() {
   .thumbnail {
-    font-size: var(--scale);
+    font-size: $scale;
   }
 }
-

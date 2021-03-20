@@ -1,10 +1,9 @@
-.thumbnailsWrapper {
-  --scale: 10%;
-  --margin: 5px;
+@import '../../common/common.scss';
 
-  flex: 0 1 var(--scale);
-  height: var(--scale);
-  margin: var(--margin) 0 0;
+.thumbnailsWrapper {
+  flex: 0 1 $scale;
+  height: $scale;
+  margin: $margin 0 0;
   padding: 0;
   overflow-y: hidden;
   overflow-x: scroll;
