@@ -23,23 +23,24 @@ import useKeyboard from '../../utils/useKeyboard';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useEventListener from '../../utils/useEventListener';
 import useFixedPosition from '../../utils/useFixedPosition';
-import { propTypes, defaultProps } from './props';
+import { propTypes, defaultProps, getSettings } from './props';
 
 // constant(s)
 // Swiping down longer than MAX_SWIPE_DOWN_DISTANCE will not have more visual changes
 const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 
 export const Carousel = (props) => {
+  /* initialize references */
   const documentRef = useRef(document);
   const maximizedBackgroundRef = useRef(null);
   const carouselRef = useRef(null);
-  const slidesWrapperRef = useRef(null);
+  const slidesContainerRef = useRef(null);
   const slidesRef = useRef(null);
   const slideMinRef = useRef(null);
   const slideMaxRef = useRef(null);
 
   /* process slides */
-  const hasImages = 'images' in props;
+  const hasImages = 'images' in props; // true even the 'images' prop is an empty Array
   const children = Array.isArray(props.children)
     ? props.children
     : [props.children];
@@ -53,7 +54,9 @@ export const Carousel = (props) => {
   const slidesMin = `${nSlides * -increment}00%`;
   const slidesMax = `${nSlides * increment}00%`;
 
+  /* handle current index change */
   const [, setCurIndex] = useState(slides.curIndex);
+
   const applyCurIndexUpdate = (curIndex) => {
     setCurIndex(curIndex);
     props.onIndexChange({
@@ -62,21 +65,24 @@ export const Carousel = (props) => {
     });
   };
 
-  /* handle autoplay and reduced motion settings */
+  /* handle autoplay and reduced motion setting */
   const [isPlaying, setIsPlaying] = useTimer(
     props.canAutoPlay && props.autoPlayInterval,
     props.isAutoPlaying,
     () => updateIndex(+1)
   );
+
   const handleMediaButtonClick = () => {
     setIsPlaying((isPlaying) => !isPlaying);
   };
 
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+
   useLayoutEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
 
+  /* set up smart pause */
   const [wasPlaying, setWasPlaying] = useState(false);
   const handleVisibilityChange = useCallback(() => {
     if (document.visibilityState !== 'visible') {
@@ -94,14 +100,14 @@ export const Carousel = (props) => {
   /* handle maximization/minimization and full screen */
   const [isMaximized, setIsMaximized] = useFixedPosition(
     props.isMaximized,
-    slidesWrapperRef
+    slidesContainerRef
   );
 
   const handleSizeButtonClick = () => {
     setIsMaximized((isMaximized) => !isMaximized);
   };
 
-  /* handle UI update */
+  /* handle UI updates */
   const applyTransitionDuration = (
     displacementX = 0,
     speed = props.transitionSpeed,
@@ -146,6 +152,7 @@ export const Carousel = (props) => {
     );
   };
 
+  // handle touch swipe down specifically
   const applyTransitionY = (displacementX = 0, displacementY = 0) => {
     // do not update the maximized carousel when it is above its original position
     // to hint the user that swiping up will not be able to minimize the carousel
@@ -177,7 +184,7 @@ export const Carousel = (props) => {
   // change to the current slide before browser paints
   useLayoutEffect(() => applyTransitionX(), [applyTransitionX]);
 
-  /* handle implicit current index update */
+  /* handle implicit current index update (e.g. +1 or -1) */
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
 
   const handleSwipeMoveX = (displacementX) => {
@@ -214,7 +221,7 @@ export const Carousel = (props) => {
       }
     }
 
-    // update carousel
+    // update UI
     if (slides.calibrateIndex(change) && shouldCalibrateIndex) {
       // remove carry-over transitionDuration
       slidesRef.current.style.transitionDuration = null;
@@ -232,7 +239,7 @@ export const Carousel = (props) => {
 
   useEventListener(window, 'orientationchange', rollBackIndexUpdate);
 
-  /* handle explicit current index update */
+  /* handle explicit current index update (e.g. go to slide number 16) */
   const goToIndex = (index) => {
     // set both the first and the last slide back into their respective original places
     slideMinRef.current.style.transform = null;
@@ -244,7 +251,7 @@ export const Carousel = (props) => {
     applyCurIndexUpdate(slides.curIndex);
   };
 
-  // process callbacks, one for each for dotButton and thumbnail
+  // set up callbacks (i.e. 1 callback for each dotButton and each thumbnail)
   const indices = slides.allIndices;
   const goToIndexCallbacks = indices.map((index) => () => goToIndex(index));
   const goToIndexCallbacksObject = indices.reduce(
@@ -260,11 +267,11 @@ export const Carousel = (props) => {
   const goLeft = () => updateIndex(-increment);
   const goRight = () => updateIndex(+increment);
 
-  useKeys(slidesWrapperRef, {
+  useKeys(slidesContainerRef, {
     ArrowLeft: goLeft,
     ArrowRight: goRight,
     /* can not use useEnter hook here to mimic user click, since a click
-    on slidesWrapper should not and will not trigger anything */
+    on slidesContainer should not and will not trigger anything */
     Enter: (event) => {
       // ignore ('Enter' key) keydown events on widgets (buttons) bubbling up to here
       if (event.target !== event.currentTarget) return;
@@ -296,19 +303,23 @@ export const Carousel = (props) => {
       setIsMaximized(() => true);
   };
 
-  const mouseEventHandlers = useSwipe(slidesWrapperRef, props.swipeThreshold, {
-    onSwipeMoveX: handleSwipeMoveX,
-    onSwipeMoveY: handleSwipeMoveY,
-    onSwipeEndLeft: (displacementX, speed) =>
-      updateIndex(increment, displacementX, speed),
-    onSwipeEndRight: (displacementX, speed) =>
-      updateIndex(-increment, displacementX, speed),
-    onSwipeEndDisqualified: (displacementX, speed) =>
-      updateIndex(0, displacementX, speed),
-    onSwipeEndDown: handleSwipeEndDown,
-    onTap: handleTap
-  });
-  // touch event handlers are already added to slidesWrapperRef by useSwipe hook at this point
+  const mouseEventHandlers = useSwipe(
+    slidesContainerRef,
+    props.swipeThreshold,
+    {
+      onSwipeMoveX: handleSwipeMoveX,
+      onSwipeMoveY: handleSwipeMoveY,
+      onSwipeEndLeft: (displacementX, speed) =>
+        updateIndex(increment, displacementX, speed),
+      onSwipeEndRight: (displacementX, speed) =>
+        updateIndex(-increment, displacementX, speed),
+      onSwipeEndDisqualified: (displacementX, speed) =>
+        updateIndex(0, displacementX, speed),
+      onSwipeEndDown: handleSwipeEndDown,
+      onTap: handleTap
+    }
+  );
+  // touch event handlers are already added to slidesContainerRef by useSwipe hook at this point
 
   /* process class names */
   const propsClassName = 'className' in props ? ' ' + props.className : '';
@@ -317,81 +328,65 @@ export const Carousel = (props) => {
   const maxCarouselClassName = styles.maxCarousel + galleryClassName;
 
   /* process components for maximized carousel */
+  // placeholder to be placed at the carousel's non-maximized position
   const carouselPlaceholder = isMaximized && (
     <div className={carouselClassName} style={props.style} />
   );
 
+  // background to be placed behind the maximized carousel
   const maxCarouselBackground = isMaximized && (
     <div ref={maximizedBackgroundRef} className={maxCarouselClassName} />
   );
 
   /* process settings */
-  const objectFit =
-    isMaximized && 'objectFitAtMax' in props
-      ? props.objectFitAtMax
-      : props.objectFit;
-  const hasArrowButtons =
-    isMaximized && 'hasArrowButtonsAtMax' in props
-      ? props.hasArrowButtonsAtMax
-      : props.hasArrowButtons;
-  const hasMediaButton =
-    isMaximized && 'hasMediaButtonAtMax' in props
-      ? props.hasMediaButtonAtMax
-      : props.hasMediaButton;
-  const hasSizeButton =
-    isMaximized && 'hasSizeButtonAtMax' in props
-      ? props.hasSizeButtonAtMax
-      : props.hasSizeButton;
-  const hasDotButtons =
-    isMaximized && 'hasDotButtonsAtMax' in props
-      ? props.hasDotButtonsAtMax
-      : props.hasDotButtons;
-  const hasIndexBoard =
-    isMaximized && 'hasIndexBoardAtMax' in props
-      ? props.hasIndexBoardAtMax
-      : props.hasIndexBoard;
-  const hasCaptions =
-    isMaximized && 'hasCaptionsAtMax' in props
-      ? props.hasCaptionsAtMax
-      : props.hasCaptions;
-  const hasThumbnails =
-    isMaximized && 'hasThumbnailsAtMax' in props
-      ? props.hasThumbnailsAtMax
-      : props.hasThumbnails;
+  const settings = getSettings(
+    props,
+    [
+      'objectFit',
+      'hasArrowButtons',
+      'hasMediaButton',
+      'hasSizeButton',
+      'hasDotButtons',
+      'hasIndexBoard',
+      'hasCaptions',
+      'hasThumbnails'
+    ],
+    isMaximized
+  );
 
   /* process widgets */
-  const indexBoard = hasIndexBoard && (
+  const indexBoard = settings.hasIndexBoard && (
     <IndexBoard
       hasShadow={props.widgetsHasShadow}
-      position={hasIndexBoard}
+      position={settings.hasIndexBoard}
       curIndex={slides.curIndexForDisplay}
       totalIndices={indices.length}
     />
   );
 
-  const mediaButtons = hasMediaButton && props.canAutoPlay && (
+  const mediaButtons = settings.hasMediaButton && props.canAutoPlay && (
     <MediaButtons
       playIcon={props.playIcon}
       pauseIcon={props.pauseIcon}
       hasShadow={props.widgetsHasShadow}
-      position={hasMediaButton}
+      position={settings.hasMediaButton}
       isPlaying={isPlaying}
       clickCallback={handleMediaButtonClick}
     />
   );
 
-  const sizeButtons = hasSizeButton && (
+  const sizeButtons = settings.hasSizeButton && (
     <SizeButtons
       minIcon={props.minIcon}
       maxIcon={props.maxIcon}
       hasShadow={props.widgetsHasShadow}
-      position={hasSizeButton}
+      position={settings.hasSizeButton}
       isMaximized={isMaximized}
       clickCallback={handleSizeButtonClick}
     />
   );
 
-  const arrowButtons = hasArrowButtons && (
+  const arrowButtons = settings.hasArrowButtons && (
     <ArrowButtons
       leftIcon={props.leftIcon}
       rightIcon={props.rightIcon}
@@ -404,19 +399,19 @@ export const Carousel = (props) => {
     />
   );
 
-  const dotButtons = hasDotButtons && (
+  const dotButtons = settings.hasDotButtons && (
     <DotButtons
       isRTL={props.isRTL}
       activeIcon={props.activeIcon}
       passiveIcon={props.passiveIcon}
       hasShadow={props.widgetsHasShadow}
-      position={hasDotButtons}
+      position={settings.hasDotButtons}
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObject}
     />
   );
 
-  const thumbnails = hasThumbnails && (
+  const thumbnails = settings.hasThumbnails && (
     <Thumbnails
       isRTL={props.isRTL}
       isMaximized={isMaximized}
@@ -438,25 +433,27 @@ export const Carousel = (props) => {
         style={isMaximized ? {} : props.style}
         data-is-not-keyboard-user='true'
       >
-        <div
-          ref={slidesWrapperRef}
-          className={styles.slidesWrapper}
-          tabIndex={0}
-          {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
-        >
-          <Slides
-            minRef={slideMinRef}
-            maxRef={slideMaxRef}
-            slidesRef={slidesRef}
-            length={nSlides}
-            slides={slidesElements}
-            hasImages={hasImages}
-            isRTL={props.isRTL}
-            shouldLazyLoad={props.shouldLazyLoad}
-            objectFit={objectFit}
-            widgetsHasShadow={props.widgetsHasShadow}
-            hasCaptions={hasCaptions}
-          />
+        <div className={styles.slidesWrapper}>
+          <div
+            ref={slidesContainerRef}
+            className={styles.slidesContainer}
+            tabIndex={0}
+            {...(props.shouldSwipeOnMouse ? mouseEventHandlers : {})}
+          >
+            <Slides
+              minRef={slideMinRef}
+              maxRef={slideMaxRef}
+              slidesRef={slidesRef}
+              length={nSlides}
+              slides={slidesElements}
+              hasImages={hasImages}
+              isRTL={props.isRTL}
+              shouldLazyLoad={props.shouldLazyLoad}
+              objectFit={settings.objectFit}
+              widgetsHasShadow={props.widgetsHasShadow}
+              hasCaptions={settings.hasCaptions}
+            />
+          </div>
           {mediaButtons}
           {indexBoard}
           {sizeButtons}

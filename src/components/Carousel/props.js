@@ -77,7 +77,8 @@ export const defaultProps = {
   swipeThreshold: 0.1, // * 100%
   swipeRollbackSpeed: 0.1, // px/ms
   transitionSpeed: 1, // px/ms
-  transitionDurationLimit: 1000, // ms
+  transitionDurationMin: 200, // ms
+  transitionDurationLimit: 800, // ms
   widgetsHasShadow: false,
   hasArrowButtons: true,
   hasMediaButton: 'topLeft',
@@ -93,4 +94,20 @@ export const defaultProps = {
   onIndexChange: () => {},
   objectFit: 'cover',
   objectFitAtMax: 'contain'
+};
+
+// get props according to whether the carousel isMaximized
+export const getSettings = (props, propNames, isMaximized) => {
+  const newProps = propNames.map((propName) => {
+    if (!isMaximized) return props[propName];
+    const propNameAtMax = propName + 'AtMax';
+    // only take the props[propNameAtMax] if it is specified
+    if (propNameAtMax in props) return props[propNameAtMax];
+    // take the props[propName] as a fallback
+    return props[propName];
+  });
+  return propNames.reduce(
+    (obj, key, index) => ({ ...obj, [key]: newProps[index] }),
+    {}
+  );
 };

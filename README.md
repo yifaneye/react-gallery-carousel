@@ -22,8 +22,7 @@ import { Carousel } from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
 const App = () => {
-  const sizes = [900, 800, 700, 600, 500, 400];
-  const images = sizes.map((size) => ({
+  const images = [900, 800, 700, 600, 500, 400].map((size) => ({
     src: `https://placedog.net/${size}/${size}`
   }));
 
@@ -56,8 +55,8 @@ To customize the carousel, use the following props:
 |swipeThreshold           |Number                |0.1        |Threshold swipe distance (in percentage of the width of the viewport of the carousel) to move to the previous or the next slide.|
 |swipeRollbackSpeed       |Number                |0.1        |Speed of the transition (in pixels per millisecond) in moving back to the current slide after a swipe smaller than swipeThreshold.|
 |transitionSpeed          |Number                |1          |Speed of the transition (in pixels per millisecond) in moving to the previous or the next slide on non-swipe updates on the carousel.|
-|transitionDurationLimit  |Number                |1000       |Limit of transition duration (in milliseconds). The limit is used to flatten transition duration, where the maximum transition duration infinitely approaches this value.|
-|transitionDurationMin    |Number                |undefined  |Minimum transition duration (in milliseconds). Transition duration can be set to be a constant with transitionDurationMin === transitionDurationMax.|
+|transitionDurationLimit  |Number                |800        |Limit of transition duration (in milliseconds). The limit is used to flatten transition duration, where the maximum transition duration infinitely approaches this value.|
+|transitionDurationMin    |Number                |200        |Minimum transition duration (in milliseconds). Transition duration can be set to be a constant with transitionDurationMin === transitionDurationMax.|
 |transitionDurationMax    |Number                |undefined  |Maximum transition duration (in milliseconds). It will have precedence over transitionDurationMin, if transitionDurationMin > transitionDurationMax.|
 |widgetsHasShadow         |Boolean               |false      |If true, the following widgets (with *) have shadows. If true, the transition will tend to drop frames.|
 |hasMediaButton *         |Boolean or String     |'topLeft'  |If false, the carousel does not show media button (i.e. play/pause button). Its position can be specified by one of ['topLeft', 'topCenter', 'topRight', 'centerLeft', 'centerCenter', 'centerRight', 'bottomLeft', 'bottomCenter','bottomRight']. If the value of 'canAutoPlay' is falsy, media button will not be shown on the carousel.|
@@ -83,8 +82,8 @@ To customize the carousel, use the following props:
 |activeIcon               |node                  |undefined  |Active dot icon (HTML element) to be placed into the active DotButton indicating the current slide.|
 |passiveIcon              |node                  |undefined  |Passive dot icon (HTML element) to be placed into the passive DotButton indicating all non-current slide(s).|
 |shouldSwipeOnMouse       |Boolean               |true       |If true, the carousel can be swiped by the cursor using a mouse or a track pad.|
-|shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking. It is suitable for when there is no control widget.|
-|shouldMinimizeOnClick    |Boolean               |false      |If true, the carousel can be minimized by clicking. It is suitable for when there is no control widget.|
+|shouldMaximizeOnClick    |Boolean               |false      |If true, the carousel can be maximized by clicking.|
+|shouldMinimizeOnClick    |Boolean               |false      |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true       |If true, the carousel can be minimized by touch swiping down.|
 |onIndexChange            |Function              |() => {}   |Callback function invoked when the current index of the slides of the carousel is being updated. It is called regardless of whether index value's before and after are the same.|
 |objectFit                |String                |'cover'    |CSS 'object-fit' style to be placed on each image.|

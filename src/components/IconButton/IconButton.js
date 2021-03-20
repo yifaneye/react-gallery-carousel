@@ -111,7 +111,7 @@ const icons = {
         width='10'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Active</title>
+        <title>Stay</title>
         <circle cx='5' cy='5' r='4' fill='#888' />
       </svg>
     </div>
@@ -127,7 +127,7 @@ const icons = {
         width='10'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Passive</title>
+        <title>Go</title>
         <circle cx='5' cy='5' r='4' />
       </svg>
     </div>
@@ -135,7 +135,9 @@ const icons = {
 };
 
 export const IconButton = (props) => {
-  const icon = props.icon === undefined ? icons[props.name] : props.icon;
+  // only take the user-supplied icon if it is not undefined;
+  // use the default icon as a fallback
+  const icon = props.icon !== undefined ? props.icon : icons[props.name];
   return (
     <button
       className={`${styles.button} ${

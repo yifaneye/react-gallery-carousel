@@ -38,6 +38,6 @@
 
 .thumbnails.RTL {
   flex-direction: row-reverse;
-  /*!*thumbnails would be frozen (can not be scrolled) with justify-content: flex-start;*!*/
+  /*thumbnails would be frozen (can not be scrolled) with justify-content: flex-start;*/
   justify-content: flex-end;
 }

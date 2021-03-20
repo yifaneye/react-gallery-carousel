@@ -4,7 +4,7 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/twoWayMap';
 
-const imageIDs = Array(100)
+const imageIDs = Array(160)
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
@@ -39,7 +39,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       onIndexChange={({ curIndex }) => {
         const title = indexToTitle.get(curIndex);
         window.location.hash = title;
-        document.title = title;
+        document.title = `${title} | react-gallery-carousel`;
       }}
       style={{ width: '100%', height: '200px', userSelect: 'text' }}
     >
@@ -57,7 +57,9 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       <div>
         <h2>Get Started</h2>
         <code>npm install react-gallery-carousel --save</code>
-        <span>or</span>
+        <div>
+          <span>or</span>
+        </div>
         <code>yarn add react-gallery-carousel</code>
       </div>
       <div>
@@ -70,7 +72,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 };
 
 const App = () => {
-  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '60vh' }} />`;
+  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '300px' }} />`;
 
   return (
     <div
@@ -100,26 +102,11 @@ const App = () => {
           hasDotButtonsAtMax={false}
           hasThumbnails={false}
           hasThumbnailsAtMax={true}
+          shouldMaximizeOnClick={true}
+          shouldMinimizeOnClick={true}
           // activeIcon={<span className='text'>x</span>}
           // passiveIcon={<span className='text'>o</span>}
           className='framed'
-        />
-      </div>
-
-      {/*control-less carousel example*/}
-      <div style={{ width: '100%', height: '60vh' }}>
-        <Carousel
-          images={images}
-          index={20}
-          autoplay={false}
-          hasMediaButton={false}
-          hasSizeButton={false}
-          hasArrowButtons={false}
-          hasIndexBoard={false}
-          hasIndexBoardAtMax={'topCenter'}
-          hasCaptionsAtMax={'bottom'}
-          shouldMaximizeOnClick={true}
-          shouldMinimizeOnClick={true}
         />
       </div>
     </div>
