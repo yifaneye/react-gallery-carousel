@@ -1,7 +1,8 @@
 export {
-  ArrowButtons,
-  MediaButtons,
-  SizeButtons,
+  LeftButton,
+  RightButton,
+  MediaButton,
+  SizeButton,
   DotButtons,
   IndexBoard,
   Caption

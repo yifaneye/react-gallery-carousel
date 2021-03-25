@@ -2,9 +2,9 @@ import React from 'react';
 
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
-import TwoWayMap from './utils/twoWayMap';
+import TwoWayMap from './utils/TwoWayMap';
 
-const imageIDs = Array(160)
+const imageIDs = Array(172)
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
@@ -93,9 +93,11 @@ const App = () => {
       <div style={{ width: '100%', height: '60vh' }}>
         <Carousel
           images={images}
-          index={10}
+          index={170}
           isRTL={true}
           isMaximized={false}
+          hasMediaButtonAtMax='topRight'
+          hasSizeButtonAtMax='topLeft'
           hasCaptions={false}
           hasCaptionsAtMax='bottom'
           hasDotButtons='bottom'

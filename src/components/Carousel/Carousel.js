@@ -9,11 +9,12 @@ import styles from './Carousel.module.css';
 import Slides from '../Slides';
 import Thumbnails from '../Thumbnails';
 import {
-  ArrowButtons,
-  MediaButtons,
-  SizeButtons,
-  DotButtons,
-  IndexBoard
+  LeftButton,
+  RightButton,
+  MediaButton,
+  SizeButton,
+  IndexBoard,
+  DotButtons
 } from '../Widgets';
 import useKeys from '../../utils/useKeys';
 import useSwipe from '../../utils/useSwipe';
@@ -23,11 +24,13 @@ import useKeyboard from '../../utils/useKeyboard';
 import useMediaQuery from '../../utils/useMediaQuery';
 import useEventListener from '../../utils/useEventListener';
 import useFixedPosition from '../../utils/useFixedPosition';
+import {
+  MAX_SWIPE_DOWN_DISTANCE,
+  WIDGET_POSITIONS,
+  WIDGET_POSITIONS_WITH_RTL
+} from './constants';
+import ReversedMap from '../../utils/ReversedMap';
 import { propTypes, defaultProps, getSettings } from './props';
-
-// constant(s)
-// Swiping down longer than MAX_SWIPE_DOWN_DISTANCE will not have more visual changes
-const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 
 export const Carousel = (props) => {
   /* initialize references */
@@ -339,75 +342,89 @@ export const Carousel = (props) => {
   );
 
   /* process settings */
-  const settings = getSettings(
+  const settings = {
+    ...getSettings(
+      props,
+      ['objectFit', 'hasCaptions', 'hasThumbnails'],
+      isMaximized
+    )
+  };
+
+  const widgetSettings = getSettings(
     props,
     [
-      'objectFit',
-      'hasArrowButtons',
+      'hasLeftButton',
+      'hasRightButton',
       'hasMediaButton',
       'hasSizeButton',
       'hasDotButtons',
-      'hasIndexBoard',
-      'hasCaptions',
-      'hasThumbnails'
+      'hasIndexBoard'
     ],
     isMaximized
   );
 
-  /* process widgets */
-  const indexBoard = settings.hasIndexBoard && (
-    <IndexBoard
+  const leftButton = widgetSettings.hasLeftButton && (
+    <LeftButton
+      position={widgetSettings.hasLeftButton}
+      isDisabled={!slides.canUpdateIndex(-increment)}
+      icon={props.leftIcon}
+      isRTL={props.isRTL}
       hasShadow={props.widgetsHasShadow}
-      position={settings.hasIndexBoard}
+      onClick={goLeft}
+    />
+  );
+
+  const rightButton = widgetSettings.hasRightButton && (
+    <RightButton
+      position={widgetSettings.hasRightButton}
+      isDisabled={!slides.canUpdateIndex(+increment)}
+      icon={props.rightIcon}
+      isRTL={props.isRTL}
+      hasShadow={props.widgetsHasShadow}
+      onClick={goRight}
+    />
+  );
+
+  const mediaButton = widgetSettings.hasMediaButton && props.canAutoPlay && (
+    <MediaButton
+      position={widgetSettings.hasMediaButton}
+      isPlaying={isPlaying}
+      playIcon={props.playIcon}
+      pauseIcon={props.pauseIcon}
+      hasShadow={props.widgetsHasShadow}
+      onClick={handleMediaButtonClick}
+    />
+  );
+
+  const sizeButton = widgetSettings.hasSizeButton && (
+    <SizeButton
+      position={widgetSettings.hasSizeButton}
+      isMaximized={isMaximized}
+      minIcon={props.minIcon}
+      maxIcon={props.maxIcon}
+      hasShadow={props.widgetsHasShadow}
+      onClick={handleSizeButtonClick}
+    />
+  );
+
+  const indexBoard = widgetSettings.hasIndexBoard && (
+    <IndexBoard
+      position={widgetSettings.hasIndexBoard}
+      hasShadow={props.widgetsHasShadow}
       curIndex={slides.curIndexForDisplay}
       totalIndices={indices.length}
     />
   );
 
-  const mediaButtons = settings.hasMediaButton && props.canAutoPlay && (
-    <MediaButtons
-      playIcon={props.playIcon}
-      pauseIcon={props.pauseIcon}
-      hasShadow={props.widgetsHasShadow}
-      position={settings.hasMediaButton}
-      isPlaying={isPlaying}
-      clickCallback={handleMediaButtonClick}
-    />
-  );
-
-  const sizeButtons = settings.hasSizeButton && (
-    <SizeButtons
-      minIcon={props.minIcon}
-      maxIcon={props.maxIcon}
-      hasShadow={props.widgetsHasShadow}
-      position={settings.hasSizeButton}
-      isMaximized={isMaximized}
-      clickCallback={handleSizeButtonClick}
-    />
-  );
-
-  const arrowButtons = settings.hasArrowButtons && (
-    <ArrowButtons
-      leftIcon={props.leftIcon}
-      rightIcon={props.rightIcon}
-      hasShadow={props.widgetsHasShadow}
-      isRTL={props.isRTL}
-      isLeftDisabled={!slides.canUpdateIndex(-increment)}
-      isRightDisabled={!slides.canUpdateIndex(+increment)}
-      onClickLeft={goLeft}
-      onClickRight={goRight}
-    />
-  );
-
-  const dotButtons = settings.hasDotButtons && (
+  const dotButtons = widgetSettings.hasDotButtons && (
     <DotButtons
+      callbacks={goToIndexCallbacksObject}
+      position={widgetSettings.hasDotButtons}
       isRTL={props.isRTL}
+      curIndex={slides.curIndex}
       activeIcon={props.activeIcon}
       passiveIcon={props.passiveIcon}
       hasShadow={props.widgetsHasShadow}
-      position={settings.hasDotButtons}
-      curIndex={slides.curIndex}
-      callbacks={goToIndexCallbacksObject}
     />
   );
 
@@ -421,6 +438,34 @@ export const Carousel = (props) => {
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObject}
     />
+  );
+
+  // organize and sort the widgets
+  const widgetsObj = {
+    hasLeftButton: leftButton,
+    hasRightButton: rightButton,
+    hasMediaButton: mediaButton,
+    hasSizeButton: sizeButton,
+    hasDotButtons: dotButtons,
+    hasIndexBoard: indexBoard
+  };
+  const positionsToWidgets = new ReversedMap(widgetSettings);
+  const positions = props.isRTL ? WIDGET_POSITIONS_WITH_RTL : WIDGET_POSITIONS;
+  const widgets = (
+    <>
+      {positions.map(
+        (position, index) =>
+          widgetsObj[positionsToWidgets.get(position)] && (
+            <Fragment key={index}>
+              {
+                widgetsObj[
+                  positionsToWidgets.get(position).replace(/AtMax$/, '')
+                ]
+              }
+            </Fragment>
+          )
+      )}
+    </>
   );
 
   return (
@@ -454,11 +499,7 @@ export const Carousel = (props) => {
               hasCaptions={settings.hasCaptions}
             />
           </div>
-          {mediaButtons}
-          {indexBoard}
-          {sizeButtons}
-          {arrowButtons}
-          {dotButtons}
+          {widgets}
         </div>
         {thumbnails}
       </div>

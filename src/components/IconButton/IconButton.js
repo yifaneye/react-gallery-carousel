@@ -145,7 +145,7 @@ export const IconButton = (props) => {
       }`}
       aria-label={props.label}
       aria-disabled={false}
-      onClick={props.clickCallback}
+      onClick={props.onClick}
     >
       {icon}
     </button>
@@ -166,5 +166,5 @@ IconButton.propTypes = {
   ]).isRequired,
   hasShadow: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,
-  clickCallback: PropTypes.func.isRequired
+  onClick: PropTypes.func
 };

@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useRef } from 'react';
+import React, { memo, useRef } from 'react';
 import styles from './Widgets.module.css';
 import IconButton from '../IconButton';
 import useNoSwipe from '../../utils/useNoSwipe';
@@ -8,94 +8,105 @@ import {
   largeWidgetPositions
 } from '../../utils/validators';
 
-export const ArrowButtons = (props) => {
-  const leftButton = !props.isLeftDisabled && (
-    <div className={styles.widgetWrapper + ' ' + styles.centerLeft}>
-      <IconButton
-        icon={props.leftIcon}
-        name='left'
-        label={props.isRTL ? 'Go to Next Slide' : 'Go to Previous Slide'}
-        hasShadow={props.hasShadow}
-        clickCallback={props.onClickLeft}
-      />
-    </div>
-  );
-
-  const rightButton = !props.isRightDisabled && (
-    <div className={styles.widgetWrapper + ' ' + styles.centerRight}>
-      <IconButton
-        icon={props.rightIcon}
-        name='right'
-        label={props.isRTL ? 'Go to Previous Slide' : 'Go to Next Slide'}
-        hasShadow={props.hasShadow}
-        clickCallback={props.onClickRight}
-      />
-    </div>
-  );
-
-  return (
-    <Fragment>
-      {leftButton}
-      {rightButton}
-    </Fragment>
-  );
-};
-
-ArrowButtons.propTypes = {
-  isLeftDisabled: PropTypes.bool.isRequired,
-  leftIcon: PropTypes.node,
+const arrowButtonPropTypes = {
+  position: smallWidgetPositions.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  icon: PropTypes.node,
   isRTL: PropTypes.bool.isRequired,
   hasShadow: PropTypes.bool.isRequired,
-  onClickLeft: PropTypes.func.isRequired,
-  isRightDisabled: PropTypes.bool.isRequired,
-  rightIcon: PropTypes.node,
-  onClickRight: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
-export const MediaButtons = (props) => {
+export const LeftButton = (props) => {
+  return (
+    <div
+      className={
+        styles.widgetWrapper +
+        ' ' +
+        styles[props.position] +
+        `${props.isDisabled ? ' ' + styles.disabled : ''}`
+      }
+    >
+      <IconButton
+        icon={props.icon}
+        name='left'
+        hasShadow={props.hasShadow}
+        label={props.isRTL ? 'Go to Next Slide' : 'Go to Previous Slide'}
+        onClick={props.isDisabled ? undefined : props.onClick}
+      />
+    </div>
+  );
+};
+
+LeftButton.propTypes = arrowButtonPropTypes;
+
+export const RightButton = (props) => {
+  return (
+    <div
+      className={
+        styles.widgetWrapper +
+        ' ' +
+        styles[props.position] +
+        `${props.isDisabled ? ' ' + styles.disabled : ''}`
+      }
+    >
+      <IconButton
+        icon={props.icon}
+        name='right'
+        hasShadow={props.hasShadow}
+        label={props.isRTL ? 'Go to Previous Slide' : 'Go to Next Slide'}
+        onClick={props.isDisabled ? undefined : props.onClick}
+      />
+    </div>
+  );
+};
+
+RightButton.propTypes = arrowButtonPropTypes;
+
+export const MediaButton = (props) => {
   return (
     <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <IconButton
         icon={props.isPlaying ? props.pauseIcon : props.playIcon}
         name={props.isPlaying ? 'pause' : 'play'}
-        label={props.isPlaying ? 'Pause Autoplay' : 'Start Autoplay'}
         hasShadow={props.hasShadow}
-        clickCallback={props.clickCallback}
+        label={props.isPlaying ? 'Pause Autoplay' : 'Start Autoplay'}
+        onClick={props.onClick}
       />
     </div>
   );
 };
 
-MediaButtons.propTypes = {
+MediaButton.propTypes = {
   position: smallWidgetPositions.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   pauseIcon: PropTypes.node,
   playIcon: PropTypes.node,
   hasShadow: PropTypes.bool.isRequired,
-  clickCallback: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
-export const SizeButtons = (props) => {
+export const SizeButton = (props) => {
   return (
     <div className={styles.widgetWrapper + ' ' + styles[props.position]}>
       <IconButton
         icon={props.isMaximized ? props.minIcon : props.maxIcon}
         name={props.isMaximized ? 'min' : 'max'}
-        label={props.isMaximized ? 'Minimize Slides' : 'Maximize Slides'}
         hasShadow={props.hasShadow}
-        clickCallback={props.clickCallback}
+        label={props.isMaximized ? 'Minimize Slides' : 'Maximize Slides'}
+        onClick={props.onClick}
       />
     </div>
   );
 };
 
-SizeButtons.propTypes = {
+SizeButton.propTypes = {
   position: smallWidgetPositions.isRequired,
   isMaximized: PropTypes.bool.isRequired,
   minIcon: PropTypes.node,
   maxIcon: PropTypes.node,
   hasShadow: PropTypes.bool.isRequired,
-  clickCallback: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export const IndexBoard = (props) => {
@@ -156,7 +167,7 @@ export const DotButtons = (props) => {
                 : `Go to Slide ${index + 1}`
             }
             hasShadow={props.hasShadow}
-            clickCallback={callbacks[key]}
+            onClick={callbacks[key]}
           />
         ))}
       </div>
@@ -165,7 +176,7 @@ export const DotButtons = (props) => {
 };
 
 DotButtons.propTypes = {
-  callbacks: PropTypes.shape(PropTypes.function).isRequired,
+  callbacks: PropTypes.objectOf(PropTypes.func).isRequired,
   position: largeWidgetPositions.isRequired,
   isRTL: PropTypes.bool.isRequired,
   curIndex: PropTypes.number.isRequired,
@@ -173,28 +184,6 @@ DotButtons.propTypes = {
   passiveIcon: PropTypes.node,
   hasShadow: PropTypes.bool.isRequired
 };
-
-/*
-// not used for performance gains
-export const LoadingSpinner = (props) => {
-  return (
-    <div className={styles.centerWrapper}>
-      <div className={styles.widgetWrapper + ' ' + styles.centerCenter}>
-        <div
-          className={
-            styles.spinner + (props.hasShadow ? ' ' + styles.shadow : '')
-          }
-          aria-label='Loading'
-        />
-      </div>
-    </div>
-  );
-};
-
-LoadingSpinner.propTypes = {
-  hasShadow: PropTypes.bool.isRequired
-};
-*/
 
 // memo is useful here
 export const Caption = memo((props) => {
