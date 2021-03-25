@@ -79,8 +79,8 @@ export const defaultProps = {
   swipeThreshold: 0.1, // * 100%
   swipeRollbackSpeed: 0.1, // px/ms
   transitionSpeed: 1, // px/ms
-  transitionDurationMin: 200, // ms
-  transitionDurationLimit: 800, // ms
+  transitionDurationMin: 250, // ms
+  transitionDurationLimit: 750, // ms
   widgetsHasShadow: false,
   hasLeftButton: 'centerLeft',
   hasRightButton: 'centerRight',

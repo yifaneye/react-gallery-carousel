@@ -8,6 +8,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+  cursor: grab;
   transform: translateZ(0);
   transition-duration: 0s;
   transition-property: transform;
@@ -18,4 +19,8 @@
 
 .slides.RTL {
   flex-direction: row-reverse;
+}
+
+:global(.isGrabbing) > .slides {
+  cursor: grabbing;
 }

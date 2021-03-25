@@ -4,19 +4,19 @@
   width: 100%;
   margin: 0;
   border: 0;
+  border-image-width: 0;
   padding: 0;
+  user-select: none;
   overflow: hidden;
-  cursor: grab;
-}
-
-:global(.isGrabbing) .figure {
-  cursor: grabbing;
 }
 
 .image {
+  position: relative;
   height: 100%;
   width: 100%;
   margin: 0;
+  border: 0;
+  border-image-width: 0;
   padding: 0;
   object-fit: cover;
   user-select: none;
@@ -40,7 +40,8 @@
   display: none;
 }
 
-.thumbnail::before, .image::before {
+.thumbnail::before,
+.image::before {
   content: '';
   display: block;
   position: absolute;
@@ -50,5 +51,5 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: #000;
+  background: #bbb;
 }

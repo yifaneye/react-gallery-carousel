@@ -31,7 +31,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       hasSizeButton='bottomLeft'
       hasMediaButton='bottomRight'
       hasDotButtons='bottom'
-      shouldSwipeOnMouse={false} // for selecting text
+      // shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       index={Number(
         indexToTitle.getReversed(window.location.hash.replace('#', ''))
