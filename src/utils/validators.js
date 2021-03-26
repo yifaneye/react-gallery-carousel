@@ -59,10 +59,6 @@ export const fallbackProps = (fallbackProps) => {
   return (props, propName, componentName) => {
     const prop = props[propName];
     if (prop !== undefined) return;
-    if (!fallbackProps)
-      return new Error(
-        `The prop \`${propName} is marked as required in \`${componentName}, but its value is \`undefined\`.`
-      );
     for (const fallbackProp of fallbackProps) {
       if (props[fallbackProp] !== undefined) return;
     }

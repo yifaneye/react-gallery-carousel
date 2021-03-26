@@ -478,7 +478,7 @@ export const Carousel = (props) => {
         style={isMaximized ? {} : props.style}
         data-is-not-keyboard-user='true'
       >
-        <div className={styles.slidesWrapper}>
+        <div className={styles.carouselInner}>
           <div
             ref={slidesContainerRef}
             className={styles.slidesContainer}

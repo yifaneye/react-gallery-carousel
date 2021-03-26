@@ -1,5 +1,3 @@
-// constant(s)
-
 // Swiping down longer than MAX_SWIPE_DOWN_DISTANCE will not have more visual changes
 export const MAX_SWIPE_DOWN_DISTANCE = 1500; // px
 
