@@ -164,22 +164,34 @@ export const Carousel = (props) => {
 
     // move and scale the element
     if (carouselRef.current) {
-      carouselRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${portion})`;
+      // check whether the update is necessary
+      if (
+        carouselRef.current.style.transform !==
+        `translate(${displacementX}px, ${displacementY}px) scale(${portion})`
+      ) {
+        carouselRef.current.style.transform = `translate(${displacementX}px, ${displacementY}px) scale(${portion})`;
+      }
     }
 
     // update opacity of the background
     if (maximizedBackgroundRef.current) {
-      maximizedBackgroundRef.current.style.opacity = portion;
+      // check whether the update is necessary
+      if (maximizedBackgroundRef.current.style.opacity !== portion) {
+        maximizedBackgroundRef.current.style.opacity = portion;
+      }
     }
   };
 
   const applyTransitionX = useCallback(
     (displacementX = 0) => {
+      const targetPosition =
+        displacementX === 0
+          ? `${-100 * slides.curIndex * increment}%`
+          : `calc(${-100 * slides.curIndex * increment}% + ${displacementX}px)`;
       // move the element
-      if (slidesRef.current)
-        slidesRef.current.style.transform = `translateX(calc(${
-          -100 * slides.curIndex * increment
-        }% + ${displacementX}px))`;
+      if (slidesRef.current) {
+        slidesRef.current.style.transform = `translateX(${targetPosition})`;
+      }
     },
     [slides.curIndex, increment]
   );
