@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styles from './Thumbnail.module.scss';
-import ImageThumbnail from '../ImageThumbnail';
+import { ImageThumbnail } from '../Image';
 import { UserSlideThumbnail } from '../UserSlide';
 import useNoDrag from '../../utils/useNoDrag';
 import useEnter from '../../utils/useEnter';
