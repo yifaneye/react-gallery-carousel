@@ -8,7 +8,6 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  cursor: grab;
   transform: translateZ(0);
   transition-duration: 0s;
   transition-property: transform;
@@ -21,6 +20,10 @@
   flex-direction: row-reverse;
 }
 
-:global(.isGrabbing) > .slides {
+.hasImages {
+  cursor: grab;
+}
+
+:global(.isGrabbing) > .hasImages {
   cursor: grabbing;
 }

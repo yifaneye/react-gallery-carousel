@@ -9,7 +9,7 @@ const imageIDs = Array(172)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
   return {
-    src: `https://placedog.net/400/300?id=${imageID}`,
+    src: `https://placedog.net/400/240?id=${imageID}`,
     srcset: `https://placedog.net/400/240?id=${imageID} 400w, https://placedog.net/700/420?id=${imageID} 700w, https://placedog.net/1000/600?id=${imageID} 1000w`,
     sizes: '(max-width: 1000px) 400px, (max-width: 2000px) 700px, 1000px',
     alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
@@ -31,7 +31,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       hasSizeButton='bottomLeft'
       hasMediaButton='bottomRight'
       hasDotButtons='bottom'
-      // shouldSwipeOnMouse={false} // for selecting text
+      shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       index={Number(
         indexToTitle.getReversed(window.location.hash.replace('#', ''))
@@ -41,14 +41,15 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         window.location.hash = title;
         document.title = `${title} | react-gallery-carousel`;
       }}
-      style={{ width: '100%', height: '200px', userSelect: 'text' }}
+      style={{ userSelect: 'text' }}
     >
       <div>
         <h1>react-gallery-carousel</h1>
         <p>
-          Carousel component with support for lazy loading, velocity detection,
-          pinch zoom, touch swiping, mouse dragging, keyboard navigation, full
-          screen mode and thumbnails.
+          Dependency-free React carousel component with support for lazy
+          loading, pinch zoom, touch swiping, mouse dragging, velocity
+          detection, maximization, thumbnails, keyboard navigation and
+          accessibility.
         </p>
         <a href='https://www.npmjs.com/package/react-gallery-carousel'>npm</a>
         <span> / </span>
@@ -75,40 +76,35 @@ const App = () => {
   const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '300px' }} />`;
 
   return (
-    <div
-      style={{
-        maxWidth: '1440px',
-        margin: '0 auto'
-      }}
-    >
-      {/*basic carousel example with self-managed slides */}
-      <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
+    <div className='carousels-container'>
+      <div className='carousel-container short'>
+        {/*basic carousel example with user-managed slides */}
+        <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
+      </div>
 
-      {/*basic carousel example*/}
-      <div style={{ width: '100%', height: '60vh' }}>
+      <div className='carousel-container'>
+        {/*basic carousel example*/}
         <Carousel images={images} />
       </div>
 
-      {/*customized carousel example*/}
-      <div style={{ width: '100%', height: '60vh' }}>
+      <div className='carousel-container'>
+        {/*customized carousel example*/}
         <Carousel
+          className='framed-carousel'
           images={images}
-          index={170}
-          isRTL={true}
+          index={99}
+          // isRTL={true}
           isMaximized={false}
-          hasMediaButtonAtMax='topRight'
-          hasSizeButtonAtMax='topLeft'
-          hasCaptions={false}
-          hasCaptionsAtMax='bottom'
-          hasDotButtons='bottom'
-          hasDotButtonsAtMax={false}
+          hasMediaButtonAtMax='bottomLeft'
+          hasIndexBoardAtMax='bottomCenter'
+          hasSizeButtonAtMax='bottomRight'
+          hasCaptionsAtMax='top'
           hasThumbnails={false}
           hasThumbnailsAtMax={true}
           shouldMaximizeOnClick={true}
           shouldMinimizeOnClick={true}
-          // activeIcon={<span className='text'>x</span>}
-          // passiveIcon={<span className='text'>o</span>}
-          className='framed'
+          // activeIcon={<span className='icon-text'>x</span>}
+          // passiveIcon={<span className='icon-text'>o</span>}
         />
       </div>
     </div>
