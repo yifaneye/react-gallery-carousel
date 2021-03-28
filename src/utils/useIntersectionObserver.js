@@ -1,25 +1,42 @@
 import { useEffect, useState } from 'react';
 
-const useIntersectionObserver = (elementRef) => {
+const useIntersectionObserver = (
+  elementRef,
+  rootRef,
+  rootMargin = '0px 0px 0px 0px'
+) => {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
+    // fallback for browsers those do not support IntersectionObserver (i.e. IE)
+    if (!('IntersectionObserver' in window)) {
+      return () => {};
+    }
+
+    const root = rootRef?.current ? rootRef.current : null;
+
     // eslint-disable-next-line no-undef
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !isIntersecting) {
+      ([entry], observer) => {
+        if (!isIntersecting && entry.isIntersecting) {
           setIsIntersecting(true);
           observer.disconnect();
         }
       },
-      { root: null, rootMargin: '0px', threshold: 0 }
+      // increase the size of the viewport using rootMargin to preload images
+      { root: root, rootMargin: rootMargin, threshold: 0 }
     );
     if (elementRef.current) observer.observe(elementRef.current);
 
     return () => {
       if (observer) observer.disconnect();
     };
-  }, [elementRef, isIntersecting]);
+  }, [rootRef, rootMargin, elementRef, isIntersecting]);
+
+  // fallback for browsers those do not support IntersectionObserver (i.e. IE)
+  if (!('IntersectionObserver' in window)) {
+    return true;
+  }
 
   return isIntersecting;
 };

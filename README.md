@@ -47,7 +47,7 @@ To customize the carousel, use the following props:
 |isRTL                    |Boolean               |false        |If true, the slides of the carousel starts from the right (and also auto plays from the right to the left).|
 |isLoop                   |Boolean               |true         |If true, the carousel form a loop from the ribbon of slides. i.e. Going left from the left-most slide lands at the right-most slide, and vice versa.|
 |isMaximized              |Boolean               |false        |If true, the carousel is maximized initially.|
-|shouldLazyLoad           |Boolean               |true         |If true, images that are not yet in the viewport of the carousel will be lazy loaded.|
+|shouldLazyLoad           |Boolean               |true         |If true, images that are not yet in the viewport of the carousel will be lazy loaded, except the 2 adjacent images from either side of the carousel which will be preloaded.|
 |canAutoPlay              |Boolean               |true         |If true, the carousel has auto play capability.|
 |isAutoPlaying            |Boolean               |false        |If true, the carousel auto plays initially.|
 |autoPlayInterval         |Number                |5000         |Interval of the auto play (in milliseconds).|

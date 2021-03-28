@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 import {
   objectFitStyles,
   largeWidgetPositions,
-  imageObject
+  imageObject,
+  elementRef
 } from '../../utils/validators';
 
 const handleError = (event) => {
@@ -17,34 +18,55 @@ const handleError = (event) => {
 
 const LazyLoadedImage = (props) => {
   const imageRef = useRef(null);
-  const isInViewport = useIntersectionObserver(imageRef);
-  const [isLoaded, setIsLoaded] = useState(!props.image.thumbnail);
+  const isInViewport = useIntersectionObserver(
+    imageRef,
+    props.slidesContainerRef,
+    '0px 101% 0px 101%'
+    // preload 2 images on either side of the slides container (viewport)
+  );
+  const [shouldShowThumbnail, setShouldShowThumbnail] = useState(
+    props.image.thumbnail
+  );
+  const [hasError, setHasError] = useState(false);
 
   const handleLoad = () => {
-    if (isInViewport) setIsLoaded(true);
+    if (isInViewport) setShouldShowThumbnail(false);
+    // the low quality image (props.image.thumbnail) will be hidden
   };
 
-  const { src, srcset, alt, thumbnail, ...otherImageProps } = props.image;
+  const handleError = () => {
+    setHasError(true);
+  };
+
+  let { src, srcset, alt, thumbnail, ...otherImageProps } = props.image;
+
+  src = isInViewport ? (hasError ? fallbackImage : src) : placeholderImage;
+  srcset = isInViewport ? (hasError ? null : srcset) : null;
+  thumbnail = isInViewport
+    ? hasError
+      ? fallbackImage
+      : thumbnail
+    : placeholderImage;
 
   return (
     <>
       <img
+        ref={imageRef}
         className={styles.image}
-        src={isInViewport ? src : placeholderImage}
+        srcSet={srcset}
+        src={src}
         alt={alt || null}
-        srcSet={isInViewport ? srcset : null}
-        loading='lazy'
         style={props.style}
         onLoad={handleLoad}
-        onError={handleError}
+        onError={handleError || handleLoad}
         {...otherImageProps}
       />
       <img
-        ref={imageRef}
-        className={styles.thumbnail + (isLoaded ? ' ' + styles.hidden : '')}
-        src={isInViewport ? thumbnail : placeholderImage}
-        alt={alt}
-        loading='lazy'
+        className={
+          styles.thumbnail + (shouldShowThumbnail ? '' : ' ' + styles.hidden)
+        }
+        src={thumbnail}
+        alt={alt || null}
         style={props.style}
         onError={handleError}
       />
@@ -53,6 +75,7 @@ const LazyLoadedImage = (props) => {
 };
 
 LazyLoadedImage.propTypes = {
+  slidesContainerRef: elementRef.isRequired,
   image: imageObject.isRequired,
   style: PropTypes.object.isRequired
 };
@@ -64,13 +87,17 @@ export const Image = (props) => {
   const { src, alt, srcset, thumbnail, ...otherImageProps } = props.image;
 
   const image = props.shouldLazyLoad ? (
-    <LazyLoadedImage image={props.image} style={style} />
+    <LazyLoadedImage
+      slidesContainerRef={props.slidesContainerRef}
+      image={props.image}
+      style={style}
+    />
   ) : (
     <img
       className={styles.image}
+      srcSet={srcset}
       src={src}
       alt={alt || null}
-      srcSet={srcset}
       loading='auto'
       style={style}
       onError={handleError}
@@ -94,8 +121,9 @@ export const Image = (props) => {
 
 Image.propTypes = {
   objectFit: objectFitStyles.isRequired,
-  shouldLazyLoad: PropTypes.bool.isRequired,
   image: imageObject.isRequired,
+  shouldLazyLoad: PropTypes.bool.isRequired,
+  slidesContainerRef: elementRef.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired
 };

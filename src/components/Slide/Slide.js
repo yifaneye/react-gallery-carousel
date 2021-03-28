@@ -18,6 +18,7 @@ export const Slide = (props) => {
       objectFit={props.objectFit}
       widgetsHasShadow={props.widgetsHasShadow}
       hasCaption={props.hasCaption}
+      slidesContainerRef={props.slidesContainerRef}
     />
   ) : (
     <UserSlide slide={props.slide} />
@@ -36,5 +37,6 @@ Slide.propTypes = {
   objectFit: objectFitStyles.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
+  slidesContainerRef: elementRef.isRequired,
   reference: elementRef
 };

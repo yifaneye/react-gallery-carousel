@@ -27,6 +27,7 @@ export const Slides = memo((props) => {
             key={index}
             draggable='false'
             reference={reference}
+            slidesContainerRef={props.slidesContainerRef}
             slide={slide}
             isImage={props.hasImages}
             shouldLazyLoad={props.shouldLazyLoad}
@@ -47,6 +48,7 @@ Slides.propTypes = {
   minRef: elementRef.isRequired,
   length: positiveNumber(true),
   maxRef: elementRef.isRequired,
+  slidesContainerRef: elementRef.isRequired,
   hasImages: PropTypes.bool.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
   objectFit: objectFitStyles.isRequired,

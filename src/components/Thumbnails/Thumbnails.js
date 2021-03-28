@@ -8,15 +8,17 @@ import PropTypes from 'prop-types';
 
 export const Thumbnails = (props) => {
   const callbacks = props.callbacks;
-  const thumbnailsRef = useRef(null);
+  const thumbnailsContainerRef = useRef(null);
   const thumbnailRef = useRef(null);
+
   useAnchor(thumbnailRef, { isMaximized: props.isMaximized });
-  const wheelEventHandler = useNoOverScroll(thumbnailsRef);
-  const mouseEventHandlers = useMouseDrag(thumbnailsRef);
+
+  const wheelEventHandler = useNoOverScroll(thumbnailsContainerRef);
+  const mouseEventHandlers = useMouseDrag(thumbnailsContainerRef);
 
   return (
     <div
-      ref={thumbnailsRef}
+      ref={thumbnailsContainerRef}
       className={styles.thumbnailsWrapper}
       onWheel={wheelEventHandler}
       {...mouseEventHandlers}
@@ -29,6 +31,7 @@ export const Thumbnails = (props) => {
             <Thumbnail
               key={index}
               reference={thumbnailRef}
+              thumbnailsContainerRef={thumbnailsContainerRef}
               slide={props.slides[key]}
               isImage={props.hasImages}
               shouldLazyLoad={props.shouldLazyLoad}

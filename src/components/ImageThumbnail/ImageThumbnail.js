@@ -4,16 +4,22 @@ import placeholderImage from 'placeholder.jpg';
 import fallbackImage from 'fallback.jpg';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
-import { imageObject } from '../../utils/validators';
+import { elementRef, imageObject } from '../../utils/validators';
 
 const handleError = (event) => {
   // permanently replace the image with the fallback image
   event.target.src = fallbackImage;
 };
 
-const LazyLoadedImage = (props) => {
+const LazyLoadedImageThumbnail = (props) => {
   const imageRef = useRef(null);
-  const isInViewport = useIntersectionObserver(imageRef);
+  const isInViewport = useIntersectionObserver(
+    imageRef,
+    props.thumbnailsContainerRef,
+    '0px 20% 0px 20%'
+    // preload approximately 2 image thumbnails on either side of the thumbnails container (viewport)
+    // 'approximately' is due to the presence of margin between adjacent images
+  );
 
   // temporarily replace the image with the placeholder image
   const src = isInViewport ? props.src : placeholderImage;
@@ -25,13 +31,13 @@ const LazyLoadedImage = (props) => {
       src={src}
       alt={props.alt}
       aria-label={props.alt}
-      loading='lazy'
       onError={handleError}
     />
   );
 };
 
-LazyLoadedImage.propTypes = {
+LazyLoadedImageThumbnail.propTypes = {
+  thumbnailsContainerRef: elementRef.isRequired,
   src: PropTypes.string.isRequired,
   alt: PropTypes.string
 };
@@ -41,7 +47,14 @@ export const ImageThumbnail = (props) => {
   const src = props.image.thumbnail || props.image.src;
   const alt = props.image.alt || null;
 
-  if (props.shouldLazyLoad) return <LazyLoadedImage src={src} alt={alt} />;
+  if (props.shouldLazyLoad)
+    return (
+      <LazyLoadedImageThumbnail
+        thumbnailsContainerRef={props.thumbnailsContainerRef}
+        src={src}
+        alt={alt}
+      />
+    );
 
   return (
     <img
@@ -57,5 +70,6 @@ export const ImageThumbnail = (props) => {
 
 ImageThumbnail.propTypes = {
   image: imageObject.isRequired,
-  shouldLazyLoad: PropTypes.bool.isRequired
+  shouldLazyLoad: PropTypes.bool.isRequired,
+  thumbnailsContainerRef: elementRef.isRequired
 };

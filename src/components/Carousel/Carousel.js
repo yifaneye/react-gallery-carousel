@@ -489,6 +489,7 @@ export const Carousel = (props) => {
               minRef={slideMinRef}
               maxRef={slideMaxRef}
               slidesRef={slidesRef}
+              slidesContainerRef={slidesContainerRef}
               length={nSlides}
               slides={slidesElements}
               hasImages={hasImages}
