@@ -338,7 +338,11 @@ export const Carousel = (props) => {
 
   // background to be placed behind the maximized carousel
   const maxCarouselBackground = isMaximized && (
-    <div ref={maximizedBackgroundRef} className={maxCarouselClassName} />
+    <div
+      ref={maximizedBackgroundRef}
+      className={maxCarouselClassName}
+      style={'zIndexAtMax' in props ? { zIndex: props.zIndexAtMax } : {}}
+    />
   );
 
   /* process settings */
@@ -475,7 +479,13 @@ export const Carousel = (props) => {
       <div
         ref={carouselRef}
         className={isMaximized ? maxCarouselClassName : carouselClassName}
-        style={isMaximized ? {} : props.style}
+        style={
+          isMaximized
+            ? 'zIndexAtMax' in props
+              ? { zIndex: props.zIndexAtMax }
+              : {}
+            : props.style
+        }
         data-is-not-keyboard-user='true'
       >
         <div className={styles.carouselInner}>

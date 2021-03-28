@@ -63,7 +63,8 @@ export const propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   objectFit: objectFitStyles.isRequired,
-  objectFitAtMax: objectFitStyles.isRequired
+  objectFitAtMax: objectFitStyles.isRequired,
+  zIndexAtMax: PropTypes.number
 };
 
 export const defaultProps = {
