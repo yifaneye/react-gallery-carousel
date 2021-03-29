@@ -21,13 +21,19 @@ code {
 
 .carousel-container {
   width: 100%;
-  height: 600px;
+  height: calc(100vw * 0.8);
   margin-bottom: 30px;
 }
 
-@media (max-width: 1000px) {
+@media only screen and (min-width: 500px) and (max-width: 1000px) {
   .carousel-container {
-    height: calc(100vw * 0.8);
+    height: calc(100vw * 0.6);
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .carousel-container {
+    height: 600px;
   }
 }
 

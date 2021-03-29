@@ -4,7 +4,7 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/TwoWayMap';
 
-const imageIDs = Array(172)
+const imageIDs = Array(30) // the maximum is currently 172
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
@@ -92,7 +92,7 @@ const App = () => {
         <Carousel
           className='framed-carousel'
           images={images}
-          index={99}
+          index={7}
           // isRTL={true}
           isMaximized={false}
           hasMediaButtonAtMax='bottomLeft'
