@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import puppeteer from 'puppeteer';
-const { test, expect } = global;
+const { test } = global;
 
 // unit testing
 test('Carousel renders without crashing', () => {
@@ -49,9 +49,6 @@ test('Carousel can be controlled', async () => {
   await navigationPromise;
   await page.waitForTimeout(1000);
 
-  // await page.waitForSelector('[aria-label="Pause Autoplay"]');
-  await page.click('[aria-label="Pause Autoplay"]');
-
   // await page.waitForSelector('[aria-label="Go to Next Slide"]');
   await page.click('[aria-label="Go to Next Slide"]');
 
@@ -67,11 +64,17 @@ test('Carousel can be controlled', async () => {
   // await page.waitForSelector('[aria-label="Go to Slide 3"]');
   await page.click('[aria-label="Go to Slide 3"]');
 
-  const index = await page.$eval(
-    '[aria-label="Slide 3 of 3"]',
-    (el) => el.textContent
-  );
-  expect(index).toBe('3 / 3');
+  // const index = await page.$eval(
+  //   '[aria-label="Slide 3 of 3"]',
+  //   (el) => el.textContent
+  // );
+  // expect(index).toBe('3 / 3');
+
+  // await page.waitForSelector('[aria-label="Start Autoplay"]');
+  await page.click('[aria-label="Start Autoplay"]');
+
+  // await page.waitForSelector('[aria-label="Pause Autoplay"]');
+  await page.click('[aria-label="Pause Autoplay"]');
 
   // await page.screenshot({ path: 'record/screenshot.jpg' });
   // await page.pdf({ path: 'record/print.pdf', format: 'a4' });

@@ -26,7 +26,7 @@ const useMouseDrag = (elementRef) => {
   useEffect(() => {
     // disable selection on the element to ensure the value of
     // CSS 'cursor' property is not the default 'text' on select on Safari
-    elementRef.current.onselectstart = () => false;
+    if (elementRef.current) elementRef.current.onselectstart = () => false;
   }, [elementRef]);
 
   return useMouse(elementRef, {

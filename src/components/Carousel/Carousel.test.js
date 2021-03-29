@@ -3,10 +3,14 @@ import renderer from 'react-test-renderer';
 import Carousel from '../Carousel';
 const { describe, it, expect } = global;
 
+const images = [900, 800, 700, 600, 500].map((size) => ({
+  src: `https://placedog.net/${size}/${size}`
+}));
+
 const imageIDs = Array(6)
   .fill(1)
   .map((_, i) => i + 1);
-const images = imageIDs.map((imageID) => {
+const images2 = imageIDs.map((imageID) => {
   return {
     src: `https://placedog.net/8${imageID}0/6${imageID}0?id=${imageID}`,
     alt: `Dog No. ${imageID}. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
@@ -46,7 +50,7 @@ describe('Carousel', () => {
 
   it('can be maximized and renders the same as snapshot', () => {
     const component2 = renderer.create(
-      <Carousel images={images} isMaximized />
+      <Carousel images={images2} isMaximized />
     );
     const tree2 = component2.toJSON();
     expect(tree2).toMatchSnapshot();

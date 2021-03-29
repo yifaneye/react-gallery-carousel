@@ -143,6 +143,7 @@ export const IconButton = (props) => {
       className={`${styles.button} ${
         props.hasShadow ? ' ' + styles.buttonShadow : ''
       }`}
+      type='button'
       aria-label={props.label}
       aria-disabled={false}
       onClick={props.onClick}

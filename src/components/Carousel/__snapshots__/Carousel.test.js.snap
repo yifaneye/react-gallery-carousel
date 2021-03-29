@@ -7,6 +7,7 @@ Array [
   />,
   <div
     className="maxCarousel gallery"
+    style={Object {}}
   />,
   <div
     className="maxCarousel gallery"
@@ -14,221 +15,219 @@ Array [
     style={Object {}}
   >
     <div
-      className="slidesWrapper"
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseMove={[Function]}
-      onMouseUpCapture={[Function]}
-      tabIndex={0}
+      className="carouselInner"
     >
-      <ul
-        className="slides"
+      <div
+        className="slidesContainer"
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
+        onMouseUpCapture={[Function]}
+        tabIndex={0}
       >
-        <li
-          className="slide"
+        <ul
+          className="slides hasImages"
         >
-          <figure
-            aria-label="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="figure"
+          <li
+            className="slide"
           >
-            <img
-              alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="image"
-              loading="lazy"
-              onError={[Function]}
-              onLoad={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+            <figure
+              aria-label="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+              className="figure"
+            >
+              <img
+                alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="image"
+                onError={[Function]}
+                onLoad={[Function]}
+                src=""
+                srcSet={null}
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-            <img
-              alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="thumbnail"
-              loading="lazy"
-              onError={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+              />
+              <img
+                alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="thumbnail"
+                onError={[Function]}
+                src=""
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-          </figure>
-        </li>
-        <li
-          className="slide"
-        >
-          <figure
-            aria-label="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="figure"
+              />
+            </figure>
+          </li>
+          <li
+            className="slide"
           >
-            <img
-              alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="image"
-              loading="lazy"
-              onError={[Function]}
-              onLoad={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+            <figure
+              aria-label="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+              className="figure"
+            >
+              <img
+                alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="image"
+                onError={[Function]}
+                onLoad={[Function]}
+                src=""
+                srcSet={null}
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-            <img
-              alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="thumbnail"
-              loading="lazy"
-              onError={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+              />
+              <img
+                alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="thumbnail"
+                onError={[Function]}
+                src=""
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-          </figure>
-        </li>
-        <li
-          className="slide"
-        >
-          <figure
-            aria-label="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="figure"
+              />
+            </figure>
+          </li>
+          <li
+            className="slide"
           >
-            <img
-              alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="image"
-              loading="lazy"
-              onError={[Function]}
-              onLoad={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+            <figure
+              aria-label="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+              className="figure"
+            >
+              <img
+                alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="image"
+                onError={[Function]}
+                onLoad={[Function]}
+                src=""
+                srcSet={null}
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-            <img
-              alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="thumbnail"
-              loading="lazy"
-              onError={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+              />
+              <img
+                alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="thumbnail"
+                onError={[Function]}
+                src=""
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-          </figure>
-        </li>
-        <li
-          className="slide"
-        >
-          <figure
-            aria-label="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="figure"
+              />
+            </figure>
+          </li>
+          <li
+            className="slide"
           >
-            <img
-              alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="image"
-              loading="lazy"
-              onError={[Function]}
-              onLoad={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+            <figure
+              aria-label="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+              className="figure"
+            >
+              <img
+                alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="image"
+                onError={[Function]}
+                onLoad={[Function]}
+                src=""
+                srcSet={null}
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-            <img
-              alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="thumbnail"
-              loading="lazy"
-              onError={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+              />
+              <img
+                alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="thumbnail"
+                onError={[Function]}
+                src=""
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-          </figure>
-        </li>
-        <li
-          className="slide"
-        >
-          <figure
-            aria-label="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="figure"
+              />
+            </figure>
+          </li>
+          <li
+            className="slide"
           >
-            <img
-              alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="image"
-              loading="lazy"
-              onError={[Function]}
-              onLoad={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+            <figure
+              aria-label="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+              className="figure"
+            >
+              <img
+                alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="image"
+                onError={[Function]}
+                onLoad={[Function]}
+                src=""
+                srcSet={null}
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-            <img
-              alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="thumbnail"
-              loading="lazy"
-              onError={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+              />
+              <img
+                alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="thumbnail"
+                onError={[Function]}
+                src=""
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-          </figure>
-        </li>
-        <li
-          className="slide"
-        >
-          <figure
-            aria-label="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="figure"
+              />
+            </figure>
+          </li>
+          <li
+            className="slide"
           >
-            <img
-              alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="image"
-              loading="lazy"
-              onError={[Function]}
-              onLoad={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+            <figure
+              aria-label="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+              className="figure"
+            >
+              <img
+                alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="image"
+                onError={[Function]}
+                onLoad={[Function]}
+                src=""
+                srcSet={null}
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-            <img
-              alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-              className="thumbnail"
-              loading="lazy"
-              onError={[Function]}
-              src=""
-              style={
-                Object {
-                  "objectFit": "contain",
+              />
+              <img
+                alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+                className="thumbnail"
+                onError={[Function]}
+                src=""
+                style={
+                  Object {
+                    "objectFit": "contain",
+                  }
                 }
-              }
-            />
-          </figure>
-        </li>
-      </ul>
+              />
+            </figure>
+          </li>
+        </ul>
+      </div>
       <div
         className="widgetWrapper topLeft"
       >
@@ -237,31 +236,25 @@ Array [
           aria-label="Start Autoplay"
           className="button "
           onClick={[Function]}
+          type="button"
         >
           <div
             className="iconWrapper square"
           >
             <svg
-              aria-labelledby="play-title play-desc"
+              className="icon"
               height="30"
               preserveAspectRatio="xMidYMid meet"
+              role="img"
               viewBox="0 0 30 30"
               width="30"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title
-                id="play-title"
-              >
+              <title>
                 Play
               </title>
-              <desc
-                id="play-desc"
-              >
-                Equilateral triangle pointing right
-              </desc>
               <path
-                d="m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z"
-                fill="#fff"
+                d="m1 1v28l28-14z"
               />
             </svg>
           </div>
@@ -287,56 +280,26 @@ Array [
           aria-label="Minimize Slides"
           className="button "
           onClick={[Function]}
+          type="button"
         >
           <div
             className="iconWrapper square"
           >
             <svg
-              aria-labelledby="min-title min-desc"
+              className="icon"
               height="30"
               preserveAspectRatio="xMidYMid meet"
+              role="img"
               viewBox="0 0 30 30"
               width="30"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title
-                id="min-title"
-              >
+              <title>
                 Minimize
               </title>
-              <desc
-                id="min-desc"
-              >
-                4 small arrows pointing inwards
-              </desc>
-              <g
-                fill="#fff"
-              >
-                <path
-                  d="m0 5h10v5h-10z"
-                />
-                <path
-                  d="m0 20h10v5h-10z"
-                />
-                <path
-                  d="m10 0v10h-5v-10z"
-                />
-                <path
-                  d="m10 20v10h-5v-10z"
-                />
-                <path
-                  d="m20 5h10v5h-10z"
-                />
-                <path
-                  d="m20 20h10v5h-10z"
-                />
-                <path
-                  d="m25 0v10h-5v-10z"
-                />
-                <path
-                  d="m25 20v10h-5v-10z"
-                />
-              </g>
+              <path
+                d="m6 1v5h-5v5h10v-10zm13 0v10h10v-5h-5v-5zm-18 18v5h5v5h5v-10zm18 0v10h5v-5h5v-5z"
+              />
             </svg>
           </div>
         </button>
@@ -349,31 +312,25 @@ Array [
           aria-label="Go to Previous Slide"
           className="button "
           onClick={[Function]}
+          type="button"
         >
           <div
             className="iconWrapper rectangle"
           >
             <svg
-              aria-labelledby="left-title left-desc"
+              className="icon"
               height="40"
               preserveAspectRatio="xMidYMid meet"
+              role="img"
               viewBox="0 0 20 40"
               width="20"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title
-                id="left-title"
-              >
+              <title>
                 Left
               </title>
-              <desc
-                id="left-desc"
-              >
-                Obtuse triangle pointing left
-              </desc>
               <path
-                d="m20 0v40l-20-20z"
-                fill="#fff"
+                d="m19 1v37l-18-20z"
               />
             </svg>
           </div>
@@ -387,31 +344,25 @@ Array [
           aria-label="Go to Next Slide"
           className="button "
           onClick={[Function]}
+          type="button"
         >
           <div
             className="iconWrapper rectangle"
           >
             <svg
-              aria-labelledby="right-title right-desc"
+              className="icon"
               height="40"
               preserveAspectRatio="xMidYMid meet"
+              role="img"
               viewBox="0 0 20 40"
               width="20"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title
-                id="right-title"
-              >
+              <title>
                 Right
               </title>
-              <desc
-                id="right-desc"
-              >
-                Obtuse triangle pointing right
-              </desc>
               <path
-                d="m0 40v-40l20 20z"
-                fill="#fff"
+                d="m1 1v38l18-19z"
               />
             </svg>
           </div>
@@ -439,7 +390,6 @@ Array [
             alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             aria-label="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             className="image"
-            loading="lazy"
             onError={[Function]}
             src=""
           />
@@ -454,7 +404,6 @@ Array [
             alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             aria-label="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             className="image"
-            loading="lazy"
             onError={[Function]}
             src=""
           />
@@ -469,7 +418,6 @@ Array [
             alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             aria-label="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             className="image"
-            loading="lazy"
             onError={[Function]}
             src=""
           />
@@ -484,7 +432,6 @@ Array [
             alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             aria-label="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             className="image"
-            loading="lazy"
             onError={[Function]}
             src=""
           />
@@ -499,7 +446,6 @@ Array [
             alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             aria-label="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             className="image"
-            loading="lazy"
             onError={[Function]}
             src=""
           />
@@ -514,7 +460,6 @@ Array [
             alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             aria-label="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
             className="image"
-            loading="lazy"
             onError={[Function]}
             src=""
           />
@@ -531,221 +476,186 @@ exports[`Carousel renders the same as snapshot 1`] = `
   data-is-not-keyboard-user="true"
 >
   <div
-    className="slidesWrapper"
-    onMouseDown={[Function]}
-    onMouseLeave={[Function]}
-    onMouseMove={[Function]}
-    onMouseUpCapture={[Function]}
-    tabIndex={0}
+    className="carouselInner"
   >
-    <ul
-      className="slides"
+    <div
+      className="slidesContainer"
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      onMouseUpCapture={[Function]}
+      tabIndex={0}
     >
-      <li
-        className="slide"
+      <ul
+        className="slides hasImages"
       >
-        <figure
-          aria-label="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="figure"
+        <li
+          className="slide"
         >
-          <img
-            alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="image"
-            loading="lazy"
-            onError={[Function]}
-            onLoad={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+          <figure
+            aria-label={null}
+            className="figure"
+          >
+            <img
+              alt={null}
+              className="image"
+              onError={[Function]}
+              onLoad={[Function]}
+              src=""
+              srcSet={null}
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-          <img
-            alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="thumbnail"
-            loading="lazy"
-            onError={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+            />
+            <img
+              alt={null}
+              className="thumbnail hidden"
+              onError={[Function]}
+              src=""
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-        </figure>
-      </li>
-      <li
-        className="slide"
-      >
-        <figure
-          aria-label="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="figure"
+            />
+          </figure>
+        </li>
+        <li
+          className="slide"
         >
-          <img
-            alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="image"
-            loading="lazy"
-            onError={[Function]}
-            onLoad={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+          <figure
+            aria-label={null}
+            className="figure"
+          >
+            <img
+              alt={null}
+              className="image"
+              onError={[Function]}
+              onLoad={[Function]}
+              src=""
+              srcSet={null}
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-          <img
-            alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="thumbnail"
-            loading="lazy"
-            onError={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+            />
+            <img
+              alt={null}
+              className="thumbnail hidden"
+              onError={[Function]}
+              src=""
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-        </figure>
-      </li>
-      <li
-        className="slide"
-      >
-        <figure
-          aria-label="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="figure"
+            />
+          </figure>
+        </li>
+        <li
+          className="slide"
         >
-          <img
-            alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="image"
-            loading="lazy"
-            onError={[Function]}
-            onLoad={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+          <figure
+            aria-label={null}
+            className="figure"
+          >
+            <img
+              alt={null}
+              className="image"
+              onError={[Function]}
+              onLoad={[Function]}
+              src=""
+              srcSet={null}
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-          <img
-            alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="thumbnail"
-            loading="lazy"
-            onError={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+            />
+            <img
+              alt={null}
+              className="thumbnail hidden"
+              onError={[Function]}
+              src=""
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-        </figure>
-      </li>
-      <li
-        className="slide"
-      >
-        <figure
-          aria-label="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="figure"
+            />
+          </figure>
+        </li>
+        <li
+          className="slide"
         >
-          <img
-            alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="image"
-            loading="lazy"
-            onError={[Function]}
-            onLoad={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+          <figure
+            aria-label={null}
+            className="figure"
+          >
+            <img
+              alt={null}
+              className="image"
+              onError={[Function]}
+              onLoad={[Function]}
+              src=""
+              srcSet={null}
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-          <img
-            alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="thumbnail"
-            loading="lazy"
-            onError={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+            />
+            <img
+              alt={null}
+              className="thumbnail hidden"
+              onError={[Function]}
+              src=""
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-        </figure>
-      </li>
-      <li
-        className="slide"
-      >
-        <figure
-          aria-label="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="figure"
+            />
+          </figure>
+        </li>
+        <li
+          className="slide"
         >
-          <img
-            alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="image"
-            loading="lazy"
-            onError={[Function]}
-            onLoad={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+          <figure
+            aria-label={null}
+            className="figure"
+          >
+            <img
+              alt={null}
+              className="image"
+              onError={[Function]}
+              onLoad={[Function]}
+              src=""
+              srcSet={null}
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-          <img
-            alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="thumbnail"
-            loading="lazy"
-            onError={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
+            />
+            <img
+              alt={null}
+              className="thumbnail hidden"
+              onError={[Function]}
+              src=""
+              style={
+                Object {
+                  "objectFit": null,
+                }
               }
-            }
-          />
-        </figure>
-      </li>
-      <li
-        className="slide"
-      >
-        <figure
-          aria-label="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="figure"
-        >
-          <img
-            alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="image"
-            loading="lazy"
-            onError={[Function]}
-            onLoad={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
-              }
-            }
-          />
-          <img
-            alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-            className="thumbnail"
-            loading="lazy"
-            onError={[Function]}
-            src=""
-            style={
-              Object {
-                "objectFit": null,
-              }
-            }
-          />
-        </figure>
-      </li>
-    </ul>
+            />
+          </figure>
+        </li>
+      </ul>
+    </div>
     <div
       className="widgetWrapper topLeft"
     >
@@ -754,31 +664,25 @@ exports[`Carousel renders the same as snapshot 1`] = `
         aria-label="Start Autoplay"
         className="button "
         onClick={[Function]}
+        type="button"
       >
         <div
           className="iconWrapper square"
         >
           <svg
-            aria-labelledby="play-title play-desc"
+            className="icon"
             height="30"
             preserveAspectRatio="xMidYMid meet"
+            role="img"
             viewBox="0 0 30 30"
             width="30"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <title
-              id="play-title"
-            >
+            <title>
               Play
             </title>
-            <desc
-              id="play-desc"
-            >
-              Equilateral triangle pointing right
-            </desc>
             <path
-              d="m15 22.5-15 7.5v-15-15l15 7.5 15 7.5z"
-              fill="#fff"
+              d="m1 1v28l28-14z"
             />
           </svg>
         </div>
@@ -793,7 +697,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
       >
         1
          / 
-        6
+        5
       </span>
     </div>
     <div
@@ -804,56 +708,26 @@ exports[`Carousel renders the same as snapshot 1`] = `
         aria-label="Maximize Slides"
         className="button "
         onClick={[Function]}
+        type="button"
       >
         <div
           className="iconWrapper square"
         >
           <svg
-            aria-labelledby="max-title max-desc"
+            className="icon"
             height="30"
             preserveAspectRatio="xMidYMid meet"
+            role="img"
             viewBox="0 0 30 30"
             width="30"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <title
-              id="max-title"
-            >
+            <title>
               Maximize
             </title>
-            <desc
-              id="max-desc"
-            >
-              4 small arrows pointing outwards
-            </desc>
-            <g
-              fill="#fff"
-            >
-              <path
-                d="m0 0h10v5h-10z"
-              />
-              <path
-                d="m0 25h10v5h-10z"
-              />
-              <path
-                d="m5 0v10h-5v-10z"
-              />
-              <path
-                d="m5 20v10h-5v-10z"
-              />
-              <path
-                d="m20 0h10v5h-10z"
-              />
-              <path
-                d="m20 25h10v5h-10z"
-              />
-              <path
-                d="m30 0v10h-5v-10z"
-              />
-              <path
-                d="m30 20v10h-5v-10z"
-              />
-            </g>
+            <path
+              d="m1 1v10h5v-5h5v-5zm18 0v5h5v5h5v-10zm-18 18v10h10v-5h-5v-5zm18 5v5h10v-10h-5v5z"
+            />
           </svg>
         </div>
       </button>
@@ -866,31 +740,25 @@ exports[`Carousel renders the same as snapshot 1`] = `
         aria-label="Go to Previous Slide"
         className="button "
         onClick={[Function]}
+        type="button"
       >
         <div
           className="iconWrapper rectangle"
         >
           <svg
-            aria-labelledby="left-title left-desc"
+            className="icon"
             height="40"
             preserveAspectRatio="xMidYMid meet"
+            role="img"
             viewBox="0 0 20 40"
             width="20"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <title
-              id="left-title"
-            >
+            <title>
               Left
             </title>
-            <desc
-              id="left-desc"
-            >
-              Obtuse triangle pointing left
-            </desc>
             <path
-              d="m20 0v40l-20-20z"
-              fill="#fff"
+              d="m19 1v37l-18-20z"
             />
           </svg>
         </div>
@@ -904,31 +772,25 @@ exports[`Carousel renders the same as snapshot 1`] = `
         aria-label="Go to Next Slide"
         className="button "
         onClick={[Function]}
+        type="button"
       >
         <div
           className="iconWrapper rectangle"
         >
           <svg
-            aria-labelledby="right-title right-desc"
+            className="icon"
             height="40"
             preserveAspectRatio="xMidYMid meet"
+            role="img"
             viewBox="0 0 20 40"
             width="20"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <title
-              id="right-title"
-            >
+            <title>
               Right
             </title>
-            <desc
-              id="right-desc"
-            >
-              Obtuse triangle pointing right
-            </desc>
             <path
-              d="m0 40v-40l20 20z"
-              fill="#fff"
+              d="m1 1v38l18-19z"
             />
           </svg>
         </div>
@@ -953,10 +815,9 @@ exports[`Carousel renders the same as snapshot 1`] = `
         tabIndex={0}
       >
         <img
-          alt="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          aria-label="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+          alt={null}
+          aria-label={null}
           className="image"
-          loading="lazy"
           onError={[Function]}
           src=""
         />
@@ -968,10 +829,9 @@ exports[`Carousel renders the same as snapshot 1`] = `
         tabIndex={0}
       >
         <img
-          alt="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          aria-label="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+          alt={null}
+          aria-label={null}
           className="image"
-          loading="lazy"
           onError={[Function]}
           src=""
         />
@@ -983,10 +843,9 @@ exports[`Carousel renders the same as snapshot 1`] = `
         tabIndex={0}
       >
         <img
-          alt="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          aria-label="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+          alt={null}
+          aria-label={null}
           className="image"
-          loading="lazy"
           onError={[Function]}
           src=""
         />
@@ -998,10 +857,9 @@ exports[`Carousel renders the same as snapshot 1`] = `
         tabIndex={0}
       >
         <img
-          alt="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          aria-label="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+          alt={null}
+          aria-label={null}
           className="image"
-          loading="lazy"
           onError={[Function]}
           src=""
         />
@@ -1013,25 +871,9 @@ exports[`Carousel renders the same as snapshot 1`] = `
         tabIndex={0}
       >
         <img
-          alt="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          aria-label="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
+          alt={null}
+          aria-label={null}
           className="image"
-          loading="lazy"
-          onError={[Function]}
-          src=""
-        />
-      </li>
-      <li
-        className="thumbnail"
-        onMouseUpCapture={[Function]}
-        role="button"
-        tabIndex={0}
-      >
-        <img
-          alt="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          aria-label="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
-          className="image"
-          loading="lazy"
           onError={[Function]}
           src=""
         />
