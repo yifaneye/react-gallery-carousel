@@ -45,6 +45,8 @@ export const Slides = memo((props) => {
   );
 });
 
+Slides.type.displayName = 'Slides';
+
 Slides.propTypes = {
   slides: PropTypes.array.isRequired,
   isRTL: PropTypes.bool.isRequired,

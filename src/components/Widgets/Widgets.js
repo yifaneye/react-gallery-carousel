@@ -211,6 +211,8 @@ export const Caption = memo((props) => {
   );
 });
 
+Caption.type.displayName = 'Caption';
+
 Caption.propTypes = {
   position: largeWidgetPositions.isRequired,
   hasShadow: PropTypes.bool.isRequired,
