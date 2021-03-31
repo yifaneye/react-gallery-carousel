@@ -12,7 +12,7 @@ UserSlide.propTypes = {
 
 export const UserSlideThumbnail = (props) => {
   return (
-    <div className={styles.userSlide + ' ' + styles.thumbnail}>
+    <div className={styles.userSlide + ' ' + styles.thumbnail} tabIndex='-1'>
       {props.slide}
     </div>
   );

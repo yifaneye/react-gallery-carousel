@@ -24,7 +24,7 @@ export const Slide = (props) => {
     <UserSlide slide={props.slide} />
   );
   return (
-    <li ref={props.reference} className={styles.slide}>
+    <li ref={props.reference} className={styles.slide} role='presentation'>
       {slide}
     </li>
   );

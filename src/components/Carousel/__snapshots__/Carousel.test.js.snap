@@ -491,6 +491,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
       >
         <li
           className="slide"
+          role="presentation"
         >
           <figure
             aria-label={null}
@@ -524,6 +525,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
         </li>
         <li
           className="slide"
+          role="presentation"
         >
           <figure
             aria-label={null}
@@ -557,6 +559,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
         </li>
         <li
           className="slide"
+          role="presentation"
         >
           <figure
             aria-label={null}
@@ -590,6 +593,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
         </li>
         <li
           className="slide"
+          role="presentation"
         >
           <figure
             aria-label={null}
@@ -623,6 +627,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
         </li>
         <li
           className="slide"
+          role="presentation"
         >
           <figure
             aria-label={null}
