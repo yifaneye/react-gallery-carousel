@@ -4,6 +4,14 @@ Dependency-free React carousel component with support for lazy loading, pinch zo
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+## Demo
+Try [Live Demo](https://yifanai.com/rgc)
+
+![Carousel in action](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
+![Non-maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_non_maximized.jpg)
+![Maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_maximized.jpg)
+![Lighthouse Report](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report.jpg)
+
 ## Install
 
 ```bash
@@ -142,4 +150,4 @@ yarn start
 
 ## License
 
-MIT © [Yifan Ai](https://github.com/yifaneye/react-gallery-carousel)
+MIT © [Yifan Ai](https://yifanai.com)
