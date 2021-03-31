@@ -1,0 +1,4 @@
+# robots.txt for https://yifaneye.github.io/react-gallery-carousel/
+
+User-agent: *
+Allow: *
