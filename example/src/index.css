@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+.text-slide {
+  padding: 1rem;
+}
+
 .carousels-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -22,7 +26,7 @@ code {
 .carousel-container {
   width: 100%;
   height: calc(100vw * 0.8);
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 @media only screen and (min-width: 500px) and (max-width: 1000px) {
@@ -42,7 +46,6 @@ code {
 }
 
 .framed-carousel {
-  margin: 50px 0;
   border: 5px solid #eee;
   overflow: hidden;
   border-radius: 10px;

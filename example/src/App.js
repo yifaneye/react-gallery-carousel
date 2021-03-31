@@ -43,28 +43,30 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       }}
       style={{ userSelect: 'text' }}
     >
-      <div>
-        <h1>react-gallery-carousel</h1>
+      <div className='text-slide'>
+        <h3>Introduction</h3>
         <p>
-          Dependency-free React carousel component with support for lazy
-          loading, pinch zoom, touch swiping, mouse dragging, velocity
-          detection, maximization, thumbnails, keyboard navigation and
-          accessibility.
+          react-gallery-carousel is a dependency-free React carousel component
+          with support for lazy loading, pinch zoom, touch swiping, mouse
+          dragging, velocity detection, maximization, thumbnails, keyboard
+          navigation and accessibility.
         </p>
+        <a href='https://yifanai.com/rgc'>Demo</a>
+        <span> / </span>
         <a href='https://www.npmjs.com/package/react-gallery-carousel'>npm</a>
         <span> / </span>
         <a href='https://github.com/yifaneye/react-gallery-carousel'>GitHub</a>
       </div>
-      <div>
-        <h2>Get Started</h2>
+      <div className='text-slide'>
+        <h3>Get Started</h3>
         <code>npm install react-gallery-carousel --save</code>
         <div>
           <span>or</span>
         </div>
         <code>yarn add react-gallery-carousel</code>
       </div>
-      <div>
-        <h2>Example</h2>
+      <div className='text-slide'>
+        <h3>Example</h3>
         <p>The basic carousel shown below is created by:</p>
         <code>{exampleCode}</code>
       </div>
@@ -73,20 +75,25 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 };
 
 const App = () => {
-  const basicCarouselExampleCode = `<Carousel images={images} style={{ height: '300px' }} />`;
+  const basicCarouselExampleCode = `<Carousel images={images} />`;
 
   return (
     <div className='carousels-container'>
+      <h1>react-gallery-carousel</h1>
+      <h2>Example 1:</h2>
+      <p>This is a example with user-managed slides</p>
       <div className='carousel-container short'>
         {/*basic carousel example with user-managed slides */}
         <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
       </div>
-
+      <h2>Example 2:</h2>
+      <p>This is the default example with images</p>
       <div className='carousel-container'>
         {/*basic carousel example*/}
         <Carousel images={images} />
       </div>
-
+      <h2>Example 3:</h2>
+      <p>This is the customized example with images</p>
       <div className='carousel-container'>
         {/*customized carousel example*/}
         <Carousel
