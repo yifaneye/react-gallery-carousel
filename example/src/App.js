@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
@@ -76,6 +76,12 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 
 const App = () => {
   const basicCarouselExampleCode = `<Carousel images={images} />`;
+  const [dynamicImages, setDynamicImages] = useState([]);
+
+  useEffect(() => {
+    setDynamicImages(images);
+    return () => {};
+  }, [setDynamicImages]);
 
   return (
     <div className='carousels-container'>
@@ -98,7 +104,7 @@ const App = () => {
         {/*customized carousel example*/}
         <Carousel
           className='framed-carousel'
-          images={images}
+          images={dynamicImages}
           index={7}
           // isRTL={true}
           isMaximized={false}

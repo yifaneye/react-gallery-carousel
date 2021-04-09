@@ -1,17 +1,16 @@
 import SlidesFactory from './SlidesFactory';
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 
 const useSlides = (items, { index, isLoop }) => {
-  const itemsRef = useRef(items);
   return useMemo(() => {
     const slidesFactory = new SlidesFactory();
-    const slides = slidesFactory.CreateSlides(itemsRef.current, {
+    const slides = slidesFactory.CreateSlides(items, {
       index: index,
       isLoop: isLoop
     });
     const slidesElements = slides.slides;
     return [slides, slidesElements];
-  }, [itemsRef, index, isLoop]);
+  }, [items, index, isLoop]);
 };
 
 export default useSlides;
