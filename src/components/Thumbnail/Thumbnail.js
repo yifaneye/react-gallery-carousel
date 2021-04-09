@@ -3,7 +3,7 @@ import styles from './Thumbnail.module.scss';
 import { ImageThumbnail } from '../Image';
 import { UserSlideThumbnail } from '../UserSlide';
 import useNoDrag from '../../utils/useNoDrag';
-import useEnter from '../../utils/useEnter';
+import useKeys from '../../utils/useKeys';
 import PropTypes from 'prop-types';
 import { elementRef, slideObject } from '../../utils/validators';
 
@@ -28,7 +28,7 @@ export const Thumbnail = (props) => {
 
   useNoDrag(ref); // prevent dragging on FireFox
 
-  useEnter(ref);
+  useKeys(ref, { Enter: props.onClick }); // allow keyboard navigation
 
   return (
     <li
