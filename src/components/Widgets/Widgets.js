@@ -112,9 +112,6 @@ SizeButton.propTypes = {
 export const IndexBoard = (props) => {
   const ref = useRef(null);
 
-  // allow the user to select text using cursor or finger
-  useNoSwipe(ref);
-
   return (
     <div
       ref={ref}
