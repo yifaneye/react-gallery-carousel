@@ -1,16 +1,28 @@
 # react-gallery-carousel
 
-Dependency-free React carousel component with support for lazy loading, pinch zoom, touch swiping, mouse dragging, velocity detection, maximization, thumbnails, keyboard navigation and accessibility.
+Dependency-free React carousel component with support for lazy loading, pinch to zoom, touch swiping, mouse dragging, velocity detection, maximization, thumbnails, keyboard navigation and accessibility.
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
 ## Demo
+
+### Live demo
 Try [Live Demo](https://yifanai.com/rgc)
 
-![Carousel in action](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
+### Carousel controlled by cursor
+![Carousel controlled by cursor](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
+
+### Carousel controlled by finger
+![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
+
+### Non-maximized carousel
 ![Non-maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_non_maximized.jpg)
+
+### Maximized carousel
 ![Maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_maximized.jpg)
-![Lighthouse Report](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report.jpg)
+
+### Lighthouse report
+![Lighthouse Report on GitHub Pages](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.1.jpg)
 
 ## Install
 
@@ -75,8 +87,8 @@ To customize the carousel, use the following props:
 |hasDotButtons *          |Boolean or String     |false        |If false, the carousel does not show dot buttons (i.e. array of dots indicating the current slide in relation to other slides). Its position can be specified by one of [large widget positions](#large-widget-positions).|
 |hasCaptions *            |Boolean or String     |false        |If false, the carousel does not show caption for each image. Its position can be specified by one of [large widget positions](#large-widget-positions).|
 |hasThumbnails            |Boolean               |true         |If false, the carousel does not show thumbnails at the bottom.|
-|hasLeftButtonAtMax *     |Boolean or String     |undefined    |If false, the maximized carousel does not show left button. Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasLeftButtons' prop for the maximized carousel. If not specified, the value of 'hasLeftButtons' will be used.|
-|hasRightButtonAtMax *    |Boolean or String     |undefined    |If false, the maximized carousel does not show right button. Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasRightButtons' prop for the maximized carousel. If not specified, the value of 'hasLeftButtons' will be used.|
+|hasLeftButtonAtMax *     |Boolean or String     |undefined    |If false, the maximized carousel does not show left button. Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasLeftButton' prop for the maximized carousel. If not specified, the value of 'hasLeftButton' will be used.|
+|hasRightButtonAtMax *    |Boolean or String     |undefined    |If false, the maximized carousel does not show right button. Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasRightButton' prop for the maximized carousel. If not specified, the value of 'hasRightButton' will be used.|
 |hasMediaButtonAtMax *    |Boolean or String     |undefined    |If false, the maximized carousel does not show media button (i.e. play/pause button). Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasMediaButton' prop for the maximized carousel. If not specified, the value of 'hasMediaButton' will be used. If the value of 'canAutoPlay' is falsy, media button will not be shown on the maximized carousel.|
 |hasSizeButtonAtMax *     |Boolean or String     |undefined    |If false, the maximized carousel does not show size button (i.e. maximize/minimize button). Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasSizeButton' prop for the maximized carousel. If not specified, the value of 'hasSizeButton' will be used.|
 |hasIndexBoardAtMax *     |Boolean or String     |undefined    |If false, the maximized carousel does not show index board (i.e. currentIndex / totalNumberOfSlides). Its position can be specified by one of [small widget positions](#small-widget-positions). It overrides 'hasIndexBoard' prop for the maximized carousel. If not specified, the value of 'hasIndexBoard' will be used.|

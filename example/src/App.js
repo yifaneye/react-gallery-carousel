@@ -31,6 +31,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       hasSizeButton='bottomLeft'
       hasMediaButton='bottomRight'
       hasDotButtons='bottom'
+      hasThumbnails={false}
       shouldSwipeOnMouse={false} // for selecting text
       shouldMinimizeOnSwipeDown={false} // for overflow scrolling
       index={Number(
@@ -47,7 +48,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         <h3>Introduction</h3>
         <p>
           react-gallery-carousel is a dependency-free React carousel component
-          with support for lazy loading, pinch zoom, touch swiping, mouse
+          with support for lazy loading, pinch to zoom, touch swiping, mouse
           dragging, velocity detection, maximization, thumbnails, keyboard
           navigation and accessibility.
         </p>
@@ -86,31 +87,44 @@ const App = () => {
   return (
     <div className='carousels-container'>
       <h1>react-gallery-carousel</h1>
-      <h2>Example 1:</h2>
-      <p>This is a example with user-managed slides</p>
+      <h2>Example 1</h2>
+      <p>Example with user-managed slides.</p>
       <div className='carousel-container short'>
         {/*basic carousel example with user-managed slides */}
         <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
       </div>
-      <h2>Example 2:</h2>
-      <p>This is the default example with images</p>
+      <h2>Example 2</h2>
+      <p>
+        Default example with images (with support for lazy loading and
+        preloading; touch swiping and mouse dragging on the carousel; touch
+        swiping, mouse dragging and wheel scrolling on the thumbnails; and touch
+        swipe down to exit the maximized carousel).
+      </p>
       <div className='carousel-container'>
         {/*basic carousel example*/}
         <Carousel images={images} />
       </div>
-      <h2>Example 3:</h2>
-      <p>This is the customized example with images</p>
+      <h2>Example 3</h2>
+      <p>
+        Customized example with images (with click to enter and exit the
+        maximized carousel; custom widget positions; thumbnails and captions for
+        the maximized carousel; and custom styles for the non-maximized
+        carousel).
+      </p>
       <div className='carousel-container'>
         {/*customized carousel example*/}
         <Carousel
           className='framed-carousel'
           images={dynamicImages}
-          index={7}
+          index={1}
           // isRTL={true}
           isMaximized={false}
-          hasMediaButtonAtMax='bottomLeft'
-          hasIndexBoardAtMax='bottomCenter'
-          hasSizeButtonAtMax='bottomRight'
+          hasSizeButton='topLeft'
+          hasMediaButton='topCenter'
+          hasIndexBoard='topRight'
+          hasSizeButtonAtMax='bottomLeft'
+          hasMediaButtonAtMax='bottomCenter'
+          hasIndexBoardAtMax='bottomRight'
           hasCaptionsAtMax='top'
           hasThumbnails={false}
           hasThumbnailsAtMax={true}

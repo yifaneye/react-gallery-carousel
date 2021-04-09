@@ -358,13 +358,11 @@ export const Carousel = (props) => {
   );
 
   /* process settings */
-  const settings = {
-    ...getSettings(
-      props,
-      ['objectFit', 'hasCaptions', 'hasThumbnails'],
-      isMaximized
-    )
-  };
+  const settings = getSettings(
+    props,
+    ['objectFit', 'hasCaptions', 'hasThumbnails'],
+    isMaximized
+  );
 
   const widgetSettings = getSettings(
     props,
