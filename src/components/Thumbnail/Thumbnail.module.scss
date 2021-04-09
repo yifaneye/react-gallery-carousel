@@ -1,5 +1,8 @@
 @import '../../common/common.scss';
 
+$passiveOpacity: 0.5;
+$activeOpacity: 1;
+
 .thumbnail {
   display: block;
   height: 100%;
@@ -9,17 +12,24 @@
   overflow: hidden;
   margin-right: $margin;
   padding: 0;
-  opacity: 0.5;
+  opacity: $passiveOpacity;
   list-style: none;
   user-select: none;
   -webkit-user-drag: none;
-  z-index: 1;
 }
 
 .currentThumbnail {
-  opacity: 1;
+  opacity: $activeOpacity;
 }
 
 .thumbnail:not(.currentThumbnail):hover {
-  opacity: 1;
+  opacity: $activeOpacity;
+}
+
+/* prevent thumbnail to stay in the hover state on touch devices,
+   since there is no such thing as "hover" on touch devices */
+@media (hover: none) {
+  .thumbnail:not(.currentThumbnail):hover {
+    opacity: $passiveOpacity;
+  }
 }
