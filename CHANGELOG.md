@@ -6,6 +6,9 @@
 
 - Fixed a bug where the last slide is not displayed starting from the second loop when there are exactly 2 slides
 
+### Enhancements
+- Remove the use of translate3d to make the performance consistent across browsers and platforms.
+
 ## v0.1.1 (2021-04-10)
 
 ### Bug Fixes
