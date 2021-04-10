@@ -1,5 +1,11 @@
 # v0.1
 
+## In Development
+
+### Bug Fixes
+
+- Fixed a bug where the last slide is not displayed starting from the second loop when there are exactly 2 slides
+
 ## v0.1.1 (2021-04-10)
 
 ### Bug Fixes

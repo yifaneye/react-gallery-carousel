@@ -149,10 +149,12 @@ export const Carousel = (props) => {
 
     // apply transition duration for the period of duration
     slidesRef.current.style.transitionDuration = `${duration}ms`;
-    setTimeout(
-      () => (slidesRef.current.style.transitionDuration = null),
-      duration
-    );
+    setTimeout(() => {
+      // revert temporary style changes made on the slides for transition and looping
+      if (slidesRef.current) slidesRef.current.style.transitionDuration = null;
+      if (slideMinRef.current) slideMinRef.current.style.transform = null;
+      if (slideMaxRef.current) slideMaxRef.current.style.transform = null;
+    }, duration);
   };
 
   // handle touch swipe down specifically
