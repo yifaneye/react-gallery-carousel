@@ -20,7 +20,7 @@ const images = imageIDs.map((imageID) => {
 const PackageIntroductionCarousel = ({ exampleCode }) => {
   const indexToTitle = new TwoWayMap({
     0: 'Introduction',
-    1: 'Get Started',
+    1: 'Get%20Started',
     2: 'Example'
   });
 
@@ -48,9 +48,9 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
         <h3>Introduction</h3>
         <p>
           react-gallery-carousel is a dependency-free React carousel component
-          with support for lazy loading, pinch to zoom, touch swiping, mouse
-          dragging, velocity detection, maximization, thumbnails, keyboard
-          navigation and accessibility.
+          with lazy loading, preloading, pinch to zoom, touch swiping, mouse
+          dragging, maximization, thumbnails, keyboard navigation, accessibility
+          and velocity detection.
         </p>
         <a href='https://yifanai.com/rgc'>Demo</a>
         <span> / </span>
@@ -95,10 +95,10 @@ const App = () => {
       </div>
       <h2>Example 2</h2>
       <p>
-        Default example with images (with support for lazy loading and
-        preloading; touch swiping and mouse dragging on the carousel; touch
-        swiping, mouse dragging and wheel scrolling on the thumbnails; and touch
-        swipe down to exit the maximized carousel).
+        Default example with images (with lazy loading and preloading; touch
+        swiping and mouse dragging on the carousel; touch swiping, mouse
+        dragging and wheel scrolling on the thumbnails; touch swipe down to exit
+        the maximized carousel; and keyboard navigation).
       </p>
       <div className='carousel-container'>
         {/*basic carousel example*/}
@@ -106,10 +106,10 @@ const App = () => {
       </div>
       <h2>Example 3</h2>
       <p>
-        Customized example with images (with click to enter and exit the
-        maximized carousel; custom widget positions; thumbnails and captions for
-        the maximized carousel; and custom styles for the non-maximized
-        carousel).
+        Customized example with images (additionally with click to enter and
+        exit the maximized carousel; custom widget positions; thumbnails and
+        captions for the maximized carousel; and custom styles for the
+        non-maximized carousel).
       </p>
       <div className='carousel-container'>
         {/*customized carousel example*/}
