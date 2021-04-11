@@ -58,6 +58,7 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(png)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css)$": "<rootDir>/__mocks__/fileMock.js"
     }
   }

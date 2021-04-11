@@ -30,6 +30,7 @@ Array [
         >
           <li
             className="slide"
+            role="presentation"
           >
             <figure
               aria-label="Dog No. 1. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
@@ -63,6 +64,7 @@ Array [
           </li>
           <li
             className="slide"
+            role="presentation"
           >
             <figure
               aria-label="Dog No. 2. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
@@ -96,6 +98,7 @@ Array [
           </li>
           <li
             className="slide"
+            role="presentation"
           >
             <figure
               aria-label="Dog No. 3. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
@@ -129,6 +132,7 @@ Array [
           </li>
           <li
             className="slide"
+            role="presentation"
           >
             <figure
               aria-label="Dog No. 4. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
@@ -162,6 +166,7 @@ Array [
           </li>
           <li
             className="slide"
+            role="presentation"
           >
             <figure
               aria-label="Dog No. 5. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
@@ -195,6 +200,7 @@ Array [
           </li>
           <li
             className="slide"
+            role="presentation"
           >
             <figure
               aria-label="Dog No. 6. Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated."
