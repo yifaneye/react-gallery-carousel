@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState } from 'react';
 import styles from './Image.module.css';
 import placeholderImage from 'placeholder.jpg';
-import fallbackImage from 'fallback.jpg';
+import fallbackImage from 'fallback.png';
 import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';

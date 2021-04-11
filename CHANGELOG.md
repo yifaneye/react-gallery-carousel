@@ -7,7 +7,8 @@
 - Fixed a bug where the last slide is not displayed starting from the second loop when there are exactly 2 slides
 
 ### Enhancements
-- Remove the use of translate3d to make the performance consistent across browsers and platforms.
+- Removed the use of translate3d to make the performance consistent across browsers and platforms.
+- Reduced the file size of the fallback image from 7.59 kB to 3.35 kB.
 
 ## v0.1.1 (2021-04-10)
 
