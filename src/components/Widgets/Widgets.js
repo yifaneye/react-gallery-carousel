@@ -126,7 +126,8 @@ export const IndexBoard = (props) => {
       tabIndex='-1'
     >
       <span className={styles.text}>
-        {props.curIndex} / {props.totalIndices}
+        {/* make curIndex and totalIndices fallback to 0 */}
+        {props.curIndex || 0} / {props.totalIndices || 0}
       </span>
     </div>
   );
