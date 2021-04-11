@@ -152,8 +152,6 @@ export const Carousel = (props) => {
     setTimeout(() => {
       // revert temporary style changes made on the slides for transition and looping
       if (slidesRef.current) slidesRef.current.style.transitionDuration = null;
-      if (slideMinRef.current) slideMinRef.current.style.transform = null;
-      if (slideMaxRef.current) slideMaxRef.current.style.transform = null;
     }, duration);
   };
 
@@ -232,10 +230,10 @@ export const Carousel = (props) => {
       } else if (slides.isMaxIndex() && change > 0) {
         slideMinRef.current.style.transform = null;
         slideMaxRef.current.style.transform = `translateX(${slidesMin})`;
-      } else if (!slides.isMinIndex() && !slides.isMaxIndex() && change !== 0) {
+      } else if (change !== 0) {
         slideMinRef.current.style.transform = null;
         slideMaxRef.current.style.transform = null;
-      }
+      } // if change === 0 then the adjacent slides shall be kept in place for the rollback transition
     }
 
     // update UI
@@ -259,8 +257,8 @@ export const Carousel = (props) => {
   /* handle explicit current index update (e.g. go to slide number 16) */
   const goToIndex = (index) => {
     // set both the first and the last slide back into their respective original places
-    slideMinRef.current.style.transform = null;
-    slideMaxRef.current.style.transform = null;
+    if (slideMinRef.current) slideMinRef.current.style.transform = null;
+    if (slideMaxRef.current) slideMaxRef.current.style.transform = null;
 
     // update carousel
     slides.goToIndex(index);
