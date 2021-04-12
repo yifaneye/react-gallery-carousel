@@ -15,16 +15,18 @@ Try [Live Demo](https://yifanai.com/rgc)
 ### Carousel controlled by finger
 ![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
 
-### Non-maximized carousel
+### Non-maximized carousels
 ![Non-maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_non_maximized.jpg)
 
 ### Maximized carousel
 ![Maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_maximized.jpg)
 
 ### Lighthouse report
-![Lighthouse Report on GitHub Pages](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.1.jpg)
+![Lighthouse Report on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_full_v0.1.3.jpg)
+![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
+This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2).
 
-## Install
+## Installation
 
 ```bash
 npm install --save react-gallery-carousel

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 const getTouchDistinguisher = () => {
   const pinchTouchIdentifiers = new Set(); // record all pinch touch identifiers
@@ -108,17 +108,18 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     isTouchMoved = false; // reset isTouchMoved for next series of touch events
   };
 
+  // to fix the dependency, I needed to wrapping pretty much everything in this
+  // file in useCallback or useMemo, so I disable exhaustive-deps check for now
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const events = [
     { event: 'touchstart', callback: handleTouchStart },
     { event: 'touchmove', callback: handleTouchMove },
     { event: 'touchend', callback: handleTouchEnd },
     { event: 'touchcancel', callback: handleTouchEnd }
   ];
-  const eventsRef = useRef(events);
 
   useEffect(() => {
     const el = elementRef.current;
-    const events = eventsRef.current;
     if (el)
       // use active event listeners to have event.cancelable === true, for later use to in calling event.preventDefault()
       events.forEach(({ event, callback }) =>
@@ -131,7 +132,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
           el.removeEventListener(event, callback)
         );
     };
-  }, [elementRef, eventsRef]);
+  }, [elementRef, events]);
 };
 
 export default useTouch;

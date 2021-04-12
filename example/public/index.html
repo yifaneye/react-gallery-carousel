@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#888" />
 
     <!--
       manifest.json provides metadata used when your web app is added to the
@@ -15,6 +15,7 @@
     -->
     <link rel="preconnect" href="https://placedog.net" />
     <link rel="dns-prefetch" href="https://placedog.net" />
+    <link rel="preload" as="image" href="https://placedog.net/400/240?id=1" imagesrcset="https://placedog.net/400/240?id=1 400w, https://placedog.net/700/420?id=1 700w, https://placedog.net/1000/600?id=1 1000w" imagesizes="(max-width: 1000px) 400px, (max-width: 2000px) 700px, 1000px" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!--
@@ -27,7 +28,7 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>react-gallery-carousel</title>
-    <meta name="Description" content="react-gallery-carousel is a dependency-free React carousel component with support for lazy loading, pinch zoom, touch swiping, mouse dragging, velocity detection, maximization, thumbnails, keyboard navigation and accessibility.">
+    <meta name="Description" content="react-gallery-carousel is a dependency-free React carousel component with lazy loading, preloading, pinch to zoom, touch swiping, mouse dragging, maximization, thumbnails, keyboard navigation, accessibility and velocity detection.">
   </head>
 
   <body>

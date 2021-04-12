@@ -11,33 +11,56 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 6px;
 }
 
 .text-slide {
   padding: 1rem;
 }
 
-.carousels-container {
-  max-width: 1000px;
+.vertical-separator {
+  margin: 1em 0;
+}
+
+.carousel-page {
+  max-width: 1200px;
   margin: 0 auto;
   overflow: hidden;
+}
+
+.carousel-page-header-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.section {
+  margin-bottom: 50px;
+}
+
+.section-header {
+  padding: 0 1em;
 }
 
 .carousel-container {
   width: 100%;
   height: calc(100vw * 0.8);
-  margin-bottom: 50px;
 }
 
-@media only screen and (min-width: 500px) and (max-width: 1000px) {
+@media only screen and (min-width: 500px) and (max-width: 1280px) {
   .carousel-container {
     height: calc(100vw * 0.6);
+    max-height: 768px;
   }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1280px) {
   .carousel-container {
-    height: 600px;
+    height: 768px;
   }
 }
 

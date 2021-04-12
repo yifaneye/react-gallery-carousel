@@ -140,9 +140,9 @@ export const IconButton = (props) => {
   const icon = props.icon !== undefined ? props.icon : icons[props.name];
   return (
     <button
-      className={`${styles.button} ${
-        props.hasShadow ? ' ' + styles.buttonShadow : ''
-      }`}
+      className={
+        styles.button + `${props.hasShadow ? ' ' + styles.buttonShadow : ''}`
+      }
       type='button'
       aria-label={props.label}
       aria-disabled={false}
