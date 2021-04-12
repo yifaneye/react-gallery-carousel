@@ -1,10 +1,17 @@
 # v0.1
 
+```react-gallery-carousel``` [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
+
 ## In Development
+
+Nil.
+
+## v0.1.3 (2021-04-12)
 
 ### Bug Fixes
 
 - Fixed a bug where touch swiping did not work on the slides when the images are dynamically set in the useEffect() hook by developer users.
+  ([Issue #5](https://github.com/yifaneye/react-gallery-carousel/issues/5))
 
 ### Enhancements
 
@@ -15,8 +22,10 @@
 ### Bug Fixes
 
 - Fixed a bug where the last slide is not displayed starting from the second loop when there are exactly 2 slides.
+  ([Issue #2](https://github.com/yifaneye/react-gallery-carousel/issues/2))
 
 ### Enhancements
+
 - Removed the use of translate3d to make the performance consistent across browsers and platforms.
 - Reduced the file size of the fallback image from 7.59 kB to 3.35 kB.
 - Made the text displayed in the index board robuster.
@@ -26,8 +35,10 @@
 ### Bug Fixes
 
 - Fixed a bug where image URLs those are not known ahead of time cannot be placed into the carousel.
+  ([Issue #1](https://github.com/yifaneye/react-gallery-carousel/issues/1))
 
 ### Enhancements
+
 - Enabled hitting Enter (Return) key on the focused thumbnail to display that image as the current image.
 - Enabled selecting text in the index board using cursor or finger.
 - Removed the effect of hover on thumbnails on touch devices.
