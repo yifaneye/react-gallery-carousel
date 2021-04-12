@@ -4,7 +4,13 @@
 
 ### Bug Fixes
 
-- Fixed a bug where the last slide is not displayed starting from the second loop when there are exactly 2 slides
+- Fixed a bug where touch swiping did not work on the slides when the images are dynamically set in the useEffect() hook by developer users.
+
+## v0.1.2 (2021-04-11)
+
+### Bug Fixes
+
+- Fixed a bug where the last slide is not displayed starting from the second loop when there are exactly 2 slides.
 
 ### Enhancements
 - Removed the use of translate3d to make the performance consistent across browsers and platforms.
