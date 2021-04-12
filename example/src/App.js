@@ -61,7 +61,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       <div className='text-slide'>
         <h3>Get Started</h3>
         <code>npm install react-gallery-carousel --save</code>
-        <div>
+        <div className='vertical-separator'>
           <span>or</span>
         </div>
         <code>yarn add react-gallery-carousel</code>
@@ -85,55 +85,75 @@ const App = () => {
   }, [setDynamicImages]);
 
   return (
-    <div className='carousels-container'>
-      <h1>react-gallery-carousel</h1>
-      <h2>Example 1</h2>
-      <p>Example with user-managed slides.</p>
-      <div className='carousel-container short'>
-        {/*basic carousel example with user-managed slides */}
-        <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
+    <div className='carousel-page'>
+      <div className='carousel-page-header-container'>
+        <header className='carousel-page-header'>
+          <h1>react-gallery-carousel</h1>
+        </header>
       </div>
-      <h2>Example 2</h2>
-      <p>
-        Default example with images (with lazy loading and preloading; touch
-        swiping and mouse dragging on the carousel; touch swiping, mouse
-        dragging and wheel scrolling on the thumbnails; touch swipe down to exit
-        the maximized carousel; and keyboard navigation).
-      </p>
-      <div className='carousel-container'>
-        {/*basic carousel example*/}
-        <Carousel images={images} />
-      </div>
-      <h2>Example 3</h2>
-      <p>
-        Customized example with images (additionally with click to enter and
-        exit the maximized carousel; custom widget positions; thumbnails and
-        captions for the maximized carousel; and custom styles for the
-        non-maximized carousel).
-      </p>
-      <div className='carousel-container'>
-        {/*customized carousel example*/}
-        <Carousel
-          className='framed-carousel'
-          images={dynamicImages}
-          index={1}
-          // isRTL={true}
-          isMaximized={false}
-          hasSizeButton='topLeft'
-          hasMediaButton='topCenter'
-          hasIndexBoard='topRight'
-          hasSizeButtonAtMax='bottomLeft'
-          hasMediaButtonAtMax='bottomCenter'
-          hasIndexBoardAtMax='bottomRight'
-          hasCaptionsAtMax='top'
-          hasThumbnails={false}
-          hasThumbnailsAtMax={true}
-          shouldMaximizeOnClick={true}
-          shouldMinimizeOnClick={true}
-          // activeIcon={<span className='icon-text'>x</span>}
-          // passiveIcon={<span className='icon-text'>o</span>}
-        />
-      </div>
+
+      <section className='section' aria-labelledby='example1'>
+        <header className='section-header'>
+          <h2 id='example1'>Example 1</h2>
+          <p>Example with user-managed slides.</p>
+        </header>
+        <div className='carousel-container short'>
+          {/*basic carousel example with user-managed slides */}
+          <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
+        </div>
+      </section>
+
+      <section className='section' aria-labelledby='example2'>
+        <header className='section-header'>
+          <h2 id='example2'>Example 2</h2>
+          <p>
+            Default example with images (with lazy loading and preloading; touch
+            swiping and mouse dragging on the carousel; touch swiping, mouse
+            dragging and wheel scrolling on the thumbnails; touch swipe down to
+            exit the maximized carousel; and keyboard navigation).
+          </p>
+        </header>
+        <div className='carousel-container'>
+          {/*basic carousel example*/}
+          <Carousel images={images} />
+        </div>
+      </section>
+
+      <section className='section' aria-labelledby='example3'>
+        <header className='section-header'>
+          <h2 id='example3'>Example 3</h2>
+          <p>
+            Customized example with images dynamically set in the{' '}
+            <code>useEffect()</code> hook (additionally with click to enter and
+            exit the maximized carousel; custom widget positions; thumbnails and
+            captions for the maximized carousel; and custom styles for the
+            non-maximized carousel).
+          </p>
+        </header>
+        <div className='carousel-container'>
+          {/*customized carousel example*/}
+          <Carousel
+            className='framed-carousel'
+            images={dynamicImages}
+            index={1}
+            // isRTL={true}
+            isMaximized={false}
+            hasSizeButton='topLeft'
+            hasMediaButton='topCenter'
+            hasIndexBoard='topRight'
+            hasSizeButtonAtMax='bottomLeft'
+            hasMediaButtonAtMax='bottomCenter'
+            hasIndexBoardAtMax='bottomRight'
+            hasCaptionsAtMax='top'
+            hasThumbnails={false}
+            hasThumbnailsAtMax={true}
+            shouldMaximizeOnClick={true}
+            shouldMinimizeOnClick={true}
+            // activeIcon={<span className='icon-text'>x</span>}
+            // passiveIcon={<span className='icon-text'>o</span>}
+          />
+        </div>
+      </section>
     </div>
   );
 };

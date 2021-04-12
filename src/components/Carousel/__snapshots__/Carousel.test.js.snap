@@ -673,7 +673,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
       <button
         aria-disabled={false}
         aria-label="Start Autoplay"
-        className="button "
+        className="button"
         onClick={[Function]}
         type="button"
       >
@@ -717,7 +717,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
       <button
         aria-disabled={false}
         aria-label="Maximize Slides"
-        className="button "
+        className="button"
         onClick={[Function]}
         type="button"
       >
@@ -749,7 +749,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
       <button
         aria-disabled={false}
         aria-label="Go to Previous Slide"
-        className="button "
+        className="button"
         onClick={[Function]}
         type="button"
       >
@@ -781,7 +781,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
       <button
         aria-disabled={false}
         aria-label="Go to Next Slide"
-        className="button "
+        className="button"
         onClick={[Function]}
         type="button"
       >

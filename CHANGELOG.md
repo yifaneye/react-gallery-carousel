@@ -6,6 +6,10 @@
 
 - Fixed a bug where touch swiping did not work on the slides when the images are dynamically set in the useEffect() hook by developer users.
 
+### Enhancements
+
+- Enhanced content, styles, responsiveness and performance (from 98% to 100%) on the [demo site](https://yifanai.com/rgc).
+
 ## v0.1.2 (2021-04-11)
 
 ### Bug Fixes
