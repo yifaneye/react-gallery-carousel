@@ -4,7 +4,10 @@
 
 ## In Development
 
-Nil.
+### Bug Fixes
+
+- Fixed a minor bug where required props is undefined by defining default props.
+  ([Issue #7](https://github.com/yifaneye/react-gallery-carousel/issues/7))
 
 ## v0.1.3 (2021-04-12)
 

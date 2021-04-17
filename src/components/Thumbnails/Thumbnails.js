@@ -55,3 +55,7 @@ Thumbnails.propTypes = {
   shouldLazyLoad: PropTypes.bool.isRequired,
   curIndex: PropTypes.number.isRequired
 };
+
+Thumbnails.defaultProps = {
+  curIndex: 0
+};
