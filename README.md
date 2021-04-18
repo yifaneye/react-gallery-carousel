@@ -1,13 +1,50 @@
 # react-gallery-carousel
 
-Dependency-free React carousel component with support for lazy loading, pinch to zoom, touch swiping, mouse dragging, velocity detection, maximization, thumbnails, keyboard navigation and accessibility.
+A mobile-friendly dependency-free React carousel component with support for touch, mouse dragging, lazy loading, thumbnails, modal, keyboard navigation, RTL and pinch to zoom.
+
+Try **[Live Demo](https://yifanai.com/rgc)**
+
+![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
+The first version was published on 31st March 2021.
+
+## Background
+
+I have used and carefully analyzed a lot of carousel/slider components. I summarized that their issues are:
+1. Some of them do not move the slide as a user swipes.
+2. Most of them do not support mouse dragging to move to the previous or the next slide.
+3. Most of them do not support keyboard navigation (i.e. left, right and tab key).
+4. Most of them cannot be maximized to fullscreen/modal/lightbox.
+5. Most of them do not have an easy solution for building thumbnails. Most of the thumbnails can not be swiped on.
+6. Most of them can not lazy load (and preload) images.
+7. Some of them cannot autoplay.
+8. Most of them do not respect the reduced motion settings by the user.
+9. Most of them disregard the velocity of the swipe and just set a constant transition duration.
+10. Some of them look odd, and their transitions are bumpy when their images have different sizes.
+11. Most of them cannot have custom elements in a slide.
+12. Most of them can not be set to display in Right-to-Left (RTL).
+13. Some of them disable pinching to zoom, while some others glitch when pinching with 2 fingers. Besides, when the window is zoomed in, most of them still detect for touch swiping to move to the previous or the next slide, while the intention of most users in this scenario is panning to see other parts of the current slide.
+14. Some of them will cause the slides to stuck its position on window resize or on mobile device orientation change, until another user interaction.
+15. Some of them can not distinguish a vertical swipe from a horizontal swipe, so that a not exactly vertical swipe moves the slides slightly horizontally; and a not exactly horizontal swipe moves the (document) page slightly vertically.
+
+So, ...
+
+I wanted to write my own **detail-oriented** and **exquisite** carousel component that solves/supports all these things above. 🤓
+
+I wanted to take my understanding of JavaScript events, DOM manipulation, browser APIs, cross-browser compatibility and performance debugging to the next level. 🤓
+
+I wanted to master React functional components, hooks, custom hooks and reconciliation. 🤓
+
+My carousel should support: touch, mouse dragging, keyboard navigation, modal (lightbox), thumbnails, lazy loading (and preloading) for images, autoplay, reduced motion settings, instantaneous velocity detection, responsive design, responsive images, images with different sizes, custom text in a slide, RTL, pinch to zoom and customization. 😎
+
+For example, to solve the last issue in the list above, my carousel should be able to detect a mostly vertical swipe and then fix the slides horizontally in the carousel. ✅
+It should also be able to detect a mostly horizontal swipe and then fix the carousel vertically in the page. ✅
 
 ## Demo
 
 ### Live demo
-Try [Live Demo](https://yifanai.com/rgc)
+Try **[Live Demo](https://yifanai.com/rgc)**
 
 ### Carousel controlled by cursor
 ![Carousel controlled by cursor](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
@@ -24,7 +61,7 @@ Try [Live Demo](https://yifanai.com/rgc)
 ### Lighthouse report
 ![Lighthouse Report on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_full_v0.1.3.jpg)
 ![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
-This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2).
+This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
 
 ## Installation
 
@@ -147,6 +184,17 @@ yarn start
   alt: `Dogs are domesticated mammals, not natural wild animals. They were originally bred from wolves. They have been bred by humans for a long time, and were the first animals ever to be domesticated.`,
   thumbnail: `https://placedog.net/100/60?id=1`
 }
+```
+### Widgets Settings
+```
+[
+  'hasLeftButton',
+  'hasRightButton',
+  'hasMediaButton',
+  'hasSizeButton',
+  'hasDotButtons',
+  'hasIndexBoard'
+],
 ```
 ### Small Widget Positions
 ```
