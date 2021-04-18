@@ -8,11 +8,16 @@
   overflow-y: hidden;
   overflow-x: scroll;
   cursor: grab;
+  scrollbar-width: none;
+
+  /* Prevent the default behaviour of "scroll chaining" where parent element
+     gets scrolled when the child element is over scrolled,
+     in order to prevent going to the previous or the next page. */
+  overflow-scrolling: auto;
   -webkit-overflow-scrolling: touch;
   -ms-scroll-chaining: none;
   overscroll-behavior-x: contain;
   -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 :global(.isGrabbing).thumbnailsWrapper {

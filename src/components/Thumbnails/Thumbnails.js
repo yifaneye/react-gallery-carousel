@@ -36,7 +36,6 @@ export const Thumbnails = (props) => {
               isImage={props.hasImages}
               shouldLazyLoad={props.shouldLazyLoad}
               isCurrent={Number(key) === props.curIndex}
-              isMaximized={props.isMaximized}
               onClick={callbacks[key]}
             />
           );
@@ -54,4 +53,8 @@ Thumbnails.propTypes = {
   hasImages: PropTypes.bool.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
   curIndex: PropTypes.number.isRequired
+};
+
+Thumbnails.defaultProps = {
+  curIndex: 0
 };

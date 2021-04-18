@@ -17,10 +17,13 @@ const useAnchor = (elementRef, options) => {
     });
   }, [elementRef]);
 
+  // center the current element on init, on maximize and on minimize
   useEffect(() => scrollToCenter(), [scrollToCenter, options]);
 
-  // both are only for centering the current element that should be scrolled to
+  // center the current element on click
   useEventListener(elementRef.current, 'click', scrollToCenter);
+
+  // center the current element on resize (including orientationchange)
   useEventListener(window, 'resize', scrollToCenter);
 };
 

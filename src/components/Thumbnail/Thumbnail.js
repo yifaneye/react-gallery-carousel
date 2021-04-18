@@ -49,7 +49,6 @@ Thumbnail.propTypes = {
   slide: slideObject.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
-  isMaximized: PropTypes.bool.isRequired,
   reference: elementRef.isRequired,
   onClick: PropTypes.func.isRequired
 };
