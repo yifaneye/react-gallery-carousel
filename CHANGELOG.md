@@ -4,7 +4,9 @@
 
 ## In Development
 
-Nil.
+### Enhancements
+
+- Set up momentum-based mouse dragging on the thumbnails.
 
 ## v0.1.4 (2021-04-18)
 
