@@ -1,7 +1,7 @@
 {
   "name": "react-gallery-carousel",
   "version": "0.1.3",
-  "description": "Dependency-free React carousel component with lazy loading, preloading, pinch to zoom, touch swiping, mouse dragging, maximization, thumbnails, keyboard navigation, accessibility and velocity detection.",
+  "description": "A mobile-friendly dependency-free React carousel component with support for touch, mouse dragging, lazy loading, thumbnails, modal, keyboard navigation, RTL and pinch to zoom.",
   "author": "yifaneye",
   "license": "MIT",
   "repository": "yifaneye/react-gallery-carousel",
