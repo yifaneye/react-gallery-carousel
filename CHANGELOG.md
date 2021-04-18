@@ -4,6 +4,10 @@
 
 ## In Development
 
+Nil.
+
+## v0.1.4 (2021-04-18)
+
 ### Bug Fixes
 
 - Fixed a minor bug where required props is undefined by defining default props.
