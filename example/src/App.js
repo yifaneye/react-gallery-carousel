@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/TwoWayMap';
+import GitHubButton from 'react-github-btn';
 
-const imageIDs = Array(30) // the maximum is currently 172
+const imageIDs = Array(30) // the maximum is currently 149
   .fill(1)
   .map((_, i) => i + 1);
 const images = imageIDs.map((imageID) => {
@@ -26,14 +27,14 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 
   return (
     <Carousel
-      isLoop={false}
       hasIndexBoard='topRight'
-      hasSizeButton='bottomLeft'
-      hasMediaButton='bottomRight'
+      hasMediaButton={false}
+      hasMediaButtonAtMax='bottomLeft'
+      hasSizeButton='bottomRight'
       hasDotButtons='bottom'
       hasThumbnails={false}
       shouldSwipeOnMouse={false} // for selecting text
-      shouldMinimizeOnSwipeDown={false} // for overflow scrolling
+      shouldMinimizeOnSwipeDown={false} // for vertical overflow scrolling
       index={Number(
         indexToTitle.getReversed(window.location.hash.replace('#', ''))
       )}
@@ -47,10 +48,10 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
       <div className='text-slide'>
         <h3>Introduction</h3>
         <p>
-          react-gallery-carousel is a dependency-free React carousel component
-          with lazy loading, preloading, pinch to zoom, touch swiping, mouse
-          dragging, maximization, thumbnails, keyboard navigation, accessibility
-          and velocity detection.
+          react-gallery-carousel is a mobile-friendly dependency-free React
+          carousel component with support for touch, mouse dragging, lazy
+          loading, thumbnails, modal, keyboard navigation, RTL and pinch to
+          zoom.
         </p>
         <a href='https://yifanai.com/rgc'>Demo</a>
         <span> / </span>
@@ -89,71 +90,175 @@ const App = () => {
       <div className='carousel-page-header-container'>
         <header className='carousel-page-header'>
           <h1>react-gallery-carousel</h1>
+          <p>
+            A mobile-friendly dependency-free React carousel component with
+            support for touch, mouse dragging, lazy loading, thumbnails, modal,
+            keyboard navigation, RTL and pinch to zoom.
+          </p>
+          <div className='star-button-container'>
+            <GitHubButton
+              href='https://github.com/yifaneye/react-gallery-carousel'
+              data-size='large'
+              data-show-count='true'
+              aria-label='Star yifaneye/react-gallery-carousel on GitHub'
+            >
+              Star
+            </GitHubButton>
+          </div>
         </header>
       </div>
 
       <section className='section' aria-labelledby='example1'>
         <header className='section-header'>
-          <h2 id='example1'>Example 1</h2>
-          <p>Example with user-managed slides.</p>
+          <h2 id='example1'>
+            Example 1: Customized carousel with user-managed slides
+          </h2>
+          <p>
+            This example has callback set to update the document title and URL
+            hash on index update; and custom widget positions.{' '}
+            <a
+              href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L29'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              See the code
+            </a>
+          </p>
         </header>
         <div className='carousel-container short'>
-          {/*basic carousel example with user-managed slides */}
           <PackageIntroductionCarousel exampleCode={basicCarouselExampleCode} />
         </div>
       </section>
 
       <section className='section' aria-labelledby='example2'>
         <header className='section-header'>
-          <h2 id='example2'>Example 2</h2>
+          <h2 id='example2'>Example 2: Default carousel with images</h2>
           <p>
-            Default example with images (with lazy loading and preloading; touch
-            swiping and mouse dragging on the carousel; touch swiping, mouse
-            dragging and wheel scrolling on the thumbnails; touch swipe down to
-            exit the maximized carousel; and keyboard navigation).
+            A default carousel example has lazy loading and preloading (the 2
+            adjacent images on either side of the current image); touch swiping
+            and mouse dragging on the carousel; touch swiping, mouse dragging
+            and wheel scrolling on the thumbnails; touch swipe down to exit the
+            maximized carousel; and keyboard navigation.{' '}
+            <a
+              href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L152'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              See the code
+            </a>
           </p>
         </header>
         <div className='carousel-container'>
-          {/*basic carousel example*/}
           <Carousel images={images} />
         </div>
       </section>
 
       <section className='section' aria-labelledby='example3'>
         <header className='section-header'>
-          <h2 id='example3'>Example 3</h2>
+          <h2 id='example3'>
+            Example 3: Default carousel with images and with right-to-left (RTL)
+          </h2>
           <p>
-            Customized example with images dynamically set in the{' '}
-            <code>useEffect()</code> hook (additionally with click to enter and
-            exit the maximized carousel; custom widget positions; thumbnails and
-            captions for the maximized carousel; and custom styles for the
-            non-maximized carousel).
+            A default carousel example has lazy loading and preloading; touch
+            swiping and mouse dragging on the carousel; touch swiping, mouse
+            dragging and wheel scrolling on the thumbnails; touch swipe down to
+            exit the maximized carousel; and keyboard navigation.{' '}
+            <a
+              href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L176'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              See the code
+            </a>
           </p>
         </header>
         <div className='carousel-container'>
-          {/*customized carousel example*/}
+          <Carousel images={images} isRTL={true} />
+        </div>
+      </section>
+
+      <section className='section' aria-labelledby='example4'>
+        <header className='section-header'>
+          <h2 id='example4'>
+            Example 4: Customized carousel with dynamic images
+          </h2>
+          <p>
+            This example has images dynamically set in the{' '}
+            <code>useEffect()</code> hook. This customized example additionally
+            has <strong>click to enter and exit the maximized carousel</strong>;
+            custom initial index; custom widget positions; thumbnails, dot
+            buttons and captions for the maximized carousel; custom active and
+            passive dot buttons; and custom styles for the non-maximized
+            carousel.{' '}
+            <a
+              href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L203'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              See the code
+            </a>
+          </p>
+        </header>
+        <div className='carousel-container'>
           <Carousel
             className='framed-carousel'
             images={dynamicImages}
-            index={1}
-            // isRTL={true}
+            index={2}
             isMaximized={false}
-            hasSizeButton='topLeft'
-            hasMediaButton='topCenter'
-            hasIndexBoard='topRight'
-            hasSizeButtonAtMax='bottomLeft'
-            hasMediaButtonAtMax='bottomCenter'
-            hasIndexBoardAtMax='bottomRight'
+            hasSizeButton={false}
+            hasMediaButton={false}
+            hasIndexBoard={false}
+            hasLeftButton={false}
+            hasRightButton={false}
             hasCaptionsAtMax='top'
+            hasDotButtonsAtMax='bottom'
             hasThumbnails={false}
             hasThumbnailsAtMax={true}
             shouldMaximizeOnClick={true}
             shouldMinimizeOnClick={true}
-            // activeIcon={<span className='icon-text'>x</span>}
-            // passiveIcon={<span className='icon-text'>o</span>}
+            activeIcon={
+              <span className='icon-text' role='img' aria-label='active'>
+                🔳
+              </span>
+            }
+            passiveIcon={
+              <span className='icon-text' role='img' aria-label='passive'>
+                🔲
+              </span>
+            }
           />
         </div>
       </section>
+      <footer className='section'>
+        <div className='action-container'>
+          <div className='star-button-container'>
+            <GitHubButton
+              href='https://github.com/yifaneye/react-gallery-carousel'
+              data-size='large'
+              data-show-count='true'
+              aria-label='Star yifaneye/react-gallery-carousel on GitHub'
+            >
+              Star
+            </GitHubButton>
+          </div>
+          <div>
+            <a href='https://yifanai.com/rgc'>Demo</a>
+            <span> / </span>
+            <a href='https://github.com/yifaneye/react-gallery-carousel'>
+              GitHub
+            </a>
+            <span> / </span>
+            <a href='https://www.npmjs.com/package/react-gallery-carousel'>
+              npm
+            </a>
+            <div>
+              <small>
+                (The first version was published on 31st March 2021.)
+              </small>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

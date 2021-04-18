@@ -19,7 +19,7 @@ code {
 }
 
 .text-slide {
-  padding: 1rem;
+  padding: 1rem 50px;
 }
 
 .vertical-separator {
@@ -34,12 +34,25 @@ code {
 
 .carousel-page-header-container {
   width: 100%;
+}
+
+.carousel-page-header {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1em;
+}
+
+.action-container {
+  padding: 0 1em;
+}
+
+.star-button-container {
+  margin-bottom: 10px;
 }
 
 .section {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .section-header {
