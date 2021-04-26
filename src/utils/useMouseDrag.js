@@ -21,12 +21,24 @@ const useMouseDrag = (elementRef) => {
     // prevent any other mouseup events to propagate
     event.stopPropagation();
 
-    const element = elementRef.current;
     /* set up momentum-based dragging by giving inertia to the element which allows it
        to continue travelling in its direction and gradually slow down by friction,
        like the mouse drag version of "-webkit-overflow-scrolling: touch;" */
-    const CONSTANT = 0.025;
     const speed = Math.abs(velocity);
+    // neglect dragging with small instantaneous velocity
+    if (speed < 0.5) return false;
+
+    const element = elementRef.current;
+    const childElement = element && element.childNodes[0];
+    const isLeftMost = element && element.scrollLeft === 0;
+    const isRightMost =
+      element &&
+      childElement &&
+      element.scrollLeft + element.clientWidth >= childElement.scrollWidth;
+    // neglect dragging at the two ends
+    if (isLeftMost || isRightMost) return false;
+
+    const CONSTANT = 0.025;
     const totalTime = speed / CONSTANT;
     let initialTime;
     let previousElapsedTime;
