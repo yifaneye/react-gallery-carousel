@@ -282,7 +282,7 @@ export const Carousel = (props) => {
   const goLeft = () => updateIndex(-increment);
   const goRight = () => updateIndex(+increment);
 
-  useKeys(slidesContainerRef, {
+  useKeys(carouselRef, {
     ArrowLeft: goLeft,
     ArrowRight: goRight,
     /* can not use useEnter hook here to mimic user click, since a click
