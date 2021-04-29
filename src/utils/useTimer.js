@@ -27,6 +27,7 @@ const useTimer = (interval, isStarted, callback) => {
 
   const start = () => !!timer && timer.start();
   const stop = () => !!timer && timer.stop();
+  const restart = () => !!timer && timer.restart();
 
   useEffect(() => {
     if (isRunning) start();
@@ -36,7 +37,7 @@ const useTimer = (interval, isStarted, callback) => {
     };
   });
 
-  return [isRunning, setIsRunning];
+  return [isRunning, setIsRunning, { stopTimer: stop, restartTimer: restart }];
 };
 
 export default useTimer;

@@ -9,6 +9,9 @@
 - Fixed a bug where left and right keys do not work when a widget is focused by listening keydown events on the entire carousel.
   ([Issue #15](https://github.com/yifaneye/react-gallery-carousel/issues/15))
 
+- Fixed a bug where swiping on a slide does not freeze autoplay countdown.
+  ([Issue #18](https://github.com/yifaneye/react-gallery-carousel/issues/18))
+
 ## v0.1.4 (2021-04-18)
 
 ### Bug Fixes

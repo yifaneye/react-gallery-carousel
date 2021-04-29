@@ -69,7 +69,11 @@ export const Carousel = (props) => {
   };
 
   /* handle autoplay and reduced motion setting */
-  const [isPlaying, setIsPlaying] = useTimer(
+  const [
+    isPlaying,
+    setIsPlaying,
+    { stopTimer, restartTimer }
+  ] = useTimer(
     props.canAutoPlay && props.autoPlayInterval,
     props.isAutoPlaying,
     () => updateIndex(+1)
@@ -203,6 +207,10 @@ export const Carousel = (props) => {
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
 
   const handleSwipeMoveX = (displacementX) => {
+    // stop the timer for autoplay if there is a timer
+    // should not use setIsPlaying(false) here since it will update the icon in the media button
+    if (props.canAutoPlay) stopTimer();
+
     const change = -displacementX * increment;
 
     // calibrate index for looping of the carousel
@@ -222,6 +230,9 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = (change, displacementX = 0, speed) => {
+    // restart the timer for autoplay if there is a timer and the index update is being roll-backed
+    if (props.canAutoPlay && change === 0) restartTimer();
+
     // calibrate index for looping of the carousel
     if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
       if (slides.isMinIndex() && change < 0) {
