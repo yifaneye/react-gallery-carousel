@@ -186,10 +186,10 @@ const App = () => {
             This example has images dynamically set in the{' '}
             <code>useEffect()</code> hook. This customized example additionally
             has <strong>click to enter and exit the maximized carousel</strong>;
-            custom initial index; custom widget positions; thumbnails, dot
-            buttons and captions for the maximized carousel; custom active and
-            passive dot buttons; and custom styles for the non-maximized
-            carousel.{' '}
+            custom initial index; custom widget positions; custom thumbnails,
+            custom dot buttons and captions for the maximized carousel; custom
+            active and passive dot buttons; and custom styles for the
+            non-maximized carousel.{' '}
             <a
               href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L203'
               target='_blank'
@@ -214,6 +214,8 @@ const App = () => {
             hasDotButtonsAtMax='bottom'
             hasThumbnails={false}
             hasThumbnailsAtMax={true}
+            thumbnailWidth={'15%'}
+            thumbnailHeight={'15%'}
             shouldMaximizeOnClick={true}
             shouldMinimizeOnClick={true}
             activeIcon={

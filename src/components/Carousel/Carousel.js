@@ -457,6 +457,8 @@ export const Carousel = (props) => {
     <Thumbnails
       isRTL={props.isRTL}
       isMaximized={isMaximized}
+      width={props.thumbnailWidth}
+      height={props.thumbnailHeight}
       slides={slidesElements}
       hasImages={hasImages}
       shouldLazyLoad={props.shouldLazyLoad}

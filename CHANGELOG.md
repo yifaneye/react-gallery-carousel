@@ -1,8 +1,10 @@
 # v0.1
 
-```react-gallery-carousel``` [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
+```react-gallery-carousel```
 
-## v0.1.4 (2021-05-02)
+[![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
+
+## v0.1.5 (2021-05-02)
 
 ### Bug Fixes
 
@@ -11,6 +13,11 @@
 
 - Fixed a bug where swiping on a slide does not freeze autoplay countdown.
   ([Issue #18](https://github.com/yifaneye/react-gallery-carousel/issues/18))
+
+### Enhancements
+
+- Allowed the size of the thumbnails to be customized.
+  ([Issue #11](https://github.com/yifaneye/react-gallery-carousel/issues/11))
 
 ## v0.1.4 (2021-04-18)
 

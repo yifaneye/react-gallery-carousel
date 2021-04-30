@@ -64,6 +64,8 @@ export const propTypes = {
   style: PropTypes.object,
   objectFit: objectFitStyles.isRequired,
   objectFitAtMax: objectFitStyles.isRequired,
+  thumbnailWidth: PropTypes.string,
+  thumbnailHeight: PropTypes.string,
   zIndexAtMax: PropTypes.number
 };
 
