@@ -147,6 +147,10 @@ To customize the carousel, use the following props:
 |shouldMinimizeOnClick    |Boolean               |false        |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true         |If true, the carousel can be minimized by touch swiping down.|
 |onIndexChange            |Function              |() => {}     |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same.)|
+|onSwipeMoveX             |Function              |(displacementX) => {}                |Callback function invoked when the carousel is being swiped in a horizontal swipe.|
+|onSwipeMoveY             |Function              |(displacementX, displacementY) => {} |Callback function invoked when the carousel is being swiped in a vertical swipe.|
+|onSwipeEndDown           |Function              |() => {}     |Callback function invoked when the carousel is being swiped in a downward swipe.|
+|onTap                    |Function              |() => {}     |Callback function invoked when the carousel is being tapped (i.e. from mousedown to mouseup without mousemove, or from touchstart to touchend without touchmove.|
 |objectFit                |String                |'cover'      |CSS 'object-fit' style to be placed on each image, on the non-maximized carousel.|
 |objectFitAtMax           |String                |'contain'    |CSS 'object-fit' style to be placed on each image, on the maximized carousel.|
 |zIndexAtMax              |Number                |undefined    |CSS 'z-index' attribute to be placed on the maximized carousel.|
