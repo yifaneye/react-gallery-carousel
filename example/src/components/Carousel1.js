@@ -14,14 +14,14 @@ const Carousel1 = () => {
     <section className='section' aria-labelledby='example1'>
       <header className='section-header'>
         <h2 id='example1'>
-          Example 1: Customized carousel with user-managed slides
+          Example 1: Customized carousel with user-managed slides{' '}
+          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel1.js#28'>
+            see the code
+          </a>
         </h2>
         <p>
           This example has callback set to update the document title and URL
-          hash on index update; and custom widget positions.{' '}
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel1.js'>
-            See the code
-          </a>
+          hash on index update; and custom widget positions.
         </p>
       </header>
       <div className='carousel-container short'>
