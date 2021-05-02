@@ -8651,6 +8651,11 @@ react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-responsive-button@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-responsive-button/-/react-responsive-button-0.2.1.tgz#c92e8a60b1e234655c42a0c8a2d404dc8db2aa0b"
+  integrity sha512-p2/TBeNpLaCOfZjdbKF6MisBxpjhdz/X9O1BUJzjE8bjqm4i8RDZFp3hdAju99lyocH05FQMCQT7Dis/ncmXqA==
+
 "react-scripts@link:../node_modules/react-scripts":
   version "0.0.0"
   uid ""

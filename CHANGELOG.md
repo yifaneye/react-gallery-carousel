@@ -12,6 +12,12 @@
 - Fixed a bug where swiping on a slide does not freeze autoplay countdown.
   ([Issue #18](https://github.com/yifaneye/react-gallery-carousel/issues/18))
 
+### Enhancements
+
+- Added handlers and listeners to the carousel.
+  ([Issue #12](https://github.com/yifaneye/react-gallery-carousel/issues/12))
+
+
 ## v0.1.4 (2021-04-18)
 
 ### Bug Fixes
