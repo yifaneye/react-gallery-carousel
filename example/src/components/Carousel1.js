@@ -1,0 +1,89 @@
+import React from 'react';
+import TwoWayMap from '../utils/TwoWayMap';
+import Carousel from 'react-gallery-carousel';
+import 'react-gallery-carousel/dist/index.css';
+
+const Carousel1 = () => {
+  const indexToTitle = new TwoWayMap({
+    0: 'Introduction',
+    1: 'Get%20Started',
+    2: 'Example'
+  });
+
+  return (
+    <section className='section' aria-labelledby='example1'>
+      <header className='section-header'>
+        <h2 id='example1'>
+          Example 1: Customized carousel with user-managed slides
+        </h2>
+        <p>
+          This example has callback set to update the document title and URL
+          hash on index update; and custom widget positions.{' '}
+          <a
+            href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L29'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            See the code
+          </a>
+        </p>
+      </header>
+      <div className='carousel-container short'>
+        <Carousel
+          isLoop={false}
+          hasIndexBoard='topRight'
+          hasMediaButton={false}
+          hasMediaButtonAtMax='bottomLeft'
+          hasSizeButton='bottomRight'
+          hasDotButtons='bottom'
+          hasThumbnails={false}
+          shouldSwipeOnMouse={false} // for selecting text
+          shouldMinimizeOnSwipeDown={false} // for vertical overflow scrolling
+          index={Number(
+            indexToTitle.getReversed(window.location.hash.replace('#', ''))
+          )}
+          onIndexChange={({ curIndex }) => {
+            const title = indexToTitle.get(curIndex);
+            window.location.hash = title;
+            document.title = `${title} | react-gallery-carousel`;
+          }}
+          style={{ userSelect: 'text' }}
+        >
+          <div className='text-slide'>
+            <h3>Introduction</h3>
+            <p>
+              react-gallery-carousel is a mobile-friendly dependency-free React
+              carousel component with support for touch, mouse dragging, lazy
+              loading, thumbnails, modal, keyboard navigation, RTL and pinch to
+              zoom.
+            </p>
+            <a href='https://yifanai.com/rgc'>Demo</a>
+            <span> / </span>
+            <a href='https://www.npmjs.com/package/react-gallery-carousel'>
+              npm
+            </a>
+            <span> / </span>
+            <a href='https://github.com/yifaneye/react-gallery-carousel'>
+              GitHub
+            </a>
+          </div>
+          <div className='text-slide'>
+            <h3>Get Started</h3>
+            <code>npm install react-gallery-carousel --save</code>
+            <div className='vertical-separator'>
+              <span>or</span>
+            </div>
+            <code>yarn add react-gallery-carousel</code>
+          </div>
+          <div className='text-slide'>
+            <h3>Example</h3>
+            <p>The basic carousel shown below is created by:</p>
+            <code>{'<Carousel images={images} />'}</code>
+          </div>
+        </Carousel>
+      </div>
+    </section>
+  );
+};
+
+export default Carousel1;
