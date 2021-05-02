@@ -19,11 +19,7 @@ const Carousel1 = () => {
         <p>
           This example has callback set to update the document title and URL
           hash on index update; and custom widget positions.{' '}
-          <a
-            href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L29'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel1.js'>
             See the code
           </a>
         </p>

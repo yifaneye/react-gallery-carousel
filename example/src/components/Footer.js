@@ -5,6 +5,7 @@ const Footer = () => {
   return (
     <footer className='section'>
       <div className='action-container'>
+        <strong>react-gallery-carousel (v0.2.0)</strong>
         <div className='star-button-container'>
           <GitHubButton
             href='https://github.com/yifaneye/react-gallery-carousel'
@@ -15,6 +16,11 @@ const Footer = () => {
             Star
           </GitHubButton>
         </div>
+        <p>
+          Mobile-friendly Carousel with batteries included (supporting touch,
+          mouse emulation, lazy loading, thumbnails, fullscreen, RTL, keyboard
+          navigation and customisations).
+        </p>
         <div>
           <a href='https://yifanai.com/rgc'>Demo</a>
           <span> / </span>

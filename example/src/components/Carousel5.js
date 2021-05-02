@@ -19,11 +19,7 @@ const Carousel5 = ({ images }) => {
           (e.g. <code>isAutoPlaying</code>, <code>isMaximized</code>,{' '}
           <code>index</code>). To customize the carousel in an imperative
           manner, use the following handlers (on the ref):
-          <a
-            href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L258'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel5.js'>
             See the code
           </a>
         </p>
@@ -57,7 +53,7 @@ const Carousel5 = ({ images }) => {
           <div className='buttons'>
             <div className='button-container'>
               <Button
-                style={{ backgroundColor: 'red' }}
+                style={{ backgroundColor: 'purple' }}
                 aria-label='Maximize the carousel'
                 onClick={() => carouselRef.current.maximize()}
               >
@@ -66,7 +62,7 @@ const Carousel5 = ({ images }) => {
             </div>
             <div className='button-container'>
               <Button
-                style={{ backgroundColor: 'red' }}
+                style={{ backgroundColor: 'purple' }}
                 aria-label='Minimize the carousel'
                 onClick={() => carouselRef.current.minimize()}
               >
@@ -75,7 +71,7 @@ const Carousel5 = ({ images }) => {
             </div>
             <div className='button-container'>
               <Button
-                style={{ backgroundColor: 'red' }}
+                style={{ backgroundColor: 'purple' }}
                 aria-label='Toggle the maximization state on the carousel'
                 onClick={() => carouselRef.current.toggleIsMaximized()}
               >

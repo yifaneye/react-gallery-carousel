@@ -1,45 +1,65 @@
 # react-gallery-carousel
 
-A mobile-friendly dependency-free React carousel component with support for touch, mouse dragging, lazy loading, thumbnails, modal, keyboard navigation, RTL and pinch to zoom.
+[![npm version][npm-badge]][npm-url]
+[![npm downloads][downloads-badge]][npm-url]
+[![npm bundle size][size-badge]][npm-url]
+[![prettier][prettier-badge]][prettier-url]
 
-Try **[Live Demo](https://yifanai.com/rgc)**
+[npm-url]: https://www.npmjs.com/package/react-gallery-carousel
+[npm-badge]: https://img.shields.io/npm/v/react-gallery-carousel.svg
+[downloads-badge]: https://img.shields.io/npm/dm/react-gallery-carousel.svg?color=blue
+[size-badge]: https://badgen.net/bundlephobia/minzip/react-gallery-carousel
+[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
+[prettier-url]: https://github.com/prettier/prettier
+
+Mobile-friendly Carousel with batteries included (supporting touch, mouse emulation, lazy loading, thumbnails, fullscreen, RTL, keyboard navigation and customisations).
+
+_The first version was published on 31st March 2021._
 
 ![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
 
-[![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
-The first version was published on 31st March 2021.
+Try **[Live Demo](https://yifanai.com/rgc)**
 
 ## Background
 
-I have used and carefully analyzed a lot of carousel/slider components. I summarized that their issues are:
-1. Some of them do not move the slide as a user swipes.
-2. Most of them do not support mouse dragging to move to the previous or the next slide.
+### Is this reinventing the wheel?
+
+No! The thing is that I have **used and carefully analyzed a lot of carousel/slider components**. I summarized that their **issues** are:
+1. Some of them do not move the slide as the user swipes on the slide.
+2. Most of them do not support mouse dragging to move to the previous or the next slide. With the ones those support mouse emulation, some of them do not properly handle the case where the mouse leaves the carousel, which allow the user to continuously control the carousel.
 3. Most of them do not support keyboard navigation (i.e. left, right and tab key).
-4. Most of them cannot be maximized to fullscreen/modal/lightbox.
-5. Most of them do not have an easy solution for building thumbnails. Most of the thumbnails can not be swiped on.
-6. Most of them can not lazy load (and preload) images.
-7. Some of them cannot autoplay.
+4. Most of them cannot be maximized to fullscreen/modal/lightbox. With fullscreen, there is the issue of browser compatibility, i.e. iOS Safari on iPhone does not support the fullscreen API.
+5. Most of them do not have an easy solution for building thumbnails. With the ones those have thumbnails, most of the thumbnails can not be freely scrolled which lead to poor user experience. In addition, most of the thumbnails can not be lazy loaded.
+6. Most of them cannot lazy load (and preload) images. With the ones those can lazy load, most of them have transition that traverses the intermediate images when the user goes to a distant slide, which defeat the purpose of lazy loading.
+7. Some of them cannot autoplay. With the ones those can autoplay, they can not auto pause. For example, when the user hits another tab or goes to another app, the autoplay on those carousels do not pause.
 8. Most of them do not respect the reduced motion settings by the user.
 9. Most of them disregard the velocity of the swipe and just set a constant transition duration.
-10. Some of them look odd, and their transitions are bumpy when their images have different sizes.
-11. Most of them cannot have custom elements in a slide.
-12. Most of them can not be set to display in Right-to-Left (RTL).
-13. Some of them disable pinching to zoom, while some others glitch when pinching with 2 fingers. Besides, when the window is zoomed in, most of them still detect for touch swiping to move to the previous or the next slide, while the intention of most users in this scenario is panning to see other parts of the current slide.
+10. Some of their carousels will be in different sizes when the images/slides inside are in different sizes. Some of their transitions are bumpy when their images/slides are in different sizes.
+11. Most of them do not support custom elements in a slide.
+12. Most of them cannot be set to display in Right-to-Left (RTL).
+13. Some of them disable pinching to zoom, while some others glitch when pinching with 2 fingers. Besides, when the window is zoomed in, most of them still detect for touch swiping to move to the previous, or the next slide, while the intention of most users in this scenario is panning to see other parts of the current slide.
 14. Some of them will cause the slides to stuck its position on window resize or on mobile device orientation change, until another user interaction.
-15. Some of them can not distinguish a vertical swipe from a horizontal swipe, so that a not exactly vertical swipe moves the slides slightly horizontally; and a not exactly horizontal swipe moves the (document) page slightly vertically.
+15. Some of them can only have predetermined images (i.e. before the carousel component mounts).
+16. Most of them do not provide a solution for fallback image (for when an image is not available).
+17. Some of them get zoomed in when the user double taps on the control, while the intention of most users in this scenario is to quickly go to the next after the next slide.
+18. Some of them remove the left or right button to indicate that there are no more slides in that direction. However, user is likely to click that spot where the button used to be, which causes undesired behaviours e.g. clicking on a link or button which is also at that spot.
+19. Some of them use the method of cloning the first, and the last slide to achieve looping (or infinite mode). I think that method is not great semantically.
+20. Some of them cannot distinguish a vertical swipe from a horizontal swipe, so that a not exactly vertical swipe moves the slides slightly horizontally; and a not exactly horizontal swipe moves the (document) page slightly vertically.
 
-So, ...
+### What did I set to achieve?
 
-I wanted to write my own **detail-oriented** and **exquisite** carousel component that solves/supports all these things above. 🤓
+I wanted to write my own **detail-oriented** and **exquisite** carousel component that is easy to use yet solves/supports all these things above under the hood. 🤓
 
 I wanted to take my understanding of JavaScript events, DOM manipulation, browser APIs, cross-browser compatibility and performance debugging to the next level. 🤓
 
 I wanted to master React functional components, hooks, custom hooks and reconciliation. 🤓
 
-My carousel should support: touch, mouse dragging, keyboard navigation, modal (lightbox), thumbnails, lazy loading (and preloading) for images, autoplay, reduced motion settings, instantaneous velocity detection, responsive design, responsive images, images with different sizes, custom text in a slide, RTL, pinch to zoom and customization. 😎
+I wanted to learn more, place more care and attention to accessibility. I want to give focus outlines to the right users, support keyboard navigation, support screen reader, and follow [W3C accessible carousel tutorials](https://www.w3.org/WAI/tutorials/carousels/).
 
-For example, to solve the last issue in the list above, my carousel should be able to detect a mostly vertical swipe and then fix the slides horizontally in the carousel. ✅
-It should also be able to detect a mostly horizontal swipe and then fix the carousel vertically in the page. ✅
+My carousel should support: touch, mouse emulation, keyboard navigation, modal (lightbox), thumbnails, autoplay (and auto pause), RTL (right to left for internationalization), image lazy loading (and preloading), responsive images, fallback image, reduced motion settings, instantaneous velocity detection, responsive design, images with any sizes, custom elements in a slide, pinch to zoom, customization and great accessibility. 😎
+
+(e.g. To solve the last issue (#20) in the list above, my carousel should be able to detect a mostly vertical swipe and then fix the slides horizontally in the carousel. ✅
+It should also be able to detect a mostly horizontal swipe and then fix the carousel vertically in the page. ✅)
 
 ## Demo
 

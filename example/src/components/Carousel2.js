@@ -13,11 +13,7 @@ const Carousel2 = ({ images }) => {
           and mouse dragging on the carousel; touch swiping, mouse dragging and
           wheel scrolling on the thumbnails; touch swipe down to exit the
           maximized carousel; and keyboard navigation.{' '}
-          <a
-            href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L152'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel2.js'>
             See the code
           </a>
         </p>

@@ -25,11 +25,7 @@ const Carousel3 = ({ images }) => {
           custom dot buttons and captions for the maximized carousel; custom
           active and passive dot buttons; and custom styles for the
           non-maximized carousel.{' '}
-          <a
-            href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L203'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel4.js'>
             See the code
           </a>
         </p>
