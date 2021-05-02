@@ -1,6 +1,8 @@
 import React, {
+  forwardRef,
   Fragment,
   useCallback,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState
@@ -32,7 +34,7 @@ import {
 import ReversedMap from '../../utils/ReversedMap';
 import { propTypes, defaultProps, getSettings } from './props';
 
-export const Carousel = (props) => {
+const GalleryCarousel = (props, ref) => {
   /* initialize references */
   const documentRef = useRef(document);
   const maximizedBackgroundRef = useRef(null);
@@ -497,6 +499,19 @@ export const Carousel = (props) => {
     </>
   );
 
+  /* provide handlers for controlling the carousel in an imperative way */
+  useImperativeHandle(ref, () => ({
+    play: () => setIsPlaying(() => true),
+    pause: () => setIsPlaying(() => false),
+    toggleIsPlaying: () => setIsPlaying((isPlaying) => !isPlaying),
+    maximize: () => setIsMaximized(() => true),
+    minimize: () => setIsMaximized(() => false),
+    toggleIsMaximized: () => setIsMaximized((isMaximized) => !isMaximized),
+    goLeft: goLeft,
+    goRight: goRight,
+    goToIndex: goToIndex
+  }));
+
   return (
     <>
       {carouselPlaceholder}
@@ -543,5 +558,8 @@ export const Carousel = (props) => {
   );
 };
 
+export const Carousel = forwardRef(GalleryCarousel);
+
+Carousel.displayName = 'Carousel';
 Carousel.propTypes = propTypes;
 Carousel.defaultProps = defaultProps;

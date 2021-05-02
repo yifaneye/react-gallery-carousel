@@ -14,7 +14,7 @@
 
 ### Enhancements
 
-- Added listeners to the carousel.
+- Added handlers and listeners to the carousel.
   ([Issue #12](https://github.com/yifaneye/react-gallery-carousel/issues/12))
 
 
