@@ -98,6 +98,10 @@ export const defaultProps = {
   shouldMinimizeOnClick: false,
   shouldMinimizeOnSwipeDown: true,
   onIndexChange: () => {},
+  onSwipeMoveX: () => {},
+  onSwipeMoveY: () => {},
+  onSwipeEndDown: () => {},
+  onTap: () => {},
   objectFit: 'cover',
   objectFitAtMax: 'contain'
 };

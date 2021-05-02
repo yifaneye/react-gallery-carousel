@@ -19,6 +19,9 @@
 - Allowed the size of the thumbnails to be customized.
   ([Issue #11](https://github.com/yifaneye/react-gallery-carousel/issues/11))
 
+- Added handlers and listeners to the carousel.
+  ([Issue #12](https://github.com/yifaneye/react-gallery-carousel/issues/12))
+
 ## v0.1.4 (2021-04-18)
 
 ### Bug Fixes

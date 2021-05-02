@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 import TwoWayMap from './utils/TwoWayMap';
 import GitHubButton from 'react-github-btn';
+import { Button } from 'react-responsive-button';
+import 'react-responsive-button/dist/index.css';
 
 const imageIDs = Array(30) // the maximum is currently 149
   .fill(1)
@@ -79,6 +81,7 @@ const PackageIntroductionCarousel = ({ exampleCode }) => {
 const App = () => {
   const basicCarouselExampleCode = `<Carousel images={images} />`;
   const [dynamicImages, setDynamicImages] = useState([]);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     setDynamicImages(images);
@@ -180,7 +183,8 @@ const App = () => {
       <section className='section' aria-labelledby='example4'>
         <header className='section-header'>
           <h2 id='example4'>
-            Example 4: Customized carousel with dynamic images
+            Example 4: Customized carousel with dynamic images{' '}
+            <small>(available from v0.1.1)</small>
           </h2>
           <p>
             This example has images dynamically set in the{' '}
@@ -229,6 +233,116 @@ const App = () => {
               </span>
             }
           />
+        </div>
+      </section>
+      <section className='section' aria-labelledby='example3'>
+        <header className='section-header'>
+          <h2 id='example5'>
+            Example 5: Default carousel with imperative handlers{' '}
+            <small>(available from v0.2.0)</small>
+          </h2>
+          <p>
+            To customize the carousel in a declarative manner, pass the props
+            (e.g. <code>isAutoPlaying</code>, <code>isMaximized</code>,{' '}
+            <code>index</code>). To customize the carousel in an imperative
+            manner, use the following handlers (on the ref):
+            <a
+              href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/App.js#L258'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              See the code
+            </a>
+          </p>
+          <div>
+            <div className='buttons'>
+              <div className='button-container'>
+                <Button
+                  aria-label='Start the autoplay on the carousel'
+                  onClick={() => carouselRef.current.play()}
+                >
+                  play()
+                </Button>
+              </div>
+              <div className='button-container'>
+                <Button
+                  aria-label='Pause the autoplay on the carousel'
+                  onClick={() => carouselRef.current.pause()}
+                >
+                  pause()
+                </Button>
+              </div>
+              <div className='button-container'>
+                <Button
+                  aria-label='Toggle the autoplay on the carousel'
+                  onClick={() => carouselRef.current.toggleIsPlaying()}
+                >
+                  toggleIsPlaying()
+                </Button>
+              </div>
+            </div>
+            <div className='buttons'>
+              <div className='button-container'>
+                <Button
+                  style={{ backgroundColor: 'red' }}
+                  aria-label='Maximize the carousel'
+                  onClick={() => carouselRef.current.maximize()}
+                >
+                  maximize()
+                </Button>
+              </div>
+              <div className='button-container'>
+                <Button
+                  style={{ backgroundColor: 'red' }}
+                  aria-label='Minimize the carousel'
+                  onClick={() => carouselRef.current.minimize()}
+                >
+                  minimize()
+                </Button>
+              </div>
+              <div className='button-container'>
+                <Button
+                  style={{ backgroundColor: 'red' }}
+                  aria-label='Toggle the maximization state on the carousel'
+                  onClick={() => carouselRef.current.toggleIsMaximized()}
+                >
+                  toggleIsMaximized()
+                </Button>
+              </div>
+            </div>
+            <div className='buttons'>
+              <div className='button-container'>
+                <Button
+                  style={{ backgroundColor: 'blue' }}
+                  aria-label='Go to the slide on the left in the carousel'
+                  onClick={() => carouselRef.current.goLeft()}
+                >
+                  goLeft()
+                </Button>
+              </div>
+              <div className='button-container'>
+                <Button
+                  style={{ backgroundColor: 'blue' }}
+                  aria-label='Go to the slide on the right in the carousel'
+                  onClick={() => carouselRef.current.goRight()}
+                >
+                  goRight()
+                </Button>
+              </div>
+              <div className='button-container'>
+                <Button
+                  style={{ backgroundColor: 'blue' }}
+                  aria-label='Go to slide No.0 in the carousel'
+                  onClick={() => carouselRef.current.goToIndex(0)}
+                >
+                  goToIndex(0)
+                </Button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className='carousel-container'>
+          <Carousel ref={carouselRef} images={images} />
         </div>
       </section>
       <footer className='section'>

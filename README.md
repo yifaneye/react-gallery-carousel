@@ -147,6 +147,10 @@ To customize the carousel, use the following props:
 |shouldMinimizeOnClick    |Boolean               |false        |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true         |If true, the carousel can be minimized by touch swiping down.|
 |onIndexChange            |Function              |() => {}     |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same.)|
+|onSwipeMoveX             |Function              |(displacementX) => {}                |Callback function invoked when the carousel is being swiped in a horizontal swipe. (Note: need >= v0.2.0)|
+|onSwipeMoveY             |Function              |(displacementX, displacementY) => {} |Callback function invoked when the carousel is being swiped in a vertical swipe. (Note: need >= v0.2.0)|
+|onSwipeEndDown           |Function              |() => {}     |Callback function invoked when the carousel is being swiped in a downward swipe. (Note: need >= v0.2.0)|
+|onTap                    |Function              |() => {}     |Callback function invoked when the carousel is being tapped (i.e. from mousedown to mouseup without mousemove, or from touchstart to touchend without touchmove. (Note: need >= v0.2.0)|
 |objectFit                |String                |'cover'      |CSS 'object-fit' style to be placed on each image, on the non-maximized carousel.|
 |objectFitAtMax           |String                |'contain'    |CSS 'object-fit' style to be placed on each image, on the maximized carousel.|
 |zIndexAtMax              |Number                |undefined    |CSS 'z-index' attribute to be placed on the maximized carousel.|
@@ -154,6 +158,24 @@ To customize the carousel, use the following props:
 |thumbnailHeight          |String                |'10%'        |Height of each thumbnail (as well as the height of thumbnails).  e.g. '20%', '20vh', '200px', 'auto'.|
 |className                |String                |undefined    |Class name(s) to be placed on the non-maximized carousel.|
 |style                    |Object                |undefined    |Inline style(s) to be placed on the non-maximized carousel.|
+
+## Handlers
+
+To customize the carousel in a declarative manner, use the props above (e.g. `isAutoPlaying`, `isMaximized`, `index`).
+
+To customize the carousel in an imperative manner, use the following handlers (on the forwarded ref):
+
+|Name                     |Description|
+|:------------------------|:----------|
+|play()                   |Start the autoplay by setting the `isPlaying` state to true. (Note: need >= v0.2.0)|
+|play()                   |Pause the autoplay by setting the `isPlaying` state to false. (Note: need >= v0.2.0)|
+|toggleIsPlaying()        |Toggle the `isPlaying` state. (Note: need >= v0.2.0)|
+|maximize()               |Maximize the carousel by setting the `isMaximized` state to true. (Note: need >= v0.2.0)|
+|minimize()               |Minimize the carousel by setting the `isMaximized` state to false. (Note: need >= v0.2.0)|
+|toggleIsMaximized()      |Toggle the `isMaximized` state. (Note: need >= v0.2.0)|
+|goLeft()                 |Go to the left slide. (Note: need >= v0.2.0)|
+|goRight()                |Go to the right slide. (Note: need >= v0.2.0)|
+|goToIndex(index)         |Go to the specified index. (Note: need >= v0.2.0)|
 
 ## Local Development
 
