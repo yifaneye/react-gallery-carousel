@@ -24,7 +24,12 @@ export const Slide = (props) => {
     <UserSlide slide={props.slide} />
   );
   return (
-    <li ref={props.reference} className={styles.slide} role='presentation'>
+    <li
+      ref={props.reference}
+      className={styles.slide}
+      role='presentation'
+      aria-live={props.isCurrent ? 'polite' : null}
+    >
       {slide}
     </li>
   );
@@ -38,5 +43,6 @@ Slide.propTypes = {
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
   slidesContainerRef: elementRef.isRequired,
-  reference: elementRef
+  reference: elementRef,
+  isCurrent: PropTypes.bool.isRequired
 };

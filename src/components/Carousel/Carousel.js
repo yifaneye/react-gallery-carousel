@@ -550,6 +550,7 @@ const GalleryCarousel = (props, ref) => {
               objectFit={settings.objectFit}
               widgetsHasShadow={props.widgetsHasShadow}
               hasCaptions={settings.hasCaptions}
+              curIndex={slides.curIndex}
             />
           </div>
           {widgets}
