@@ -22,6 +22,9 @@
 - Added handlers and listeners to the carousel.
   ([Issue #12](https://github.com/yifaneye/react-gallery-carousel/issues/12))
 
+- Enabled smooth transition on the thumbnails.
+  ([Issue #13](https://github.com/yifaneye/react-gallery-carousel/issues/13))
+
 ## v0.1.4 (2021-04-18)
 
 ### Bug Fixes
