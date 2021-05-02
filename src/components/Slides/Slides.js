@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import styles from './Slides.module.css';
 import Slide from '../Slide';
 import PropTypes from 'prop-types';
@@ -9,8 +9,7 @@ import {
   objectFitStyles
 } from '../../utils/validators';
 
-// memo is useful here
-export const Slides = memo((props) => {
+export const Slides = (props) => {
   const slides = props.slides;
 
   return (
@@ -38,14 +37,13 @@ export const Slides = memo((props) => {
             objectFit={props.objectFit}
             widgetsHasShadow={props.widgetsHasShadow}
             hasCaption={props.hasCaptions}
+            isCurrent={index === props.curIndex}
           />
         );
       })}
     </ul>
   );
-});
-
-Slides.type.displayName = 'Slides';
+};
 
 Slides.propTypes = {
   slides: PropTypes.array.isRequired,
@@ -59,5 +57,6 @@ Slides.propTypes = {
   shouldLazyLoad: PropTypes.bool.isRequired,
   objectFit: objectFitStyles.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired,
-  hasCaptions: largeWidgetPositions.isRequired
+  hasCaptions: largeWidgetPositions.isRequired,
+  curIndex: PropTypes.number
 };

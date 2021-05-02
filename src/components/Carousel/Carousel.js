@@ -1,6 +1,8 @@
 import React, {
+  forwardRef,
   Fragment,
   useCallback,
+  useImperativeHandle,
   useLayoutEffect,
   useRef,
   useState
@@ -32,7 +34,7 @@ import {
 import ReversedMap from '../../utils/ReversedMap';
 import { propTypes, defaultProps, getSettings } from './props';
 
-export const Carousel = (props) => {
+const GalleryCarousel = (props, ref) => {
   /* initialize references */
   const documentRef = useRef(document);
   const maximizedBackgroundRef = useRef(null);
@@ -69,7 +71,11 @@ export const Carousel = (props) => {
   };
 
   /* handle autoplay and reduced motion setting */
-  const [isPlaying, setIsPlaying] = useTimer(
+  const [
+    isPlaying,
+    setIsPlaying,
+    { stopTimer, restartTimer }
+  ] = useTimer(
     props.canAutoPlay && props.autoPlayInterval,
     props.isAutoPlaying,
     () => updateIndex(+1)
@@ -203,6 +209,11 @@ export const Carousel = (props) => {
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
 
   const handleSwipeMoveX = (displacementX) => {
+    props.onSwipeMoveX(displacementX);
+    // stop the timer for autoplay if there is a timer
+    // should not use setIsPlaying(false) here since it will update the icon in the media button
+    if (props.canAutoPlay) stopTimer();
+
     const change = -displacementX * increment;
 
     // calibrate index for looping of the carousel
@@ -222,6 +233,9 @@ export const Carousel = (props) => {
   };
 
   const updateIndex = (change, displacementX = 0, speed) => {
+    // restart the timer for autoplay if there is a timer and the index update is being roll-backed
+    if (props.canAutoPlay && change === 0) restartTimer();
+
     // calibrate index for looping of the carousel
     if (shouldCalibrateIndex && slideMinRef.current && slideMaxRef.current) {
       if (slides.isMinIndex() && change < 0) {
@@ -282,7 +296,7 @@ export const Carousel = (props) => {
   const goLeft = () => updateIndex(-increment);
   const goRight = () => updateIndex(+increment);
 
-  useKeys(slidesContainerRef, {
+  useKeys(carouselRef, {
     ArrowLeft: goLeft,
     ArrowRight: goRight,
     /* can not use useEnter hook here to mimic user click, since a click
@@ -300,11 +314,13 @@ export const Carousel = (props) => {
   isMaximizedRef.current = isMaximized;
 
   const handleSwipeMoveY = (displacementX, displacementY) => {
+    props.onSwipeMoveY(displacementX, displacementY);
     if (!props.shouldMinimizeOnSwipeDown) return;
     if (isMaximizedRef.current) applyTransitionY(displacementX, displacementY);
   };
 
   const handleSwipeEndDown = () => {
+    props.onSwipeEndDown();
     if (!props.shouldMinimizeOnSwipeDown) return;
     applyTransitionY(0, 0);
     setIsMaximized(() => false);
@@ -312,6 +328,7 @@ export const Carousel = (props) => {
   };
 
   const handleTap = () => {
+    props.onTap();
     if (isMaximizedRef.current && props.shouldMinimizeOnClick)
       setIsMaximized(() => false);
     else if (!isMaximizedRef.current && props.shouldMaximizeOnClick)
@@ -446,6 +463,8 @@ export const Carousel = (props) => {
     <Thumbnails
       isRTL={props.isRTL}
       isMaximized={isMaximized}
+      width={props.thumbnailWidth}
+      height={props.thumbnailHeight}
       slides={slidesElements}
       hasImages={hasImages}
       shouldLazyLoad={props.shouldLazyLoad}
@@ -481,6 +500,19 @@ export const Carousel = (props) => {
       )}
     </>
   );
+
+  /* provide handlers for controlling the carousel in an imperative way */
+  useImperativeHandle(ref, () => ({
+    play: () => setIsPlaying(() => true),
+    pause: () => setIsPlaying(() => false),
+    toggleIsPlaying: () => setIsPlaying((isPlaying) => !isPlaying),
+    maximize: () => setIsMaximized(() => true),
+    minimize: () => setIsMaximized(() => false),
+    toggleIsMaximized: () => setIsMaximized((isMaximized) => !isMaximized),
+    goLeft: goLeft,
+    goRight: goRight,
+    goToIndex: goToIndex
+  }));
 
   return (
     <>
@@ -518,6 +550,7 @@ export const Carousel = (props) => {
               objectFit={settings.objectFit}
               widgetsHasShadow={props.widgetsHasShadow}
               hasCaptions={settings.hasCaptions}
+              curIndex={slides.curIndex}
             />
           </div>
           {widgets}
@@ -528,5 +561,8 @@ export const Carousel = (props) => {
   );
 };
 
+export const Carousel = forwardRef(GalleryCarousel);
+
+Carousel.displayName = 'Carousel';
 Carousel.propTypes = propTypes;
 Carousel.defaultProps = defaultProps;

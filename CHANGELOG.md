@@ -1,10 +1,31 @@
-# v0.1
+# v0.2
 
-```react-gallery-carousel``` [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
+```react-gallery-carousel```
 
-## In Development
+[![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
-Nil.
+## v0.2.0 (2021-05-02)
+
+### Bug Fixes
+
+- Fixed a bug where left and right keys do not work when a widget is focused by listening keydown events on the entire carousel.
+  ([Issue #15](https://github.com/yifaneye/react-gallery-carousel/issues/15))
+
+- Fixed a bug where swiping on a slide does not freeze autoplay countdown.
+  ([Issue #18](https://github.com/yifaneye/react-gallery-carousel/issues/18))
+
+### Enhancements
+
+- Allowed the size of the thumbnails to be customized.
+  ([Issue #11](https://github.com/yifaneye/react-gallery-carousel/issues/11))
+
+- Added handlers and listeners to the carousel.
+  ([Issue #12](https://github.com/yifaneye/react-gallery-carousel/issues/12))
+
+- Enabled smooth transition on the thumbnails.
+  ([Issue #13](https://github.com/yifaneye/react-gallery-carousel/issues/13))
+
+- Added aria-live region for accessibility.
 
 ## v0.1.4 (2021-04-18)
 

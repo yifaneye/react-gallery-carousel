@@ -29,6 +29,7 @@ Array [
           className="slides hasImages"
         >
           <li
+            aria-live="polite"
             className="slide"
             role="presentation"
           >
@@ -63,6 +64,7 @@ Array [
             </figure>
           </li>
           <li
+            aria-live={null}
             className="slide"
             role="presentation"
           >
@@ -97,6 +99,7 @@ Array [
             </figure>
           </li>
           <li
+            aria-live={null}
             className="slide"
             role="presentation"
           >
@@ -131,6 +134,7 @@ Array [
             </figure>
           </li>
           <li
+            aria-live={null}
             className="slide"
             role="presentation"
           >
@@ -165,6 +169,7 @@ Array [
             </figure>
           </li>
           <li
+            aria-live={null}
             className="slide"
             role="presentation"
           >
@@ -199,6 +204,7 @@ Array [
             </figure>
           </li>
           <li
+            aria-live={null}
             className="slide"
             role="presentation"
           >
@@ -240,7 +246,7 @@ Array [
         <button
           aria-disabled={false}
           aria-label="Start Autoplay"
-          className="button "
+          className="button"
           onClick={[Function]}
           type="button"
         >
@@ -284,7 +290,7 @@ Array [
         <button
           aria-disabled={false}
           aria-label="Minimize Slides"
-          className="button "
+          className="button"
           onClick={[Function]}
           type="button"
         >
@@ -316,7 +322,7 @@ Array [
         <button
           aria-disabled={false}
           aria-label="Go to Previous Slide"
-          className="button "
+          className="button"
           onClick={[Function]}
           type="button"
         >
@@ -348,7 +354,7 @@ Array [
         <button
           aria-disabled={false}
           aria-label="Go to Next Slide"
-          className="button "
+          className="button"
           onClick={[Function]}
           type="button"
         >
@@ -382,6 +388,11 @@ Array [
       onMouseMove={[Function]}
       onMouseUpCapture={[Function]}
       onWheel={[Function]}
+      style={
+        Object {
+          "flexBasis": undefined,
+        }
+      }
     >
       <ul
         className="thumbnails"
@@ -390,6 +401,13 @@ Array [
           className="thumbnail currentThumbnail"
           onMouseUpCapture={[Function]}
           role="button"
+          style={
+            Object {
+              "maxWidth": undefined,
+              "minWidth": undefined,
+              "width": undefined,
+            }
+          }
           tabIndex={0}
         >
           <img
@@ -404,6 +422,13 @@ Array [
           className="thumbnail"
           onMouseUpCapture={[Function]}
           role="button"
+          style={
+            Object {
+              "maxWidth": undefined,
+              "minWidth": undefined,
+              "width": undefined,
+            }
+          }
           tabIndex={0}
         >
           <img
@@ -418,6 +443,13 @@ Array [
           className="thumbnail"
           onMouseUpCapture={[Function]}
           role="button"
+          style={
+            Object {
+              "maxWidth": undefined,
+              "minWidth": undefined,
+              "width": undefined,
+            }
+          }
           tabIndex={0}
         >
           <img
@@ -432,6 +464,13 @@ Array [
           className="thumbnail"
           onMouseUpCapture={[Function]}
           role="button"
+          style={
+            Object {
+              "maxWidth": undefined,
+              "minWidth": undefined,
+              "width": undefined,
+            }
+          }
           tabIndex={0}
         >
           <img
@@ -446,6 +485,13 @@ Array [
           className="thumbnail"
           onMouseUpCapture={[Function]}
           role="button"
+          style={
+            Object {
+              "maxWidth": undefined,
+              "minWidth": undefined,
+              "width": undefined,
+            }
+          }
           tabIndex={0}
         >
           <img
@@ -460,6 +506,13 @@ Array [
           className="thumbnail"
           onMouseUpCapture={[Function]}
           role="button"
+          style={
+            Object {
+              "maxWidth": undefined,
+              "minWidth": undefined,
+              "width": undefined,
+            }
+          }
           tabIndex={0}
         >
           <img
@@ -496,6 +549,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
         className="slides hasImages"
       >
         <li
+          aria-live="polite"
           className="slide"
           role="presentation"
         >
@@ -530,6 +584,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
           </figure>
         </li>
         <li
+          aria-live={null}
           className="slide"
           role="presentation"
         >
@@ -564,6 +619,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
           </figure>
         </li>
         <li
+          aria-live={null}
           className="slide"
           role="presentation"
         >
@@ -598,6 +654,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
           </figure>
         </li>
         <li
+          aria-live={null}
           className="slide"
           role="presentation"
         >
@@ -632,6 +689,7 @@ exports[`Carousel renders the same as snapshot 1`] = `
           </figure>
         </li>
         <li
+          aria-live={null}
           className="slide"
           role="presentation"
         >
@@ -815,6 +873,11 @@ exports[`Carousel renders the same as snapshot 1`] = `
     onMouseMove={[Function]}
     onMouseUpCapture={[Function]}
     onWheel={[Function]}
+    style={
+      Object {
+        "flexBasis": undefined,
+      }
+    }
   >
     <ul
       className="thumbnails"
@@ -823,6 +886,13 @@ exports[`Carousel renders the same as snapshot 1`] = `
         className="thumbnail currentThumbnail"
         onMouseUpCapture={[Function]}
         role="button"
+        style={
+          Object {
+            "maxWidth": undefined,
+            "minWidth": undefined,
+            "width": undefined,
+          }
+        }
         tabIndex={0}
       >
         <img
@@ -837,6 +907,13 @@ exports[`Carousel renders the same as snapshot 1`] = `
         className="thumbnail"
         onMouseUpCapture={[Function]}
         role="button"
+        style={
+          Object {
+            "maxWidth": undefined,
+            "minWidth": undefined,
+            "width": undefined,
+          }
+        }
         tabIndex={0}
       >
         <img
@@ -851,6 +928,13 @@ exports[`Carousel renders the same as snapshot 1`] = `
         className="thumbnail"
         onMouseUpCapture={[Function]}
         role="button"
+        style={
+          Object {
+            "maxWidth": undefined,
+            "minWidth": undefined,
+            "width": undefined,
+          }
+        }
         tabIndex={0}
       >
         <img
@@ -865,6 +949,13 @@ exports[`Carousel renders the same as snapshot 1`] = `
         className="thumbnail"
         onMouseUpCapture={[Function]}
         role="button"
+        style={
+          Object {
+            "maxWidth": undefined,
+            "minWidth": undefined,
+            "width": undefined,
+          }
+        }
         tabIndex={0}
       >
         <img
@@ -879,6 +970,13 @@ exports[`Carousel renders the same as snapshot 1`] = `
         className="thumbnail"
         onMouseUpCapture={[Function]}
         role="button"
+        style={
+          Object {
+            "maxWidth": undefined,
+            "minWidth": undefined,
+            "width": undefined,
+          }
+        }
         tabIndex={0}
       >
         <img

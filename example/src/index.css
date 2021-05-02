@@ -49,6 +49,7 @@ code {
 
 .star-button-container {
   height: 20px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -80,6 +81,20 @@ code {
 
 .carousel-container.short {
   height: 300px;
+}
+
+.buttons {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-container {
+  margin-bottom: 10px;
+}
+
+.button-container:not(:last-child) {
+  margin-right: 10px;
 }
 
 .framed-carousel {

@@ -64,6 +64,8 @@ export const propTypes = {
   style: PropTypes.object,
   objectFit: objectFitStyles.isRequired,
   objectFitAtMax: objectFitStyles.isRequired,
+  thumbnailWidth: PropTypes.string,
+  thumbnailHeight: PropTypes.string,
   zIndexAtMax: PropTypes.number
 };
 
@@ -96,6 +98,10 @@ export const defaultProps = {
   shouldMinimizeOnClick: false,
   shouldMinimizeOnSwipeDown: true,
   onIndexChange: () => {},
+  onSwipeMoveX: () => {},
+  onSwipeMoveY: () => {},
+  onSwipeEndDown: () => {},
+  onTap: () => {},
   objectFit: 'cover',
   objectFitAtMax: 'contain'
 };
