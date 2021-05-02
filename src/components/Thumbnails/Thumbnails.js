@@ -13,6 +13,9 @@ export const Thumbnails = (props) => {
 
   useAnchor(thumbnailRef, { isMaximized: props.isMaximized });
 
+  // customize the height of the thumbnails wrapper which wraps the thumbnails
+  const style = 'height' in props ? { flexBasis: props.height } : {};
+
   const wheelEventHandler = useNoOverScroll(thumbnailsContainerRef);
   const mouseEventHandlers = useMouseDrag(thumbnailsContainerRef);
 
@@ -20,6 +23,7 @@ export const Thumbnails = (props) => {
     <div
       ref={thumbnailsContainerRef}
       className={styles.thumbnailsWrapper}
+      style={style}
       onWheel={wheelEventHandler}
       {...mouseEventHandlers}
     >
@@ -36,6 +40,7 @@ export const Thumbnails = (props) => {
               isImage={props.hasImages}
               shouldLazyLoad={props.shouldLazyLoad}
               isCurrent={Number(key) === props.curIndex}
+              width={props.width}
               onClick={callbacks[key]}
             />
           );
@@ -48,6 +53,8 @@ export const Thumbnails = (props) => {
 Thumbnails.propTypes = {
   callbacks: PropTypes.objectOf(PropTypes.func.isRequired).isRequired,
   isMaximized: PropTypes.bool.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
   isRTL: PropTypes.bool.isRequired,
   slides: PropTypes.array.isRequired,
   hasImages: PropTypes.bool.isRequired,

@@ -24,6 +24,16 @@ export const Thumbnail = (props) => {
     props.isCurrent ? ' ' + styles.currentThumbnail : ''
   }`;
 
+  // customize the width of the thumbnail
+  const style =
+    'width' in props
+      ? {
+          minWidth: props.width,
+          width: props.width,
+          maxWidth: props.width
+        }
+      : {};
+
   const ref = props.isCurrent ? props.reference : reference;
 
   useNoDrag(ref); // prevent dragging on FireFox
@@ -36,6 +46,7 @@ export const Thumbnail = (props) => {
       className={className}
       role='button'
       tabIndex={0}
+      style={style}
       onMouseUpCapture={props.onClick} // onmouseup also works for tap on touch devices
     >
       {slide}
@@ -49,6 +60,7 @@ Thumbnail.propTypes = {
   slide: slideObject.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
+  width: PropTypes.string,
   reference: elementRef.isRequired,
   onClick: PropTypes.func.isRequired
 };

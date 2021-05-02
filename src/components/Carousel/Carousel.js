@@ -463,6 +463,8 @@ const GalleryCarousel = (props, ref) => {
     <Thumbnails
       isRTL={props.isRTL}
       isMaximized={isMaximized}
+      width={props.thumbnailWidth}
+      height={props.thumbnailHeight}
       slides={slidesElements}
       hasImages={hasImages}
       shouldLazyLoad={props.shouldLazyLoad}

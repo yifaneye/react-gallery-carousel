@@ -154,6 +154,8 @@ To customize the carousel, use the following props:
 |objectFit                |String                |'cover'      |CSS 'object-fit' style to be placed on each image, on the non-maximized carousel.|
 |objectFitAtMax           |String                |'contain'    |CSS 'object-fit' style to be placed on each image, on the maximized carousel.|
 |zIndexAtMax              |Number                |undefined    |CSS 'z-index' attribute to be placed on the maximized carousel.|
+|thumbnailWidth           |String                |'10%'        |Width of each thumbnail. e.g. '20%', '20vw', '200px', 'auto'.|
+|thumbnailHeight          |String                |'10%'        |Height of each thumbnail (as well as the height of thumbnails).  e.g. '20%', '20vh', '200px', 'auto'.|
 |className                |String                |undefined    |Class name(s) to be placed on the non-maximized carousel.|
 |style                    |Object                |undefined    |Inline style(s) to be placed on the non-maximized carousel.|
 
