@@ -1,10 +1,10 @@
-# v0.1
+# v0.2
 
 ```react-gallery-carousel```
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
-## v0.1.5 (2021-05-02)
+## v0.2.0 (2021-05-02)
 
 ### Bug Fixes
 
