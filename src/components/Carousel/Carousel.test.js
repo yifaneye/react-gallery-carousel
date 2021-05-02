@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Carousel from '../Carousel';
+import { defaultProps } from './props';
 const { describe, it, expect } = global;
 
 const images = [900, 800, 700, 600, 500].map((size) => ({
@@ -43,14 +44,16 @@ describe('Carousel', () => {
   });
 
   it('renders the same as snapshot', () => {
-    const component = renderer.create(<Carousel images={images} />);
+    const component = renderer.create(
+      <Carousel {...defaultProps} images={images} />
+    );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('can be maximized and renders the same as snapshot', () => {
     const component2 = renderer.create(
-      <Carousel images={images2} isMaximized />
+      <Carousel {...defaultProps} images={images2} isMaximized />
     );
     const tree2 = component2.toJSON();
     expect(tree2).toMatchSnapshot();
