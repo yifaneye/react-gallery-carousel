@@ -8,9 +8,7 @@ const Carousel3 = ({ images }) => {
       <header className='section-header'>
         <h2 id='example3'>
           Example 3: Default carousel with images and with right-to-left (RTL){' '}
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel3.js#L23'>
-            see the code
-          </a>
+          <a href='https://yifanai.com/rgc3'>code</a>
         </h2>
         <p>
           A default carousel example has lazy loading and preloading; touch

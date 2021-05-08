@@ -13,9 +13,7 @@ const Carousel5 = ({ images }) => {
         <h2 id='example5'>
           Example 5: Default carousel with imperative handlers{' '}
           <small>(available from v0.2.0)</small>{' '}
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel5.js#L114'>
-            see the code
-          </a>
+          <a href='https://yifanai.com/rgc5'>code</a>
         </h2>
         <p>
           To customize the carousel in a declarative manner, pass the props

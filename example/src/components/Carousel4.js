@@ -16,9 +16,7 @@ const Carousel3 = ({ images }) => {
         <h2 id='example4'>
           Example 4: Customized carousel with dynamic images{' '}
           <small>(available from v0.1.1)</small>{' '}
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel4.js#L34'>
-            see the code
-          </a>
+          <a href='https://yifanai.com/rgc4'>code</a>
         </h2>
         <p>
           This example has images dynamically set in the{' '}

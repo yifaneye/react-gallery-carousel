@@ -8,9 +8,7 @@ const Carousel2 = ({ images }) => {
       <header className='section-header'>
         <h2 id='example2'>
           Example 2: Default carousel with images{' '}
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel2.js#L24'>
-            see the code
-          </a>
+          <a href='https://yifanai.com/rgc2'>code</a>
         </h2>
         <p>
           A default carousel example has lazy loading and preloading (the 2
