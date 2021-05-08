@@ -15,7 +15,8 @@ const Carousel3 = ({ images }) => {
       <header className='section-header'>
         <h2 id='example4'>
           Example 4: Customized carousel with dynamic images{' '}
-          <small>(available from v0.1.1)</small>
+          <small>(available from v0.1.1)</small>{' '}
+          <a href='https://yifanai.com/rgc4'>code</a>
         </h2>
         <p>
           This example has images dynamically set in the{' '}
@@ -24,10 +25,7 @@ const Carousel3 = ({ images }) => {
           custom initial index; custom widget positions; custom thumbnails,
           custom dot buttons and captions for the maximized carousel; custom
           active and passive dot buttons; and custom styles for the
-          non-maximized carousel.{' '}
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel4.js'>
-            See the code
-          </a>
+          non-maximized carousel.
         </p>
       </header>
       <div className='carousel-container'>
