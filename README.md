@@ -121,7 +121,7 @@ To customize the carousel, use the following props:
 |Name                     |Type                  |Default      |Description|
 |:------------------------|:---------------------|:------------|:----------|
 |images                   |Array                 |undefined    |Array of image(s) to be placed in the carousel. Each image object (e.g. [example object](#image-object-example)) in the array has a required attribute 'src'.|
-|children                 |node or Array of nodes|undefined    |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is falsy.|
+|children                 |node or Array of nodes|undefined    |HTML element(s) to be placed into the carousel for user-managed slides. It (they) will be placed only if the 'images' prop is falsy.|
 |index                    |Number                |undefined    |Current (0-indexed) index of the slides of the carousel as a whole number starting from 0.|
 |isRTL                    |Boolean               |false        |If true, the slides of the carousel starts from the right (and also auto plays from the right to the left).|
 |isLoop                   |Boolean               |true         |If true, the carousel form a loop (i.e. going left from the left-most slide lands at the right-most slide, and vice versa) from the ribbon of slides.|
@@ -235,6 +235,11 @@ To customize the carousel in an imperative manner, use the following handlers (o
 ```
 ['top', 'bottom']
 ```
+
+## FAQ
+
+### Q: How to place video, text or any element into a slide?
+A: Custom elements in slides (called user-managed slides) can be placed using the `children` prop. Example: [demo](https://yifanai.com/rgc), [code](https://yifanai.com/rgc1). Note: it (they) will be placed only if the 'images' prop is falsy.
 
 ## Contributing
 
