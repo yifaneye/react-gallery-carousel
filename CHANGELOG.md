@@ -11,6 +11,8 @@
 - Enhanced the documentation regarding user-managed slides.
   ([Issue #14](https://github.com/yifaneye/react-gallery-carousel/issues/14))
 
+- Updated the [demo site](https://yifanai.com/rgc).
+
 ## v0.2.1 (2021-05-08)
 
 ### Bug Fixes

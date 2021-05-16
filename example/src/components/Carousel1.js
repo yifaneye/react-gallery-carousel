@@ -18,8 +18,8 @@ const Carousel1 = () => {
           <a href='https://yifanai.com/rgc1'>code</a>
         </h2>
         <p>
-          This example has callback set to update the document title and URL
-          hash on index update; and custom widget positions.
+          This example has custom elements in slides (user-managed slides) using
+          the <code>children</code> prop; and custom widget positions.
         </p>
       </header>
       <div className='carousel-container short'>
@@ -36,11 +36,11 @@ const Carousel1 = () => {
           index={Number(
             indexToTitle.getReversed(window.location.hash.replace('#', ''))
           )}
-          onIndexChange={({ curIndex }) => {
-            const title = indexToTitle.get(curIndex);
-            window.location.hash = title;
-            document.title = `${title} | react-gallery-carousel`;
-          }}
+          // onIndexChange={({ curIndex }) => {
+          //   const title = indexToTitle.get(curIndex);
+          //   window.location.hash = title;
+          //   document.title = `${title} | react-gallery-carousel`;
+          // }} // this callback can be set to update the document title and URL hash on index update
           style={{ userSelect: 'text' }}
         >
           <div className='text-slide'>
