@@ -4,13 +4,16 @@
 [![npm downloads][downloads-badge]][npm-url]
 [![npm bundle size][size-badge]][npm-url]
 [![prettier][prettier-badge]][prettier-url]
+[![license][license-badge]][license-url]
 
-[npm-url]: https://www.npmjs.com/package/react-gallery-carousel
 [npm-badge]: https://img.shields.io/npm/v/react-gallery-carousel.svg
-[downloads-badge]: https://img.shields.io/npm/dm/react-gallery-carousel.svg?color=blue
+[npm-url]: https://www.npmjs.com/package/react-gallery-carousel
+[downloads-badge]: https://img.shields.io/npm/dm/react-gallery-carousel.svg
 [size-badge]: https://badgen.net/bundlephobia/minzip/react-gallery-carousel
 [prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: https://github.com/yifaneye/react-gallery-carousel/blob/master/LICENSE
 
 Mobile-friendly Carousel with batteries included (supporting touch, mouse emulation, lazy loading, thumbnails, fullscreen, RTL, keyboard navigation and customisations).
 
@@ -66,22 +69,22 @@ It should also be able to detect a mostly horizontal swipe and then fix the caro
 ### Live demo
 Try **[Live Demo](https://yifanai.com/rgc)**
 
+### Carousel controlled by finger
+![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
+
 ### Carousel controlled by cursor
 ![Carousel controlled by cursor](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
 
-### Carousel controlled by finger
-![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
+### Lighthouse report
+![Lighthouse Report on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_full_v0.1.3.jpg)
+![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
+This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
 
 ### Non-maximized carousels
 ![Non-maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_non_maximized.jpg)
 
 ### Maximized carousel
 ![Maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_maximized.jpg)
-
-### Lighthouse report
-![Lighthouse Report on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_full_v0.1.3.jpg)
-![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
-This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
 
 ## Installation
 
@@ -241,6 +244,14 @@ To customize the carousel in an imperative manner, use the following handlers (o
 ### Q: How to place video, text or any element into a slide?
 A: Custom elements in slides (called user-managed slides) can be placed using the `children` prop. Example: [demo](https://yifanai.com/rgc), [code](https://yifanai.com/rgc1). Note: it (they) will be placed only if the 'images' prop is falsy.
 
+## Roadmap
+1. Momentum-based mouse dragging on thumbnails (in process)
+2. GitHub Actions
+3. Use Cypress for E2E testing
+4. Allow customization through render props
+5. Add type definition
+6. Use TypeScript
+
 ## Contributing
 
 Issues and pull requests are welcomed.
@@ -249,7 +260,7 @@ Issues and pull requests are welcomed.
 
 ## Local Development
 
-1. In a terminal tab, run rollup to watch the `src/` directory and to automatically compile the local version of `react-gallery-carousel` into the `dist/` directory.
+1. In a terminal tab, run rollup to watch the `src/` directory and to automatically compile the local version of `react-gallery-carousel` into the `dist/` directory. (Note: the compilation does not minify the package for readability. The decision on minification is left to the developer users).
 
 ```bash
 yarn start
