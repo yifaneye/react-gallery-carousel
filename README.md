@@ -73,12 +73,14 @@ Try **[Live Demo](https://yifanai.com/rgc)**
 ![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
 
 ### Carousel controlled by cursor
-![Carousel controlled by cursor](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
+![Carousel controlled by cursor](https://user-images.githubusercontent.com/49315663/118391709-1b490380-b679-11eb-9f56-44a6702419a0.gif)
 
 ### Lighthouse report
+![SS 2021-04-18 at 22 17 52](https://user-images.githubusercontent.com/49315663/118391896-f30dd480-b679-11eb-895b-e4cf3160303b.jpg)
+
 ![Lighthouse Report on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_full_v0.1.3.jpg)
 ![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
-This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
+This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
 
 ### Non-maximized carousels
 ![Non-maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_non_maximized.jpg)
