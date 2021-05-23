@@ -127,9 +127,10 @@ const GalleryCarousel = (props, ref) => {
 
     // calculate transition duration
     const swipedDistance = Math.abs(displacementX);
-    const transitionDistance = hasToUpdate
-      ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
-      : swipedDistance;
+    const transitionDistance =
+      hasToUpdate && slidesRef.current
+        ? Math.abs(slidesRef.current.clientWidth - swipedDistance)
+        : swipedDistance;
     speed = hasToUpdate ? speed : props.swipeRollbackSpeed;
     let duration = transitionDistance / speed;
 
@@ -154,7 +155,8 @@ const GalleryCarousel = (props, ref) => {
       duration = props.autoPlayInterval * 1;
 
     // apply transition duration for the period of duration
-    slidesRef.current.style.transitionDuration = `${duration}ms`;
+    if (slidesRef.current)
+      slidesRef.current.style.transitionDuration = `${duration}ms`;
     setTimeout(() => {
       // revert temporary style changes made on the slides for transition and looping
       if (slidesRef.current) slidesRef.current.style.transitionDuration = null;
@@ -223,8 +225,8 @@ const GalleryCarousel = (props, ref) => {
       } else if (slides.isMaxIndex() && change > 0 && slideMinRef.current) {
         slideMinRef.current.style.transform = `translateX(${slidesMax})`;
       } else {
-        slideMinRef.current.style.transform = null;
-        slideMaxRef.current.style.transform = null;
+        if (slideMinRef.current) slideMinRef.current.style.transform = null;
+        if (slideMaxRef.current) slideMaxRef.current.style.transform = null;
       }
     }
 
@@ -253,7 +255,7 @@ const GalleryCarousel = (props, ref) => {
     // update UI
     if (slides.calibrateIndex(change) && shouldCalibrateIndex) {
       // remove carry-over transitionDuration
-      slidesRef.current.style.transitionDuration = null;
+      if (slidesRef.current) slidesRef.current.style.transitionDuration = null;
       applyTransitionX(displacementX);
     }
 
