@@ -169,7 +169,7 @@ To customize the carousel, use the following props:
 |shouldMaximizeOnClick    |Boolean               |false        |If true, the carousel can be maximized by clicking.|
 |shouldMinimizeOnClick    |Boolean               |false        |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true         |If true, the carousel can be minimized by touch swiping down.|
-|onIndexChange            |Function              |() => {}     |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same.)|
+|onIndexChange            |Function              |({curIndex, curIndexForDisplay}) => {} |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same. ```curIndex``` is 0-indexed whilst ```curIndexForDisplay``` is 1-indexed)|
 |onSwipeMoveX             |Function              |(displacementX) => {}                |Callback function invoked when the carousel is being swiped in a horizontal swipe. (Note: available from v0.2.0)|
 |onSwipeMoveY             |Function              |(displacementX, displacementY) => {} |Callback function invoked when the carousel is being swiped in a vertical swipe. (Note: available from v0.2.0)|
 |onSwipeEndDown           |Function              |() => {}     |Callback function invoked when the carousel is being swiped in a downward swipe. (Note: available from v0.2.0)|
@@ -243,6 +243,9 @@ To customize the carousel in an imperative manner, use the following handlers (o
 
 ### Q: How to place video, text or any element into a slide?
 A: Custom elements in slides (called user-managed slides) can be placed using the `children` prop. Example: [demo](https://yifanai.com/rgc), [code](https://yifanai.com/rgc1). Note: it (they) will be placed only if the 'images' prop is falsy.
+
+### Q: Why the element and font in my carousel is different from the one on the demo?
+A: There are some browser default styles. Set a font, some global styles and/or use normalize.css will help. Example: [code](https://yifanai.com/rgcc).
 
 ## Roadmap
 1. Momentum-based mouse dragging on thumbnails (in process)
