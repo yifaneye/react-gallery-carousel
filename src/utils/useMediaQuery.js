@@ -6,9 +6,9 @@ const useMediaQuery = (query) => {
 
   useEffect(() => {
     const callback = () => setMatches(mediaQueryList.matches);
-    mediaQueryList.addEventListener('change', callback);
+    mediaQueryList.addEventListener && mediaQueryList.addEventListener('change', callback);
 
-    return () => mediaQueryList.removeEventListener('change', callback);
+    return () => mediaQueryList.addEventListener && mediaQueryList.removeEventListener('change', callback);
   }, [mediaQueryList]);
 
   return matches;
