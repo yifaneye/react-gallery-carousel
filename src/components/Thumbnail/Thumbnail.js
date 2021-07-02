@@ -21,7 +21,7 @@ export const Thumbnail = (props) => {
   );
 
   const className = `${styles.thumbnail}${
-    props.isCurrent ? ' ' + styles.currentThumbnail : ''
+    props.isCurrent ? ' active ' + styles.currentThumbnail : ''
   }`;
 
   // customize the width of the thumbnail

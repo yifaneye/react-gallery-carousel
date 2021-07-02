@@ -11,7 +11,7 @@ export const Thumbnails = (props) => {
   const thumbnailsContainerRef = useRef(null);
   const thumbnailRef = useRef(null);
 
-  useAnchor(thumbnailRef, props.isMaximized);
+  useAnchor(thumbnailRef, props.isMaximized, props.ignoreReducedMotion);
 
   // customize the height of the thumbnails wrapper which wraps the thumbnails
   const style = 'height' in props ? { flexBasis: props.height } : {};

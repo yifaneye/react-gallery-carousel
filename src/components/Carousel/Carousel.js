@@ -85,7 +85,8 @@ const GalleryCarousel = (props, ref) => {
     setIsPlaying((isPlaying) => !isPlaying);
   };
 
-  const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const isReducedMotion = props.ignoreReducedMotion ? false : reducedMotion;
 
   useLayoutEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
@@ -470,6 +471,7 @@ const GalleryCarousel = (props, ref) => {
       shouldLazyLoad={props.shouldLazyLoad}
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObject}
+      ignoreReducedMotion={props.ignoreReducedMotion}
     />
   );
 

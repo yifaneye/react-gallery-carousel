@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import useEventListener from './useEventListener';
 import useMediaQuery from './useMediaQuery';
 
-const useAnchor = (elementRef, isMaximized) => {
+const useAnchor = (elementRef, isMaximized, ignoreReducedMotion) => {
   const element = elementRef && elementRef.current;
   const container = element && element.parentNode.parentNode;
 
@@ -16,7 +16,8 @@ const useAnchor = (elementRef, isMaximized) => {
     element.offsetLeft + element.clientWidth >= container.clientWidth;
 
   // get reduced motion setting for determining the need to smooth scrolling for later
-  const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const isReducedMotion = ignoreReducedMotion ? false : reducedMotion;
 
   // center the element in the container without smoothness
   const centerElement = useCallback(() => {
@@ -37,6 +38,7 @@ const useAnchor = (elementRef, isMaximized) => {
   // center the element in the container with smoothness under certain conditions
   const centerElementSmoothly = useCallback(() => {
     const element = elementRef.current;
+
     if (!element) return;
     const container = element.parentNode.parentNode;
 

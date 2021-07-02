@@ -10,20 +10,27 @@ $activeOpacity: 1;
   width: $scale;
   max-width: $scale;
   overflow: hidden;
-  margin-right: $margin;
   padding: 0;
-  opacity: $passiveOpacity;
   list-style: none;
   user-select: none;
   -webkit-user-drag: none;
+  box-sizing: border-box;
+  // border: 4px solid transparent;
+  margin: 2px 2px 2px 5px;
+  // transition: border .2s ease-in-out;
 }
 
 .currentThumbnail {
-  opacity: $activeOpacity;
+  // border: 4px solid rgba(204, 105, 0, 0.6);
+  // transition: border .2s ease-in-out;
+  box-shadow: 0 0 3px 2px rgba(204, 105, 0, 0.9);
+  transition: box-shadow .1s ease-in-out;
 }
 
 .thumbnail:not(.currentThumbnail):hover {
-  opacity: $activeOpacity;
+  // opacity: $activeOpacity;
+  box-shadow: 0 0 3px 2px rgba(204, 105, 0, 0.7);
+  transition: box-shadow .1s ease-in-out;
 }
 
 /* prevent thumbnail to stay in the hover state on touch devices,

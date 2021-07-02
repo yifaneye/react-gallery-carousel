@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styles from './Image.module.css';
-import placeholderImage from 'placeholder.jpg';
-import fallbackImage from 'fallback.png';
+import placeholderImage from './placeholder.jpg';
+import fallbackImage from './fallback.png';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
 import { elementRef, imageObject } from '../../utils/validators';

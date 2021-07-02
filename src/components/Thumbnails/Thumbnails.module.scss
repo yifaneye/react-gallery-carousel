@@ -6,7 +6,7 @@
   padding: 0;
   overflow-y: hidden;
   overflow-x: scroll;
-  cursor: grab;
+  cursor: pointer;
   scrollbar-width: none;
 
   /* Prevent the default behaviour of "scroll chaining" where parent element
@@ -37,6 +37,10 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+.thumbnails::after {
+  content: '\00a0';
 }
 
 .thumbnails.RTL {
