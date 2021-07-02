@@ -4,13 +4,16 @@
 [![npm downloads][downloads-badge]][npm-url]
 [![npm bundle size][size-badge]][npm-url]
 [![prettier][prettier-badge]][prettier-url]
+[![license][license-badge]][license-url]
 
-[npm-url]: https://www.npmjs.com/package/react-gallery-carousel
 [npm-badge]: https://img.shields.io/npm/v/react-gallery-carousel.svg
-[downloads-badge]: https://img.shields.io/npm/dm/react-gallery-carousel.svg?color=blue
+[npm-url]: https://www.npmjs.com/package/react-gallery-carousel
+[downloads-badge]: https://img.shields.io/npm/dm/react-gallery-carousel.svg
 [size-badge]: https://badgen.net/bundlephobia/minzip/react-gallery-carousel
 [prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
 [prettier-url]: https://github.com/prettier/prettier
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license-url]: https://github.com/yifaneye/react-gallery-carousel/blob/master/LICENSE
 
 Mobile-friendly Carousel with batteries included (supporting touch, mouse emulation, lazy loading, thumbnails, fullscreen, RTL, keyboard navigation and customisations).
 
@@ -22,16 +25,16 @@ Try **[Live Demo](https://yifanai.com/rgc)**
 
 ## Background
 
-### Is this reinventing the wheel?
+### What problems do other Carousels have?
 
-No! The thing is that I have **used and carefully analyzed a lot of carousel/slider components**. I summarized that their **issues** are:
+I have **used and carefully analyzed a lot of carousel/slider components**. I summarized that **their issues** are:
 1. Some of them do not move the slide as the user swipes on the slide.
 2. Most of them do not support mouse dragging to move to the previous or the next slide. With the ones those support mouse emulation, some of them do not properly handle the case where the mouse leaves the carousel, which allow the user to continuously control the carousel.
 3. Most of them do not support keyboard navigation (i.e. left, right and tab key).
 4. Most of them cannot be maximized to fullscreen/modal/lightbox. With fullscreen, there is the issue of browser compatibility, i.e. iOS Safari on iPhone does not support the fullscreen API.
-5. Most of them do not have an easy solution for building thumbnails. With the ones those have thumbnails, most of the thumbnails can not be freely scrolled which lead to poor user experience. In addition, most of the thumbnails can not be lazy loaded.
+5. Most of them do not have an easy solution for building thumbnails. With the ones those have thumbnails, most of the thumbnails cannot be freely scrolled which lead to poor user experience. In addition, most of the thumbnails cannot be lazy loaded.
 6. Most of them cannot lazy load (and preload) images. With the ones those can lazy load, most of them have transition that traverses the intermediate images when the user goes to a distant slide, which defeat the purpose of lazy loading.
-7. Some of them cannot autoplay. With the ones those can autoplay, they can not auto pause. For example, when the user hits another tab or goes to another app, the autoplay on those carousels do not pause.
+7. Some of them cannot autoplay. With the ones those can autoplay, they cannot auto pause. For example, when the user hits another tab or goes to another app, the autoplay on those carousels do not pause.
 8. Most of them do not respect the reduced motion settings by the user.
 9. Most of them disregard the velocity of the swipe and just set a constant transition duration.
 10. Some of their carousels will be in different sizes when the images/slides inside are in different sizes. Some of their transitions are bumpy when their images/slides are in different sizes.
@@ -66,22 +69,22 @@ It should also be able to detect a mostly horizontal swipe and then fix the caro
 ### Live demo
 Try **[Live Demo](https://yifanai.com/rgc)**
 
-### Carousel controlled by cursor
-![Carousel controlled by cursor](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_transition.gif)
-
 ### Carousel controlled by finger
 ![Carousel controlled by finger](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_touch.gif)
+
+### Carousel controlled by cursor
+![Carousel controlled by cursor](https://user-images.githubusercontent.com/49315663/118391709-1b490380-b679-11eb-9f56-44a6702419a0.gif)
+
+### Lighthouse report
+![Lighthouse Report on react-gallery-carousel](https://user-images.githubusercontent.com/49315663/118391896-f30dd480-b679-11eb-895b-e4cf3160303b.jpg)
+![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
+This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
 
 ### Non-maximized carousels
 ![Non-maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_non_maximized.jpg)
 
 ### Maximized carousel
 ![Maximized Carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/demo_maximized.jpg)
-
-### Lighthouse report
-![Lighthouse Report on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_full_v0.1.3.jpg)
-![Lighthouse Report with scores on react-gallery-carousel](https://yifanai.s3-ap-southeast-2.amazonaws.com/rgc/lighthouse_report_v0.1.3.jpg)
-This lighthouse report is conducted on https://yifaneye.github.io/react-gallery-carousel/ in an incognito window on Chrome Version 89.0.4389.114 (Official Build) (x86_64) on MacBook Pro with macOS version 10.15.7 (19H2) on 12th of April 2021.
 
 ## Installation
 
@@ -101,12 +104,12 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
 const App = () => {
-  const images = [900, 800, 700, 600, 500].map((size) => ({
-    src: `https://placedog.net/${size}/${size}`
+  const images = [9, 8, 7, 6, 5].map((number) => ({
+    src: `https://placedog.net/${number}00/${number}00?id=${number}`
   }));
 
   return (
-    <Carousel images={images} />
+    <Carousel images={images} style={{ height: 800, width: 500 }} />
   );
 };
 
@@ -121,7 +124,7 @@ To customize the carousel, use the following props:
 |Name                     |Type                  |Default      |Description|
 |:------------------------|:---------------------|:------------|:----------|
 |images                   |Array                 |undefined    |Array of image(s) to be placed in the carousel. Each image object (e.g. [example object](#image-object-example)) in the array has a required attribute 'src'.|
-|children                 |node or Array of nodes|undefined    |HTML element(s) to be placed into the carousel, but it (they) will be placed only if the 'images' prop is falsy.|
+|children                 |node or Array of nodes|undefined    |HTML element(s) to be placed into the carousel for user-managed slides. It (they) will be placed only if the 'images' prop is falsy.|
 |index                    |Number                |undefined    |Current (0-indexed) index of the slides of the carousel as a whole number starting from 0.|
 |isRTL                    |Boolean               |false        |If true, the slides of the carousel starts from the right (and also auto plays from the right to the left).|
 |isLoop                   |Boolean               |true         |If true, the carousel form a loop (i.e. going left from the left-most slide lands at the right-most slide, and vice versa) from the ribbon of slides.|
@@ -167,10 +170,10 @@ To customize the carousel, use the following props:
 |shouldMinimizeOnClick    |Boolean               |false        |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true         |If true, the carousel can be minimized by touch swiping down.|
 |onIndexChange            |Function              |() => {}     |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same.)|
-|onSwipeMoveX             |Function              |(displacementX) => {}                |Callback function invoked when the carousel is being swiped in a horizontal swipe. (Note: need >= v0.2.0)|
-|onSwipeMoveY             |Function              |(displacementX, displacementY) => {} |Callback function invoked when the carousel is being swiped in a vertical swipe. (Note: need >= v0.2.0)|
-|onSwipeEndDown           |Function              |() => {}     |Callback function invoked when the carousel is being swiped in a downward swipe. (Note: need >= v0.2.0)|
-|onTap                    |Function              |() => {}     |Callback function invoked when the carousel is being tapped (i.e. from mousedown to mouseup without mousemove, or from touchstart to touchend without touchmove. (Note: need >= v0.2.0)|
+|onSwipeMoveX             |Function              |(displacementX) => {}                |Callback function invoked when the carousel is being swiped in a horizontal swipe. (Note: available from v0.2.0)|
+|onSwipeMoveY             |Function              |(displacementX, displacementY) => {} |Callback function invoked when the carousel is being swiped in a vertical swipe. (Note: available from v0.2.0)|
+|onSwipeEndDown           |Function              |() => {}     |Callback function invoked when the carousel is being swiped in a downward swipe. (Note: available from v0.2.0)|
+|onTap                    |Function              |() => {}     |Callback function invoked when the carousel is being tapped (i.e. from mousedown to mouseup without mousemove, or from touchstart to touchend without touchmove. (Note: available from v0.2.0)|
 |objectFit                |String                |'cover'      |CSS 'object-fit' style to be placed on each image, on the non-maximized carousel.|
 |objectFitAtMax           |String                |'contain'    |CSS 'object-fit' style to be placed on each image, on the maximized carousel.|
 |zIndexAtMax              |Number                |undefined    |CSS 'z-index' attribute to be placed on the maximized carousel.|
@@ -188,7 +191,7 @@ To customize the carousel in an imperative manner, use the following handlers (o
 |Name                     |Description|
 |:------------------------|:----------|
 |play()                   |Start the autoplay by setting the `isPlaying` state to true. (Note: need >= v0.2.0)|
-|play()                   |Pause the autoplay by setting the `isPlaying` state to false. (Note: need >= v0.2.0)|
+|pause()                  |Pause the autoplay by setting the `isPlaying` state to false. (Note: need >= v0.2.0)|
 |toggleIsPlaying()        |Toggle the `isPlaying` state. (Note: need >= v0.2.0)|
 |maximize()               |Maximize the carousel by setting the `isMaximized` state to true. (Note: need >= v0.2.0)|
 |minimize()               |Minimize the carousel by setting the `isMaximized` state to false. (Note: need >= v0.2.0)|
@@ -196,23 +199,6 @@ To customize the carousel in an imperative manner, use the following handlers (o
 |goLeft()                 |Go to the left slide. (Note: need >= v0.2.0)|
 |goRight()                |Go to the right slide. (Note: need >= v0.2.0)|
 |goToIndex(index)         |Go to the specified index. (Note: need >= v0.2.0)|
-
-## Local Development
-
-1. In a terminal tab, run rollup to watch the `src/` directory and to automatically compile the local version of `react-gallery-carousel` into the `dist/` directory.
-
-```bash
-yarn start
-```
-
-2. In another terminal tab, run create-react-app dev server to serve the example in the `example/` directory, which is dependent on the local version of `react-gallery-carousel`.
-
-```bash
-cd example
-yarn start
-```
-
-(Note: it is not helpful to run either of these commands in the background, because you will miss out on errors and warnings.)
 
 ## Definitions
 
@@ -253,6 +239,41 @@ yarn start
 ['top', 'bottom']
 ```
 
+## FAQ
+
+### Q: How to place video, text or any element into a slide?
+A: Custom elements in slides (called user-managed slides) can be placed using the `children` prop. Example: [demo](https://yifanai.com/rgc), [code](https://yifanai.com/rgc1). Note: it (they) will be placed only if the 'images' prop is falsy.
+
+## Roadmap
+1. Momentum-based mouse dragging on thumbnails (in process)
+2. GitHub Actions
+3. Use Cypress for E2E testing
+4. Allow customization through render props
+5. Add type definition
+6. Use TypeScript
+
+## Contributing
+
+Issues and pull requests are welcomed.
+
+(Note: please use Prettier for code formatting.)
+
+## Local Development
+
+1. In a terminal tab, run rollup to watch the `src/` directory and to automatically compile the local version of `react-gallery-carousel` into the `dist/` directory. (Note: the compilation does not minify the package for readability. The decision on minification is left to the developer users).
+
+```bash
+yarn start
+```
+
+2. In another terminal tab, run create-react-app dev server to serve the example in the `example/` directory, which is dependent on the local version of `react-gallery-carousel`.
+
+```bash
+cd example
+yarn start
+```
+
+(Note: it is not helpful to run either of these commands in the background, because you will miss out on errors and warnings.)
 
 ## License
 

@@ -12,16 +12,14 @@ const Carousel5 = ({ images }) => {
       <header className='section-header'>
         <h2 id='example5'>
           Example 5: Default carousel with imperative handlers{' '}
-          <small>(available from v0.2.0)</small>
+          <small>(available from v0.2.0)</small>{' '}
+          <a href='https://yifanai.com/rgc5'>code</a>
         </h2>
         <p>
           To customize the carousel in a declarative manner, pass the props
           (e.g. <code>isAutoPlaying</code>, <code>isMaximized</code>,{' '}
           <code>index</code>). To customize the carousel in an imperative
           manner, use the following handlers (on the ref):
-          <a href='https://github.com/yifaneye/react-gallery-carousel/blob/master/example/src/components/Carousel5.js'>
-            See the code
-          </a>
         </p>
         <div>
           <div className='buttons'>

@@ -29,6 +29,10 @@ const Footer = () => {
           </a>
           <span> / </span>
           <a href='https://www.npmjs.com/package/react-gallery-carousel'>npm</a>
+          <span> / </span>
+          <a href='https://github.com/yifaneye/react-gallery-carousel#installation'>
+            Documentation
+          </a>
           <div>
             <small>(The first version was published on 31st March 2021.)</small>
           </div>

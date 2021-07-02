@@ -4,6 +4,29 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+## v0.2.2 (2021-05-16)
+
+### Enhancements
+
+- Enhanced the documentation regarding user-managed slides.
+  ([Issue #14](https://github.com/yifaneye/react-gallery-carousel/issues/14))
+
+- Updated the [demo site](https://yifanai.com/rgc).
+
+## v0.2.1 (2021-05-08)
+
+### Bug Fixes
+
+- Fixed issue where caption for an image always has vertical and horizontal scroll bars even they are not required.
+  ([Issue #26](https://github.com/yifaneye/react-gallery-carousel/issues/26))
+
+### Enhancements
+
+- Enhanced content on the [demo site](https://yifanai.com/rgc).
+
+- Enhanced examples and content in the [documentation](https://yifanai.com/rgc).
+  ([Issue #28](https://github.com/yifaneye/react-gallery-carousel/issues/28))
+
 ## v0.2.0 (2021-05-02)
 
 ### Bug Fixes
