@@ -17,7 +17,7 @@ export const Thumbnail = (props) => {
       shouldLazyLoad={props.shouldLazyLoad}
     />
   ) : (
-    <UserSlideThumbnail slide={props.slide} />
+    <UserSlideThumbnail slide={props.slide} isMaximized={props.isMaximized} />
   );
 
   const className = `${styles.thumbnail}${

@@ -1,6 +1,11 @@
 .slide {
+  opacity: 0;
   height: 100%;
   min-width: 100%;
   width: 100%;
   max-width: 100%;
+}
+
+.slide[aria-live], ul[is_active] .slide, :global(.isGrabbing) .slide {
+  opacity: 1;
 }

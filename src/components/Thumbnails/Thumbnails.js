@@ -36,7 +36,7 @@ export const Thumbnails = (props) => {
               key={index}
               reference={thumbnailRef}
               thumbnailsContainerRef={thumbnailsContainerRef}
-              slide={props.slides[key]}
+              slide={props.customThumbnails?.[index] || props.slides[key]}
               isImage={props.hasImages}
               shouldLazyLoad={props.shouldLazyLoad}
               isCurrent={Number(key) === props.curIndex}

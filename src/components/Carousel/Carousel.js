@@ -56,8 +56,8 @@ const GalleryCarousel = (props, ref) => {
   });
   const nSlides = slides.length;
   const increment = props.isRTL ? -1 : +1;
-  const slidesMin = `${nSlides * -increment}00%`;
-  const slidesMax = `${nSlides * increment}00%`;
+  const slidesMin = `calc(${nSlides * -increment}00%)`;
+  const slidesMax = `calc(${nSlides * increment}00%)`;
 
   /* handle current index change */
   const [, setCurIndex] = useState(slides.curIndex);
@@ -156,9 +156,14 @@ const GalleryCarousel = (props, ref) => {
 
     // apply transition duration for the period of duration
     slidesRef.current.style.transitionDuration = `${duration}ms`;
+    slidesRef.current.setAttribute("is_active", true);
+
     setTimeout(() => {
       // revert temporary style changes made on the slides for transition and looping
-      if (slidesRef.current) slidesRef.current.style.transitionDuration = null;
+      if (slidesRef.current) {
+        slidesRef.current.style.transitionDuration = null;
+        slidesRef.current.removeAttribute("is_active");
+      }
     }, duration);
   };
 
@@ -196,6 +201,7 @@ const GalleryCarousel = (props, ref) => {
           ? `${-100 * slides.curIndex * increment}%`
           : `calc(${-100 * slides.curIndex * increment}% + ${displacementX}px)`;
       // move the element
+
       if (slidesRef.current) {
         slidesRef.current.style.transform = `translateX(${targetPosition})`;
       }
@@ -358,7 +364,8 @@ const GalleryCarousel = (props, ref) => {
   const propsClassName = 'className' in props ? ' ' + props.className : '';
   const galleryClassName = hasImages ? ' ' + styles.gallery : '';
   const carouselClassName = styles.carousel + propsClassName + galleryClassName;
-  const maxCarouselClassName = styles.maxCarousel + galleryClassName;
+
+  const maxCarouselClassName = styles.maxCarousel + galleryClassName + ` ${props.classes?.maxCarouselClassName || ''}`;
 
   /* process components for maximized carousel */
   // placeholder to be placed at the carousel's non-maximized position
@@ -472,6 +479,7 @@ const GalleryCarousel = (props, ref) => {
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObject}
       ignoreReducedMotion={props.ignoreReducedMotion}
+      customThumbnails={props.customThumbnails}
     />
   );
 
@@ -553,6 +561,8 @@ const GalleryCarousel = (props, ref) => {
               widgetsHasShadow={props.widgetsHasShadow}
               hasCaptions={settings.hasCaptions}
               curIndex={slides.curIndex}
+              classes={props.classes}
+              isMaximized={isMaximized}
             />
           </div>
           {widgets}

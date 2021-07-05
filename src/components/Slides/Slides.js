@@ -38,6 +38,8 @@ export const Slides = (props) => {
             widgetsHasShadow={props.widgetsHasShadow}
             hasCaption={props.hasCaptions}
             isCurrent={index === props.curIndex}
+            classes={props.classes}
+            isMaximized={props.isMaximized}
           />
         );
       })}
@@ -58,5 +60,7 @@ Slides.propTypes = {
   objectFit: objectFitStyles.isRequired,
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasCaptions: largeWidgetPositions.isRequired,
-  curIndex: PropTypes.number
+  curIndex: PropTypes.number,
+  isMaximized: PropTypes.bool,
+  classes: PropTypes.object,
 };

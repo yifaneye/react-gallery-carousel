@@ -94,7 +94,9 @@ export const Image = (props) => {
     />
   ) : (
     <img
-      className={styles.image}
+      className={`${styles.image} ${
+        (props.isMaximized ? props.classes?.slideMax : props.classes?.slide) || ''
+      }`}
       srcSet={srcset}
       src={src}
       alt={alt || null}
@@ -125,5 +127,6 @@ Image.propTypes = {
   shouldLazyLoad: PropTypes.bool.isRequired,
   slidesContainerRef: elementRef.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
-  widgetsHasShadow: PropTypes.bool.isRequired
+  widgetsHasShadow: PropTypes.bool.isRequired,
+  isMaximized: PropTypes.bool
 };

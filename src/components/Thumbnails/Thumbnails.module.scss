@@ -20,7 +20,7 @@
 }
 
 :global(.isGrabbing).thumbnailsWrapper {
-  cursor: grabbing;
+  cursor: pointer;
 }
 
 .thumbnailsWrapper::-webkit-scrollbar {

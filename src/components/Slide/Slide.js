@@ -19,9 +19,11 @@ export const Slide = (props) => {
       widgetsHasShadow={props.widgetsHasShadow}
       hasCaption={props.hasCaption}
       slidesContainerRef={props.slidesContainerRef}
+      classes={props.classes}
+      isMaximized={props.isMaximized}
     />
   ) : (
-    <UserSlide slide={props.slide} />
+    <UserSlide slide={props.slide} classes={props.classes} isMaximized={props.isMaximized} />
   );
   return (
     <li
@@ -44,5 +46,6 @@ Slide.propTypes = {
   hasCaption: largeWidgetPositions.isRequired,
   slidesContainerRef: elementRef.isRequired,
   reference: elementRef,
-  isCurrent: PropTypes.bool.isRequired
+  isCurrent: PropTypes.bool.isRequired,
+  isMaximized: PropTypes.bool
 };
