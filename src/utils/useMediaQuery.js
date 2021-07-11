@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
+import isSSR from './isSSR';
 
 const useMediaQuery = (query) => {
-  const mediaQueryList = window.matchMedia(query);
+  const mediaQueryList = !isSSR && window.matchMedia(query);
   const [matches, setMatches] = useState(mediaQueryList.matches);
 
   useEffect(() => {
     const callback = () => setMatches(mediaQueryList.matches);
-    mediaQueryList.addEventListener('change', callback);
+    mediaQueryList.addEventListener
+      ? mediaQueryList.addEventListener('change', callback)
+      : window.addEventListener('resize', callback);
 
-    return () => mediaQueryList.removeEventListener('change', callback);
+    return () =>
+      mediaQueryList.removeEventListener
+        ? mediaQueryList.removeEventListener('change', callback)
+        : window.removeEventListener('resize', callback);
   }, [mediaQueryList]);
 
   return matches;

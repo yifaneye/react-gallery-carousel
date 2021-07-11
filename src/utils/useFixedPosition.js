@@ -12,7 +12,7 @@ const useFixedPosition = (initialState, elementToFocusRef) => {
 
     if (isFixed) {
       bodyElement.style.overflow = 'hidden';
-      elementToFocusRef.current.focus();
+      if (elementToFocusRef.current) elementToFocusRef.current.focus();
     }
 
     return () => {
