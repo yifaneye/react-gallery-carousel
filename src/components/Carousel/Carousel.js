@@ -2,8 +2,8 @@ import React, {
   forwardRef,
   Fragment,
   useCallback,
+  useEffect,
   useImperativeHandle,
-  useLayoutEffect,
   useRef,
   useState
 } from 'react';
@@ -18,6 +18,7 @@ import {
   IndexBoard,
   DotButtons
 } from '../Widgets';
+import isSSR from '../../utils/isSSR';
 import useKeys from '../../utils/useKeys';
 import useSwipe from '../../utils/useSwipe';
 import useTimer from '../../utils/useTimer';
@@ -36,7 +37,7 @@ import { propTypes, defaultProps, getSettings } from './props';
 
 const GalleryCarousel = (props, ref) => {
   /* initialize references */
-  const documentRef = useRef(document);
+  const documentRef = useRef(isSSR ? undefined : document);
   const maximizedBackgroundRef = useRef(null);
   const carouselRef = useRef(null);
   const slidesContainerRef = useRef(null);
@@ -87,7 +88,7 @@ const GalleryCarousel = (props, ref) => {
 
   const isReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isReducedMotion) setIsPlaying(false);
   }, [isReducedMotion, setIsPlaying]);
 
@@ -104,7 +105,11 @@ const GalleryCarousel = (props, ref) => {
     }
   }, [isPlaying, setIsPlaying, wasPlaying, setWasPlaying]);
 
-  useEventListener(document, 'visibilitychange', handleVisibilityChange);
+  useEventListener(
+    isSSR ? undefined : document,
+    'visibilitychange',
+    handleVisibilityChange
+  );
 
   /* handle maximization/minimization and full screen */
   const [isMaximized, setIsMaximized] = useFixedPosition(
@@ -205,7 +210,7 @@ const GalleryCarousel = (props, ref) => {
   );
 
   // change to the current slide before browser paints
-  useLayoutEffect(() => applyTransitionX(), [applyTransitionX]);
+  useEffect(() => applyTransitionX(), [applyTransitionX]);
 
   /* handle implicit current index update (e.g. +1 or -1) */
   const shouldCalibrateIndex = props.isLoop && nSlides > 1;
@@ -268,7 +273,11 @@ const GalleryCarousel = (props, ref) => {
 
   const rollBackIndexUpdate = () => updateIndex(0, 0, 0);
 
-  useEventListener(window, 'orientationchange', rollBackIndexUpdate);
+  useEventListener(
+    isSSR ? undefined : window,
+    'orientationchange',
+    rollBackIndexUpdate
+  );
 
   /* handle explicit current index update (e.g. go to slide number 16) */
   const goToIndex = (index) => {

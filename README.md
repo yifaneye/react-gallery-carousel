@@ -247,13 +247,19 @@ A: Custom elements in slides (called user-managed slides) can be placed using th
 ### Q: Why the element and font in my carousel is different from the one on the demo?
 A: There are some browser default styles. Set a font, some global styles and/or use normalize.css will help. Example: [code](https://yifanai.com/rgcc).
 
+### Q: Can I remove hash from generated file names? How to do it?
+A: Yes. In ```node_modules/microbundle-crl/dist/microbundle.js```, Change ```useHash: true``` to ```useHash: false```.
+
 ## Roadmap
-1. Momentum-based mouse dragging on thumbnails (in process)
-2. GitHub Actions
-3. Use Cypress for E2E testing
-4. Allow customization through render props
-5. Add type definition
-6. Use TypeScript
+- [x] Support for dynamic images (since v0.1.1)
+- [x] Support handlers and listeners (since v0.2.0)
+- [x] Support for server-side rendering (since v0.2.3)
+- [ ] Momentum-based mouse dragging on thumbnails (in progress)
+- [ ] Add type definition
+- [ ] Use TypeScript
+- [ ] Allow customization through render props
+- [ ] Implement more unit tests and E2E tests
+- [ ] GitHub Actions
 
 ## Contributing
 

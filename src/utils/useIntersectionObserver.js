@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import isSSR from './isSSR';
 
 const useIntersectionObserver = (
   elementRef,
@@ -32,6 +33,11 @@ const useIntersectionObserver = (
       if (observer) observer.disconnect();
     };
   }, [rootRef, rootMargin, elementRef, isIntersecting]);
+
+  // fallback for SSR
+  if (isSSR) {
+    return false;
+  }
 
   // fallback for browsers those do not support IntersectionObserver (i.e. IE)
   if (!('IntersectionObserver' in window)) {
