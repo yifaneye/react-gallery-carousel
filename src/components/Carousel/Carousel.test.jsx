@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Carousel from '../Carousel';
+import Carousel from './index';
 import { defaultProps } from './props';
 const { describe, it, expect } = global;
 

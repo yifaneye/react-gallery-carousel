@@ -8,6 +8,7 @@ const useMouse = (elementRef, { onMouseMove, onMouseUp, onTap }) => {
 
   const handleMouseDown = (event) => {
     if (elementRef.current) elementRef.current.classList.add('isGrabbing');
+    if (elementRef.current) elementRef.current.classList.add('isInMotion');
     if (event.buttons > 0) isMouseDown = true;
     mouseDownX = event.clientX;
     previousX = event.clientX;

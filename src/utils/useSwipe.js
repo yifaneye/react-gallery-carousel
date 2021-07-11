@@ -18,6 +18,7 @@ const useSwipe = (
   let isInitialSwipeVertical;
 
   const handleSwipeEnd = (displacementX, displacementY = 0, velocity = 0) => {
+    if (elementRef.current) elementRef.current.classList.remove('isSwiping');
     const { clientWidth: width, clientHeight: height } = elementRef.current;
     const distanceXMin = width * swipePercentageMin;
     const distanceYMin = height * swipePercentageMin;
@@ -45,6 +46,8 @@ const useSwipe = (
   };
 
   const handleSwipeMove = (displacementX, displacementY = 0) => {
+    if (elementRef.current) elementRef.current.classList.add('isSwiping');
+    if (elementRef.current) elementRef.current.classList.add('isInMotion');
     if (isInitialSwipeVertical === false) onSwipeMoveX(displacementX);
     else if (isInitialSwipeVertical) onSwipeMoveY(displacementX, displacementY);
     else {

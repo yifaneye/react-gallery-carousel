@@ -164,6 +164,7 @@ const GalleryCarousel = (props, ref) => {
         slidesRef.current.style.transitionDuration = null;
         slidesRef.current.removeAttribute("is_active");
       }
+      if (slidesContainerRef?.current) slidesContainerRef.current.classList.remove('isInMotion');
     }, duration);
   };
 

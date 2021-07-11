@@ -6,6 +6,6 @@
   max-width: 100%;
 }
 
-.slide[aria-live], ul[is_active] .slide, :global(.isGrabbing) .slide {
+.slide[aria-live], ul[is_active] .slide, :global(.isGrabbing) .slide, :global(.isSwiping) .slide, :global(.isInMotion) .slide {
   opacity: 1;
 }

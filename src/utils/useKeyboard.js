@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-// import styles from '../components/Carousel/Carousel.module.css';
+// import styles from '@/components/Carousel/Carousel.module.css';
 
 const useKeyboard = (elementRef) => {
   useEffect(() => {

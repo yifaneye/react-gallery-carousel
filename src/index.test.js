@@ -1,4 +1,4 @@
-import Carousel from '.';
+import Carousel from './index';
 const { describe, it, expect } = global;
 
 // unit testing

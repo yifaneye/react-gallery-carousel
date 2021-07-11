@@ -1,5 +1,5 @@
 import React from 'react';
-import TwoWayMap from '../utils/TwoWayMap';
+import TwoWayMap from '../utils/twoWayMap';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
