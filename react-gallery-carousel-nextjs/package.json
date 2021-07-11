@@ -1,0 +1,29 @@
+{
+  "name": "react-gallery-carousel-nextjs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "react-gallery-carousel Next.js example",
+  "author": "Yifan Ai",
+  "keywords": [
+    "nextjs"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "11.0.1",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-gallery-carousel": "link:..",
+    "react-github-btn": "^1.2.0",
+    "react-responsive-button": "^0.2.1",
+    "react-scripts": "link:../node_modules/react-scripts"
+  },
+  "devDependencies": {
+    "eslint": "7.30.0",
+    "eslint-config-next": "11.0.1"
+  }
+}
