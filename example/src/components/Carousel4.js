@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
-const Carousel3 = ({ images }) => {
+const Carousel4 = ({ images }) => {
   const [dynamicImages, setDynamicImages] = useState([]);
 
   useEffect(() => {
     setDynamicImages(images);
-    return () => {};
   }, [setDynamicImages, images]);
 
   return (
@@ -42,11 +41,11 @@ const Carousel3 = ({ images }) => {
           hasCaptionsAtMax='top'
           hasDotButtonsAtMax='bottom'
           hasThumbnails={false}
-          hasThumbnailsAtMax={true}
-          thumbnailWidth={'15%'}
-          thumbnailHeight={'15%'}
-          shouldMaximizeOnClick={true}
-          shouldMinimizeOnClick={true}
+          hasThumbnailsAtMax
+          thumbnailWidth='15%'
+          thumbnailHeight='15%'
+          shouldMaximizeOnClick
+          shouldMinimizeOnClick
           activeIcon={
             <span className='icon-text' role='img' aria-label='active'>
               🔳
@@ -63,4 +62,4 @@ const Carousel3 = ({ images }) => {
   );
 };
 
-export default Carousel3;
+export default Carousel4;

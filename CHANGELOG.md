@@ -4,15 +4,21 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
-## v0.2.3 (2021-07-11)
+## v0.2.3 (2021-07-12)
 
 ### Enhancements
 
-- Make the code robuster.
+- Made the code robuster.
   ([Issue #31](https://github.com/yifaneye/react-gallery-carousel/issues/31))
+
+- Enhanced docs.
+  ([Issue #35](https://github.com/yifaneye/react-gallery-carousel/issues/35))
 
 - Added **support for server-side rendering (SSR)**.
   ([Issue #36](https://github.com/yifaneye/react-gallery-carousel/issues/36))
+
+- Enhanced examples.
+  ([Issue #45](https://github.com/yifaneye/react-gallery-carousel/issues/45))
 
 ## v0.2.2 (2021-05-16)
 
