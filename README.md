@@ -125,7 +125,7 @@ To customize the carousel, use the following props:
 |:------------------------|:---------------------|:------------|:----------|
 |images                   |Array                 |undefined    |Array of image(s) to be placed in the carousel. Each image object (e.g. [example object](#image-object-example)) in the array has a required attribute 'src'.|
 |children                 |node or Array of nodes|undefined    |HTML element(s) to be placed into the carousel for user-managed slides. It (they) will be placed only if the 'images' prop is falsy.|
-|index                    |Number                |undefined    |Current (0-indexed) index of the slides of the carousel as a whole number starting from 0.|
+|index                    |Number                |undefined    |Initial (0-indexed) index of the slides of the carousel as a whole number starting from 0.|
 |isRTL                    |Boolean               |false        |If true, the slides of the carousel starts from the right (and also auto plays from the right to the left).|
 |isLoop                   |Boolean               |true         |If true, the carousel form a loop (i.e. going left from the left-most slide lands at the right-most slide, and vice versa) from the ribbon of slides.|
 |isMaximized              |Boolean               |false        |If true, the carousel is maximized initially.|
@@ -250,12 +250,15 @@ A: There are some browser default styles. Set a font, some global styles and/or 
 ### Q: Can I remove hash from generated file names? How to do it?
 A: Yes. In ```node_modules/microbundle-crl/dist/microbundle.js```, Change ```useHash: true``` to ```useHash: false```.
 
+### Q: Are there TypeScript type definitions for this package?
+A: Yes. [```@types/react-gallery-carousel```](https://www.npmjs.com/package/@types/react-gallery-carousel) package contains type definitions for ```react-gallery-carousel``` through DefinitelyTyped.
+
 ## Roadmap
 - [x] Support for dynamic images (since v0.1.1)
 - [x] Support handlers and listeners (since v0.2.0)
 - [x] Support for server-side rendering (since v0.2.3)
 - [ ] Momentum-based mouse dragging on thumbnails (in progress)
-- [ ] Add type definition
+- [x] Add TypeScript type Definitions (since v0.2.0)
 - [ ] Use TypeScript
 - [ ] Allow customization through render props
 - [ ] Implement more unit tests and E2E tests

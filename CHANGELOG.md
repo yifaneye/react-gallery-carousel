@@ -2,6 +2,16 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+## v0.2.4 (2021-08-22)
+
+### Enhancements
+
+- Enhanced docs.
+  ([Issue #43](https://github.com/yifaneye/react-gallery-carousel/issues/43))
+
+- Enhanced code and examples.
+- Set up momentum-based mouse dragging on the thumbnails.
+
 ## v0.2.3 (2021-07-12)
 
 ### Enhancements

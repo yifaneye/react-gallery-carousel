@@ -38,7 +38,11 @@ const Carousel1 = () => {
           // )}
           // onIndexChange={({ curIndex }) => {
           //   const title = indexToTitle.get(curIndex);
-          //   window.location.hash = title;
+          //   window.history.replaceState(
+          //     undefined,
+          //     undefined,
+          //     `#${title}`
+          //   );
           //   document.title = `${title} | react-gallery-carousel`;
           // }} // this callback can be set to update the document title and URL hash on index update
           style={{ userSelect: 'text' }}
