@@ -10,6 +10,7 @@
   ([Issue #43](https://github.com/yifaneye/react-gallery-carousel/issues/43))
 
 - Enhanced code and examples.
+- Set up momentum-based mouse dragging on the thumbnails.
 
 ## v0.2.3 (2021-07-12)
 
