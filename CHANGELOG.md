@@ -9,6 +9,8 @@
 - Enhanced docs.
   ([Issue #43](https://github.com/yifaneye/react-gallery-carousel/issues/43))
 
+- Enhanced code and examples.
+
 ## v0.2.3 (2021-07-12)
 
 ### Enhancements

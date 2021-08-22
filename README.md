@@ -250,12 +250,15 @@ A: There are some browser default styles. Set a font, some global styles and/or 
 ### Q: Can I remove hash from generated file names? How to do it?
 A: Yes. In ```node_modules/microbundle-crl/dist/microbundle.js```, Change ```useHash: true``` to ```useHash: false```.
 
+### Q: Are there TypeScript type definitions for this package?
+A: Yes. [```@types/react-gallery-carousel```](https://www.npmjs.com/package/@types/react-gallery-carousel) package contains type definitions for ```react-gallery-carousel``` through DefinitelyTyped.
+
 ## Roadmap
 - [x] Support for dynamic images (since v0.1.1)
 - [x] Support handlers and listeners (since v0.2.0)
 - [x] Support for server-side rendering (since v0.2.3)
 - [ ] Momentum-based mouse dragging on thumbnails (in progress)
-- [x] Add type definition (since v0.2.0)
+- [x] Add TypeScript type Definitions (since v0.2.0)
 - [ ] Use TypeScript
 - [ ] Allow customization through render props
 - [ ] Implement more unit tests and E2E tests
