@@ -111,9 +111,9 @@ class Slides {
 }
 
 /*
-// deprecated code in favour of CSS flex-direction: row-reverse,
+// deprecated code used for RTL support, in favour of CSS flex-direction: row-reverse,
 // since merely reverse the order of slides in RTL carousel can not reverse
-// the order of tabbing (keyboard navigation) of dot buttons and thumbnails.
+// the order of "tabbing" (keyboard navigation) of dot buttons and thumbnails.
 
 class SlidesWithRTL extends Slides {
   constructor(items, options) {

@@ -1,0 +1,26 @@
+{
+  "name": "react-gallery-carousel-gatsby",
+  "version": "0.0.0",
+  "private": true,
+  "description": "react-gallery-carousel Gatsby example",
+  "author": "Yifan Ai",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^3.4.1",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-gallery-carousel": "link:..",
+    "react-github-btn": "^1.2.0",
+    "react-responsive-button": "^0.2.1",
+    "react-scripts": "link:../node_modules/react-scripts"
+  }
+}

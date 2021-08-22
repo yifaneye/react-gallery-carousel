@@ -1,14 +1,14 @@
 import React from 'react';
-import TwoWayMap from '../utils/TwoWayMap';
+// import TwoWayMap from '../utils/TwoWayMap';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
 const Carousel1 = () => {
-  const indexToTitle = new TwoWayMap({
-    0: 'Introduction',
-    1: 'Get%20Started',
-    2: 'Usage'
-  });
+  // const indexToTitle = new TwoWayMap({
+  //   0: 'Introduction',
+  //   1: 'Get%20Started',
+  //   2: 'Usage'
+  // });
 
   return (
     <section className='section' aria-labelledby='example1'>
@@ -33,9 +33,9 @@ const Carousel1 = () => {
           hasThumbnails={false}
           shouldSwipeOnMouse={false} // for selecting text
           shouldMinimizeOnSwipeDown={false} // for vertical overflow scrolling
-          index={Number(
-            indexToTitle.getReversed(window.location.hash.replace('#', ''))
-          )}
+          // index={Number(
+          //   indexToTitle.getReversed(window.location.hash.replace('#', ''))
+          // )}
           // onIndexChange={({ curIndex }) => {
           //   const title = indexToTitle.get(curIndex);
           //   window.history.replaceState(

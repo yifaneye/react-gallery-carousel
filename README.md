@@ -109,7 +109,7 @@ const App = () => {
   }));
 
   return (
-    <Carousel images={images} style={{ height: 800, width: 500 }} />
+    <Carousel images={images} style={{ height: 500, width: 800 }} />
   );
 };
 
@@ -125,7 +125,7 @@ To customize the carousel, use the following props:
 |:------------------------|:---------------------|:------------|:----------|
 |images                   |Array                 |undefined    |Array of image(s) to be placed in the carousel. Each image object (e.g. [example object](#image-object-example)) in the array has a required attribute 'src'.|
 |children                 |node or Array of nodes|undefined    |HTML element(s) to be placed into the carousel for user-managed slides. It (they) will be placed only if the 'images' prop is falsy.|
-|index                    |Number                |undefined    |Current (0-indexed) index of the slides of the carousel as a whole number starting from 0.|
+|index                    |Number                |undefined    |Initial (0-indexed) index of the slides of the carousel as a whole number starting from 0.|
 |isRTL                    |Boolean               |false        |If true, the slides of the carousel starts from the right (and also auto plays from the right to the left).|
 |isLoop                   |Boolean               |true         |If true, the carousel form a loop (i.e. going left from the left-most slide lands at the right-most slide, and vice versa) from the ribbon of slides.|
 |isMaximized              |Boolean               |false        |If true, the carousel is maximized initially.|
@@ -169,7 +169,7 @@ To customize the carousel, use the following props:
 |shouldMaximizeOnClick    |Boolean               |false        |If true, the carousel can be maximized by clicking.|
 |shouldMinimizeOnClick    |Boolean               |false        |If true, the carousel can be minimized by clicking.|
 |shouldMinimizeOnSwipeDown|Boolean               |true         |If true, the carousel can be minimized by touch swiping down.|
-|onIndexChange            |Function              |() => {}     |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same.)|
+|onIndexChange            |Function              |({curIndex, curIndexForDisplay}) => {} |Callback function invoked when the current index of the slides of the carousel is being updated. (Note: it is called regardless of whether index value's before and after are the same. ```curIndex``` is 0-indexed whilst ```curIndexForDisplay``` is 1-indexed)|
 |onSwipeMoveX             |Function              |(displacementX) => {}                |Callback function invoked when the carousel is being swiped in a horizontal swipe. (Note: available from v0.2.0)|
 |onSwipeMoveY             |Function              |(displacementX, displacementY) => {} |Callback function invoked when the carousel is being swiped in a vertical swipe. (Note: available from v0.2.0)|
 |onSwipeEndDown           |Function              |() => {}     |Callback function invoked when the carousel is being swiped in a downward swipe. (Note: available from v0.2.0)|
@@ -244,13 +244,25 @@ To customize the carousel in an imperative manner, use the following handlers (o
 ### Q: How to place video, text or any element into a slide?
 A: Custom elements in slides (called user-managed slides) can be placed using the `children` prop. Example: [demo](https://yifanai.com/rgc), [code](https://yifanai.com/rgc1). Note: it (they) will be placed only if the 'images' prop is falsy.
 
+### Q: Why the element and font in my carousel is different from the one on the demo?
+A: There are some browser default styles. Set a font, some global styles and/or use normalize.css will help. Example: [code](https://yifanai.com/rgcc).
+
+### Q: Can I remove hash from generated file names? How to do it?
+A: Yes. In ```node_modules/microbundle-crl/dist/microbundle.js```, Change ```useHash: true``` to ```useHash: false```.
+
+### Q: Are there TypeScript type definitions for this package?
+A: Yes. [```@types/react-gallery-carousel```](https://www.npmjs.com/package/@types/react-gallery-carousel) package contains type definitions for ```react-gallery-carousel``` through DefinitelyTyped.
+
 ## Roadmap
-1. Momentum-based mouse dragging on thumbnails (in process)
-2. GitHub Actions
-3. Use Cypress for E2E testing
-4. Allow customization through render props
-5. Add type definition
-6. Use TypeScript
+- [x] Support for dynamic images (since v0.1.1)
+- [x] Support handlers and listeners (since v0.2.0)
+- [x] Support for server-side rendering (since v0.2.3)
+- [ ] Momentum-based mouse dragging on thumbnails (in progress)
+- [x] Add TypeScript type Definitions (since v0.2.0)
+- [ ] Use TypeScript
+- [ ] Allow customization through render props
+- [ ] Implement more unit tests and E2E tests
+- [ ] GitHub Actions
 
 ## Contributing
 
