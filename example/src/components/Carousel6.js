@@ -4,10 +4,15 @@ import 'react-gallery-carousel/dist/index.css';
 
 const Carousel6 = ({ images }) => {
   const thumbnails = images.map((_, idx) => (
-    <img src={`https://picsum.photos/id/${idx}/info`} alt='' />
+    <img
+      src={`https://picsum.photos/id/${idx * 10}/600/600`}
+      alt=''
+      height={1100}
+      width={1100}
+    />
   ));
   const imageElements = images.map((image) => (
-    <img src={image.src} alt={image.alt} />
+    <img src={image.src} alt={image.alt} height={700} width={1200} />
   ));
 
   return (
