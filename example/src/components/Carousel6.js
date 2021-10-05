@@ -3,16 +3,11 @@ import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
 const Carousel6 = ({ images }) => {
-  const thumbnails = images.map((_, idx) => (
-    <img
-      src={`https://picsum.photos/id/${idx * 10}/600/600`}
-      alt=''
-      height={1100}
-      width={1100}
-    />
+  const thumbnails = images.map((_, index) => (
+    <span style={{ fontSize: 200, fontWeight: 'bold' }}>{index + 1}</span>
   ));
   const imageElements = images.map((image) => (
-    <img src={image.src} alt={image.alt} height={700} width={1200} />
+    <img src={image.src} alt={image.alt} className='image-responsive' />
   ));
 
   return (

@@ -109,3 +109,10 @@ code {
 .icon-text {
   color: white;
 }
+
+.image-responsive {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
