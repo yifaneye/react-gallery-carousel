@@ -4,10 +4,17 @@ import 'react-gallery-carousel/dist/index.css';
 
 const Carousel6 = ({ images }) => {
   const thumbnails = images.map((_, index) => (
-    <span style={{ fontSize: 200, fontWeight: 'bold' }}>{index + 1}</span>
+    <span style={{ fontSize: 200, fontWeight: 'bold' }} key={index}>
+      {index + 1}
+    </span>
   ));
-  const imageElements = images.map((image) => (
-    <img src={image.src} alt={image.alt} className='image-responsive' />
+  const imageElements = images.map((image, index) => (
+    <img
+      src={image.src}
+      alt={image.alt}
+      className='image-responsive'
+      key={index}
+    />
   ));
 
   return (
