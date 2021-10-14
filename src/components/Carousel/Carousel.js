@@ -55,6 +55,7 @@ const GalleryCarousel = (props, ref) => {
     index: props.index,
     isLoop: props.isLoop
   });
+  const thumbnailElements = props.thumbnails || slidesElements;
   const nSlides = slides.length;
   const increment = props.isRTL ? -1 : +1;
   const slidesMin = `${nSlides * -increment}00%`;
@@ -477,6 +478,7 @@ const GalleryCarousel = (props, ref) => {
       width={props.thumbnailWidth}
       height={props.thumbnailHeight}
       slides={slidesElements}
+      thumbnails={thumbnailElements}
       hasImages={hasImages}
       shouldLazyLoad={props.shouldLazyLoad}
       curIndex={slides.curIndex}
