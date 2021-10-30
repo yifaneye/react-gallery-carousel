@@ -1,6 +1,7 @@
 import useTouch from './useTouch';
 import useMouse from './useMouse';
 import useNoDrag from './useNoDrag';
+import useWheel from './useWheel';
 
 const useSwipe = (
   elementRef,
@@ -61,6 +62,11 @@ const useSwipe = (
     onTouchMove: handleSwipeMove,
     onTouchEnd: handleSwipeEnd,
     onTap: onTap
+  });
+
+  useWheel(elementRef, {
+    onWheel: handleSwipeMove,
+    onWheelEnd: handleSwipeEnd
   });
 
   const mouseEventHandlers = useMouse(elementRef, {
