@@ -2,6 +2,15 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+## v0.2.5 (2021-10-30)
+
+### Enhancements
+
+- Added **support for custom children for the thumbnails**.
+  ([Issue #40](https://github.com/yifaneye/react-gallery-carousel/issues/40))
+
+- Enhanced docs.
+
 ## v0.2.4 (2021-08-22)
 
 ### Enhancements
