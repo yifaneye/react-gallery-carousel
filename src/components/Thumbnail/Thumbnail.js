@@ -17,7 +17,7 @@ export const Thumbnail = (props) => {
       shouldLazyLoad={props.shouldLazyLoad}
     />
   ) : (
-    <UserSlideThumbnail slide={props.slide} />
+    <UserSlideThumbnail slide={props.thumbnail} />
   );
 
   const className = `${styles.thumbnail}${
@@ -58,6 +58,7 @@ Thumbnail.propTypes = {
   isImage: PropTypes.bool.isRequired,
   thumbnailsContainerRef: elementRef.isRequired,
   slide: slideObject.isRequired,
+  thumbnail: slideObject.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
   width: PropTypes.string,

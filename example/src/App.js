@@ -5,6 +5,7 @@ import Carousel2 from './components/Carousel2';
 import Carousel3 from './components/Carousel3';
 import Carousel4 from './components/Carousel4';
 import Carousel5 from './components/Carousel5';
+import Carousel6 from './components/Carousel6';
 import Footer from './components/Footer';
 
 const imageIDs = Array(30) // the maximum is currently 149
@@ -29,6 +30,7 @@ const App = () => {
       <Carousel3 images={images} />
       <Carousel4 images={images} />
       <Carousel5 images={images} />
+      <Carousel6 images={images} />
       <Footer />
     </div>
   );

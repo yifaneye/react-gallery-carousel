@@ -37,6 +37,7 @@ export const Thumbnails = (props) => {
               reference={thumbnailRef}
               thumbnailsContainerRef={thumbnailsContainerRef}
               slide={props.slides[key]}
+              thumbnail={props.thumbnails[key]}
               isImage={props.hasImages}
               shouldLazyLoad={props.shouldLazyLoad}
               isCurrent={Number(key) === props.curIndex}
@@ -57,6 +58,7 @@ Thumbnails.propTypes = {
   height: PropTypes.string,
   isRTL: PropTypes.bool.isRequired,
   slides: PropTypes.array.isRequired,
+  thumbnails: PropTypes.array.isRequired,
   hasImages: PropTypes.bool.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
   curIndex: PropTypes.number.isRequired
