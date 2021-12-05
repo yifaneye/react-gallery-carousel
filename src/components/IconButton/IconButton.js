@@ -15,7 +15,6 @@ const icons = {
         width='20'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Left</title>
         <path d='m19 1v37l-18-20z' />
       </svg>
     </div>
@@ -31,7 +30,6 @@ const icons = {
         width='20'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Right</title>
         <path d='m1 1v38l18-19z' />
       </svg>
     </div>
@@ -47,7 +45,6 @@ const icons = {
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Play</title>
         <path d='m1 1v28l28-14z' />
       </svg>
     </div>
@@ -63,7 +60,6 @@ const icons = {
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Pause</title>
         <path d='m1 1v28h9v-28zm19 0v28h9v-28z' />
       </svg>
     </div>
@@ -79,7 +75,6 @@ const icons = {
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Maximize</title>
         <path d='m1 1v10h5v-5h5v-5zm18 0v5h5v5h5v-10zm-18 18v10h10v-5h-5v-5zm18 5v5h10v-10h-5v5z' />
       </svg>
     </div>
@@ -95,7 +90,6 @@ const icons = {
         width='30'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Minimize</title>
         <path d='m6 1v5h-5v5h10v-10zm13 0v10h10v-5h-5v-5zm-18 18v5h5v5h5v-10zm18 0v10h5v-5h5v-5z' />
       </svg>
     </div>
@@ -111,7 +105,6 @@ const icons = {
         width='10'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Stay</title>
         <circle cx='5' cy='5' r='4' fill='#888' />
       </svg>
     </div>
@@ -127,7 +120,6 @@ const icons = {
         width='10'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <title>Go</title>
         <circle cx='5' cy='5' r='4' />
       </svg>
     </div>

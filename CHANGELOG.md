@@ -2,6 +2,16 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+## v0.2.6 (2021-12-06)
+
+### Enhancements
+
+- Fix swiping stuck after zoom issue.
+  ([Issue #44](https://github.com/yifaneye/react-gallery-carousel/issues/44))
+
+- Remove title for icons.
+  ([Issue #60](https://github.com/yifaneye/react-gallery-carousel/issues/60))
+
 ## v0.2.5 (2021-10-30)
 
 ### Enhancements
