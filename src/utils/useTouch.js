@@ -50,19 +50,8 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
       event.preventDefault();
   };
 
-  const shouldOmitEvent = (event, displacementX = 0) => {
-    if (touchDistinguisher.isPinch(event)) return true;
-
-    // window.visualViewport is not yet supported on IE
-    if (!('visualViewport' in window)) return false;
-
-    const { scale, offsetLeft, width } = window.visualViewport;
-    if (scale <= 1) return false;
-    // pan right at or beyond the left edge
-    if (offsetLeft <= 0 && displacementX > 0) return false;
-    // pan left at or beyond the right edge
-    if (offsetLeft + width >= width * scale && displacementX < 0) return false;
-    return true;
+  const shouldOmitEvent = (event) => {
+    return !!touchDistinguisher.isPinch(event);
   };
 
   const handleTouchStart = (event) => {
@@ -78,7 +67,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     event.stopPropagation();
     if (!isTouchStarted) return;
     const displacementX = event.changedTouches[0].clientX - touchStartX;
-    if (shouldOmitEvent(event, displacementX)) return;
+    if (shouldOmitEvent(event)) return;
     const displacementY = event.changedTouches[0].clientY - touchStartY;
     handleVerticalMovement(event, displacementX, displacementY);
     onTouchMove(displacementX, displacementY);
@@ -94,7 +83,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     event.stopPropagation();
     if (!isTouchStarted) return;
     const displacementX = event.changedTouches[0].clientX - touchStartX;
-    if (shouldOmitEvent(event, displacementX)) {
+    if (shouldOmitEvent(event)) {
       onTouchEnd(0, 0, 0);
       return;
     }
