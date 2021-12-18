@@ -43,7 +43,7 @@ I have **used and carefully analyzed a lot of carousel/slider components**. I su
 13. Some of them disable pinching to zoom, while some others glitch when pinching with 2 fingers. Besides, when the window is zoomed in, most of them still detect for touch swiping to move to the previous, or the next slide, while the intention of most users in this scenario is panning to see other parts of the current slide.
 14. Some of them will cause the slides to stuck its position on window resize or on mobile device orientation change, until another user interaction.
 15. Some of them can only have predetermined images (i.e. before the carousel component mounts).
-16. Most of them do not provide a solution for fallback image (for when an image is not available).
+16. Most of them do not provide a solution for fallback/placeholder image (for when an image is not available).
 17. Some of them get zoomed in when the user double taps on the control, while the intention of most users in this scenario is to quickly go to the next after the next slide.
 18. Some of them remove the left or right button to indicate that there are no more slides in that direction. However, user is likely to click that spot where the button used to be, which causes undesired behaviours e.g. clicking on a link or button which is also at that spot.
 19. Some of them use the method of cloning the first, and the last slide to achieve looping (or infinite mode). I think that method is not great semantically.

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-gallery-carousel';
-import 'react-gallery-carousel/dist/index.css';
 
 const Carousel4 = ({ images }) => {
   const [dynamicImages, setDynamicImages] = useState([]);

@@ -2,6 +2,17 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+
+## v0.2.7 (2021-12-18)
+
+### Enhancements
+
+- Fix "invalid or unexpected token" issue in Next.js.
+  ([Issue #51](https://github.com/yifaneye/react-gallery-carousel/issues/51))
+
+- Remove request to "object Object"
+  ([Issue #52](https://github.com/yifaneye/react-gallery-carousel/issues/52))
+
 ## v0.2.6 (2021-12-06)
 
 ### Enhancements
