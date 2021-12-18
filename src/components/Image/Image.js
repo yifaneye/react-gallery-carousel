@@ -1,7 +1,6 @@
 import React, { Fragment, useRef, useState } from 'react';
 import styles from './Image.module.css';
-import placeholderImage from 'placeholder.jpg';
-import fallbackImage from 'fallback.png';
+import { PLACEHOLDER_IMAGE } from './constants';
 import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
@@ -13,7 +12,7 @@ import {
 } from '../../utils/validators';
 
 const handleError = (event) => {
-  event.target.src = fallbackImage;
+  event.target.src = PLACEHOLDER_IMAGE;
 };
 
 const LazyLoadedImage = (props) => {
@@ -22,7 +21,7 @@ const LazyLoadedImage = (props) => {
     imageRef,
     props.slidesContainerRef,
     '0px 101% 0px 101%'
-    // preload 2 images on either side of the slides container (viewport)
+    // preload 2 images on either side of the slides' container (viewport)
   );
   const [shouldShowThumbnail, setShouldShowThumbnail] = useState(
     props.image.thumbnail
@@ -40,13 +39,9 @@ const LazyLoadedImage = (props) => {
 
   let { src, srcset, alt, thumbnail, ...otherImageProps } = props.image;
 
-  src = isInViewport ? (hasError ? fallbackImage : src) : placeholderImage;
-  srcset = isInViewport ? (hasError ? null : srcset) : null;
-  thumbnail = isInViewport
-    ? hasError
-      ? fallbackImage
-      : thumbnail
-    : placeholderImage;
+  src = isInViewport && !hasError ? src : PLACEHOLDER_IMAGE;
+  srcset = isInViewport && !hasError ? srcset : null;
+  thumbnail = isInViewport && !hasError ? thumbnail : PLACEHOLDER_IMAGE;
 
   return (
     <>
