@@ -63,6 +63,7 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
     // pan right at or beyond the left edge
     if (offsetLeft <= 0 && displacementX > 0) return false;
     // pan left at or beyond the right edge
+    // noinspection RedundantIfStatementJS
     if (offsetLeft + width >= width * scale && displacementX < 0) return false;
     return true;
   };
@@ -93,6 +94,8 @@ const useTouch = (elementRef, { onTouchMove, onTouchEnd, onTap }) => {
   };
 
   const handleTouchEnd = (event) => {
+    // prevent the event from being recognized additionally as a mouse event on simulated mobile devices (e.g. Toggle Device Toolbar on Chrome).
+    event.preventDefault();
     event.stopPropagation();
     if (!isTouchStarted) return;
     const displacementX = event.changedTouches[0].clientX - touchStartX;
