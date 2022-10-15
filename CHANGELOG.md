@@ -1,6 +1,20 @@
-```react-gallery-carousel```
+# ```react-gallery-carousel```
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
+
+## v0.3.0 (2022-10-15)
+
+### Bug Fixes
+
+- Fix issue related to maximizing/minimizing not working when shouldMaximizeOnClick/shouldMinimizeOnClick is on, for Toggle Device Toolbar (simulated mobile devices).
+  ([Issue #74](https://github.com/yifaneye/react-gallery-carousel/issues/74))
+
+- Fix issue related to `npm install` not working for `/example`.
+  ([Issue #72](https://github.com/yifaneye/react-gallery-carousel/issues/72))
+
+### Enhancements
+
+- Update package dependencies. ([Issue #71](https://github.com/yifaneye/react-gallery-carousel/issues/71))
 
 ## v0.2.10 (2022-08-03)
 
