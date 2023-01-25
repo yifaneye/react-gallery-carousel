@@ -34,6 +34,7 @@ import {
 } from './constants';
 import ReversedMap from '../../utils/ReversedMap';
 import { propTypes, defaultProps, getSettings } from './props';
+import { MapInteractionCSS } from "react-map-interaction";
 
 const GalleryCarousel = (props, ref) => {
   /* initialize references */
