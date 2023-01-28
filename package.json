@@ -1,6 +1,6 @@
 {
   "name": "react-gallery-carousel",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Mobile-friendly Carousel with batteries included (supporting touch, mouse emulation, lazy loading, thumbnails, fullscreen, RTL, keyboard navigation and customisations).",
   "author": "yifaneye",
   "license": "MIT",
