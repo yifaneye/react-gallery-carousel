@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className='section'>
       <div className='action-container'>
-        <strong>react-gallery-carousel (v0.3.0)</strong>
+        <strong>react-gallery-carousel (v0.4.0)</strong>
         <div className='star-button-container'>
           <GitHubButton
             href='https://github.com/yifaneye/react-gallery-carousel'

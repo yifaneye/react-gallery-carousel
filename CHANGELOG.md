@@ -2,6 +2,14 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gallery-carousel.svg)](https://www.npmjs.com/package/react-gallery-carousel)
 
+## v0.4.0 (2023-01-28)
+
+### Enhancements
+
+- Add support for custom elements.
+
+- Improve format in the README file.
+
 ## v0.3.0 (2022-10-15)
 
 ### Bug Fixes
