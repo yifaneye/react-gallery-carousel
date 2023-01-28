@@ -567,6 +567,7 @@ const GalleryCarousel = (props, ref) => {
             />
           </div>
           {widgets}
+          {props.elements && props.elements}
         </div>
         {thumbnails}
       </div>

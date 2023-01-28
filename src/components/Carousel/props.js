@@ -56,6 +56,7 @@ export const propTypes = {
   maxIcon: PropTypes.node,
   activeIcon: PropTypes.node,
   passiveIcon: PropTypes.node,
+  elements: PropTypes.node,
   shouldSwipeOnMouse: PropTypes.bool.isRequired,
   shouldMaximizeOnClick: PropTypes.bool.isRequired,
   shouldMinimizeOnClick: PropTypes.bool.isRequired,
