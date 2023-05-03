@@ -564,6 +564,7 @@ const GalleryCarousel = (props, ref) => {
               widgetsHasShadow={props.widgetsHasShadow}
               hasCaptions={settings.hasCaptions}
               curIndex={slides.curIndex}
+              placeholderImg={props.placeholderImg}
             />
           </div>
           {widgets}

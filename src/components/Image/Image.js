@@ -1,9 +1,9 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import styles from './Image.module.css';
 import { PLACEHOLDER_IMAGE } from './constants';
 import { Caption } from '../Widgets';
 import useIntersectionObserver from '../../utils/useIntersectionObserver';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import {
   objectFitStyles,
   largeWidgetPositions,
@@ -33,15 +33,27 @@ const LazyLoadedImage = (props) => {
     // the low quality image (props.image.thumbnail) will be hidden
   };
 
+  // This block checks whether the user specified fallback image actually works or not
+  const [isLoading, setIsLoading] = useState(true);
+  const [isValidFallback, setIsValidFallback] = useState(false);
+  useEffect(() => {
+    fetch(props.placeholderImg).then(res => {
+      setIsValidFallback(res.status === 200);
+      setIsLoading(false);
+    }).catch((_reason) => {
+      setIsLoading(false);
+    })
+  }, []);
+
   const handleError = () => {
     setHasError(true);
   };
 
   let { src, srcset, alt, thumbnail, ...otherImageProps } = props.image;
 
-  src = isInViewport && !hasError ? src : PLACEHOLDER_IMAGE;
+  src = isInViewport && !hasError ? src : (!isLoading && isValidFallback ? props.placeholderImg : PLACEHOLDER_IMAGE);
   srcset = isInViewport && !hasError ? srcset : null;
-  thumbnail = isInViewport && !hasError ? thumbnail : PLACEHOLDER_IMAGE;
+  thumbnail = isInViewport && !hasError ? thumbnail : (!isLoading && isValidFallback ? props.placeholderImg : PLACEHOLDER_IMAGE);
 
   return (
     <>
@@ -81,11 +93,28 @@ export const Image = (props) => {
 
   const { src, alt, srcset, thumbnail, ...otherImageProps } = props.image;
 
+  // This block checks whether the user specified fallback image actually works or not
+  const [isLoading, setIsLoading] = useState(true);
+  const [isValidFallback, setIsValidFallback] = useState(false);
+  useEffect(() => {
+    fetch(props.placeholderImg).then(res => {
+      setIsValidFallback(res.status === 200);
+      setIsLoading(false);
+    }).catch((_reason) => {
+      setIsLoading(false);
+    })
+  }, []);
+
+  const handleError = (event) => {
+    event.target.src = isValidFallback && !isLoading ? props.placeholderImg : PLACEHOLDER_IMAGE;
+  };
+
   const image = props.shouldLazyLoad ? (
     <LazyLoadedImage
       slidesContainerRef={props.slidesContainerRef}
       image={props.image}
       style={style}
+      placeholderImg={props.placeholderImg}
     />
   ) : (
     <img
@@ -120,5 +149,6 @@ Image.propTypes = {
   shouldLazyLoad: PropTypes.bool.isRequired,
   slidesContainerRef: elementRef.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
-  widgetsHasShadow: PropTypes.bool.isRequired
+  widgetsHasShadow: PropTypes.bool.isRequired,
+  placeholderImg: PropTypes.string,
 };

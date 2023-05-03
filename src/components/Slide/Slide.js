@@ -19,6 +19,7 @@ export const Slide = (props) => {
       widgetsHasShadow={props.widgetsHasShadow}
       hasCaption={props.hasCaption}
       slidesContainerRef={props.slidesContainerRef}
+      placeholderImg={props.placeholderImg}
     />
   ) : (
     <UserSlide slide={props.slide} />
@@ -44,5 +45,6 @@ Slide.propTypes = {
   hasCaption: largeWidgetPositions.isRequired,
   slidesContainerRef: elementRef.isRequired,
   reference: elementRef,
-  isCurrent: PropTypes.bool.isRequired
+  isCurrent: PropTypes.bool.isRequired,
+  placeholderImg: PropTypes.string,
 };
