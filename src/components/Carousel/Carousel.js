@@ -406,6 +406,20 @@ const GalleryCarousel = (props, ref) => {
     isMaximized
   );
 
+  /* check whether fallback image (if specified) returns an ok status */
+  const [fallbackImg, setFallbackImg] = useState(null);
+  useEffect(() => {
+    fetch(props.fallbackImg)
+      .then((res) => {
+        if (res.ok) {
+          setFallbackImg(props.fallbackImg);
+        }
+      })
+      .catch((_reason) => {
+        setFallbackImg(null);
+      });
+  });
+
   const leftButton = widgetSettings.hasLeftButton && (
     <LeftButton
       position={widgetSettings.hasLeftButton}
@@ -483,6 +497,7 @@ const GalleryCarousel = (props, ref) => {
       shouldLazyLoad={props.shouldLazyLoad}
       curIndex={slides.curIndex}
       callbacks={goToIndexCallbacksObject}
+      fallbackImg={fallbackImg}
     />
   );
 
@@ -564,6 +579,7 @@ const GalleryCarousel = (props, ref) => {
               widgetsHasShadow={props.widgetsHasShadow}
               hasCaptions={settings.hasCaptions}
               curIndex={slides.curIndex}
+              fallbackImg={fallbackImg}
             />
           </div>
           {widgets}

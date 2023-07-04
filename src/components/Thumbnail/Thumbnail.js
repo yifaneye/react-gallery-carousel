@@ -15,6 +15,7 @@ export const Thumbnail = (props) => {
       thumbnailsContainerRef={props.thumbnailsContainerRef}
       image={props.slide}
       shouldLazyLoad={props.shouldLazyLoad}
+      fallbackImg={props.fallbackImg}
     />
   ) : (
     <UserSlideThumbnail slide={props.thumbnail} />
@@ -63,5 +64,6 @@ Thumbnail.propTypes = {
   isCurrent: PropTypes.bool.isRequired,
   width: PropTypes.string,
   reference: elementRef.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  fallbackImg: PropTypes.string
 };

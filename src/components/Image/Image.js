@@ -39,9 +39,13 @@ const LazyLoadedImage = (props) => {
 
   let { src, srcset, alt, thumbnail, ...otherImageProps } = props.image;
 
-  src = isInViewport && !hasError ? src : PLACEHOLDER_IMAGE;
+  src =
+    isInViewport && !hasError ? src : props.fallbackImg ?? PLACEHOLDER_IMAGE;
   srcset = isInViewport && !hasError ? srcset : null;
-  thumbnail = isInViewport && !hasError ? thumbnail : PLACEHOLDER_IMAGE;
+  thumbnail =
+    isInViewport && !hasError
+      ? thumbnail
+      : props.fallbackImg ?? PLACEHOLDER_IMAGE;
 
   return (
     <>
@@ -81,11 +85,16 @@ export const Image = (props) => {
 
   const { src, alt, srcset, thumbnail, ...otherImageProps } = props.image;
 
+  const handleError = (event) => {
+    event.target.src = props.fallbackImg ?? PLACEHOLDER_IMAGE;
+  };
+
   const image = props.shouldLazyLoad ? (
     <LazyLoadedImage
       slidesContainerRef={props.slidesContainerRef}
       image={props.image}
       style={style}
+      fallbackImg={props.fallbackImg}
     />
   ) : (
     <img
@@ -120,5 +129,6 @@ Image.propTypes = {
   shouldLazyLoad: PropTypes.bool.isRequired,
   slidesContainerRef: elementRef.isRequired,
   hasCaption: largeWidgetPositions.isRequired,
-  widgetsHasShadow: PropTypes.bool.isRequired
+  widgetsHasShadow: PropTypes.bool.isRequired,
+  fallbackImg: PropTypes.string
 };

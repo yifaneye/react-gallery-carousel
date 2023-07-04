@@ -5,9 +5,9 @@ import useIntersectionObserver from '../../utils/useIntersectionObserver';
 import PropTypes from 'prop-types';
 import { elementRef, imageObject } from '../../utils/validators';
 
-const handleError = (event) => {
+const handleError = (event, fallbackImg) => {
   // permanently replace the image with the fallback image
-  event.target.src = PLACEHOLDER_IMAGE;
+  event.target.src = fallbackImg ?? PLACEHOLDER_IMAGE;
 };
 
 const LazyLoadedImageThumbnail = (props) => {
@@ -30,7 +30,7 @@ const LazyLoadedImageThumbnail = (props) => {
       src={src}
       alt={props.alt}
       aria-label={props.alt}
-      onError={handleError}
+      onError={(event) => handleError(event, props.fallbackImg)}
     />
   );
 };
@@ -38,7 +38,8 @@ const LazyLoadedImageThumbnail = (props) => {
 LazyLoadedImageThumbnail.propTypes = {
   thumbnailsContainerRef: elementRef.isRequired,
   src: PropTypes.string.isRequired,
-  alt: PropTypes.string
+  alt: PropTypes.string,
+  fallbackImg: PropTypes.string
 };
 
 export const ImageThumbnail = (props) => {
@@ -52,6 +53,7 @@ export const ImageThumbnail = (props) => {
         thumbnailsContainerRef={props.thumbnailsContainerRef}
         src={src}
         alt={alt}
+        fallbackImg={props.fallbackImg}
       />
     );
 
@@ -62,7 +64,7 @@ export const ImageThumbnail = (props) => {
       alt={alt}
       aria-label={alt}
       loading='auto'
-      onError={handleError}
+      onError={(event) => handleError(event, props.fallbackImg)}
     />
   );
 };
@@ -70,5 +72,6 @@ export const ImageThumbnail = (props) => {
 ImageThumbnail.propTypes = {
   image: imageObject.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
-  thumbnailsContainerRef: elementRef.isRequired
+  thumbnailsContainerRef: elementRef.isRequired,
+  fallbackImg: PropTypes.string
 };
