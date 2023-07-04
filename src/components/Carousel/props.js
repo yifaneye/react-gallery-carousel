@@ -48,7 +48,7 @@ export const propTypes = {
   hasDotButtonsAtMax: largeWidgetPositions,
   hasCaptionsAtMax: largeWidgetPositions,
   hasThumbnailsAtMax: PropTypes.bool,
-  placeholderImg: PropTypes.string,
+  fallbackImg: PropTypes.string,
   leftIcon: PropTypes.node,
   rightIcon: PropTypes.node,
   playIcon: PropTypes.node,

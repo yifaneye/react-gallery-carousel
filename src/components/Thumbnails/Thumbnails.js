@@ -43,6 +43,7 @@ export const Thumbnails = (props) => {
               isCurrent={Number(key) === props.curIndex}
               width={props.width}
               onClick={callbacks[key]}
+              fallbackImg={props.fallbackImg}
             />
           );
         })}
@@ -61,7 +62,8 @@ Thumbnails.propTypes = {
   thumbnails: PropTypes.array.isRequired,
   hasImages: PropTypes.bool.isRequired,
   shouldLazyLoad: PropTypes.bool.isRequired,
-  curIndex: PropTypes.number.isRequired
+  curIndex: PropTypes.number.isRequired,
+  fallbackImg: PropTypes.string
 };
 
 Thumbnails.defaultProps = {

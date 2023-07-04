@@ -38,7 +38,7 @@ export const Slides = (props) => {
             widgetsHasShadow={props.widgetsHasShadow}
             hasCaption={props.hasCaptions}
             isCurrent={index === props.curIndex}
-            placeholderImg={props.placeholderImg}
+            fallbackImg={props.fallbackImg}
           />
         );
       })}
@@ -60,5 +60,5 @@ Slides.propTypes = {
   widgetsHasShadow: PropTypes.bool.isRequired,
   hasCaptions: largeWidgetPositions.isRequired,
   curIndex: PropTypes.number,
-  placeholderImg: PropTypes.string,
+  fallbackImg: PropTypes.string
 };
