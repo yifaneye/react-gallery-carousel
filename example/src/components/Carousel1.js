@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TwoWayMap from '../utils/TwoWayMap';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
@@ -9,7 +9,7 @@ const Carousel1 = () => {
     1: 'Get%20Started',
     2: 'Usage'
   });
-
+  const [isMaximized, setIsMaximized] = useState(false)
   return (
     <section className='section' aria-labelledby='example1'>
       <header className='section-header'>
@@ -17,6 +17,7 @@ const Carousel1 = () => {
           Example 1: Customized carousel with user-managed slides{' '}
           <a href='https://yifanai.com/rgc1'>code</a>
         </h2>
+        <h4>isMaximized: {`${isMaximized}`}</h4>
         <p>
           This example has custom elements in slides (user-managed slides) using
           the <code>children</code> prop; and custom widget positions.
@@ -36,6 +37,7 @@ const Carousel1 = () => {
           index={Number(
             indexToTitle.getReversed(window.location.hash.replace('#', ''))
           )}
+          onMaximizedStatusChange={(status) => setIsMaximized(status)}
           // onIndexChange={({ curIndex }) => {
           //   const title = indexToTitle.get(curIndex);
           //   window.history.replaceState(
@@ -49,6 +51,7 @@ const Carousel1 = () => {
         >
           <div className='text-slide'>
             <h3>Introduction</h3>
+            <h4>isMaximized: {`${isMaximized}`}</h4>
             <p>
               <strong>react-gallery-carousel</strong> is a mobile-friendly
               dependency-free React carousel component with support for touch,
@@ -71,6 +74,7 @@ const Carousel1 = () => {
           </div>
           <div className='text-slide'>
             <h3>Get Started</h3>
+            <h4>isMaximized: {`${isMaximized}`}</h4>
             <code>npm install react-gallery-carousel --save</code>
             <div className='vertical-separator'>
               <span>or</span>
@@ -78,6 +82,7 @@ const Carousel1 = () => {
             <code>yarn add react-gallery-carousel</code>
           </div>
           <div className='text-slide'>
+            <h4>isMaximized: {`${isMaximized}`}</h4>
             <h3>Usage</h3>
             <p>The default carousel shown below as example 2 is created by:</p>
             <code>{'<Carousel images={images} />'}</code>

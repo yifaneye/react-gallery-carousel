@@ -120,6 +120,7 @@ const GalleryCarousel = (props, ref) => {
 
   const handleSizeButtonClick = () => {
     setIsMaximized((isMaximized) => !isMaximized);
+    props.onMaximizedStatusChange(!isMaximized)
   };
 
   /* handle UI updates */
@@ -301,7 +302,12 @@ const GalleryCarousel = (props, ref) => {
   );
 
   /* handle keyboard events */
-  useKeys(documentRef, { Escape: () => setIsMaximized(() => false) });
+  useKeys(documentRef, {
+    Escape: () => {
+      props.onMaximizedStatusChange(false)
+      setIsMaximized(() => false)
+    }
+  });
 
   useKeyboard(carouselRef);
 
@@ -505,7 +511,7 @@ const GalleryCarousel = (props, ref) => {
             <Fragment key={index}>
               {
                 widgetsObj[
-                  positionsToWidgets.get(position).replace(/AtMax$/, '')
+                positionsToWidgets.get(position).replace(/AtMax$/, '')
                 ]
               }
             </Fragment>
